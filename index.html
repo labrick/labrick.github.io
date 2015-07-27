@@ -81,6 +81,142 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/27/bash-learning/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T05:48:44.548Z" itemprop="datePublished"> 發表於 2015-07-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>[TOC]</p>
+<h3 id="�ĵ����¼�¼">�ĵ����¼�¼</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">�汾</th>
+<th style="text-align:left">����ʱ��</th>
+<th style="text-align:left">������</th>
+<th style="text-align:left">��������</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">V0.1</td>
+<td style="text-align:left">2015-07-26</td>
+<td style="text-align:left">����Ӱ</td>
+<td style="text-align:left">bash shellѧϰ�ʼ�����</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1_ϵͳ�ĺϷ�shell��/etc/shells����">1 ϵͳ�ĺϷ�shell��/etc/shells����</h3><h3 id="2_Bash_shell_�Ĺ���">2 Bash shell �Ĺ���</h3><h4 id="2-1_������������">2.1 ������������</h4><p>ͨ���û���bash����������ʱ���ذ�������ȫ��shell�����жϳ�����Ҫ����������ù��ܵĺ���˼���ǣ�bash�����û�����������Ϣ����������Щ��Ϣ��ͷ������Ӷ���ͼ���ɵ�ǰ���������빤��������ִ������ܵļ���Tab��������Tab������bash����ͼ�����������������룬�����г������ܹ��뵱ǰ�����ַ���ƥ���������б�</p>
+<h4 id="2-2_�����뵵����ȫ����">2.2 �����뵵����ȫ����</h4><h4 id="2-3_���������趨����">2.3 ���������趨����</h4><p>������bash��������ʡʱ������һ����Ҫ���ܣ��������û������Լ�ϲ���ķ�ʽ�����������Զ��塣</p>
+<p>�����Ĵ�����alias���������</p>
+<pre><code>alias <span class="keyword">lm</span>=��<span class="keyword">ls</span> -<span class="keyword">al</span>��
+</code></pre><p>������ȡ������unalias ȡ������������</p>
+<pre><code><span class="built_in">unalias</span> lm
+</code></pre><h4 id="2-4_�������ơ�ǰ����������">2.4 �������ơ�ǰ����������</h4><h4 id="2-5_���򻯽ű����򵥣�">2.5 ���򻯽ű����򵥣�</h4><h4 id="2-6_ͨ����">2.6 ͨ����</h4><p>ͨ����<code>*</code>�ĳ��÷������ǲ��Ҿ�����ͬ��չ�����ļ������磺</p>
+<pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
+</code></pre><p>ͨ����<code>*</code>��ʱ���Խ����ٵ��������̳�һ�����</p>
+<pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
+</code></pre><p>�ʺ�ͨ����<code>?</code>����ƥ��һ����ֻ��ƥ��һ���ַ���ͨ���������ұ�<code>*</code>��Ϊ��ȷ��ƥ�䡣</p>
+<pre><code>ls <span class="keyword">*</span>.???
+</code></pre><h3 id="3_Bash_shell���ڽ����type">3 Bash shell���ڽ����type</h3><p>��ѯ�Ƿ���bash�ڲ����type -t ������</p>
+<pre><code><span class="type">file</span> <span class="comment">--�ⲿ���</span>
+<span class="type">alias</span> <span class="comment">--����������</span>
+builtin <span class="comment">--�ڲ�����</span>
+</code></pre><h3 id="4_ָ�����´�">4 ָ�����´�</h3><h3 id="5_������ȡ�����趨">5 ������ȡ�����趨</h3><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
+<span class="built_in">echo</span> <span class="variable">${PATH}</span>
+</code></pre><h4 id="5-1_�������ƹ���">5.1 �������ƹ���</h4><ol>
+<li>����������д��˽�б���Сд����������ֻ������ĸ�����֣���ͷ�ַ�����������</li>
+<li>������������”=”���ӣ��Ⱥ����߲��ܿո񣻱����������пո�������””or’’����</li>
+<li>����”” ��’’��ʹ�ã�ǰ�߱������ԣ������ڵ������ַ���Ϊһ���ַ�unset </li>
+<li><p>�������ݿ����������ṩ����Ϣ</p>
+<p> version=<code>uname -r</code> or<br> version=$(uname -r)</p>
+</li>
+<li><p>���������ۼ����ݣ�PATH=”$PATH”:/home/bin</p>
+</li>
+<li>�Զ����������ɻ���������export mypath</li>
+</ol>
+<h3 id="6_���������Ĺ��ܣ�env_��������������˵��,_set,_export">6 ���������Ĺ��ܣ�env ��������������˵��, set, export</h3><ul>
+<li>HOME������homeĿ¼��cd /home ��ȡ����������</li>
+<li>SHELL����֪Ŀǰ����ʹ�õ�shell����֧����</li>
+</ul>
+<p>/etc/shells:ϵͳ�п��õ�shell�汾</p>
+<pre><code>/bin/sh
+/bin/bash
+/sbin/nologin ��
+/etc/passwd <span class="symbol">:</span> ��ǰ�û�Ĭ�ϲ����ĸ�shell������
+<span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span>
+<span class="symbol">bin:</span><span class="symbol">x:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span><span class="symbol">:bin</span><span class="symbol">:/bin</span><span class="symbol">:/sbin/nologin</span>
+...
+</code></pre><ul>
+<li>HISTSIZE�������´������������Ա�ϵͳ����������¼�ı���������ֵ���趨������������������ÿ����������浽һ����Ϊhistory��������ʷ��¼���ĵط�</li>
+<li>MAIL��������ʹ��mail����ָ��������ʱ��ϵͳ��ȥ��ȡ���ʼ����䵵��(<strong>???</strong>)</li>
+<li>PATH��ִ���ļ���·����Ŀ¼��Ŀ¼�м���ð�ŷָ�</li>
+<li>LANG����ϵ����</li>
+<li>RANDOM:����ȡ����ֵ����BASH�����£�RANDOM���������ݽ���0~32767֮�䣬<code>echo $random</code>ʱϵͳ������ȡ��һ������0~32767����ֵ����declare������������</li>
+<li>��set�۲����б����������������Զ���������</li>
+</ul>
+<p>������������ν���������Ǹ���shell�µĿ��Ƽ��豸�������ն˻����ͣ��ļ�����·�����û�Ŀ¼�ȡ��û���shell��ִ�г���ʱ����Щ�������õ�һЩ������������¼ϵͳʱ�Ĺ���֮һ�������û���¼ʱ�ͽ����˵Ļ��������á�<br>�Զ����������Զ�������������ÿ�����̶��ܵ��õĻ�������������������ֻ���ڵ�ǰ����ʹ�õ�˽�б�����</p>
+<pre><code><span class="attribute">PS1</span>:����ʾ�ַ����趨��
+<span class="string">\d:��ʾ����</span> �� �յ����ڸ�ʽ��
+<span class="string">\H:��������������</span>
+<span class="string">\h:��ȡ�������ڵ�һ��С����֮ǰ�����ݡ�</span>
+<span class="string">\t:��ʾʱ�䣬24Сʱ��ʽ</span>
+<span class="string">\T:��ʾʱ�䣬12Сʱ��ʽ</span>
+<span class="string">\A:��ʾʱ�䣬24Сʱ��ʽ</span>
+<span class="string">\@:��ʾʱ�䣬12Сʱ��ʽ��</span>
+<span class="string">\u:Ŀǰʹ���ߵ��˺ţ���[root]��</span>
+<span class="string">\v:BASH�İ汾��Ϣ��</span>
+<span class="string">\w:�����Ĺ���Ŀ¼���ƣ��ɸ�Ŀ¼д����Ŀ¼���ơ�</span>
+<span class="string">\W:����basename����ȡ�ù���Ŀ¼���ƣ����г�����һ��Ŀ¼����</span>
+<span class="string">\#:�´��ĵڼ���ָ�</span>
+<span class="string">\$:��ʾ�ַ�</span>
+$������OATYPE��HOSTTYPE��MACHTYPE��������Ӳ�������ĵĵȼ���
+</code></pre><p>export:�Զ�������ת���ɻ�������</p>
+<h3 id="7_Ӱ����ʾ��������ϵ����_(locale)_��Ҫ��ǰ���½ڿ�����">7 Ӱ����ʾ��������ϵ���� (locale) ��Ҫ��ǰ���½ڿ�����</h3><h3 id="8_��������Ч��Χ">8 ��������Ч��Χ</h3><p>�����ɷ���������export�йأ���export���ı�����Ϊ���������������������Ա��ӳ������ã��Զ����������ݲ����������ӳ����С�������һ��shell������ϵͳ������һ����������shellʹ�ã����ڴ���֮���������ӳ���ȡ�ã����ڸ���������export���ܣ��������Զ�������������д�������ļ������鵱�У���������������������һ��shellʱ����shell���Խ��������Ļ����������ڵļ������鵼���Լ��Ļ����������鵱�С�</p>
+<h3 id="9_�������̶�ȡ�����������棺_read,_declare,_array">9 �������̶�ȡ�����������棺 read, declare, array</h3><pre><code><span class="built_in">read</span> atest ��<span class="built_in">declare</span>��<span class="built_in">typeset</span>����������������
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/27/gem5-run-bench-step/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-author">By
@@ -279,142 +415,6 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
         <p>安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：<code>/192.168.0.227/01.专业软件/matlab/ubuntu-matlab2014b</code>]。安装步骤如下：</p>
 <h3 id="1-把镜像文件中的install-jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install-jar">1.把镜像文件中的install.jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install.jar</h3><h4 id="1-将R2014b_glnxa64-ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive_manager），本教程将解压后的放在/home/lab302/matlab2014b中">1.将R2014b_glnxa64.ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive manager），本教程将解压后的放在<code>/home/lab302/matlab2014b</code>中</h4><h4 id="2-将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install-jar复制到matlab2014b/java/jar/下的覆盖原来的install-jar，并执行指令chmod_+x_*">2.将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install.jar复制到<code>matlab2014b/java/jar/</code>下的覆盖原来的install.jar，并执行指令<code>chmod +x *</code></h4><h4 id="3-进入到java/jar文件夹下，可以看到有install-jar文件，执行命令chmod_+x_*。然后将该文件删除rm_install-jar">3.进入到java/jar文件夹下，可以看到有install.jar文件，执行命令chmod +x *。然后将该文件删除<code>rm install.jar</code></h4><h3 id="2-安装matlab">2.安装matlab</h3><p>回到解压后的文件目录matlab2014b/下，可以看到有intall文件，执行<code>sudo ./install</code>命令，开始安装【注意：选择使用文件安装秘钥】</p>
 <h3 id="3-输入installation_key:_29797-39064-48306-32452，安装路径这里选择/usr/local/MATLAB/R2014b">3.输入installation key: 29797-39064-48306-32452，安装路径这里选择<code>/usr/local/MATLAB/R2014b</code></h3><h3 id="4-不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license-lic文件激活">4.不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license.lic文件激活</h3><h3 id="5-把libmwservices-so文件放入到/usr/local/MATLAB/R2014B/bin/glnxa64文件下">5.把libmwservices.so文件放入到<code>/usr/local/MATLAB/R2014B/bin/glnxa64</code>文件下</h3><h3 id="6-进入到/usr/local/MATLAB/R2014b/bin文件夹中，输入-/matlab启动matlab。">6.进入到<code>/usr/local/MATLAB/R2014b/bin</code>文件夹中，输入./matlab启动matlab。</h3><h3 id="7-至此安装完成。">7.至此安装完成。</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/27/bash-learning/" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-27T04:54:48.572Z" itemprop="datePublished"> 發表於 2015-07-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>[TOC]</p>
-<h3 id="�ĵ����¼�¼">�ĵ����¼�¼</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">�汾</th>
-<th style="text-align:left">����ʱ��</th>
-<th style="text-align:left">������</th>
-<th style="text-align:left">��������</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">V0.1</td>
-<td style="text-align:left">2015-07-26</td>
-<td style="text-align:left">����Ӱ</td>
-<td style="text-align:left">bash shellѧϰ�ʼ�����</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1_ϵͳ�ĺϷ�shell��/etc/shells����">1 ϵͳ�ĺϷ�shell��/etc/shells����</h3><h3 id="2_Bash_shell_�Ĺ���">2 Bash shell �Ĺ���</h3><h4 id="2-1_������������">2.1 ������������</h4><p>ͨ���û���bash����������ʱ���ذ�������ȫ��shell�����жϳ�����Ҫ����������ù��ܵĺ���˼���ǣ�bash�����û�����������Ϣ����������Щ��Ϣ��ͷ������Ӷ���ͼ���ɵ�ǰ���������빤��������ִ������ܵļ���Tab��������Tab������bash����ͼ�����������������룬�����г������ܹ��뵱ǰ�����ַ���ƥ���������б�</p>
-<h4 id="2-2_�����뵵����ȫ����">2.2 �����뵵����ȫ����</h4><h4 id="2-3_���������趨����">2.3 ���������趨����</h4><p>������bash��������ʡʱ������һ����Ҫ���ܣ��������û������Լ�ϲ���ķ�ʽ�����������Զ��塣</p>
-<p>�����Ĵ�����alias���������</p>
-<pre><code>alias <span class="keyword">lm</span>=��<span class="keyword">ls</span> -<span class="keyword">al</span>��
-</code></pre><p>������ȡ������unalias ȡ������������</p>
-<pre><code><span class="built_in">unalias</span> lm
-</code></pre><h4 id="2-4_�������ơ�ǰ����������">2.4 �������ơ�ǰ����������</h4><h4 id="2-5_���򻯽ű����򵥣�">2.5 ���򻯽ű����򵥣�</h4><h4 id="2-6_ͨ����">2.6 ͨ����</h4><p>ͨ����<code>*</code>�ĳ��÷������ǲ��Ҿ�����ͬ��չ�����ļ������磺</p>
-<pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
-</code></pre><p>ͨ����<code>*</code>��ʱ���Խ����ٵ��������̳�һ�����</p>
-<pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
-</code></pre><p>�ʺ�ͨ����<code>?</code>����ƥ��һ����ֻ��ƥ��һ���ַ���ͨ���������ұ�<code>*</code>��Ϊ��ȷ��ƥ�䡣</p>
-<pre><code>ls <span class="keyword">*</span>.???
-</code></pre><h3 id="3_Bash_shell���ڽ����type">3 Bash shell���ڽ����type</h3><p>��ѯ�Ƿ���bash�ڲ����type -t ������</p>
-<pre><code><span class="type">file</span> <span class="comment">--�ⲿ���</span>
-<span class="type">alias</span> <span class="comment">--����������</span>
-builtin <span class="comment">--�ڲ�����</span>
-</code></pre><h3 id="4_ָ�����´�">4 ָ�����´�</h3><h3 id="5_������ȡ�����趨">5 ������ȡ�����趨</h3><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
-<span class="built_in">echo</span> <span class="variable">${PATH}</span>
-</code></pre><h4 id="5-1_�������ƹ���">5.1 �������ƹ���</h4><ol>
-<li>����������д��˽�б���Сд����������ֻ������ĸ�����֣���ͷ�ַ�����������</li>
-<li>������������”=”���ӣ��Ⱥ����߲��ܿո񣻱����������пո�������””or’’����</li>
-<li>����”” ��’’��ʹ�ã�ǰ�߱������ԣ������ڵ������ַ���Ϊһ���ַ�unset </li>
-<li><p>�������ݿ����������ṩ����Ϣ</p>
-<p> version=<code>uname -r</code> or<br> version=$(uname -r)</p>
-</li>
-<li><p>���������ۼ����ݣ�PATH=”$PATH”:/home/bin</p>
-</li>
-<li>�Զ����������ɻ���������export mypath</li>
-</ol>
-<h3 id="6_���������Ĺ��ܣ�env_��������������˵��,_set,_export">6 ���������Ĺ��ܣ�env ��������������˵��, set, export</h3><ul>
-<li>HOME������homeĿ¼��cd /home ��ȡ����������</li>
-<li>SHELL����֪Ŀǰ����ʹ�õ�shell����֧����</li>
-</ul>
-<p>/etc/shells:ϵͳ�п��õ�shell�汾</p>
-<pre><code>/bin/sh
-/bin/bash
-/sbin/nologin ��
-/etc/passwd <span class="symbol">:</span> ��ǰ�û�Ĭ�ϲ����ĸ�shell������
-<span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span>
-<span class="symbol">bin:</span><span class="symbol">x:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span><span class="symbol">:bin</span><span class="symbol">:/bin</span><span class="symbol">:/sbin/nologin</span>
-...
-</code></pre><ul>
-<li>HISTSIZE�������´������������Ա�ϵͳ����������¼�ı���������ֵ���趨������������������ÿ����������浽һ����Ϊhistory��������ʷ��¼���ĵط�</li>
-<li>MAIL��������ʹ��mail����ָ��������ʱ��ϵͳ��ȥ��ȡ���ʼ����䵵��(<strong>???</strong>)</li>
-<li>PATH��ִ���ļ���·����Ŀ¼��Ŀ¼�м���ð�ŷָ�</li>
-<li>LANG����ϵ����</li>
-<li>RANDOM:����ȡ����ֵ����BASH�����£�RANDOM���������ݽ���0~32767֮�䣬<code>echo $random</code>ʱϵͳ������ȡ��һ������0~32767����ֵ����declare������������</li>
-<li>��set�۲����б����������������Զ���������</li>
-</ul>
-<p>������������ν���������Ǹ���shell�µĿ��Ƽ��豸�������ն˻����ͣ��ļ�����·�����û�Ŀ¼�ȡ��û���shell��ִ�г���ʱ����Щ�������õ�һЩ������������¼ϵͳʱ�Ĺ���֮һ�������û���¼ʱ�ͽ����˵Ļ��������á�<br>�Զ����������Զ�������������ÿ�����̶��ܵ��õĻ�������������������ֻ���ڵ�ǰ����ʹ�õ�˽�б�����</p>
-<pre><code><span class="attribute">PS1</span>:����ʾ�ַ����趨��
-<span class="string">\d:��ʾ����</span> �� �յ����ڸ�ʽ��
-<span class="string">\H:��������������</span>
-<span class="string">\h:��ȡ�������ڵ�һ��С����֮ǰ�����ݡ�</span>
-<span class="string">\t:��ʾʱ�䣬24Сʱ��ʽ</span>
-<span class="string">\T:��ʾʱ�䣬12Сʱ��ʽ</span>
-<span class="string">\A:��ʾʱ�䣬24Сʱ��ʽ</span>
-<span class="string">\@:��ʾʱ�䣬12Сʱ��ʽ��</span>
-<span class="string">\u:Ŀǰʹ���ߵ��˺ţ���[root]��</span>
-<span class="string">\v:BASH�İ汾��Ϣ��</span>
-<span class="string">\w:�����Ĺ���Ŀ¼���ƣ��ɸ�Ŀ¼д����Ŀ¼���ơ�</span>
-<span class="string">\W:����basename����ȡ�ù���Ŀ¼���ƣ����г�����һ��Ŀ¼����</span>
-<span class="string">\#:�´��ĵڼ���ָ�</span>
-<span class="string">\$:��ʾ�ַ�</span>
-$������OATYPE��HOSTTYPE��MACHTYPE��������Ӳ�������ĵĵȼ���
-</code></pre><p>export:�Զ�������ת���ɻ�������</p>
-<h3 id="7_Ӱ����ʾ��������ϵ����_(locale)_��Ҫ��ǰ���½ڿ�����">7 Ӱ����ʾ��������ϵ���� (locale) ��Ҫ��ǰ���½ڿ�����</h3><h3 id="8_��������Ч��Χ">8 ��������Ч��Χ</h3><p>�����ɷ���������export�йأ���export���ı�����Ϊ���������������������Ա��ӳ������ã��Զ����������ݲ����������ӳ����С�������һ��shell������ϵͳ������һ����������shellʹ�ã����ڴ���֮���������ӳ���ȡ�ã����ڸ���������export���ܣ��������Զ�������������д�������ļ������鵱�У���������������������һ��shellʱ����shell���Խ��������Ļ����������ڵļ������鵼���Լ��Ļ����������鵱�С�</p>
-<h3 id="9_�������̶�ȡ�����������棺_read,_declare,_array">9 �������̶�ȡ�����������棺 read, declare, array</h3><pre><code><span class="built_in">read</span> atest ��<span class="built_in">declare</span>��<span class="built_in">typeset</span>����������������
-</code></pre>
         
         
         <p class="article-more-link">
