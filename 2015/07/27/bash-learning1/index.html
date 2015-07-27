@@ -1,0 +1,600 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>bash学习笔记 | 工作实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pumpkin">
+    
+
+    
+    <meta name="description" content="文档更新记录
+
+
+版本
+更新时间
+更新人
+更新内容
+
+
+
+
+V0.1
+2015-07-26
+孙凤影
+bash shell学习笔记整理
+
+
+
+1 系统的合法shell与/etc/shells功能2 Bash shell 的功能2.1 命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bash学习笔记">
+<meta property="og:url" content="http://yoursite.com/2015/07/27/bash-learning1/index.html">
+<meta property="og:site_name" content="工作实验室">
+<meta property="og:description" content="文档更新记录
+
+
+版本
+更新时间
+更新人
+更新内容
+
+
+
+
+V0.1
+2015-07-26
+孙凤影
+bash shell学习笔记整理
+
+
+
+1 系统的合法shell与/etc/shells功能2 Bash shell 的功能2.1 命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命">
+<meta property="og:updated_time" content="2015-07-27T06:45:14.137Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bash学习笔记">
+<meta name="twitter:description" content="文档更新记录
+
+
+版本
+更新时间
+更新人
+更新内容
+
+
+
+
+V0.1
+2015-07-26
+孙凤影
+bash shell学习笔记整理
+
+
+
+1 系统的合法shell与/etc/shells功能2 Bash shell 的功能2.1 命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命">
+
+    
+    <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="工作实验室" title="工作实验室"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="工作实验室">工作实验室</a></h1>
+				<h2 class="blog-motto">专注于自我心智成长</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/27/bash-learning1/" title="bash学习笔记" itemprop="url">bash学习笔记</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T06:45:14.137Z" itemprop="datePublished"> 发表于 2015-07-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档更新记录"><span class="toc-number">1.</span> <span class="toc-text">文档更新记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1_系统的合法shell与/etc/shells功能"><span class="toc-number">2.</span> <span class="toc-text">1 系统的合法shell与/etc/shells功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_Bash_shell_的功能"><span class="toc-number">3.</span> <span class="toc-text">2 Bash shell 的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_命令编修能力"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 命令编修能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_命令与档案补全功能"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 命令与档案补全功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_命令别名设定功能"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 命令别名设定功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4_工作控制、前景背景控制"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 工作控制、前景背景控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5_程序化脚本（简单）"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 程序化脚本（简单）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6_通配符"><span class="toc-number">3.6.</span> <span class="toc-text">2.6 通配符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_Bash_shell的内建命令：type"><span class="toc-number">4.</span> <span class="toc-text">3 Bash shell的内建命令：type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_指令的下达"><span class="toc-number">5.</span> <span class="toc-text">4 指令的下达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_变量的取用与设定"><span class="toc-number">6.</span> <span class="toc-text">5 变量的取用与设定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1_变量设计规则"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 变量设计规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6_环境变量的功能：env_不常见环境变量说明,_set,_export"><span class="toc-number">7.</span> <span class="toc-text">6 环境变量的功能：env 不常见环境变量说明, set, export</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7_影响显示结果的语系变量_(locale)_（要回前面章节看看）"><span class="toc-number">8.</span> <span class="toc-text">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8_变量的有效范围"><span class="toc-number">9.</span> <span class="toc-text">8 变量的有效范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9_变量键盘读取、数组与宣告：_read,_declare,_array"><span class="toc-number">10.</span> <span class="toc-text">9 变量键盘读取、数组与宣告： read, declare, array</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="文档更新记录">文档更新记录</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">版本</th>
+<th style="text-align:left">更新时间</th>
+<th style="text-align:left">更新人</th>
+<th style="text-align:left">更新内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">V0.1</td>
+<td style="text-align:left">2015-07-26</td>
+<td style="text-align:left">孙凤影</td>
+<td style="text-align:left">bash shell学习笔记整理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1_系统的合法shell与/etc/shells功能">1 系统的合法shell与/etc/shells功能</h3><h3 id="2_Bash_shell_的功能">2 Bash shell 的功能</h3><h4 id="2-1_命令编修能力">2.1 命令编修能力</h4><p>通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成当前命令的输入工作。用来执行这项功能的键是Tab键，按下Tab键后，bash就试图完成整个命令的输入，并将列出所有能够与当前输入字符相匹配的命令列表。</p>
+<h4 id="2-2_命令与档案补全功能">2.2 命令与档案补全功能</h4><h4 id="2-3_命令别名设定功能">2.3 命令别名设定功能</h4><p>别名是bash中用来节省时间的另一项重要功能，它允许用户按照自己喜欢的方式对命令进行自定义。</p>
+<p>别名的创建：alias接命令，例：</p>
+<pre><code>alias <span class="keyword">lm</span>=‘<span class="keyword">ls</span> -<span class="keyword">al</span>’
+</code></pre><p>别名的取消：用unalias 取消别名，例：</p>
+<pre><code><span class="built_in">unalias</span> lm
+</code></pre><h4 id="2-4_工作控制、前景背景控制">2.4 工作控制、前景背景控制</h4><h4 id="2-5_程序化脚本（简单）">2.5 程序化脚本（简单）</h4><h4 id="2-6_通配符">2.6 通配符</h4><p>通配符<code>*</code>的常用方法就是查找具有相同扩展名的文件，比如：</p>
+<pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
+</code></pre><p>通配符<code>*</code>有时可以将几百的命令缩短成一个命令。</p>
+<pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
+</code></pre><p>问号通配符<code>?</code>必须匹配一个且只能匹配一个字符，通常用来查找比<code>*</code>更为精确的匹配。</p>
+<pre><code>ls <span class="keyword">*</span>.???
+</code></pre><h3 id="3_Bash_shell的内建命令：type">3 Bash shell的内建命令：type</h3><p>查询是否是bash内部命令：type -t 命令名</p>
+<pre><code><span class="type">file</span> <span class="comment">--外部命令；</span>
+<span class="type">alias</span> <span class="comment">--命令别名；</span>
+builtin <span class="comment">--内部命令</span>
+</code></pre><h3 id="4_指令的下达">4 指令的下达</h3><h3 id="5_变量的取用与设定">5 变量的取用与设定</h3><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
+<span class="built_in">echo</span> <span class="variable">${PATH}</span>
+</code></pre><h4 id="5-1_变量设计规则">5.1 变量设计规则</h4><ol>
+<li>环境变量大写，私有变量小写：变量名称只能是字母与数字，开头字符不能是数字</li>
+<li>变量与内容以”=”连接，等号两边不能空格；变量内容若有空格可是有””or’’括起</li>
+<li>区分”” 与’’的使用，前者保留特性，后者内的特殊字符仅为一般字符unset </li>
+<li><p>变量内容可以是命令提供的信息</p>
+<p> version=<code>uname -r</code> or<br> version=$(uname -r)</p>
+</li>
+<li><p>变量可以累加内容：PATH=”$PATH”:/home/bin</p>
+</li>
+<li>自定义变量变成环境变量：export mypath</li>
+</ol>
+<h3 id="6_环境变量的功能：env_不常见环境变量说明,_set,_export">6 环境变量的功能：env 不常见环境变量说明, set, export</h3><ul>
+<li>HOME：代表home目录，cd /home 即取用这个变量</li>
+<li>SHELL：告知目前环境使用的shell是哪支程序</li>
+</ul>
+<p>/etc/shells:系统中可用的shell版本</p>
+<pre><code>/bin/sh
+/bin/bash
+/sbin/nologin …
+/etc/passwd <span class="symbol">:</span> 当前用户默认采用哪个shell来工作
+<span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span>
+<span class="symbol">bin:</span><span class="symbol">x:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span><span class="symbol">:bin</span><span class="symbol">:/bin</span><span class="symbol">:/sbin/nologin</span>
+...
+</code></pre><ul>
+<li>HISTSIZE：曾经下达过的命令可以被系统记下来，记录的笔数有这个值来设定。在命令行中输入的每个命令都被保存到一个称为history（命令历史记录）的地方</li>
+<li>MAIL：当我们使用mail这个指令在收信时，系统会去读取的邮件信箱档案(<strong>???</strong>)</li>
+<li>PATH：执行文件的路径，目录与目录中间以冒号分隔</li>
+<li>LANG：语系数据</li>
+<li>RANDOM:随机取得数值。在BASH环境下，RANDOM变量的内容介于0~32767之间，<code>echo $random</code>时系统会随机取出一个介于0~32767的数值。用declare宣告数据类型</li>
+<li>用set观察所有变量（环境变量、自定义变量）</li>
+</ul>
+<p>环境变量：所谓环境，就是各项shell下的控制及设备，包括终端机类型，文件搜索路径，用户目录等。用户在shell下执行程序时，有些程序会用到一些环境变量。登录系统时的工作之一就是在用户登录时就将个人的环境建立好。<br>自定义变量：自定义变量除了在每个进程都能调用的环境变量，还可以设置只能在当前进程使用的私有变量。</p>
+<pre><code><span class="attribute">PS1</span>:（提示字符的设定）
+<span class="string">\d:显示星期</span> 月 日的日期格式。
+<span class="string">\H:完整的主机名。</span>
+<span class="string">\h:仅取主机名在第一个小数点之前的数据。</span>
+<span class="string">\t:显示时间，24小时格式</span>
+<span class="string">\T:显示时间，12小时格式</span>
+<span class="string">\A:显示时间，24小时格式</span>
+<span class="string">\@:显示时间，12小时格式。</span>
+<span class="string">\u:目前使用者的账号，如[root]。</span>
+<span class="string">\v:BASH的版本信息。</span>
+<span class="string">\w:完整的工作目录名称，由根目录写起的目录名称。</span>
+<span class="string">\W:利用basename函数取得工作目录名称，仅列出最后一个目录名。</span>
+<span class="string">\#:下达的第几个指令。</span>
+<span class="string">\$:提示字符</span>
+$、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
+</code></pre><p>export:自定义变量转换成环境变量</p>
+<h3 id="7_影响显示结果的语系变量_(locale)_（要回前面章节看看）">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</h3><h3 id="8_变量的有效范围">8 变量的有效范围</h3><p>变量可否被引用与export有关，被export后的变量成为环境变量，环境变量可以被子程序引用，自定义变量内容不会存在于子程序中。当启动一个shell，操作系统会分配一记忆区块给shell使用，此内存内之变量可让子程序取用；若在父程序利用export功能，可以让自定义变量的内容写到上述的记忆区块当中（环境变量）；当加载另一个shell时，子shell可以将父程序的环境变量所在的记忆区块导入自己的环境变量区块当中。</p>
+<h3 id="9_变量键盘读取、数组与宣告：_read,_declare,_array">9 变量键盘读取、数组与宣告： read, declare, array</h3><pre><code><span class="built_in">read</span> atest 、<span class="built_in">declare</span>或<span class="built_in">typeset</span>：宣告变量的类型
+</code></pre>  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/07/27/bash-learning1/" data-title="bash学习笔记 | 工作实验室" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/07/27/ubuntu-android-sdk/"  title="ubuntu采用eclips搭建安卓环境记录">
+ <strong>下一篇：</strong><br/> 
+ <span>ubuntu采用eclips搭建安卓环境记录
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档更新记录"><span class="toc-number">1.</span> <span class="toc-text">文档更新记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1_系统的合法shell与/etc/shells功能"><span class="toc-number">2.</span> <span class="toc-text">1 系统的合法shell与/etc/shells功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_Bash_shell_的功能"><span class="toc-number">3.</span> <span class="toc-text">2 Bash shell 的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_命令编修能力"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 命令编修能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_命令与档案补全功能"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 命令与档案补全功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_命令别名设定功能"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 命令别名设定功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4_工作控制、前景背景控制"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 工作控制、前景背景控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5_程序化脚本（简单）"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 程序化脚本（简单）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6_通配符"><span class="toc-number">3.6.</span> <span class="toc-text">2.6 通配符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_Bash_shell的内建命令：type"><span class="toc-number">4.</span> <span class="toc-text">3 Bash shell的内建命令：type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_指令的下达"><span class="toc-number">5.</span> <span class="toc-text">4 指令的下达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_变量的取用与设定"><span class="toc-number">6.</span> <span class="toc-text">5 变量的取用与设定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1_变量设计规则"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 变量设计规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6_环境变量的功能：env_不常见环境变量说明,_set,_export"><span class="toc-number">7.</span> <span class="toc-text">6 环境变量的功能：env 不常见环境变量说明, set, export</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7_影响显示结果的语系变量_(locale)_（要回前面章节看看）"><span class="toc-number">8.</span> <span class="toc-text">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8_变量的有效范围"><span class="toc-number">9.</span> <span class="toc-text">8 变量的有效范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9_变量键盘读取、数组与宣告：_read,_declare,_array"><span class="toc-number">10.</span> <span class="toc-text">9 变量键盘读取、数组与宣告： read, declare, array</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/生活哲学-规律-反省/" title="生活哲学 规律 反省">生活哲学 规律 反省<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/perl/" title="perl">perl<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell-cmd/" title="shell-cmd">shell-cmd<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/git-page-建站/" title="git-page 建站">git-page 建站<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/markdown-html/" title="markdown html">markdown html<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/操作系统-内存管理/" title="操作系统 内存管理">操作系统 内存管理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/代码理解-软硬件/" title="代码理解 软硬件">代码理解 软硬件<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.zhihu.com/people/sui-feng-56" target="_blank" title="我的知乎">我的知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.douban.com/people/larrybrick" target="_blank" title="我的豆瓣">我的豆瓣</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+<div class="doubanshow">
+<p class="asidetitle">豆瓣秀</p>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/larrybrick/?show=collection&amp;n=12&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book|movie" ></script>
+</div>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 知识管理 学习思考 读书写作 <br/>
+			个人总结 生活感悟 网络分享</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/lbrick" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/larrybrick" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:yananback@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="pumpkin">pumpkin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
