@@ -29,7 +29,7 @@ bash shell学习笔记整理
 
 
 
-1 系统的合法shell与/etc/shells功能2 Bash shell 的功能2.1 命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命">
+系统的合法shell与/etc/shells功能Bash shell 的功能命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bash学习笔记">
 <meta property="og:url" content="http://yoursite.com/2015/07/27/bash-learning/index.html">
@@ -52,8 +52,8 @@ bash shell学习笔记整理
 
 
 
-1 系统的合法shell与/etc/shells功能2 Bash shell 的功能2.1 命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命">
-<meta property="og:updated_time" content="2015-07-27T12:47:23.509Z">
+系统的合法shell与/etc/shells功能Bash shell 的功能命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成">
+<meta property="og:updated_time" content="2015-07-27T12:57:26.956Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bash学习笔记">
 <meta name="twitter:description" content="文档更新记录
@@ -74,7 +74,7 @@ bash shell学习笔记整理
 
 
 
-1 系统的合法shell与/etc/shells功能2 Bash shell 的功能2.1 命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命">
+系统的合法shell与/etc/shells功能Bash shell 的功能命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -140,7 +140,7 @@ bash shell学习笔记整理
 		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-27T12:47:23.533Z" itemprop="datePublished"> 发表于 2015-07-27</time>
+    <time datetime="2015-07-27T12:57:26.984Z" itemprop="datePublished"> 发表于 2015-07-27</time>
     
   </p>
 </header>
@@ -149,11 +149,11 @@ bash shell学习笔记整理
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档更新记录"><span class="toc-number">1.</span> <span class="toc-text">文档更新记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1_系统的合法shell与/etc/shells功能"><span class="toc-number">2.</span> <span class="toc-text">1 系统的合法shell与/etc/shells功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_Bash_shell_的功能"><span class="toc-number">3.</span> <span class="toc-text">2 Bash shell 的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_命令编修能力"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 命令编修能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_命令与档案补全功能"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 命令与档案补全功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_命令别名设定功能"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 命令别名设定功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4_工作控制、前景背景控制"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 工作控制、前景背景控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5_程序化脚本（简单）"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 程序化脚本（简单）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6_通配符"><span class="toc-number">3.6.</span> <span class="toc-text">2.6 通配符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_Bash_shell的内建命令：type"><span class="toc-number">4.</span> <span class="toc-text">3 Bash shell的内建命令：type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_指令的下达"><span class="toc-number">5.</span> <span class="toc-text">4 指令的下达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_变量的取用与设定"><span class="toc-number">6.</span> <span class="toc-text">5 变量的取用与设定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1_变量设计规则"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 变量设计规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6_环境变量的功能：env_不常见环境变量说明,_set,_export"><span class="toc-number">7.</span> <span class="toc-text">6 环境变量的功能：env 不常见环境变量说明, set, export</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7_影响显示结果的语系变量_(locale)_（要回前面章节看看）"><span class="toc-number">8.</span> <span class="toc-text">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8_变量的有效范围"><span class="toc-number">9.</span> <span class="toc-text">8 变量的有效范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9_变量键盘读取、数组与宣告：_read,_declare,_array"><span class="toc-number">10.</span> <span class="toc-text">9 变量键盘读取、数组与宣告： read, declare, array</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文档更新记录"><span class="toc-number">1.</span> <span class="toc-text">文档更新记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统的合法shell与/etc/shells功能"><span class="toc-number">2.</span> <span class="toc-text">系统的合法shell与/etc/shells功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bash_shell_的功能"><span class="toc-number">3.</span> <span class="toc-text">Bash shell 的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令编修能力"><span class="toc-number">3.1.</span> <span class="toc-text">命令编修能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令与档案补全功能"><span class="toc-number">3.2.</span> <span class="toc-text">命令与档案补全功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令别名设定功能"><span class="toc-number">3.3.</span> <span class="toc-text">命令别名设定功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作控制、前景背景控制"><span class="toc-number">3.4.</span> <span class="toc-text">工作控制、前景背景控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序化脚本（简单）"><span class="toc-number">3.5.</span> <span class="toc-text">程序化脚本（简单）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通配符"><span class="toc-number">3.6.</span> <span class="toc-text">通配符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bash_shell的内建命令：type"><span class="toc-number">4.</span> <span class="toc-text">Bash shell的内建命令：type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令的下达"><span class="toc-number">5.</span> <span class="toc-text">指令的下达</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的取用与设定"><span class="toc-number">6.</span> <span class="toc-text">变量的取用与设定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量设计规则"><span class="toc-number">6.1.</span> <span class="toc-text">变量设计规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境变量的功能：env_不常见环境变量说明,_set,_export"><span class="toc-number">7.</span> <span class="toc-text">环境变量的功能：env 不常见环境变量说明, set, export</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#影响显示结果的语系变量_(locale)_（要回前面章节看看）"><span class="toc-number">8.</span> <span class="toc-text">影响显示结果的语系变量 (locale) （要回前面章节看看）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的有效范围"><span class="toc-number">9.</span> <span class="toc-text">变量的有效范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量键盘读取、数组与宣告：_read,_declare,_array"><span class="toc-number">10.</span> <span class="toc-text">变量键盘读取、数组与宣告： read, declare, array</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="文档更新记录">文档更新记录</h3><table>
+		<h2 id="文档更新记录">文档更新记录</h2><table>
 <thead>
 <tr>
 <th style="text-align:left">版本</th>
@@ -171,25 +171,25 @@ bash shell学习笔记整理
 </tr>
 </tbody>
 </table>
-<h3 id="1_系统的合法shell与/etc/shells功能">1 系统的合法shell与/etc/shells功能</h3><h3 id="2_Bash_shell_的功能">2 Bash shell 的功能</h3><h4 id="2-1_命令编修能力">2.1 命令编修能力</h4><p>通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成当前命令的输入工作。用来执行这项功能的键是Tab键，按下Tab键后，bash就试图完成整个命令的输入，并将列出所有能够与当前输入字符相匹配的命令列表。</p>
-<h4 id="2-2_命令与档案补全功能">2.2 命令与档案补全功能</h4><h4 id="2-3_命令别名设定功能">2.3 命令别名设定功能</h4><p>别名是bash中用来节省时间的另一项重要功能，它允许用户按照自己喜欢的方式对命令进行自定义。</p>
+<h2 id="系统的合法shell与/etc/shells功能">系统的合法shell与/etc/shells功能</h2><h2 id="Bash_shell_的功能">Bash shell 的功能</h2><h3 id="命令编修能力">命令编修能力</h3><p>通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成当前命令的输入工作。用来执行这项功能的键是Tab键，按下Tab键后，bash就试图完成整个命令的输入，并将列出所有能够与当前输入字符相匹配的命令列表。</p>
+<h3 id="命令与档案补全功能">命令与档案补全功能</h3><h3 id="命令别名设定功能">命令别名设定功能</h3><p>别名是bash中用来节省时间的另一项重要功能，它允许用户按照自己喜欢的方式对命令进行自定义。</p>
 <p>别名的创建：alias接命令，例：</p>
 <pre><code>alias <span class="keyword">lm</span>=‘<span class="keyword">ls</span> -<span class="keyword">al</span>’
 </code></pre><p>别名的取消：用unalias 取消别名，例：</p>
 <pre><code><span class="built_in">unalias</span> lm
-</code></pre><h4 id="2-4_工作控制、前景背景控制">2.4 工作控制、前景背景控制</h4><h4 id="2-5_程序化脚本（简单）">2.5 程序化脚本（简单）</h4><h4 id="2-6_通配符">2.6 通配符</h4><p>通配符<code>*</code>的常用方法就是查找具有相同扩展名的文件，比如：</p>
+</code></pre><h3 id="工作控制、前景背景控制">工作控制、前景背景控制</h3><h3 id="程序化脚本（简单）">程序化脚本（简单）</h3><h3 id="通配符">通配符</h3><p>通配符<code>*</code>的常用方法就是查找具有相同扩展名的文件，比如：</p>
 <pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
 </code></pre><p>通配符<code>*</code>有时可以将几百的命令缩短成一个命令。</p>
 <pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
 </code></pre><p>问号通配符<code>?</code>必须匹配一个且只能匹配一个字符，通常用来查找比<code>*</code>更为精确的匹配。</p>
 <pre><code>ls <span class="keyword">*</span>.???
-</code></pre><h3 id="3_Bash_shell的内建命令：type">3 Bash shell的内建命令：type</h3><p>查询是否是bash内部命令：type -t 命令名</p>
+</code></pre><h2 id="Bash_shell的内建命令：type">Bash shell的内建命令：type</h2><p>查询是否是bash内部命令：type -t 命令名</p>
 <pre><code><span class="type">file</span> <span class="comment">--外部命令；</span>
 <span class="type">alias</span> <span class="comment">--命令别名；</span>
 builtin <span class="comment">--内部命令</span>
-</code></pre><h3 id="4_指令的下达">4 指令的下达</h3><h3 id="5_变量的取用与设定">5 变量的取用与设定</h3><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
+</code></pre><h2 id="指令的下达">指令的下达</h2><h2 id="变量的取用与设定">变量的取用与设定</h2><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
 <span class="built_in">echo</span> <span class="variable">${PATH}</span>
-</code></pre><h4 id="5-1_变量设计规则">5.1 变量设计规则</h4><ol>
+</code></pre><h3 id="变量设计规则">变量设计规则</h3><ol>
 <li>环境变量大写，私有变量小写：变量名称只能是字母与数字，开头字符不能是数字</li>
 <li>变量与内容以”=”连接，等号两边不能空格；变量内容若有空格可是有””or’’括起</li>
 <li>区分”” 与’’的使用，前者保留特性，后者内的特殊字符仅为一般字符unset </li>
@@ -200,7 +200,7 @@ builtin <span class="comment">--内部命令</span>
 </li>
 <li>自定义变量变成环境变量：export mypath</li>
 </ol>
-<h3 id="6_环境变量的功能：env_不常见环境变量说明,_set,_export">6 环境变量的功能：env 不常见环境变量说明, set, export</h3><ul>
+<h2 id="环境变量的功能：env_不常见环境变量说明,_set,_export">环境变量的功能：env 不常见环境变量说明, set, export</h2><ul>
 <li>HOME：代表home目录，cd /home 即取用这个变量</li>
 <li>SHELL：告知目前环境使用的shell是哪支程序</li>
 </ul>
@@ -237,8 +237,8 @@ builtin <span class="comment">--内部命令</span>
 <span class="string">\$:提示字符</span>
 $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
 </code></pre><p>export:自定义变量转换成环境变量</p>
-<h3 id="7_影响显示结果的语系变量_(locale)_（要回前面章节看看）">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</h3><h3 id="8_变量的有效范围">8 变量的有效范围</h3><p>变量可否被引用与export有关，被export后的变量成为环境变量，环境变量可以被子程序引用，自定义变量内容不会存在于子程序中。当启动一个shell，操作系统会分配一记忆区块给shell使用，此内存内之变量可让子程序取用；若在父程序利用export功能，可以让自定义变量的内容写到上述的记忆区块当中（环境变量）；当加载另一个shell时，子shell可以将父程序的环境变量所在的记忆区块导入自己的环境变量区块当中。</p>
-<h3 id="9_变量键盘读取、数组与宣告：_read,_declare,_array">9 变量键盘读取、数组与宣告： read, declare, array</h3><pre><code><span class="built_in">read</span> atest 、<span class="built_in">declare</span>或<span class="built_in">typeset</span>：宣告变量的类型
+<h2 id="影响显示结果的语系变量_(locale)_（要回前面章节看看）">影响显示结果的语系变量 (locale) （要回前面章节看看）</h2><h2 id="变量的有效范围">变量的有效范围</h2><p>变量可否被引用与export有关，被export后的变量成为环境变量，环境变量可以被子程序引用，自定义变量内容不会存在于子程序中。当启动一个shell，操作系统会分配一记忆区块给shell使用，此内存内之变量可让子程序取用；若在父程序利用export功能，可以让自定义变量的内容写到上述的记忆区块当中（环境变量）；当加载另一个shell时，子shell可以将父程序的环境变量所在的记忆区块导入自己的环境变量区块当中。</p>
+<h2 id="变量键盘读取、数组与宣告：_read,_declare,_array">变量键盘读取、数组与宣告： read, declare, array</h2><pre><code><span class="built_in">read</span> atest 、<span class="built_in">declare</span>或<span class="built_in">typeset</span>：宣告变量的类型
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -249,6 +249,11 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
   <a class="article-category-link" href="/categories/linux学习/">linux学习</a>
 </div>
 
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/shell/">shell</a>
+  </div>
 
 </div>
 
@@ -269,6 +274,14 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/07/27/gem5-run-bench-step/" title="gem5跑bench过程记录">
+  <strong>上一篇：</strong><br/>
+  <span>
+  gem5跑bench过程记录</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/07/27/ubuntu-android-sdk/"  title="ubuntu采用eclips搭建安卓环境记录">
@@ -288,7 +301,7 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文档更新记录"><span class="toc-number">1.</span> <span class="toc-text">文档更新记录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1_系统的合法shell与/etc/shells功能"><span class="toc-number">2.</span> <span class="toc-text">1 系统的合法shell与/etc/shells功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_Bash_shell_的功能"><span class="toc-number">3.</span> <span class="toc-text">2 Bash shell 的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1_命令编修能力"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 命令编修能力</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2_命令与档案补全功能"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 命令与档案补全功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3_命令别名设定功能"><span class="toc-number">3.3.</span> <span class="toc-text">2.3 命令别名设定功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4_工作控制、前景背景控制"><span class="toc-number">3.4.</span> <span class="toc-text">2.4 工作控制、前景背景控制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-5_程序化脚本（简单）"><span class="toc-number">3.5.</span> <span class="toc-text">2.5 程序化脚本（简单）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-6_通配符"><span class="toc-number">3.6.</span> <span class="toc-text">2.6 通配符</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_Bash_shell的内建命令：type"><span class="toc-number">4.</span> <span class="toc-text">3 Bash shell的内建命令：type</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_指令的下达"><span class="toc-number">5.</span> <span class="toc-text">4 指令的下达</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_变量的取用与设定"><span class="toc-number">6.</span> <span class="toc-text">5 变量的取用与设定</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1_变量设计规则"><span class="toc-number">6.1.</span> <span class="toc-text">5.1 变量设计规则</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6_环境变量的功能：env_不常见环境变量说明,_set,_export"><span class="toc-number">7.</span> <span class="toc-text">6 环境变量的功能：env 不常见环境变量说明, set, export</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7_影响显示结果的语系变量_(locale)_（要回前面章节看看）"><span class="toc-number">8.</span> <span class="toc-text">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8_变量的有效范围"><span class="toc-number">9.</span> <span class="toc-text">8 变量的有效范围</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9_变量键盘读取、数组与宣告：_read,_declare,_array"><span class="toc-number">10.</span> <span class="toc-text">9 变量键盘读取、数组与宣告： read, declare, array</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文档更新记录"><span class="toc-number">1.</span> <span class="toc-text">文档更新记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#系统的合法shell与/etc/shells功能"><span class="toc-number">2.</span> <span class="toc-text">系统的合法shell与/etc/shells功能</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bash_shell_的功能"><span class="toc-number">3.</span> <span class="toc-text">Bash shell 的功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#命令编修能力"><span class="toc-number">3.1.</span> <span class="toc-text">命令编修能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令与档案补全功能"><span class="toc-number">3.2.</span> <span class="toc-text">命令与档案补全功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#命令别名设定功能"><span class="toc-number">3.3.</span> <span class="toc-text">命令别名设定功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#工作控制、前景背景控制"><span class="toc-number">3.4.</span> <span class="toc-text">工作控制、前景背景控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#程序化脚本（简单）"><span class="toc-number">3.5.</span> <span class="toc-text">程序化脚本（简单）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通配符"><span class="toc-number">3.6.</span> <span class="toc-text">通配符</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Bash_shell的内建命令：type"><span class="toc-number">4.</span> <span class="toc-text">Bash shell的内建命令：type</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#指令的下达"><span class="toc-number">5.</span> <span class="toc-text">指令的下达</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的取用与设定"><span class="toc-number">6.</span> <span class="toc-text">变量的取用与设定</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#变量设计规则"><span class="toc-number">6.1.</span> <span class="toc-text">变量设计规则</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#环境变量的功能：env_不常见环境变量说明,_set,_export"><span class="toc-number">7.</span> <span class="toc-text">环境变量的功能：env 不常见环境变量说明, set, export</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#影响显示结果的语系变量_(locale)_（要回前面章节看看）"><span class="toc-number">8.</span> <span class="toc-text">影响显示结果的语系变量 (locale) （要回前面章节看看）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量的有效范围"><span class="toc-number">9.</span> <span class="toc-text">变量的有效范围</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#变量键盘读取、数组与宣告：_read,_declare,_array"><span class="toc-number">10.</span> <span class="toc-text">变量键盘读取、数组与宣告： read, declare, array</span></a></li></ol>
  
   </div>
 
@@ -315,6 +328,10 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/shell/" title="shell">shell<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
 			
 		
@@ -328,10 +345,6 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
 		
 			
 				<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
 			
 		
 			

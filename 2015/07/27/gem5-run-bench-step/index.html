@@ -11,25 +11,28 @@
     
 
     
-    <meta name="description" content="1.安装所需工具sudo apt-get install git scons g++ python-dev swig m4
-2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
+    <meta name="description" content="安装所需工具sudo apt-get install git scons g++ python-dev swig m4
+下载我们改过的my-gem5下载地址如下:（已有的话就git pull更新一下）
+git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 如果速度过慢，采用下面地址下载
-链接: http://pa">
+链接: http://pan.ba">
 <meta property="og:type" content="article">
 <meta property="og:title" content="gem5跑bench过程记录">
 <meta property="og:url" content="http://yoursite.com/2015/07/27/gem5-run-bench-step/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="1.安装所需工具sudo apt-get install git scons g++ python-dev swig m4
-2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
+<meta property="og:description" content="安装所需工具sudo apt-get install git scons g++ python-dev swig m4
+下载我们改过的my-gem5下载地址如下:（已有的话就git pull更新一下）
+git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 如果速度过慢，采用下面地址下载
-链接: http://pa">
-<meta property="og:updated_time" content="2015-07-27T05:49:53.569Z">
+链接: http://pan.ba">
+<meta property="og:updated_time" content="2015-07-27T13:02:32.709Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gem5跑bench过程记录">
-<meta name="twitter:description" content="1.安装所需工具sudo apt-get install git scons g++ python-dev swig m4
-2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
+<meta name="twitter:description" content="安装所需工具sudo apt-get install git scons g++ python-dev swig m4
+下载我们改过的my-gem5下载地址如下:（已有的话就git pull更新一下）
+git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 如果速度过慢，采用下面地址下载
-链接: http://pa">
+链接: http://pan.ba">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -95,7 +98,7 @@
 		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-27T05:49:53.597Z" itemprop="datePublished"> 发表于 2015-07-27</time>
+    <time datetime="2015-07-27T13:02:32.749Z" itemprop="datePublished"> 发表于 2015-07-27</time>
     
   </p>
 </header>
@@ -104,26 +107,25 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">1.安装所需工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）"><span class="toc-number">2.</span> <span class="toc-text">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-编译gem5"><span class="toc-number">3.</span> <span class="toc-text">3.编译gem5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">4.下载Linux镜像：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-解压aarch-system-2014-10-tar-xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)"><span class="toc-number">5.</span> <span class="toc-text">5.解压aarch-system-2014-10.tar.xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里"><span class="toc-number">6.</span> <span class="toc-text">6.下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">7.构建仿真目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">8.启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_用AtomicSimpleCpu模式启动linux，_设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">1. 用AtomicSimpleCpu模式启动linux， 设置一个观察点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">2. 用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">9.跑具体的bench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">10.保存bench运行信息</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">安装所需工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载我们改过的my-gem5"><span class="toc-number">2.</span> <span class="toc-text">下载我们改过的my-gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译gem5"><span class="toc-number">3.</span> <span class="toc-text">编译gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">下载Linux镜像：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-解压系统镜像，并放入正确的目录"><span class="toc-number">5.</span> <span class="toc-text">5.解压系统镜像，并放入正确的目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载benchmark，放到文件系统镜像"><span class="toc-number">6.</span> <span class="toc-text">下载benchmark，放到文件系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">构建仿真目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">跑具体的bench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">保存bench运行信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">11.</span> <span class="toc-text">END</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="1-安装所需工具">1.安装所需工具</h3><pre><code><span class="label">sudo</span> apt-<span class="preprocessor">get</span> install git scons g++ python-dev <span class="keyword">swig </span>m4
-</code></pre><h3 id="2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</h3><pre><code>git clone <span class="string">https:</span><span class="comment">//tianna1121@bitbucket.org/tianna1121/my-gem5.git</span>
+		<h2 id="安装所需工具">安装所需工具</h2><pre><code><span class="label">sudo</span> apt-<span class="preprocessor">get</span> install git scons g++ python-dev <span class="keyword">swig </span>m4
+</code></pre><h2 id="下载我们改过的my-gem5">下载我们改过的my-gem5</h2><p>下载地址如下:（已有的话就git pull更新一下）</p>
+<pre><code>git clone <span class="string">https:</span><span class="comment">//tianna1121@bitbucket.org/tianna1121/my-gem5.git</span>
 </code></pre><p>如果速度过慢，采用下面地址下载</p>
 <pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/137oku 密码: shs6</span>
-</code></pre><h3 id="3-编译gem5">3.编译gem5</h3><p>进入my-gem5文件夹之后</p>
+</code></pre><h2 id="编译gem5">编译gem5</h2><p>进入my-gem5文件夹之后</p>
 <pre><code>scons build<span class="regexp">/ARM/g</span>em5.opt
 </code></pre><p>第一次较慢(大概20分钟)，如果以前跑过gem5可以备份一下build文件夹之后再编译</p>
-<h3 id="4-下载Linux镜像：">4.下载Linux镜像：</h3><pre><code><span class="label">http:</span>//www.gem5<span class="preprocessor">.org</span>/dist/current/arm/aarch-system-<span class="number">2014</span>-<span class="number">10.</span>tar.xz
-</code></pre><h3 id="5-解压aarch-system-2014-10-tar-xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)">5.解压aarch-system-2014-10.tar.xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)</h3><p>目录结构如下：</p>
+<h2 id="下载Linux镜像：">下载Linux镜像：</h2><pre><code><span class="label">http:</span>//www.gem5<span class="preprocessor">.org</span>/dist/current/arm/aarch-system-<span class="number">2014</span>-<span class="number">10.</span>tar.xz
+</code></pre><h2 id="5-解压系统镜像，并放入正确的目录">5.解压系统镜像，并放入正确的目录</h2><p>将aarch-system-2014-10.tar.xz解压到my-gem5文件夹下的img文件夹中(如果没有则自己创建)</p>
+<p>目录结构如下：</p>
 <blockquote>
-<p>gem5/</p>
-<p>|——img/</p>
-<p>|——|——binaries/*</p>
-<p>|——|——disks/*</p>
+<p>gem5/<br>|——img/<br>|——|——binaries/<em><br>|——|——disks/</em></p>
 </blockquote>
-<h3 id="6-下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里">6.下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里</h3><p>下载地址</p>
+<h2 id="下载benchmark，放到文件系统镜像">下载benchmark，放到文件系统镜像</h2><p>(此镜像作为linux文件系统)里,下载地址</p>
 <pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/1qWJZF0S 密码: ms7h</span>
 </code></pre><p>向镜像添加文件指令</p>
 <pre><code>sudo mount -o loop,offset=<span class="number">32256</span> img/disks/linux-aarch32-ael<span class="class">.img</span> /mnt
@@ -133,20 +135,17 @@ cd /mnt
 chmod +x /mediabench<span class="comment">/* -r
 chmod +x /Mibench<span class="comment">/* -r
 umount /mnt</span></span>
-</code></pre><h3 id="7-构建仿真目录">7.构建仿真目录</h3><p>将gem5/build/ARM/gem5.opt和gem5/configs/链接到任一文件夹下（这里采用gem5/parsec-1/)，开始仿真,<strong>注意</strong>为不同的benchmark创建不同的目录</p>
+</code></pre><h2 id="构建仿真目录">构建仿真目录</h2><p>将gem5/build/ARM/gem5.opt和gem5/configs/链接到任一文件夹下（这里采用gem5/parsec-1/)，开始仿真,<strong>注意</strong>为不同的benchmark创建不同的目录</p>
 <p>链接指令如下</p>
 <pre><code>进入parsec-<span class="number">1</span>目录
 ln -s ..<span class="regexp">/build/</span>ARM<span class="regexp">/gem5.opt ./</span>
 ln -s ..<span class="regexp">/configs/</span> .<span class="regexp">/</span>
 </code></pre><p>目录结构如下：</p>
 <blockquote>
-<p>parsec-1/</p>
-<p>|——board_start.sh</p>
-<p>|——gem5.opt</p>
-<p>|——configs/</p>
+<p>parsec-1/<br>|——board_start.sh<br>|——gem5.opt<br>|——configs/</p>
 </blockquote>
-<h3 id="8-启动Linux系统(gem5目录下)，设置观察点：">8.启动Linux系统(gem5目录下)，设置观察点：</h3><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
-<h4 id="1-_用AtomicSimpleCpu模式启动linux，_设置一个观察点">1. 用AtomicSimpleCpu模式启动linux， 设置一个观察点</h4><p>修改board_start.sh文件:</p>
+<h2 id="启动Linux系统(gem5目录下)，设置观察点：">启动Linux系统(gem5目录下)，设置观察点：</h2><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
+<h3 id="用AtomicSimpleCpu模式启动linux，设置一个观察点">用AtomicSimpleCpu模式启动linux，设置一个观察点</h3><p>修改board_start.sh文件:</p>
 <blockquote>
 <p>1.首先将<code>M5_PATH</code>修改为你自己的img路径</p>
 <p>2.可能需要根据不同的模式进行相应的修改，且注意每种模式后面参数文件是否存在</p>
@@ -162,12 +161,11 @@ ln -s ..<span class="regexp">/configs/</span> .<span class="regexp">/</span>
 <pre><code>m5 checkpoint       <span class="comment">#设置观察点</span>
 m5 <span class="keyword">exit</span>             <span class="comment">#设置完成退出，不用关闭窗口 </span>
 </code></pre><p>此时parserc-1/m5out/文件夹里会生成cpt.xxxxx文件夹，即为checkpoint，这个文件夹可以重复使用，跑另一个bench的时候复制其链接到m5out文件夹中</p>
-<h4 id="2-_用arm_detailed模式从设置的观察点继续执行">2. 用arm_detailed模式从设置的观察点继续执行</h4><p>再次运行<code>./util/term/m5term 127.0.0.1 3456</code>就可以看到所跑linux系统的命令行<code>#</code>，即已经进入m5终端</p>
-<h3 id="9-跑具体的bench">9.跑具体的bench</h3><p>进入系统后，根据具体的bench指令直接执行应用</p>
+<h3 id="用arm_detailed模式从设置的观察点继续执行">用arm_detailed模式从设置的观察点继续执行</h3><p>再次运行<code>./util/term/m5term 127.0.0.1 3456</code>就可以看到所跑linux系统的命令行<code>#</code>，即已经进入m5终端</p>
+<h2 id="跑具体的bench">跑具体的bench</h2><p>进入系统后，根据具体的bench指令直接执行应用</p>
 <p><strong>注意：</strong>m5终端下尽量少使用bash指令（比如ls, cd, chmod等等，此会影响所跑应用的状态结果，最好提前修改权限一句指令解决）</p>
-<h3 id="10-保存bench运行信息">10.保存bench运行信息</h3><p>进入parsec-1/m5out/Mibench/，复制一份qsort_small为你所跑bench的名字，然后删除qsort_small下去掉检查点文件cpt.xxxxxxx以外的所有文件，重新开启第8.2步跑新的bench</p>
-<p>END</p>
-<p>AtomicSimpeCPU模式：</p>
+<h2 id="保存bench运行信息">保存bench运行信息</h2><p>进入parsec-1/m5out/Mibench/，复制一份qsort_small为你所跑bench的名字，然后删除qsort_small下去掉检查点文件cpt.xxxxxxx以外的所有文件，重新开启第8.2步跑新的bench</p>
+<h2 id="END">END</h2><p>AtomicSimpeCPU模式：</p>
 <pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=AtomicSimpleCPU</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span>
 </code></pre><p>arm_detailed模式：</p>
 <pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=arm_detailed</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span> <span class="literal">-</span><span class="comment">r</span> <span class="comment">1</span>
@@ -197,19 +195,11 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/07/27/install-matlab2014b-in-ubuntu14.04/" title="linux安装matlab记录">
-  <strong>上一篇：</strong><br/>
-  <span>
-  linux安装matlab记录</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/06/26/first-use-perl/"  title="第一次使用perl语言">
+<a href="/2015/07/27/bash-learning/"  title="bash学习笔记">
  <strong>下一篇：</strong><br/> 
- <span>第一次使用perl语言
+ <span>bash学习笔记
 </span>
 </a>
 </div>
@@ -224,7 +214,7 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">1.安装所需工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）"><span class="toc-number">2.</span> <span class="toc-text">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-编译gem5"><span class="toc-number">3.</span> <span class="toc-text">3.编译gem5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">4.下载Linux镜像：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-解压aarch-system-2014-10-tar-xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)"><span class="toc-number">5.</span> <span class="toc-text">5.解压aarch-system-2014-10.tar.xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里"><span class="toc-number">6.</span> <span class="toc-text">6.下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">7.构建仿真目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">8.启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_用AtomicSimpleCpu模式启动linux，_设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">1. 用AtomicSimpleCpu模式启动linux， 设置一个观察点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">2. 用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">9.跑具体的bench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">10.保存bench运行信息</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">安装所需工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载我们改过的my-gem5"><span class="toc-number">2.</span> <span class="toc-text">下载我们改过的my-gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译gem5"><span class="toc-number">3.</span> <span class="toc-text">编译gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">下载Linux镜像：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-解压系统镜像，并放入正确的目录"><span class="toc-number">5.</span> <span class="toc-text">5.解压系统镜像，并放入正确的目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载benchmark，放到文件系统镜像"><span class="toc-number">6.</span> <span class="toc-text">下载benchmark，放到文件系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">构建仿真目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">跑具体的bench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">保存bench运行信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">11.</span> <span class="toc-text">END</span></a></li></ol>
  
   </div>
 
@@ -251,6 +241,10 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 		<ul class="clearfix">
 		
 			
+				<li><a href="/tags/shell/" title="shell">shell<sup>2</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
 			
 		
@@ -264,10 +258,6 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 		
 			
 				<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
 			
 		
 			
