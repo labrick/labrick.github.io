@@ -4,23 +4,51 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>更好的掌控自己 | 工作实验室</title>
+    <title>虚拟地址向物理地址的转换 | 工作实验室</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="pumpkin">
     
 
     
-    <meta name="description" content="生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就一句话哲学的合理性。">
+    <meta name="description" content="操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。
+目录：
+
+
+总体概述
+页表项结构
+缺页异常
+不同的层次结构
+补充">
 <meta property="og:type" content="article">
-<meta property="og:title" content="更好的掌控自己">
-<meta property="og:url" content="http://yoursite.com/2015/01/31/2015-01-31-更好的掌控自己/index.html">
+<meta property="og:title" content="虚拟地址向物理地址的转换">
+<meta property="og:url" content="http://yoursite.com/2015/06/14/虚拟地址向物理地址转换/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就一句话哲学的合理性。">
-<meta property="og:updated_time" content="2015-07-27T06:38:28.303Z">
+<meta property="og:description" content="操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。
+目录：
+
+
+总体概述
+页表项结构
+缺页异常
+不同的层次结构
+补充">
+<meta property="og:image" content="http://yoursite.com/!--￼0-->/va_pa.png">
+<meta property="og:image" content="http://yoursite.com/!--￼1-->/page_table.png">
+<meta property="og:image" content="http://yoursite.com/!--￼2-->/page_fault.png">
+<meta property="og:image" content="http://yoursite.com/!--￼3-->/virtual_physical_cache.png">
+<meta property="og:updated_time" content="2015-07-27T07:00:30.062Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="更好的掌控自己">
-<meta name="twitter:description" content="生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就一句话哲学的合理性。">
+<meta name="twitter:title" content="虚拟地址向物理地址的转换">
+<meta name="twitter:description" content="操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。
+目录：
+
+
+总体概述
+页表项结构
+缺页异常
+不同的层次结构
+补充">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -80,14 +108,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/01/31/2015-01-31-更好的掌控自己/" title="更好的掌控自己" itemprop="url">更好的掌控自己</a>
+      <a href="/2015/06/14/虚拟地址向物理地址转换/" title="虚拟地址向物理地址的转换" itemprop="url">虚拟地址向物理地址的转换</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
 		
   <p class="article-time">
-    <time datetime="2015-02-01T00:58:00.000Z" itemprop="datePublished"> 发表于 2015-01-31</time>
+    <time datetime="2015-06-15T00:14:00.000Z" itemprop="datePublished"> 发表于 2015-06-14</time>
     
   </p>
 </header>
@@ -96,22 +124,29 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#控制语速可以控制底气。"><span class="toc-number">1.</span> <span class="toc-text">控制语速可以控制底气。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有两个思维习惯："><span class="toc-number">2.</span> <span class="toc-text">有两个思维习惯：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深度给你生存的技能，广度赋予你生活的意义。"><span class="toc-number">3.</span> <span class="toc-text">深度给你生存的技能，广度赋予你生活的意义。</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1_总体概述"><span class="toc-number">1.</span> <span class="toc-text">1 总体概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_页表项结构"><span class="toc-number">2.</span> <span class="toc-text">2 页表项结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_缺页异常"><span class="toc-number">3.</span> <span class="toc-text">3 缺页异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_不同的层次结构"><span class="toc-number">4.</span> <span class="toc-text">4 不同的层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_补充"><span class="toc-number">5.</span> <span class="toc-text">5 补充</span></a></li></ol>
 		
 		</div>
 		
-		<p>　　生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就一句话哲学的合理性。</p>
+		<p>　　操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。</p>
+<p>目录：</p>
+<blockquote>
+<ul>
+<li>总体概述</li>
+<li>页表项结构</li>
+<li>缺页异常</li>
+<li>不同的层次结构</li>
+<li>补充</li>
+</ul>
+</blockquote>
 <a id="more"></a>
-<h3 id="控制语速可以控制底气。">控制语速可以控制底气。</h3><p>　　看到上了年纪或者经历比较多的人，几乎没有说话速度比较快的，或许因为放慢语速可以三思而后行，尽量照顾到每一个细节，找到合适的话语来说明问题，尽量让自己的观点、态度准确的传达给听者；</p>
-<p>　　每次我出场相对正式的场合（工作报告，code-review等），我都会想起来这句话，因为它的存在让我更好的控制自己的底气，让自己看起来比较的自信，从而充满自信；</p>
-<p>　　但是这是不够的，在平时的生活当中，这句话依然很重要，把它运用到我平时的生活当中才能使它真正的成为我的一部分；</p>
-<h3 id="有两个思维习惯：">有两个思维习惯：</h3><p>　　—- 能够把简单的事情想复杂，使你具备执行力。</p>
-<p>　　—- 能够把复杂的事情想简单，使你具备操控局面的能力。</p>
-<p>但是这样做也就产生了一个很大的问题，面对复杂的问题，很多时候不是想能够想的通的，这样就很容易对复杂问题产生恐惧，也就失去了前进的动力，所以就要把复杂的问题想简单，让我更轻松的去面对问题，试探着去做，有了细节的问题才有详细的解决办法，借用哲学里的一句话：问题和解决问题的方法是同时产生的。</p>
-<p>　　我的问题在于侧重于问题复杂化，这是一个很大的优势，也是一个很大的问题，牢记这句话在复杂问题面前不至于一败涂地，从容淡定的面对问题；</p>
-<h3 id="深度给你生存的技能，广度赋予你生活的意义。">深度给你生存的技能，广度赋予你生活的意义。</h3><p>　　本科前两年我一直在思考一个问题：文科的意义？世界上存在科学、哲学后其他学科有什么存在的价值？我对于这个问题在那期间一直是一个否定的回答；</p>
-<p>　　本科里我一直注重的是技能，也就是做好程序；现在虽说技能没有成熟，但是还可以简单混口饭吃，这或许就技能的意义，让我能够在当今社会下生活下去。但如果想生活的很好就不能单单靠单一的技能，因为单一的技能始终是出卖自己的劳动力。</p>
-<p>　　脑海中始终会存在一句话：有所精，有所通。精就是深度，通就是广度，也是见识的多少，通就会赋予我们更丰富美好的生活，通到一定程度可能就会产生另外一番的天地；希望自己在以后的生活里能够做到精通全面；</p>
+<h3 id="1_总体概述">1 总体概述</h3><p><img src="!--￼0--&gt;/va_pa.png" alt="va_pa.png"></p>
+<p>　　首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，从中查找页表，如果页表项存在，则可以根据页表项找到物理地址，从而根据指令类型和页表项位标识读写cache/mem，如果页表项不存在就会产生缺页异常。</p>
+<h3 id="2_页表项结构">2 页表项结构</h3><p><img src="!--￼1--&gt;/page_table.png" alt="page_table.png"><br>　　可以看到虚拟地址包括：虚拟叶号（VPN）和偏移地址<br>　　而虚拟叶号中包括：叶项有效位，访问控制位（RW）和物理帧号（PFN）<br>　　重新划分后可以得到物理地址：物理帧号和偏移地址</p>
+<h3 id="3_缺页异常">3 缺页异常</h3><p><img src="!--￼2--&gt;/page_fault.png" alt="page_fault.png"></p>
+<p>　　MMU根据虚拟地址查找页表项，如果对应页表项无效（有效位标记）则就会产生缺页异常，此时MMU会从内存匿名池中获取一帧内存，更新页表项信息，然后从Disk中搬移数据填充。如果内存已全部使用完，则需要根据替换策略替换出一帧内存，并跟新页表项。　</p>
+<h3 id="4_不同的层次结构">4 不同的层次结构</h3><p><img src="!--￼3--&gt;/virtual_physical_cache.png" alt="virtual_physical_cache.png"><br>　　物理cache：因为采用TLB管理，有很好的替换策略，对于命中率不高、需要频繁切换的应用效率比较高。<br>　　虚拟cache：cache命中率比较高（单线程优）时采用虚拟cache，因为地址翻译延迟很高，不能充分发挥cache的优势。<br>　　虚拟-物理cache：减少了关键路径，少见。</p>
+<h3 id="5_补充">5 补充</h3><p>　　OS产生之前我们基本采用手动分配内存，而对于未知的应用又没法定义应用所使用的内存的范围，OS之后的虚存可以对内存进行妥善的管理，使通用性大大增强，并可以保证多个任务顺利安全的进行。（域的管理用的比较少）<br>　　对于每个应用都存在0～3G的用户空间内存，应用可以采用连续的某一段虚拟地址进行访存，其中内存的分配：代码段+常量数据段+全局数据段，按顺序一层层生长，堆数据也同样往上长，栈数据往下压。<br>　　随应用进程产生虚拟地址从匿名池（空闲内存管理池）中申请物理内存与虚拟地址关联，应用进程关闭，物理内存得到释放（取消关联）。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -120,7 +155,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/生活哲学-规律-反省/">生活哲学 规律 反省</a>
+  <span></span> <a href="/tags/内存管理/">内存管理</a>
   </div>
 
 </div>
@@ -129,7 +164,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/01/31/2015-01-31-更好的掌控自己/" data-title="更好的掌控自己 | 工作实验室" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/06/14/虚拟地址向物理地址转换/" data-title="虚拟地址向物理地址的转换 | 工作实验室" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -143,13 +178,21 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/03/05/2015-03-05-代码的深思/" title="代码的深思">
+ <a href="/2015/06/18/该网站的建设过程/" title="本网站建设中所遇到到的问题及解决方法">
   <strong>上一篇：</strong><br/>
   <span>
-  代码的深思</span>
+  本网站建设中所遇到到的问题及解决方法</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2015/03/05/代码的深思/"  title="代码的深思">
+ <strong>下一篇：</strong><br/> 
+ <span>代码的深思
+</span>
+</a>
+</div>
 
 </nav>
 
@@ -161,7 +204,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#控制语速可以控制底气。"><span class="toc-number">1.</span> <span class="toc-text">控制语速可以控制底气。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#有两个思维习惯："><span class="toc-number">2.</span> <span class="toc-text">有两个思维习惯：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深度给你生存的技能，广度赋予你生活的意义。"><span class="toc-number">3.</span> <span class="toc-text">深度给你生存的技能，广度赋予你生活的意义。</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1_总体概述"><span class="toc-number">1.</span> <span class="toc-text">1 总体概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_页表项结构"><span class="toc-number">2.</span> <span class="toc-text">2 页表项结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_缺页异常"><span class="toc-number">3.</span> <span class="toc-text">3 缺页异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_不同的层次结构"><span class="toc-number">4.</span> <span class="toc-text">4 不同的层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_补充"><span class="toc-number">5.</span> <span class="toc-text">5 补充</span></a></li></ol>
  
   </div>
 
@@ -177,31 +220,27 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/生活哲学-规律-反省/" title="生活哲学 规律 反省">生活哲学 规律 反省<sup>1</sup></a></li>
+				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/perl/" title="perl">perl<sup>1</sup></a></li>
+				<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/shell-cmd/" title="shell-cmd">shell-cmd<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git-page-建站/" title="git-page 建站">git-page 建站<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/markdown-html/" title="markdown html">markdown html<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/操作系统-内存管理/" title="操作系统 内存管理">操作系统 内存管理<sup>1</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/代码理解-软硬件/" title="代码理解 软硬件">代码理解 软硬件<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/perl/" title="perl">perl<sup>1</sup></a></li>
 			
 		
 		</ul>

@@ -4,23 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>shell/vim指令收集 | 工作实验室</title>
+    <title>代码的深思 | 工作实验室</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="pumpkin">
     
 
     
-    <meta name="description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
+    <meta name="description" content="对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ 
+先说代码：　　我们是用电脑的键盘来输入的指令，每一个指令都对应一个ASCII码，而这里的ASCII码就是有序电压的高低，即我们输入的是电压的高低，你所">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell/vim指令收集">
-<meta property="og:url" content="http://yoursite.com/2015/06/24/2015-06-24-shell-cmd/index.html">
+<meta property="og:title" content="代码的深思">
+<meta property="og:url" content="http://yoursite.com/2015/03/05/代码的深思/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
-<meta property="og:updated_time" content="2015-07-27T06:36:50.195Z">
+<meta property="og:description" content="对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ 
+先说代码：　　我们是用电脑的键盘来输入的指令，每一个指令都对应一个ASCII码，而这里的ASCII码就是有序电压的高低，即我们输入的是电压的高低，你所">
+<meta property="og:updated_time" content="2015-07-27T06:59:53.078Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell/vim指令收集">
-<meta name="twitter:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
+<meta name="twitter:title" content="代码的深思">
+<meta name="twitter:description" content="对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ 
+先说代码：　　我们是用电脑的键盘来输入的指令，每一个指令都对应一个ASCII码，而这里的ASCII码就是有序电压的高低，即我们输入的是电压的高低，你所">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -80,14 +83,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/06/24/2015-06-24-shell-cmd/" title="shell/vim指令收集" itemprop="url">shell/vim指令收集</a>
+      <a href="/2015/03/05/代码的深思/" title="代码的深思" itemprop="url">代码的深思</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
 		
   <p class="article-time">
-    <time datetime="2015-06-25T01:08:00.000Z" itemprop="datePublished"> 发表于 2015-06-24</time>
+    <time datetime="2015-03-05T16:41:00.000Z" itemprop="datePublished"> 发表于 2015-03-05</time>
     
   </p>
 </header>
@@ -96,37 +99,22 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#vim跳到指定行"><span class="toc-number">1.</span> <span class="toc-text">vim跳到指定行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看光标所在行"><span class="toc-number">2.</span> <span class="toc-text">查看光标所在行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何显示一个文件的某几行"><span class="toc-number">3.</span> <span class="toc-text">如何显示一个文件的某几行</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先说代码："><span class="toc-number">1.</span> <span class="toc-text">先说代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再说编译："><span class="toc-number">2.</span> <span class="toc-text">再说编译：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#到单片机烧录："><span class="toc-number">3.</span> <span class="toc-text">到单片机烧录：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接下来ROM就可以释放其中的电压来控制外围的电路。"><span class="toc-number">4.</span> <span class="toc-text">接下来ROM就可以释放其中的电压来控制外围的电路。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再补充一下："><span class="toc-number">5.</span> <span class="toc-text">再补充一下：</span></a></li></ol>
 		
 		</div>
 		
-		<p>今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
-<a id="more"></a>
-<p>TOC</p>
-<h4 id="vim跳到指定行"><strong>vim跳到指定行</strong></h4><p>在<strong>编辑模式</strong>下输入：</p>
-<pre><code><span class="title">ngg</span>
-nG
-</code></pre><p>其中n为指定的行数（如25）</p>
-<pre><code>25gg
-25G
-</code></pre><p>跳转到第25行</p>
-<p>在<strong>命令模式</strong>下输入行号n</p>
-<pre><code><span class="attribute">:n</span>
-</code></pre><p>如果想打开文件即跳转</p>
-<pre><code><span class="title">vim</span> +n file_name
-</code></pre><h4 id="查看光标所在行"><strong>查看光标所在行</strong></h4><pre><code>Ctrl+<span class="keyword">g</span>
-</code></pre><h4 id="如何显示一个文件的某几行"><strong>如何显示一个文件的某几行</strong></h4><p>比如:从第3000行开始，显示1000行。即显示3000～3999行</p>
-<pre><code><span class="keyword">cat</span> file_name | tail -<span class="keyword">n</span> +3000 | head -<span class="keyword">n</span> 1000
-</code></pre><p>比如:显示1000行到3000行</p>
-<pre><code><span class="keyword">cat</span> file_name | head -<span class="keyword">n</span> 3000 | tail -<span class="keyword">n</span> +1000
-</code></pre><blockquote>
-<p>   tail -n 1000:    显示最后1000行<br>    tail -n +1000:    从1000行开始显示<br>    head -n 1000:    显示前面1000行</p>
-</blockquote>
-<p>也可以采用sed命令来实现</p>
-<pre><code><span class="title">sed</span> -n <span class="string">'5,10p'</span> file_name
-</code></pre><blockquote>
-<p>   查看文件第5行到第10行<br>    注意这里使用的是’单引号’</p>
-</blockquote>
+		<a id="more"></a>
+<p>　　对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ </p>
+<h3 id="先说代码：">先说代码：</h3><p>　　我们是用电脑的键盘来输入的指令，每一个指令都对应一个ASCII码，而这里的ASCII码就是有序电压的高低，即我们输入的是电压的高低，你所看到代码是这些电压的高低控制显示器所显示的图像，其实电脑也不知道它是什么，只知道这样显示。 </p>
+<p>　　结论：代码其实就是存储在存储器（内存、硬盘或者闪存等等）中有序电压的高低。 </p>
+<h3 id="再说编译：">再说编译：</h3><p>　　编译是一个有序电压的高低向另一种有序电压高低的一种转换过程，下面以52单片机为例，我们编译是从表示ASCII码的那种有序电压高低转换为52单片机能够识别的另一种规定好的有序电压高低，即表示HEX文件的电压高低。 </p>
+<p>　　结论：编译出的结果还是电脑中存储的有序电压高低。 </p>
+<h3 id="到单片机烧录：">到单片机烧录：</h3><p>　　接下俩就是烧录，理解了上面两点就很容易理解下面的内容，烧录就是电脑中的有序电压高低通过数据线传输到单片机中的ROM中。 </p>
+<h3 id="接下来ROM就可以释放其中的电压来控制外围的电路。">接下来ROM就可以释放其中的电压来控制外围的电路。</h3><p>　　总结：从代码的编辑到最后对电路的控制都是电压在起作用，只是为了方面我们而给我们展现的形式不一样而已，而其本质都是电压，这样也就不存在转换。 </p>
+<p>所以就有了这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ </p>
+<h3 id="再补充一下：">再补充一下：</h3><p>　　只要提到0/1，提到软件，这个问题就是没法理解的，因为软件【包括0/1】和硬件始终存在一道无法跨越的鸿沟；</p>
+<p>　　我们所写的0只是在电脑显示器上电平的呈现形式，这个所谓的0【实质是电平】可以传输到单片机中的ROM中，当然电平可以控制电平！</p>
+<p><a href="http://www.zhihu.com/question/20492284" target="_blank" rel="external">知乎链接</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -135,7 +123,7 @@ nG
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/shell-cmd/">shell-cmd</a>
+  <span></span> <a href="/tags/代码理解-软硬件/">代码理解 软硬件</a>
   </div>
 
 </div>
@@ -144,7 +132,7 @@ nG
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/06/24/2015-06-24-shell-cmd/" data-title="shell/vim指令收集 | 工作实验室" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/03/05/代码的深思/" data-title="代码的深思 | 工作实验室" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -158,18 +146,18 @@ nG
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/06/26/2015-06-26-first-use-perl/" title="第一次使用perl语言">
+ <a href="/2015/06/14/虚拟地址向物理地址转换/" title="虚拟地址向物理地址的转换">
   <strong>上一篇：</strong><br/>
   <span>
-  第一次使用perl语言</span>
+  虚拟地址向物理地址的转换</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/06/18/2015-06-18-git-page-issues/"  title="本网站建设中所遇到到的问题及解决方法">
+<a href="/2015/01/31/更好的掌控自己/"  title="更好的掌控自己">
  <strong>下一篇：</strong><br/> 
- <span>本网站建设中所遇到到的问题及解决方法
+ <span>更好的掌控自己
 </span>
 </a>
 </div>
@@ -184,7 +172,7 @@ nG
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#vim跳到指定行"><span class="toc-number">1.</span> <span class="toc-text">vim跳到指定行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看光标所在行"><span class="toc-number">2.</span> <span class="toc-text">查看光标所在行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何显示一个文件的某几行"><span class="toc-number">3.</span> <span class="toc-text">如何显示一个文件的某几行</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先说代码："><span class="toc-number">1.</span> <span class="toc-text">先说代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再说编译："><span class="toc-number">2.</span> <span class="toc-text">再说编译：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#到单片机烧录："><span class="toc-number">3.</span> <span class="toc-text">到单片机烧录：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接下来ROM就可以释放其中的电压来控制外围的电路。"><span class="toc-number">4.</span> <span class="toc-text">接下来ROM就可以释放其中的电压来控制外围的电路。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再补充一下："><span class="toc-number">5.</span> <span class="toc-text">再补充一下：</span></a></li></ol>
  
   </div>
 
@@ -200,31 +188,27 @@ nG
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/生活哲学-规律-反省/" title="生活哲学 规律 反省">生活哲学 规律 反省<sup>1</sup></a></li>
+				<li><a href="/tags/blog/" title="blog">blog<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/perl/" title="perl">perl<sup>1</sup></a></li>
+				<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/shell-cmd/" title="shell-cmd">shell-cmd<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/git-page-建站/" title="git-page 建站">git-page 建站<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/markdown-html/" title="markdown html">markdown html<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/操作系统-内存管理/" title="操作系统 内存管理">操作系统 内存管理<sup>1</sup></a></li>
+				<li><a href="/tags/感悟/" title="感悟">感悟<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/代码理解-软硬件/" title="代码理解 软硬件">代码理解 软硬件<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/shell/" title="shell">shell<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/perl/" title="perl">perl<sup>1</sup></a></li>
 			
 		
 		</ul>
