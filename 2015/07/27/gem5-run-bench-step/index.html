@@ -101,6 +101,13 @@
 </header>
 	<div class="article-content">
 		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">1.安装所需工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）"><span class="toc-number">2.</span> <span class="toc-text">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-编译gem5"><span class="toc-number">3.</span> <span class="toc-text">3.编译gem5</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">4.下载Linux镜像：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-解压aarch-system-2014-10-tar-xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)"><span class="toc-number">5.</span> <span class="toc-text">5.解压aarch-system-2014-10.tar.xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里"><span class="toc-number">6.</span> <span class="toc-text">6.下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">7.构建仿真目录</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">8.启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-_用AtomicSimpleCpu模式启动linux，_设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">1. 用AtomicSimpleCpu模式启动linux， 设置一个观察点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-_用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">2. 用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">9.跑具体的bench</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">10.保存bench运行信息</span></a></li></ol>
+		
+		</div>
+		
 		<h3 id="1-安装所需工具">1.安装所需工具</h3><pre><code><span class="label">sudo</span> apt-<span class="preprocessor">get</span> install git scons g++ python-dev <span class="keyword">swig </span>m4
 </code></pre><h3 id="2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</h3><pre><code>git clone <span class="string">https:</span><span class="comment">//tianna1121@bitbucket.org/tianna1121/my-gem5.git</span>
 </code></pre><p>如果速度过慢，采用下面地址下载</p>
@@ -284,6 +291,12 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
           <li>
             
             	<a href="http://www.douban.com/people/larrybrick" target="_blank" title="我的豆瓣">我的豆瓣</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://weibo.com/lbrick" target="_blank" title="我的微博">我的微博</a>
             
           </li>
         
