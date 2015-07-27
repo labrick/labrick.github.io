@@ -62,11 +62,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -92,13 +91,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#vim跳到指定行"><span class="toc-number">1.</span> <span class="toc-text">vim跳到指定行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看光标所在行"><span class="toc-number">2.</span> <span class="toc-text">查看光标所在行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#如何显示一个文件的某几行"><span class="toc-number">3.</span> <span class="toc-text">如何显示一个文件的某几行</span></a></li></ol>
-		
-		</div>
 		
 		<p>今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
 <a id="more"></a>
@@ -352,6 +344,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

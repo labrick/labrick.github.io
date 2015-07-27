@@ -65,11 +65,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -95,13 +94,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#首页显示摘要问题"><span class="toc-number">1.</span> <span class="toc-text">首页显示摘要问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#博文中显示HTML代码问题"><span class="toc-number">2.</span> <span class="toc-text">博文中显示HTML代码问题</span></a></li></ol>
-		
-		</div>
 		
 		<p>　　对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.</p>
 <p>[TOC]</p>
@@ -345,6 +337,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

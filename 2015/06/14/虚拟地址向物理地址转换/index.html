@@ -90,11 +90,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -120,13 +119,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1_总体概述"><span class="toc-number">1.</span> <span class="toc-text">1 总体概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2_页表项结构"><span class="toc-number">2.</span> <span class="toc-text">2 页表项结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3_缺页异常"><span class="toc-number">3.</span> <span class="toc-text">3 缺页异常</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4_不同的层次结构"><span class="toc-number">4.</span> <span class="toc-text">4 不同的层次结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5_补充"><span class="toc-number">5.</span> <span class="toc-text">5 补充</span></a></li></ol>
-		
-		</div>
 		
 		<p>　　操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。</p>
 <p>目录：</p>
@@ -372,6 +364,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

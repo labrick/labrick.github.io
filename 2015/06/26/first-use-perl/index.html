@@ -62,11 +62,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -92,13 +91,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			
-		
-		</div>
 		
 		<p>听说perl语言很久了，记得那还是两三年的本科阶段，对python的见解特别感兴趣，只是因为perl与python之间的争执，所以才知道了他，但也仅是知道而已，听说他语法混乱，大部分喜欢python的人都不喜欢他，今天使用perl语言也是一个巧合，因为大师兄让我来阅读一个脚本，顺便检查其中的问题，这才认真去了解perl语言。</p>
 <a id="more"></a>
@@ -331,6 +323,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

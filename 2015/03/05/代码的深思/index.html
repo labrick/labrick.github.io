@@ -65,11 +65,10 @@
 					
 					<li>
  					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:yoursite.com">
-					</form>
+						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
 					
 					</li>
 				</ul>
@@ -95,13 +94,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#先说代码："><span class="toc-number">1.</span> <span class="toc-text">先说代码：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再说编译："><span class="toc-number">2.</span> <span class="toc-text">再说编译：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#到单片机烧录："><span class="toc-number">3.</span> <span class="toc-text">到单片机烧录：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接下来ROM就可以释放其中的电压来控制外围的电路。"><span class="toc-number">4.</span> <span class="toc-text">接下来ROM就可以释放其中的电压来控制外围的电路。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#再补充一下："><span class="toc-number">5.</span> <span class="toc-text">再补充一下：</span></a></li></ol>
-		
-		</div>
 		
 		<a id="more"></a>
 <p>　　对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ </p>
@@ -340,6 +332,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 
