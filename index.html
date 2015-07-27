@@ -81,6 +81,375 @@
         <header class="article-info clearfix">
   <h1 itemprop="name">
     
+      <a href="/2015/07/27/gem5-run-bench-step/" title="Hello World" itemprop="url">Hello World</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T05:31:20.895Z" itemprop="datePublished"> 發表於 2015-07-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <h3 id="1-安装所需工具">1.安装所需工具</h3><pre><code><span class="label">sudo</span> apt-<span class="preprocessor">get</span> install git scons g++ python-dev <span class="keyword">swig </span>m4
+</code></pre><h3 id="2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</h3><pre><code>git clone <span class="string">https:</span><span class="comment">//tianna1121@bitbucket.org/tianna1121/my-gem5.git</span>
+</code></pre><p>如果速度过慢，采用下面地址下载</p>
+<pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/137oku 密码: shs6</span>
+</code></pre><h3 id="3-编译gem5">3.编译gem5</h3><p>进入my-gem5文件夹之后</p>
+<pre><code>scons build<span class="regexp">/ARM/g</span>em5.opt
+</code></pre><p>第一次较慢(大概20分钟)，如果以前跑过gem5可以备份一下build文件夹之后再编译</p>
+<h3 id="4-下载Linux镜像：">4.下载Linux镜像：</h3><pre><code><span class="label">http:</span>//www.gem5<span class="preprocessor">.org</span>/dist/current/arm/aarch-system-<span class="number">2014</span>-<span class="number">10.</span>tar.xz
+</code></pre><h3 id="5-解压aarch-system-2014-10-tar-xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)">5.解压aarch-system-2014-10.tar.xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)</h3><p>目录结构如下：</p>
+<blockquote>
+<p>gem5/</p>
+<p>|——img/</p>
+<p>|——|——binaries/*</p>
+<p>|——|——disks/*</p>
+</blockquote>
+<h3 id="6-下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里">6.下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里</h3><p>下载地址</p>
+<pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/1qWJZF0S 密码: ms7h</span>
+</code></pre><p>向镜像添加文件指令</p>
+<pre><code>sudo mount -o loop,offset=<span class="number">32256</span> img/disks/linux-aarch32-ael<span class="class">.img</span> /mnt
+cp -<span class="tag">a</span> Mibench /mnt
+cp -<span class="tag">a</span> mediaBench /mnt
+cd /mnt
+chmod +x /mediabench<span class="comment">/* -r
+chmod +x /Mibench<span class="comment">/* -r
+umount /mnt</span></span>
+</code></pre><h3 id="7-构建仿真目录">7.构建仿真目录</h3><p>将gem5/build/ARM/gem5.opt和gem5/configs/链接到任一文件夹下（这里采用gem5/parsec-1/)，开始仿真,<strong>注意</strong>为不同的benchmark创建不同的目录</p>
+<p>链接指令如下</p>
+<pre><code>进入parsec-<span class="number">1</span>目录
+ln -s ..<span class="regexp">/build/</span>ARM<span class="regexp">/gem5.opt ./</span>
+ln -s ..<span class="regexp">/configs/</span> .<span class="regexp">/</span>
+</code></pre><p>目录结构如下：</p>
+<blockquote>
+<p>parsec-1/</p>
+<p>|——board_start.sh</p>
+<p>|——gem5.opt</p>
+<p>|——configs/</p>
+</blockquote>
+<h3 id="8-启动Linux系统(gem5目录下)，设置观察点：">8.启动Linux系统(gem5目录下)，设置观察点：</h3><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
+<h4 id="1-_用AtomicSimpleCpu模式启动linux，_设置一个观察点">1. 用AtomicSimpleCpu模式启动linux， 设置一个观察点</h4><p>修改board_start.sh文件:</p>
+<blockquote>
+<p>1.首先将<code>M5_PATH</code>修改为你自己的img路径</p>
+<p>2.可能需要根据不同的模式进行相应的修改，且注意每种模式后面参数文件是否存在</p>
+</blockquote>
+<p>运行<code>./board_start.sh</code>时可能会出现错误，提示有两个文件不存在：</p>
+<blockquote>
+<p>gem5/img/disks/sdcard-1g-mxplayer.img和gem5/img/binaries/vmlinux-gem5-android-dvfs，从上述网盘可以下载，放入相应的路径下即可</p>
+</blockquote>
+<p>运行<code>gem5/parsec-1/</code>目录下<code>board_start.sh</code></p>
+<p>再开一个终端，运行<code>./util/term/m5term 127.0.0.1 3456</code> 这里的<code>3456</code>是个端口号，开第二个的话就是<code>3457</code>（gem5说明：会自动变化）</p>
+<pre><code><span class="tag">AEL</span> <span class="rule"><span class="attribute">login</span>:<span class="value">root</span></span>
+</code></pre><p>出现<code>#</code>号时，说明linux系统已经启动好</p>
+<pre><code>m5 checkpoint       <span class="comment">#设置观察点</span>
+m5 <span class="keyword">exit</span>             <span class="comment">#设置完成退出，不用关闭窗口 </span>
+</code></pre><p>此时parserc-1/m5out/文件夹里会生成cpt.xxxxx文件夹，即为checkpoint，这个文件夹可以重复使用，跑另一个bench的时候复制其链接到m5out文件夹中</p>
+<h4 id="2-_用arm_detailed模式从设置的观察点继续执行">2. 用arm_detailed模式从设置的观察点继续执行</h4><p>再次运行<code>./util/term/m5term 127.0.0.1 3456</code>就可以看到所跑linux系统的命令行<code>#</code>，即已经进入m5终端</p>
+<h3 id="9-跑具体的bench">9.跑具体的bench</h3><p>进入系统后，根据具体的bench指令直接执行应用</p>
+<p><strong>注意：</strong>m5终端下尽量少使用bash指令（比如ls, cd, chmod等等，此会影响所跑应用的状态结果，最好提前修改权限一句指令解决）</p>
+<h3 id="10-保存bench运行信息">10.保存bench运行信息</h3><p>进入parsec-1/m5out/Mibench/，复制一份qsort_small为你所跑bench的名字，然后删除qsort_small下去掉检查点文件cpt.xxxxxxx以外的所有文件，重新开启第8.2步跑新的bench</p>
+<p>END</p>
+<p>AtomicSimpeCPU模式：</p>
+<pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=AtomicSimpleCPU</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span>
+</code></pre><p>arm_detailed模式：</p>
+<pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=arm_detailed</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span> <span class="literal">-</span><span class="comment">r</span> <span class="comment">1</span>
+</code></pre><p><strong>注意：</strong>不同的配置信息后加入<code>-r 1</code>代表从观察点启动，没有则表示直接启动，可以设置观察点</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/27/ubuntu-android-sdk/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T04:54:48.584Z" itemprop="datePublished"> 發表於 2015-07-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>网盘链接：<a href="http://pan.baidu.com/s/1c096Bi4" target="_blank" rel="external">http://pan.baidu.com/s/1c096Bi4</a> 密码：batc</p>
+<h3 id="一、安装eclipse">一、安装eclipse</h3><h4 id="方法一：从官网下载安装包直接安装">方法一：从官网下载安装包直接安装</h4><p>【网盘：eclipse-standard-luna-R-linux-gtk-x86_64.tar.gz，需要配置路径】。</p>
+<h4 id="方法二：在ubuntu_terminal下输入指令sudo_apt-get_install_eclipse">方法二：在ubuntu terminal下输入指令sudo apt-get install eclipse</h4><h4 id="方法三：在ubuntu的software_center中搜索eclipse，点击“安装”直接安装">方法三：在ubuntu的software center中搜索eclipse，点击“安装”直接安装</h4><h4 id="注：第一次启动会出现An_error_has_occurred-_让你查看一个log文件">注：第一次启动会出现An error has occurred. 让你查看一个log文件</h4><p>解决方法：链接一个库过去，指令如下：</p>
+<pre><code>ln -s <span class="regexp">/usr/</span>lib<span class="regexp">/jni/</span>libswt-*<span class="number">3740</span>.so ~<span class="regexp">/.swt/</span>lib<span class="regexp">/linux/</span>x86_64<span class="regexp">/</span>
+</code></pre><h3 id="二、ADT安装">二、ADT安装</h3><h4 id="方法一，在线安装：">方法一，在线安装：</h4><p>打开Eclipse→Help→Install New Software</p>
+<p>点击Work with的“Add”</p>
+<p>Name：ADT Online（随意）</p>
+<p>Location：<a href="https://dl-ssl.google.com/android/eclipse/" target="_blank" rel="external">https://dl-ssl.google.com/android/eclipse/</a></p>
+<p>由于GFW，ADT的安装比较困难，会提示contact with Server。</p>
+<h4 id="方法二，手动安装：">方法二，手动安装：</h4><p>下载ADT插件【网盘：ADT-23.0.6.zip】</p>
+<p>点击方法一中的“Add”</p>
+<p>Name：ADT Plugin（随意）</p>
+<p>点击Archive…选择ADT路径</p>
+<p>点击完成</p>
+<h3 id="三、安装Android_SDK">三、安装Android SDK</h3><p>ADT安装完成后会弹出对话框，直接选择Android SDK的路径【网盘：Android Sdk（include api）.tar.gz】即可</p>
+<p><strong>注</strong>：ubuntu-12.04-SmdtSDK-amd64.iso镜像已经提供java环境，在此不需要重新安装</p>
+<p>编译文件时可能会遇到一个问题： Your project contains error(s)，please fix them before running your application.</p>
+<p>解决方法：</p>
+<pre><code>sudo apt-<span class="keyword">get</span> install lib32z1 lib32stdc++<span class="number">6</span>
+</code></pre><p><strong>注</strong>:lib32z1中最后是数字1</p>
+
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/27/install-matlab2014b-in-ubuntu14.04/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T04:54:48.580Z" itemprop="datePublished"> 發表於 2015-07-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：<code>/192.168.0.227/01.专业软件/matlab/ubuntu-matlab2014b</code>]。安装步骤如下：</p>
+<h3 id="1-把镜像文件中的install-jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install-jar">1.把镜像文件中的install.jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install.jar</h3><h4 id="1-将R2014b_glnxa64-ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive_manager），本教程将解压后的放在/home/lab302/matlab2014b中">1.将R2014b_glnxa64.ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive manager），本教程将解压后的放在<code>/home/lab302/matlab2014b</code>中</h4><h4 id="2-将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install-jar复制到matlab2014b/java/jar/下的覆盖原来的install-jar，并执行指令chmod_+x_*">2.将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install.jar复制到<code>matlab2014b/java/jar/</code>下的覆盖原来的install.jar，并执行指令<code>chmod +x *</code></h4><h4 id="3-进入到java/jar文件夹下，可以看到有install-jar文件，执行命令chmod_+x_*。然后将该文件删除rm_install-jar">3.进入到java/jar文件夹下，可以看到有install.jar文件，执行命令chmod +x *。然后将该文件删除<code>rm install.jar</code></h4><h3 id="2-安装matlab">2.安装matlab</h3><p>回到解压后的文件目录matlab2014b/下，可以看到有intall文件，执行<code>sudo ./install</code>命令，开始安装【注意：选择使用文件安装秘钥】</p>
+<h3 id="3-输入installation_key:_29797-39064-48306-32452，安装路径这里选择/usr/local/MATLAB/R2014b">3.输入installation key: 29797-39064-48306-32452，安装路径这里选择<code>/usr/local/MATLAB/R2014b</code></h3><h3 id="4-不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license-lic文件激活">4.不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license.lic文件激活</h3><h3 id="5-把libmwservices-so文件放入到/usr/local/MATLAB/R2014B/bin/glnxa64文件下">5.把libmwservices.so文件放入到<code>/usr/local/MATLAB/R2014B/bin/glnxa64</code>文件下</h3><h3 id="6-进入到/usr/local/MATLAB/R2014b/bin文件夹中，输入-/matlab启动matlab。">6.进入到<code>/usr/local/MATLAB/R2014b/bin</code>文件夹中，输入./matlab启动matlab。</h3><h3 id="7-至此安装完成。">7.至此安装完成。</h3>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/07/27/bash-learning/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-07-27T04:54:48.572Z" itemprop="datePublished"> 發表於 2015-07-27</time>
+    
+  </p>
+</header>
+    <div class="article-content">
+        
+        <p>[TOC]</p>
+<h3 id="�ĵ����¼�¼">�ĵ����¼�¼</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">�汾</th>
+<th style="text-align:left">����ʱ��</th>
+<th style="text-align:left">������</th>
+<th style="text-align:left">��������</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">V0.1</td>
+<td style="text-align:left">2015-07-26</td>
+<td style="text-align:left">����Ӱ</td>
+<td style="text-align:left">bash shellѧϰ�ʼ�����</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1_ϵͳ�ĺϷ�shell��/etc/shells����">1 ϵͳ�ĺϷ�shell��/etc/shells����</h3><h3 id="2_Bash_shell_�Ĺ���">2 Bash shell �Ĺ���</h3><h4 id="2-1_������������">2.1 ������������</h4><p>ͨ���û���bash����������ʱ���ذ�������ȫ��shell�����жϳ�����Ҫ����������ù��ܵĺ���˼���ǣ�bash�����û�����������Ϣ����������Щ��Ϣ��ͷ������Ӷ���ͼ���ɵ�ǰ���������빤��������ִ������ܵļ���Tab��������Tab������bash����ͼ�����������������룬�����г������ܹ��뵱ǰ�����ַ���ƥ���������б�</p>
+<h4 id="2-2_�����뵵����ȫ����">2.2 �����뵵����ȫ����</h4><h4 id="2-3_���������趨����">2.3 ���������趨����</h4><p>������bash��������ʡʱ������һ����Ҫ���ܣ��������û������Լ�ϲ���ķ�ʽ�����������Զ��塣</p>
+<p>�����Ĵ�����alias���������</p>
+<pre><code>alias <span class="keyword">lm</span>=��<span class="keyword">ls</span> -<span class="keyword">al</span>��
+</code></pre><p>������ȡ������unalias ȡ������������</p>
+<pre><code><span class="built_in">unalias</span> lm
+</code></pre><h4 id="2-4_�������ơ�ǰ����������">2.4 �������ơ�ǰ����������</h4><h4 id="2-5_���򻯽ű����򵥣�">2.5 ���򻯽ű����򵥣�</h4><h4 id="2-6_ͨ����">2.6 ͨ����</h4><p>ͨ����<code>*</code>�ĳ��÷������ǲ��Ҿ�����ͬ��չ�����ļ������磺</p>
+<pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
+</code></pre><p>ͨ����<code>*</code>��ʱ���Խ����ٵ��������̳�һ�����</p>
+<pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
+</code></pre><p>�ʺ�ͨ����<code>?</code>����ƥ��һ����ֻ��ƥ��һ���ַ���ͨ���������ұ�<code>*</code>��Ϊ��ȷ��ƥ�䡣</p>
+<pre><code>ls <span class="keyword">*</span>.???
+</code></pre><h3 id="3_Bash_shell���ڽ����type">3 Bash shell���ڽ����type</h3><p>��ѯ�Ƿ���bash�ڲ����type -t ������</p>
+<pre><code><span class="type">file</span> <span class="comment">--�ⲿ���</span>
+<span class="type">alias</span> <span class="comment">--����������</span>
+builtin <span class="comment">--�ڲ�����</span>
+</code></pre><h3 id="4_ָ�����´�">4 ָ�����´�</h3><h3 id="5_������ȡ�����趨">5 ������ȡ�����趨</h3><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
+<span class="built_in">echo</span> <span class="variable">${PATH}</span>
+</code></pre><h4 id="5-1_�������ƹ���">5.1 �������ƹ���</h4><ol>
+<li>����������д��˽�б���Сд����������ֻ������ĸ�����֣���ͷ�ַ�����������</li>
+<li>������������”=”���ӣ��Ⱥ����߲��ܿո񣻱����������пո�������””or’’����</li>
+<li>����”” ��’’��ʹ�ã�ǰ�߱������ԣ������ڵ������ַ���Ϊһ���ַ�unset </li>
+<li><p>�������ݿ����������ṩ����Ϣ</p>
+<p> version=<code>uname -r</code> or<br> version=$(uname -r)</p>
+</li>
+<li><p>���������ۼ����ݣ�PATH=”$PATH”:/home/bin</p>
+</li>
+<li>�Զ����������ɻ���������export mypath</li>
+</ol>
+<h3 id="6_���������Ĺ��ܣ�env_��������������˵��,_set,_export">6 ���������Ĺ��ܣ�env ��������������˵��, set, export</h3><ul>
+<li>HOME������homeĿ¼��cd /home ��ȡ����������</li>
+<li>SHELL����֪Ŀǰ����ʹ�õ�shell����֧����</li>
+</ul>
+<p>/etc/shells:ϵͳ�п��õ�shell�汾</p>
+<pre><code>/bin/sh
+/bin/bash
+/sbin/nologin ��
+/etc/passwd <span class="symbol">:</span> ��ǰ�û�Ĭ�ϲ����ĸ�shell������
+<span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span>
+<span class="symbol">bin:</span><span class="symbol">x:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span><span class="symbol">:bin</span><span class="symbol">:/bin</span><span class="symbol">:/sbin/nologin</span>
+...
+</code></pre><ul>
+<li>HISTSIZE�������´������������Ա�ϵͳ����������¼�ı���������ֵ���趨������������������ÿ����������浽һ����Ϊhistory��������ʷ��¼���ĵط�</li>
+<li>MAIL��������ʹ��mail����ָ��������ʱ��ϵͳ��ȥ��ȡ���ʼ����䵵��(<strong>???</strong>)</li>
+<li>PATH��ִ���ļ���·����Ŀ¼��Ŀ¼�м���ð�ŷָ�</li>
+<li>LANG����ϵ����</li>
+<li>RANDOM:����ȡ����ֵ����BASH�����£�RANDOM���������ݽ���0~32767֮�䣬<code>echo $random</code>ʱϵͳ������ȡ��һ������0~32767����ֵ����declare������������</li>
+<li>��set�۲����б����������������Զ���������</li>
+</ul>
+<p>������������ν���������Ǹ���shell�µĿ��Ƽ��豸�������ն˻����ͣ��ļ�����·�����û�Ŀ¼�ȡ��û���shell��ִ�г���ʱ����Щ�������õ�һЩ������������¼ϵͳʱ�Ĺ���֮һ�������û���¼ʱ�ͽ����˵Ļ��������á�<br>�Զ����������Զ�������������ÿ�����̶��ܵ��õĻ�������������������ֻ���ڵ�ǰ����ʹ�õ�˽�б�����</p>
+<pre><code><span class="attribute">PS1</span>:����ʾ�ַ����趨��
+<span class="string">\d:��ʾ����</span> �� �յ����ڸ�ʽ��
+<span class="string">\H:��������������</span>
+<span class="string">\h:��ȡ�������ڵ�һ��С����֮ǰ�����ݡ�</span>
+<span class="string">\t:��ʾʱ�䣬24Сʱ��ʽ</span>
+<span class="string">\T:��ʾʱ�䣬12Сʱ��ʽ</span>
+<span class="string">\A:��ʾʱ�䣬24Сʱ��ʽ</span>
+<span class="string">\@:��ʾʱ�䣬12Сʱ��ʽ��</span>
+<span class="string">\u:Ŀǰʹ���ߵ��˺ţ���[root]��</span>
+<span class="string">\v:BASH�İ汾��Ϣ��</span>
+<span class="string">\w:�����Ĺ���Ŀ¼���ƣ��ɸ�Ŀ¼д����Ŀ¼���ơ�</span>
+<span class="string">\W:����basename����ȡ�ù���Ŀ¼���ƣ����г�����һ��Ŀ¼����</span>
+<span class="string">\#:�´��ĵڼ���ָ�</span>
+<span class="string">\$:��ʾ�ַ�</span>
+$������OATYPE��HOSTTYPE��MACHTYPE��������Ӳ�������ĵĵȼ���
+</code></pre><p>export:�Զ�������ת���ɻ�������</p>
+<h3 id="7_Ӱ����ʾ��������ϵ����_(locale)_��Ҫ��ǰ���½ڿ�����">7 Ӱ����ʾ��������ϵ���� (locale) ��Ҫ��ǰ���½ڿ�����</h3><h3 id="8_��������Ч��Χ">8 ��������Ч��Χ</h3><p>�����ɷ���������export�йأ���export���ı�����Ϊ���������������������Ա��ӳ������ã��Զ����������ݲ����������ӳ����С�������һ��shell������ϵͳ������һ����������shellʹ�ã����ڴ���֮���������ӳ���ȡ�ã����ڸ���������export���ܣ��������Զ�������������д�������ļ������鵱�У���������������������һ��shellʱ����shell���Խ��������Ļ����������ڵļ������鵼���Լ��Ļ����������鵱�С�</p>
+<h3 id="9_�������̶�ȡ�����������棺_read,_declare,_array">9 �������̶�ȡ�����������棺 read, declare, array</h3><pre><code><span class="built_in">read</span> atest ��<span class="built_in">declare</span>��<span class="built_in">typeset</span>����������������
+</code></pre>
+        
+        
+        <p class="article-more-link">
+          
+       </p>
+    </div>
+    <footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+
+<div class="comments-count">
+	
+</div>
+
+</footer>
+
+
+    </article>
+
+
+
+
+
+
+   
+    
+    <article class="post-expand post" itemprop="articleBody"> 
+        <header class="article-info clearfix">
+  <h1 itemprop="name">
+    
       <a href="/2015/07/26/hello-world/" title="Hello World" itemprop="url">Hello World</a>
   </h1>
   <p class="article-author">By
