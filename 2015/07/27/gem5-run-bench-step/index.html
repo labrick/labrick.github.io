@@ -25,7 +25,7 @@ git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 如果速度过慢，采用下面地址下载
 链接: http://pan.ba">
-<meta property="og:updated_time" content="2015-07-27T13:02:32.709Z">
+<meta property="og:updated_time" content="2015-07-27T13:13:56.537Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gem5跑bench过程记录">
 <meta name="twitter:description" content="安装所需工具sudo apt-get install git scons g++ python-dev swig m4
@@ -98,7 +98,7 @@ git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
 		
   <p class="article-time">
-    <time datetime="2015-07-27T13:02:32.749Z" itemprop="datePublished"> 发表于 2015-07-27</time>
+    <time datetime="2015-07-27T13:13:56.565Z" itemprop="datePublished"> 发表于 2015-07-27</time>
     
   </p>
 </header>
@@ -107,7 +107,7 @@ git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">安装所需工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载我们改过的my-gem5"><span class="toc-number">2.</span> <span class="toc-text">下载我们改过的my-gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译gem5"><span class="toc-number">3.</span> <span class="toc-text">编译gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">下载Linux镜像：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-解压系统镜像，并放入正确的目录"><span class="toc-number">5.</span> <span class="toc-text">5.解压系统镜像，并放入正确的目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载benchmark，放到文件系统镜像"><span class="toc-number">6.</span> <span class="toc-text">下载benchmark，放到文件系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">构建仿真目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">跑具体的bench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">保存bench运行信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">11.</span> <span class="toc-text">END</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">安装所需工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载我们改过的my-gem5"><span class="toc-number">2.</span> <span class="toc-text">下载我们改过的my-gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译gem5"><span class="toc-number">3.</span> <span class="toc-text">编译gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">下载Linux镜像：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压系统镜像，并放入正确的目录"><span class="toc-number">5.</span> <span class="toc-text">解压系统镜像，并放入正确的目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载benchmark，放到文件系统镜像"><span class="toc-number">6.</span> <span class="toc-text">下载benchmark，放到文件系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">构建仿真目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Linux系统(gem5目录下)"><span class="toc-number">8.</span> <span class="toc-text">启动Linux系统(gem5目录下)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">跑具体的bench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">保存bench运行信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">11.</span> <span class="toc-text">END</span></a></li></ol>
 		
 		</div>
 		
@@ -120,7 +120,7 @@ git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 <pre><code>scons build<span class="regexp">/ARM/g</span>em5.opt
 </code></pre><p>第一次较慢(大概20分钟)，如果以前跑过gem5可以备份一下build文件夹之后再编译</p>
 <h2 id="下载Linux镜像：">下载Linux镜像：</h2><pre><code><span class="label">http:</span>//www.gem5<span class="preprocessor">.org</span>/dist/current/arm/aarch-system-<span class="number">2014</span>-<span class="number">10.</span>tar.xz
-</code></pre><h2 id="5-解压系统镜像，并放入正确的目录">5.解压系统镜像，并放入正确的目录</h2><p>将aarch-system-2014-10.tar.xz解压到my-gem5文件夹下的img文件夹中(如果没有则自己创建)</p>
+</code></pre><h2 id="解压系统镜像，并放入正确的目录">解压系统镜像，并放入正确的目录</h2><p>将aarch-system-2014-10.tar.xz解压到my-gem5文件夹下的img文件夹中(如果没有则自己创建)</p>
 <p>目录结构如下：</p>
 <blockquote>
 <p>gem5/<br>|——img/<br>|——|——binaries/<em><br>|——|——disks/</em></p>
@@ -144,7 +144,7 @@ ln -s ..<span class="regexp">/configs/</span> .<span class="regexp">/</span>
 <blockquote>
 <p>parsec-1/<br>|——board_start.sh<br>|——gem5.opt<br>|——configs/</p>
 </blockquote>
-<h2 id="启动Linux系统(gem5目录下)，设置观察点：">启动Linux系统(gem5目录下)，设置观察点：</h2><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
+<h2 id="启动Linux系统(gem5目录下)">启动Linux系统(gem5目录下)</h2><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
 <h3 id="用AtomicSimpleCpu模式启动linux，设置一个观察点">用AtomicSimpleCpu模式启动linux，设置一个观察点</h3><p>修改board_start.sh文件:</p>
 <blockquote>
 <p>1.首先将<code>M5_PATH</code>修改为你自己的img路径</p>
@@ -175,6 +175,16 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工作记录/">工作记录</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/gem5/">gem5</a>
+  </div>
 
 </div>
 
@@ -195,6 +205,14 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/07/27/install-matlab2014b-in-ubuntu14.04/" title="linux安装matlab记录">
+  <strong>上一篇：</strong><br/>
+  <span>
+  linux安装matlab记录</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/07/27/bash-learning/"  title="bash学习笔记">
@@ -214,7 +232,7 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">安装所需工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载我们改过的my-gem5"><span class="toc-number">2.</span> <span class="toc-text">下载我们改过的my-gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译gem5"><span class="toc-number">3.</span> <span class="toc-text">编译gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">下载Linux镜像：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-解压系统镜像，并放入正确的目录"><span class="toc-number">5.</span> <span class="toc-text">5.解压系统镜像，并放入正确的目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载benchmark，放到文件系统镜像"><span class="toc-number">6.</span> <span class="toc-text">下载benchmark，放到文件系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">构建仿真目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Linux系统(gem5目录下)，设置观察点："><span class="toc-number">8.</span> <span class="toc-text">启动Linux系统(gem5目录下)，设置观察点：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">跑具体的bench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">保存bench运行信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">11.</span> <span class="toc-text">END</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#安装所需工具"><span class="toc-number">1.</span> <span class="toc-text">安装所需工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载我们改过的my-gem5"><span class="toc-number">2.</span> <span class="toc-text">下载我们改过的my-gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#编译gem5"><span class="toc-number">3.</span> <span class="toc-text">编译gem5</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载Linux镜像："><span class="toc-number">4.</span> <span class="toc-text">下载Linux镜像：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解压系统镜像，并放入正确的目录"><span class="toc-number">5.</span> <span class="toc-text">解压系统镜像，并放入正确的目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#下载benchmark，放到文件系统镜像"><span class="toc-number">6.</span> <span class="toc-text">下载benchmark，放到文件系统镜像</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#构建仿真目录"><span class="toc-number">7.</span> <span class="toc-text">构建仿真目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动Linux系统(gem5目录下)"><span class="toc-number">8.</span> <span class="toc-text">启动Linux系统(gem5目录下)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="toc-number">8.1.</span> <span class="toc-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="toc-number">8.2.</span> <span class="toc-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跑具体的bench"><span class="toc-number">9.</span> <span class="toc-text">跑具体的bench</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#保存bench运行信息"><span class="toc-number">10.</span> <span class="toc-text">保存bench运行信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#END"><span class="toc-number">11.</span> <span class="toc-text">END</span></a></li></ol>
  
   </div>
 
@@ -228,7 +246,19 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 		<ul>
 		
 		  
-			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>1</sup></a></li>
+			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/让生活更上一层楼/" title="让生活更上一层楼">让生活更上一层楼<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/重要理论理解/" title="重要理论理解">重要理论理解<sup>2</sup></a></li>
 		  
 		
 		</ul>
@@ -258,6 +288,18 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 		
 			
 				<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/android/" title="android">android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/matlab/" title="matlab">matlab<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/gem5/" title="gem5">gem5<sup>1</sup></a></li>
 			
 		
 			

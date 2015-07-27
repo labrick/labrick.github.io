@@ -12,18 +12,18 @@
 
     
     <meta name="description" content="对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
-[TOC]">
+首页显示摘要问题问题:每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="本网站建设中所遇到到的问题及解决方法">
 <meta property="og:url" content="http://yoursite.com/2015/06/18/该网站的建设过程/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
-[TOC]">
-<meta property="og:updated_time" content="2015-07-27T07:01:44.166Z">
+首页显示摘要问题问题:每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为j">
+<meta property="og:updated_time" content="2015-07-27T13:23:28.312Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="本网站建设中所遇到到的问题及解决方法">
 <meta name="twitter:description" content="对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
-[TOC]">
+首页显示摘要问题问题:每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为j">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -103,8 +103,6 @@
 		</div>
 		
 		<p>　　对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.</p>
-<p>[TOC]</p>
-<a id="more"></a>
 <h4 id="首页显示摘要问题"><strong>首页显示摘要问题</strong></h4><p><strong>问题:</strong>每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为jekyll默认将摘要分割标识：<code>excerpt_separator</code>设置了换行，但是有些时候我们的博文可能是从其他位置拷贝过来，这样的换行可能就不是utf-8，摘要分割标识就无法找到换行标识来截取第一段。</p>
 <p>查找<a href="http://jekyllrb.com/docs/posts/" target="_blank" rel="external">官网</a>我们可以看到这样的例程:</p>
 <pre><code>---
@@ -123,6 +121,11 @@ You can also set the excerpt_separator globally in your _config.yml configuratio
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/工作记录/">工作记录</a>
+</div>
 
 
   <div class="article-tags">
@@ -190,7 +193,19 @@ You can also set the excerpt_separator globally in your _config.yml configuratio
 		<ul>
 		
 		  
-			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>1</sup></a></li>
+			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/让生活更上一层楼/" title="让生活更上一层楼">让生活更上一层楼<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/重要理论理解/" title="重要理论理解">重要理论理解<sup>2</sup></a></li>
 		  
 		
 		</ul>
@@ -220,6 +235,18 @@ You can also set the excerpt_separator globally in your _config.yml configuratio
 		
 			
 				<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/android/" title="android">android<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/matlab/" title="matlab">matlab<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/gem5/" title="gem5">gem5<sup>1</sup></a></li>
 			
 		
 			
