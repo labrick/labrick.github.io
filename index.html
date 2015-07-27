@@ -63,7 +63,7 @@
  					
 						<form class="search" action="http://zhannei.baidu.com/cse/search" target="_blank">
 							<label>Search</label>
-						<input name="s" type="hidden" value= null ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						<input name="s" type="hidden" value= 287383847596682460 ><input type="text" name="q" size="30" placeholder="搜索"><br>
 						</form>
 					
 					</li>
@@ -74,730 +74,212 @@
     <div id="container">
       <div id="main">
 
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/27/bash-learning/" title="bash学习笔记" itemprop="url">bash学习笔记</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-27T07:15:05.498Z" itemprop="datePublished"> 发表于 2015-07-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="文档更新记录">文档更新记录</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">版本</th>
-<th style="text-align:left">更新时间</th>
-<th style="text-align:left">更新人</th>
-<th style="text-align:left">更新内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">V0.1</td>
-<td style="text-align:left">2015-07-26</td>
-<td style="text-align:left">孙凤影</td>
-<td style="text-align:left">bash shell学习笔记整理</td>
-</tr>
-</tbody>
-</table>
-<h3 id="1_系统的合法shell与/etc/shells功能">1 系统的合法shell与/etc/shells功能</h3><h3 id="2_Bash_shell_的功能">2 Bash shell 的功能</h3><h4 id="2-1_命令编修能力">2.1 命令编修能力</h4><p>通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成当前命令的输入工作。用来执行这项功能的键是Tab键，按下Tab键后，bash就试图完成整个命令的输入，并将列出所有能够与当前输入字符相匹配的命令列表。</p>
-<h4 id="2-2_命令与档案补全功能">2.2 命令与档案补全功能</h4><h4 id="2-3_命令别名设定功能">2.3 命令别名设定功能</h4><p>别名是bash中用来节省时间的另一项重要功能，它允许用户按照自己喜欢的方式对命令进行自定义。</p>
-<p>别名的创建：alias接命令，例：</p>
-<pre><code>alias <span class="keyword">lm</span>=‘<span class="keyword">ls</span> -<span class="keyword">al</span>’
-</code></pre><p>别名的取消：用unalias 取消别名，例：</p>
-<pre><code><span class="built_in">unalias</span> lm
-</code></pre><h4 id="2-4_工作控制、前景背景控制">2.4 工作控制、前景背景控制</h4><h4 id="2-5_程序化脚本（简单）">2.5 程序化脚本（简单）</h4><h4 id="2-6_通配符">2.6 通配符</h4><p>通配符<code>*</code>的常用方法就是查找具有相同扩展名的文件，比如：</p>
-<pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
-</code></pre><p>通配符<code>*</code>有时可以将几百的命令缩短成一个命令。</p>
-<pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
-</code></pre><p>问号通配符<code>?</code>必须匹配一个且只能匹配一个字符，通常用来查找比<code>*</code>更为精确的匹配。</p>
-<pre><code>ls <span class="keyword">*</span>.???
-</code></pre><h3 id="3_Bash_shell的内建命令：type">3 Bash shell的内建命令：type</h3><p>查询是否是bash内部命令：type -t 命令名</p>
-<pre><code><span class="type">file</span> <span class="comment">--外部命令；</span>
-<span class="type">alias</span> <span class="comment">--命令别名；</span>
-builtin <span class="comment">--内部命令</span>
-</code></pre><h3 id="4_指令的下达">4 指令的下达</h3><h3 id="5_变量的取用与设定">5 变量的取用与设定</h3><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
-<span class="built_in">echo</span> <span class="variable">${PATH}</span>
-</code></pre><h4 id="5-1_变量设计规则">5.1 变量设计规则</h4><ol>
-<li>环境变量大写，私有变量小写：变量名称只能是字母与数字，开头字符不能是数字</li>
-<li>变量与内容以”=”连接，等号两边不能空格；变量内容若有空格可是有””or’’括起</li>
-<li>区分”” 与’’的使用，前者保留特性，后者内的特殊字符仅为一般字符unset </li>
-<li><p>变量内容可以是命令提供的信息</p>
-<p> version=<code>uname -r</code> or<br> version=$(uname -r)</p>
-</li>
-<li><p>变量可以累加内容：PATH=”$PATH”:/home/bin</p>
-</li>
-<li>自定义变量变成环境变量：export mypath</li>
-</ol>
-<h3 id="6_环境变量的功能：env_不常见环境变量说明,_set,_export">6 环境变量的功能：env 不常见环境变量说明, set, export</h3><ul>
-<li>HOME：代表home目录，cd /home 即取用这个变量</li>
-<li>SHELL：告知目前环境使用的shell是哪支程序</li>
-</ul>
-<p>/etc/shells:系统中可用的shell版本</p>
-<pre><code>/bin/sh
-/bin/bash
-/sbin/nologin …
-/etc/passwd <span class="symbol">:</span> 当前用户默认采用哪个shell来工作
-<span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span>
-<span class="symbol">bin:</span><span class="symbol">x:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span><span class="symbol">:bin</span><span class="symbol">:/bin</span><span class="symbol">:/sbin/nologin</span>
-...
-</code></pre><ul>
-<li>HISTSIZE：曾经下达过的命令可以被系统记下来，记录的笔数有这个值来设定。在命令行中输入的每个命令都被保存到一个称为history（命令历史记录）的地方</li>
-<li>MAIL：当我们使用mail这个指令在收信时，系统会去读取的邮件信箱档案(<strong>???</strong>)</li>
-<li>PATH：执行文件的路径，目录与目录中间以冒号分隔</li>
-<li>LANG：语系数据</li>
-<li>RANDOM:随机取得数值。在BASH环境下，RANDOM变量的内容介于0~32767之间，<code>echo $random</code>时系统会随机取出一个介于0~32767的数值。用declare宣告数据类型</li>
-<li>用set观察所有变量（环境变量、自定义变量）</li>
-</ul>
-<p>环境变量：所谓环境，就是各项shell下的控制及设备，包括终端机类型，文件搜索路径，用户目录等。用户在shell下执行程序时，有些程序会用到一些环境变量。登录系统时的工作之一就是在用户登录时就将个人的环境建立好。<br>自定义变量：自定义变量除了在每个进程都能调用的环境变量，还可以设置只能在当前进程使用的私有变量。</p>
-<pre><code><span class="attribute">PS1</span>:（提示字符的设定）
-<span class="string">\d:显示星期</span> 月 日的日期格式。
-<span class="string">\H:完整的主机名。</span>
-<span class="string">\h:仅取主机名在第一个小数点之前的数据。</span>
-<span class="string">\t:显示时间，24小时格式</span>
-<span class="string">\T:显示时间，12小时格式</span>
-<span class="string">\A:显示时间，24小时格式</span>
-<span class="string">\@:显示时间，12小时格式。</span>
-<span class="string">\u:目前使用者的账号，如[root]。</span>
-<span class="string">\v:BASH的版本信息。</span>
-<span class="string">\w:完整的工作目录名称，由根目录写起的目录名称。</span>
-<span class="string">\W:利用basename函数取得工作目录名称，仅列出最后一个目录名。</span>
-<span class="string">\#:下达的第几个指令。</span>
-<span class="string">\$:提示字符</span>
-$、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
-</code></pre><p>export:自定义变量转换成环境变量</p>
-<h3 id="7_影响显示结果的语系变量_(locale)_（要回前面章节看看）">7 影响显示结果的语系变量 (locale) （要回前面章节看看）</h3><h3 id="8_变量的有效范围">8 变量的有效范围</h3><p>变量可否被引用与export有关，被export后的变量成为环境变量，环境变量可以被子程序引用，自定义变量内容不会存在于子程序中。当启动一个shell，操作系统会分配一记忆区块给shell使用，此内存内之变量可让子程序取用；若在父程序利用export功能，可以让自定义变量的内容写到上述的记忆区块当中（环境变量）；当加载另一个shell时，子shell可以将父程序的环境变量所在的记忆区块导入自己的环境变量区块当中。</p>
-<h3 id="9_变量键盘读取、数组与宣告：_read,_declare,_array">9 变量键盘读取、数组与宣告： read, declare, array</h3><pre><code><span class="built_in">read</span> atest 、<span class="built_in">declare</span>或<span class="built_in">typeset</span>：宣告变量的类型
-</code></pre>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/linux学习/">linux学习</a>
-</div>
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/27/ubuntu-android-sdk/" title="ubuntu采用eclips搭建安卓环境记录" itemprop="url">ubuntu采用eclips搭建安卓环境记录</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-27T05:55:05.074Z" itemprop="datePublished"> 发表于 2015-07-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>网盘链接：<a href="http://pan.baidu.com/s/1c096Bi4" target="_blank" rel="external">http://pan.baidu.com/s/1c096Bi4</a> 密码：batc</p>
-<h3 id="一、安装eclipse">一、安装eclipse</h3><h4 id="方法一：从官网下载安装包直接安装">方法一：从官网下载安装包直接安装</h4><p>【网盘：eclipse-standard-luna-R-linux-gtk-x86_64.tar.gz，需要配置路径】。</p>
-<h4 id="方法二：在ubuntu_terminal下输入指令sudo_apt-get_install_eclipse">方法二：在ubuntu terminal下输入指令sudo apt-get install eclipse</h4><h4 id="方法三：在ubuntu的software_center中搜索eclipse，点击“安装”直接安装">方法三：在ubuntu的software center中搜索eclipse，点击“安装”直接安装</h4><h4 id="注：第一次启动会出现An_error_has_occurred-_让你查看一个log文件">注：第一次启动会出现An error has occurred. 让你查看一个log文件</h4><p>解决方法：链接一个库过去，指令如下：</p>
-<pre><code>ln -s <span class="regexp">/usr/</span>lib<span class="regexp">/jni/</span>libswt-*<span class="number">3740</span>.so ~<span class="regexp">/.swt/</span>lib<span class="regexp">/linux/</span>x86_64<span class="regexp">/</span>
-</code></pre><h3 id="二、ADT安装">二、ADT安装</h3><h4 id="方法一，在线安装：">方法一，在线安装：</h4><p>打开Eclipse→Help→Install New Software</p>
-<p>点击Work with的“Add”</p>
-<p>Name：ADT Online（随意）</p>
-<p>Location：<a href="https://dl-ssl.google.com/android/eclipse/" target="_blank" rel="external">https://dl-ssl.google.com/android/eclipse/</a></p>
-<p>由于GFW，ADT的安装比较困难，会提示contact with Server。</p>
-<h4 id="方法二，手动安装：">方法二，手动安装：</h4><p>下载ADT插件【网盘：ADT-23.0.6.zip】</p>
-<p>点击方法一中的“Add”</p>
-<p>Name：ADT Plugin（随意）</p>
-<p>点击Archive…选择ADT路径</p>
-<p>点击完成</p>
-<h3 id="三、安装Android_SDK">三、安装Android SDK</h3><p>ADT安装完成后会弹出对话框，直接选择Android SDK的路径【网盘：Android Sdk（include api）.tar.gz】即可</p>
-<p><strong>注</strong>：ubuntu-12.04-SmdtSDK-amd64.iso镜像已经提供java环境，在此不需要重新安装</p>
-<p>编译文件时可能会遇到一个问题： Your project contains error(s)，please fix them before running your application.</p>
-<p>解决方法：</p>
-<pre><code>sudo apt-<span class="keyword">get</span> install lib32z1 lib32stdc++<span class="number">6</span>
-</code></pre><p><strong>注</strong>:lib32z1中最后是数字1</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/27/install-matlab2014b-in-ubuntu14.04/" title="linux安装matlab记录" itemprop="url">linux安装matlab记录</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-27T05:50:31.397Z" itemprop="datePublished"> 发表于 2015-07-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：<code>/192.168.0.227/01.专业软件/matlab/ubuntu-matlab2014b</code>]。安装步骤如下：</p>
-<h3 id="1-把镜像文件中的install-jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install-jar">1.把镜像文件中的install.jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install.jar</h3><h4 id="1-将R2014b_glnxa64-ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive_manager），本教程将解压后的放在/home/lab302/matlab2014b中">1.将R2014b_glnxa64.ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive manager），本教程将解压后的放在<code>/home/lab302/matlab2014b</code>中</h4><h4 id="2-将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install-jar复制到matlab2014b/java/jar/下的覆盖原来的install-jar，并执行指令chmod_+x_*">2.将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install.jar复制到<code>matlab2014b/java/jar/</code>下的覆盖原来的install.jar，并执行指令<code>chmod +x *</code></h4><h4 id="3-进入到java/jar文件夹下，可以看到有install-jar文件，执行命令chmod_+x_*。然后将该文件删除rm_install-jar">3.进入到java/jar文件夹下，可以看到有install.jar文件，执行命令chmod +x *。然后将该文件删除<code>rm install.jar</code></h4><h3 id="2-安装matlab">2.安装matlab</h3><p>回到解压后的文件目录matlab2014b/下，可以看到有intall文件，执行<code>sudo ./install</code>命令，开始安装【注意：选择使用文件安装秘钥】</p>
-<h3 id="3-输入installation_key:_29797-39064-48306-32452，安装路径这里选择/usr/local/MATLAB/R2014b">3.输入installation key: 29797-39064-48306-32452，安装路径这里选择<code>/usr/local/MATLAB/R2014b</code></h3><h3 id="4-不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license-lic文件激活">4.不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license.lic文件激活</h3><h3 id="5-把libmwservices-so文件放入到/usr/local/MATLAB/R2014B/bin/glnxa64文件下">5.把libmwservices.so文件放入到<code>/usr/local/MATLAB/R2014B/bin/glnxa64</code>文件下</h3><h3 id="6-进入到/usr/local/MATLAB/R2014b/bin文件夹中，输入-/matlab启动matlab。">6.进入到<code>/usr/local/MATLAB/R2014b/bin</code>文件夹中，输入./matlab启动matlab。</h3><h3 id="7-至此安装完成。">7.至此安装完成。</h3>
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/07/27/gem5-run-bench-step/" title="gem5跑bench过程记录" itemprop="url">gem5跑bench过程记录</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-07-27T05:49:53.597Z" itemprop="datePublished"> 发表于 2015-07-27</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <h3 id="1-安装所需工具">1.安装所需工具</h3><pre><code><span class="label">sudo</span> apt-<span class="preprocessor">get</span> install git scons g++ python-dev <span class="keyword">swig </span>m4
-</code></pre><h3 id="2-下载我们改过的my-gem5，下载地址如下:（已有的话就git_pull更新一下）">2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）</h3><pre><code>git clone <span class="string">https:</span><span class="comment">//tianna1121@bitbucket.org/tianna1121/my-gem5.git</span>
-</code></pre><p>如果速度过慢，采用下面地址下载</p>
-<pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/137oku 密码: shs6</span>
-</code></pre><h3 id="3-编译gem5">3.编译gem5</h3><p>进入my-gem5文件夹之后</p>
-<pre><code>scons build<span class="regexp">/ARM/g</span>em5.opt
-</code></pre><p>第一次较慢(大概20分钟)，如果以前跑过gem5可以备份一下build文件夹之后再编译</p>
-<h3 id="4-下载Linux镜像：">4.下载Linux镜像：</h3><pre><code><span class="label">http:</span>//www.gem5<span class="preprocessor">.org</span>/dist/current/arm/aarch-system-<span class="number">2014</span>-<span class="number">10.</span>tar.xz
-</code></pre><h3 id="5-解压aarch-system-2014-10-tar-xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)">5.解压aarch-system-2014-10.tar.xz文件到my-gem5文件夹下的img文件夹(如果没有则自己创建)</h3><p>目录结构如下：</p>
-<blockquote>
-<p>gem5/</p>
-<p>|——img/</p>
-<p>|——|——binaries/*</p>
-<p>|——|——disks/*</p>
-</blockquote>
-<h3 id="6-下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里">6.下载benchmark，放到文件系统镜像(此镜像作为linux文件系统)里</h3><p>下载地址</p>
-<pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/1qWJZF0S 密码: ms7h</span>
-</code></pre><p>向镜像添加文件指令</p>
-<pre><code>sudo mount -o loop,offset=<span class="number">32256</span> img/disks/linux-aarch32-ael<span class="class">.img</span> /mnt
-cp -<span class="tag">a</span> Mibench /mnt
-cp -<span class="tag">a</span> mediaBench /mnt
-cd /mnt
-chmod +x /mediabench<span class="comment">/* -r
-chmod +x /Mibench<span class="comment">/* -r
-umount /mnt</span></span>
-</code></pre><h3 id="7-构建仿真目录">7.构建仿真目录</h3><p>将gem5/build/ARM/gem5.opt和gem5/configs/链接到任一文件夹下（这里采用gem5/parsec-1/)，开始仿真,<strong>注意</strong>为不同的benchmark创建不同的目录</p>
-<p>链接指令如下</p>
-<pre><code>进入parsec-<span class="number">1</span>目录
-ln -s ..<span class="regexp">/build/</span>ARM<span class="regexp">/gem5.opt ./</span>
-ln -s ..<span class="regexp">/configs/</span> .<span class="regexp">/</span>
-</code></pre><p>目录结构如下：</p>
-<blockquote>
-<p>parsec-1/</p>
-<p>|——board_start.sh</p>
-<p>|——gem5.opt</p>
-<p>|——configs/</p>
-</blockquote>
-<h3 id="8-启动Linux系统(gem5目录下)，设置观察点：">8.启动Linux系统(gem5目录下)，设置观察点：</h3><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
-<h4 id="1-_用AtomicSimpleCpu模式启动linux，_设置一个观察点">1. 用AtomicSimpleCpu模式启动linux， 设置一个观察点</h4><p>修改board_start.sh文件:</p>
-<blockquote>
-<p>1.首先将<code>M5_PATH</code>修改为你自己的img路径</p>
-<p>2.可能需要根据不同的模式进行相应的修改，且注意每种模式后面参数文件是否存在</p>
-</blockquote>
-<p>运行<code>./board_start.sh</code>时可能会出现错误，提示有两个文件不存在：</p>
-<blockquote>
-<p>gem5/img/disks/sdcard-1g-mxplayer.img和gem5/img/binaries/vmlinux-gem5-android-dvfs，从上述网盘可以下载，放入相应的路径下即可</p>
-</blockquote>
-<p>运行<code>gem5/parsec-1/</code>目录下<code>board_start.sh</code></p>
-<p>再开一个终端，运行<code>./util/term/m5term 127.0.0.1 3456</code> 这里的<code>3456</code>是个端口号，开第二个的话就是<code>3457</code>（gem5说明：会自动变化）</p>
-<pre><code><span class="tag">AEL</span> <span class="rule"><span class="attribute">login</span>:<span class="value">root</span></span>
-</code></pre><p>出现<code>#</code>号时，说明linux系统已经启动好</p>
-<pre><code>m5 checkpoint       <span class="comment">#设置观察点</span>
-m5 <span class="keyword">exit</span>             <span class="comment">#设置完成退出，不用关闭窗口 </span>
-</code></pre><p>此时parserc-1/m5out/文件夹里会生成cpt.xxxxx文件夹，即为checkpoint，这个文件夹可以重复使用，跑另一个bench的时候复制其链接到m5out文件夹中</p>
-<h4 id="2-_用arm_detailed模式从设置的观察点继续执行">2. 用arm_detailed模式从设置的观察点继续执行</h4><p>再次运行<code>./util/term/m5term 127.0.0.1 3456</code>就可以看到所跑linux系统的命令行<code>#</code>，即已经进入m5终端</p>
-<h3 id="9-跑具体的bench">9.跑具体的bench</h3><p>进入系统后，根据具体的bench指令直接执行应用</p>
-<p><strong>注意：</strong>m5终端下尽量少使用bash指令（比如ls, cd, chmod等等，此会影响所跑应用的状态结果，最好提前修改权限一句指令解决）</p>
-<h3 id="10-保存bench运行信息">10.保存bench运行信息</h3><p>进入parsec-1/m5out/Mibench/，复制一份qsort_small为你所跑bench的名字，然后删除qsort_small下去掉检查点文件cpt.xxxxxxx以外的所有文件，重新开启第8.2步跑新的bench</p>
-<p>END</p>
-<p>AtomicSimpeCPU模式：</p>
-<pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=AtomicSimpleCPU</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span>
-</code></pre><p>arm_detailed模式：</p>
-<pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=arm_detailed</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span> <span class="literal">-</span><span class="comment">r</span> <span class="comment">1</span>
-</code></pre><p><strong>注意：</strong>不同的配置信息后加入<code>-r 1</code>代表从观察点启动，没有则表示直接启动，可以设置观察点</p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/06/26/first-use-perl/" title="第一次使用perl语言" itemprop="url">第一次使用perl语言</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-27T02:06:00.000Z" itemprop="datePublished"> 发表于 2015-06-26</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>听说perl语言很久了，记得那还是两三年的本科阶段，对python的见解特别感兴趣，只是因为perl与python之间的争执，所以才知道了他，但也仅是知道而已，听说他语法混乱，大部分喜欢python的人都不喜欢他，今天使用perl语言也是一个巧合，因为大师兄让我来阅读一个脚本，顺便检查其中的问题，这才认真去了解perl语言。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/06/26/first-use-perl/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
   
-  <span></span> <a href="/tags/perl/">perl</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/06/24/shell-vim-collection/" title="shell/vim指令收集" itemprop="url">shell/vim指令收集</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-25T01:08:00.000Z" itemprop="datePublished"> 发表于 2015-06-24</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/06/24/shell-vim-collection/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/shell/">shell</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/06/18/该网站的建设过程/" title="本网站建设中所遇到到的问题及解决方法" itemprop="url">本网站建设中所遇到到的问题及解决方法</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-19T01:52:00.000Z" itemprop="datePublished"> 发表于 2015-06-18</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>　　对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.</p>
-<p>[TOC]</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/06/18/该网站的建设过程/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/07/27/bash-learning/" title="bash学习笔记" itemprop="url">
   
-  <span></span> <a href="/tags/blog/">blog</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
+    <h1 itemprop="name">bash学习笔记</h1>
     
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
+     
+      <p itemprop="description" >笔记类型内容</p>
+      
     
-      <a href="/2015/06/14/虚拟地址向物理地址转换/" title="虚拟地址向物理地址的转换" itemprop="url">虚拟地址向物理地址的转换</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-06-15T00:14:00.000Z" itemprop="datePublished"> 发表于 2015-06-14</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>　　操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。</p>
-<p>目录：</p>
-<blockquote>
-<ul>
-<li>总体概述</li>
-<li>页表项结构</li>
-<li>缺页异常</li>
-<li>不同的层次结构</li>
-<li>补充</li>
-</ul>
-</blockquote>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/06/14/虚拟地址向物理地址转换/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
+    <time datetime="2015-07-27T07:15:05.498Z" itemprop="datePublished">2015-07-27</time>
+  </a>
+</section>
 
 
-  <div class="article-tags">
+
+
+
+
   
-  <span></span> <a href="/tags/内存管理/">内存管理</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/03/05/代码的深思/" title="代码的深思" itemprop="url">代码的深思</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-03-05T16:41:00.000Z" itemprop="datePublished"> 发表于 2015-03-05</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <a id="more"></a>
-<p>　　对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ </p>
-<h3 id="先说代码：">先说代码：</h3><p>　　我们是用电脑的键盘来输入的指令，每一个指令都对应一个ASCII码，而这里的ASCII码就是有序电压的高低，即我们输入的是电压的高低，你所看到代码是这些电压的高低控制显示器所显示的图像，其实电脑也不知道它是什么，只知道这样显示。 </p>
-<p>　　结论：代码其实就是存储在存储器（内存、硬盘或者闪存等等）中有序电压的高低。 </p>
-<h3 id="再说编译：">再说编译：</h3><p>　　编译是一个有序电压的高低向另一种有序电压高低的一种转换过程，下面以52单片机为例，我们编译是从表示ASCII码的那种有序电压高低转换为52单片机能够识别的另一种规定好的有序电压高低，即表示HEX文件的电压高低。 </p>
-<p>　　结论：编译出的结果还是电脑中存储的有序电压高低。 </p>
-<h3 id="到单片机烧录：">到单片机烧录：</h3><p>　　接下俩就是烧录，理解了上面两点就很容易理解下面的内容，烧录就是电脑中的有序电压高低通过数据线传输到单片机中的ROM中。 </p>
-<h3 id="接下来ROM就可以释放其中的电压来控制外围的电路。">接下来ROM就可以释放其中的电压来控制外围的电路。</h3><p>　　总结：从代码的编辑到最后对电路的控制都是电压在起作用，只是为了方面我们而给我们展现的形式不一样而已，而其本质都是电压，这样也就不存在转换。 </p>
-<p>所以就有了这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ </p>
-<h3 id="再补充一下：">再补充一下：</h3><p>　　只要提到0/1，提到软件，这个问题就是没法理解的，因为软件【包括0/1】和硬件始终存在一道无法跨越的鸿沟；</p>
-<p>　　我们所写的0只是在电脑显示器上电平的呈现形式，这个所谓的0【实质是电平】可以传输到单片机中的ROM中，当然电平可以控制电平！</p>
-<p><a href="http://www.zhihu.com/question/20492284" target="_blank" rel="external">知乎链接</a></p>
-
-        
-        
-        <p class="article-more-link">
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+<section class="post" itemscope itemprop="blogitem">
   
-  <span></span> <a href="/tags/代码理解/">代码理解</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
-
-
-    </article>
-
-
-
-
-
-
-   
-    
-    <article class="post-expand post" itemprop="articleBody"> 
-        <header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2015/01/31/更好的掌控自己/" title="更好的掌控自己" itemprop="url">更好的掌控自己</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-02-01T00:58:00.000Z" itemprop="datePublished"> 发表于 2015-01-31</time>
-    
-  </p>
-</header>
-    <div class="article-content">
-        
-        <p>　　生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就一句话哲学的合理性。</p>
-        
-        
-        <p class="article-more-link">
-          
-            <a href="/2015/01/31/更好的掌控自己/#more">Read More</a>
-          
-       </p>
-    </div>
-    <footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
-  <div class="article-tags">
+    <a href="/2015/07/27/ubuntu-android-sdk/" title="ubuntu采用eclips搭建安卓环境记录" itemprop="url">
   
-  <span></span> <a href="/tags/感悟/">感悟</a>
-  </div>
-
-</div>
-
-
-
-
-<div class="comments-count">
-	
-</div>
-
-</footer>
+    <h1 itemprop="name">ubuntu采用eclips搭建安卓环境记录</h1>
+    
+     
+           <p itemprop="description" >网盘链接：http://pan.baidu.com/s/1c096Bi4 密码：batc
+一、安装eclipse方法一：从官网下载安装包直接安装【网盘：eclipse-standard-luna-R-linux-gtk-x86_64.tar.gz，需要配置路径】。
+方法二：在ub</p>
+        
+    
+    <time datetime="2015-07-27T05:55:05.074Z" itemprop="datePublished">2015-07-27</time>
+  </a>
+</section>
 
 
-    </article>
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/07/27/install-matlab2014b-in-ubuntu14.04/" title="linux安装matlab记录" itemprop="url">
+  
+    <h1 itemprop="name">linux安装matlab记录</h1>
+    
+     
+           <p itemprop="description" >安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：/192.168.0.227/01.专业软件/matlab/ubuntu-</p>
+        
+    
+    <time datetime="2015-07-27T05:50:31.397Z" itemprop="datePublished">2015-07-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/07/27/gem5-run-bench-step/" title="gem5跑bench过程记录" itemprop="url">
+  
+    <h1 itemprop="name">gem5跑bench过程记录</h1>
+    
+     
+           <p itemprop="description" >1.安装所需工具sudo apt-get install git scons g++ python-dev swig m4
+2.下载我们改过的my-gem5，下载地址如下:（已有的话就git pull更新一下）git clone https://tianna1121@bitbuc</p>
+        
+    
+    <time datetime="2015-07-27T05:49:53.597Z" itemprop="datePublished">2015-07-27</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/06/26/first-use-perl/" title="第一次使用perl语言" itemprop="url">
+  
+    <h1 itemprop="name">第一次使用perl语言</h1>
+    
+     
+       <p itemprop="description" >听说perl语言很久了，记得那还是两三年的本科阶段，对python的见解特别感兴趣，只是因为perl与python之间的争执，所以才知道了他，但也仅是知道而已，听说他语法混乱，大部分喜欢python的人都不喜欢他，今天使用perl语言也是一个巧合，因为大师兄让我来阅读一个脚本，顺</p>
+      
+    
+    <time datetime="2015-06-27T02:06:00.000Z" itemprop="datePublished">2015-06-26</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/06/24/shell-vim-collection/" title="shell/vim指令收集" itemprop="url">
+  
+    <h1 itemprop="name">shell/vim指令收集</h1>
+    
+     
+       <p itemprop="description" >今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
+      
+    
+    <time datetime="2015-06-25T01:08:00.000Z" itemprop="datePublished">2015-06-24</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/06/18/该网站的建设过程/" title="本网站建设中所遇到到的问题及解决方法" itemprop="url">
+  
+    <h1 itemprop="name">本网站建设中所遇到到的问题及解决方法</h1>
+    
+     
+       <p itemprop="description" >对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
+[TO</p>
+      
+    
+    <time datetime="2015-06-19T01:52:00.000Z" itemprop="datePublished">2015-06-18</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/06/14/虚拟地址向物理地址转换/" title="虚拟地址向物理地址的转换" itemprop="url">
+  
+    <h1 itemprop="name">虚拟地址向物理地址的转换</h1>
+    
+     
+       <p itemprop="description" >操作系统当中，对内存的管理是一个很大的内容，而分页机制又是内存管理的重中之重，其关联到虚拟地址向物理地址的转换，以及具体操作的具体机理，这里仅仅从从单级分页机制来进行初步的说明。分为虚拟内存的意义、实现的机理、缺页异常。
+目录：
+
+
+总体概述
+页表项结构
+缺页异常
+不同的层次结构</p>
+      
+    
+    <time datetime="2015-06-15T00:14:00.000Z" itemprop="datePublished">2015-06-14</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/03/05/代码的深思/" title="代码的深思" itemprop="url">
+  
+    <h1 itemprop="name">代码的深思</h1>
+    
+     
+           <p itemprop="description" >对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ 
+先说代码：　　我们是用电脑的键</p>
+        
+    
+    <time datetime="2015-03-05T16:41:00.000Z" itemprop="datePublished">2015-03-05</time>
+  </a>
+</section>
+
+
+
+
+
+
+  
+<section class="post" itemscope itemprop="blogitem">
+  
+    <a href="/2015/01/31/更好的掌控自己/" title="更好的掌控自己" itemprop="url">
+  
+    <h1 itemprop="name">更好的掌控自己</h1>
+    
+     
+       <p itemprop="description" >生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就一句话哲学的合理性。</p>
+      
+    
+    <time datetime="2015-02-01T00:58:00.000Z" itemprop="datePublished">2015-01-31</time>
+  </a>
+</section>
 
 
 
