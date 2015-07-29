@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
 首页显示摘要问题问题:每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为j">
-<meta property="og:updated_time" content="2015-07-27T13:23:28.312Z">
+<meta property="og:updated_time" content="2015-07-29T07:57:17.518Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="本网站建设中所遇到到的问题及解决方法">
 <meta name="twitter:description" content="对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
@@ -98,12 +98,12 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#首页显示摘要问题"><span class="toc-number">1.</span> <span class="toc-text">首页显示摘要问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#博文中显示HTML代码问题"><span class="toc-number">2.</span> <span class="toc-text">博文中显示HTML代码问题</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#首页显示摘要问题"><span class="toc-number">1.</span> <span class="toc-text">首页显示摘要问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博文中显示HTML代码问题"><span class="toc-number">2.</span> <span class="toc-text">博文中显示HTML代码问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导航栏添加自定义页面"><span class="toc-number">3.</span> <span class="toc-text">导航栏添加自定义页面</span></a></li></ol>
 		
 		</div>
 		
 		<p>　　对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.</p>
-<h4 id="首页显示摘要问题"><strong>首页显示摘要问题</strong></h4><p><strong>问题:</strong>每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为jekyll默认将摘要分割标识：<code>excerpt_separator</code>设置了换行，但是有些时候我们的博文可能是从其他位置拷贝过来，这样的换行可能就不是utf-8，摘要分割标识就无法找到换行标识来截取第一段。</p>
+<h2 id="首页显示摘要问题">首页显示摘要问题</h2><p><strong>问题:</strong>每篇博客在主页上有个摘要的显示能够更好的辅助标题进行了解博客的内容，模板默认的摘要都是第一段，这是因为jekyll默认将摘要分割标识：<code>excerpt_separator</code>设置了换行，但是有些时候我们的博文可能是从其他位置拷贝过来，这样的换行可能就不是utf-8，摘要分割标识就无法找到换行标识来截取第一段。</p>
 <p>查找<a href="http://jekyllrb.com/docs/posts/" target="_blank" rel="external">官网</a>我们可以看到这样的例程:</p>
 <pre><code>---
 excerpt_separator: <span class="comment">&lt;!-- more --&gt;</span>
@@ -116,7 +116,18 @@ You can also set the excerpt_separator globally in your _config.yml configuratio
 </code></pre><p>翻译：如果你不想使用自动产生的blog摘要，你可以在blog的YAML中添加摘要分割标识来覆盖原来的机制。这里你可以在blog的YAML中定义一个<code>excerpt_separator</code>标签。</p>
 <p>你也可以在_config.yml配置文件中进行这样的定义。</p>
 <p>这样我们就很清楚的知道，只要在_config.yml文件中或者在blog.md文件的头部添加<code>excerpt_separator</code>标签，然后博文中在摘要结束之后添加上标签的内容就可以完美的支持摘要的摘取功能，完全自定义化。</p>
-<h4 id="博文中显示HTML代码问题"><strong>博文中显示HTML代码问题</strong></h4><p>查看官网中有关代码的引用部分，所说的都是采用TAB缩进进行代码引用，而同样采用TAB缩进引用（显示）HTML代码时会发现HTML代码会直接执行，这个问题有待于解决。</p>
+<h2 id="博文中显示HTML代码问题">博文中显示HTML代码问题</h2><p>查看官网中有关代码的引用部分，所说的都是采用TAB缩进进行代码引用，而同样采用TAB缩进引用（显示）HTML代码时会发现HTML代码会直接执行，这个问题有待于解决。</p>
+<h2 id="导航栏添加自定义页面">导航栏添加自定义页面</h2><ol>
+<li><p>手动生成自定义页面</p>
+<p> hexo n page “about”</p>
+</li>
+<li><p>编辑<code>hexo/source/about/index.md</code>内容</p>
+</li>
+<li><p>修改themes/jacman/_config.yml文件</p>
+<p> menu:</p>
+<pre><code>关于：/<span class="keyword">about</span>
+</code></pre></li>
+</ol>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -183,7 +194,7 @@ You can also set the excerpt_separator globally in your _config.yml configuratio
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#首页显示摘要问题"><span class="toc-number">1.</span> <span class="toc-text">首页显示摘要问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#博文中显示HTML代码问题"><span class="toc-number">2.</span> <span class="toc-text">博文中显示HTML代码问题</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#首页显示摘要问题"><span class="toc-number">1.</span> <span class="toc-text">首页显示摘要问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#博文中显示HTML代码问题"><span class="toc-number">2.</span> <span class="toc-text">博文中显示HTML代码问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#导航栏添加自定义页面"><span class="toc-number">3.</span> <span class="toc-text">导航栏添加自定义页面</span></a></li></ol>
  
   </div>
 
