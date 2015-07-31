@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="回归历史依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。
 程序来源实验室各种网络环境基本已经搭建完毕，我们都是在各自的电脑上通过ssh服务远程登陆到四台主机，但我们还是一个问题：通常我们要">
-<meta property="og:updated_time" content="2015-07-31T13:54:21.830Z">
+<meta property="og:updated_time" content="2015-07-31T14:05:28.197Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="后台进程监控软件">
 <meta name="twitter:description" content="回归历史依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。
@@ -105,8 +105,7 @@
 		<h2 id="回归历史">回归历史</h2><p>依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。</p>
 <h2 id="程序来源">程序来源</h2><p>实验室各种网络环境基本已经搭建完毕，我们都是在各自的电脑上通过ssh服务远程登陆到四台主机，但我们还是一个问题：通常我们要跑的程序时间都比较长（三四天），如果我们通过远程连接软件在主机中启动程序，一旦关闭远程连接软件，相应的程序也会自动关闭，达不到在服务器上跑程序的目的，问题出来了，就要着手解决啊，所以我就写了个deamon程序来达到这个目的。</p>
 <p>写出来之后发现这就是个对程序进行监控的程序啊，只要能够获得程序运行时的状态就可以随意进行程序控制。其实这个程序可以干更多的事情，你可以想象驻留内存有多么大的优势存在。</p>
-<h2 id="具体程序如下">具体程序如下</h2><p>```c</p>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span>&lt;stdio.h&gt;</span>
+<h2 id="具体程序如下">具体程序如下</h2><pre><code><span class="preprocessor">#<span class="keyword">include</span>&lt;stdio.h&gt;</span>
 <span class="preprocessor">#<span class="keyword">include</span>&lt;stdlib.h&gt;</span>
 <span class="preprocessor">#<span class="keyword">include</span>&lt;string.h&gt;</span>
 <span class="preprocessor">#<span class="keyword">include</span>&lt;fcntl.h&gt;</span>
