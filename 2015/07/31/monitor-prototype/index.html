@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="回顾历史依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。
 程序来源实验室各种网络环境基本已经搭建完毕，我们都是在各自的电脑上通过ssh服务远程登陆到四台主机，但我们还是一个问题：通常我们要">
-<meta property="og:updated_time" content="2015-07-31T14:08:37.742Z">
+<meta property="og:updated_time" content="2015-08-03T02:54:20.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="后台进程监控软件">
 <meta name="twitter:description" content="回顾历史依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。
@@ -98,7 +98,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾历史"><span class="toc-number">1.</span> <span class="toc-text">回顾历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序来源"><span class="toc-number">2.</span> <span class="toc-text">程序来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体程序"><span class="toc-number">3.</span> <span class="toc-text">具体程序</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾历史"><span class="toc-number">1.</span> <span class="toc-text">回顾历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序来源"><span class="toc-number">2.</span> <span class="toc-text">程序来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体程序"><span class="toc-number">3.</span> <span class="toc-text">具体程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2015-8-3更新"><span class="toc-number">4.</span> <span class="toc-text">2015-8-3更新</span></a></li></ol>
 		
 		</div>
 		
@@ -191,6 +191,23 @@
     close(fd);
     <span class="keyword">return</span> <span class="number">0</span>;
 }
+</code></pre><h2 id="2015-8-3更新">2015-8-3更新</h2><p>现在发现linux自带的有两种工具可以实现脱离终端运行程序：</p>
+<ol>
+<li><p>nohub命令：其将标准输出重定向到当前目录下的nohub.out文件中，指令格式如下：</p>
+<p> nohub 命令        //当前终端不能再执行其他指令，可以关闭终端<br> nohub 命令&amp;        //可以直接按<code>enter</code>键回到终端命令模式执行其他指令</p>
+</li>
+<li><p>tmux工具：可能是谁写的一个工具，常见的命令如下：</p>
+</li>
+</ol>
+<p>标准终端下下：</p>
+<pre><code>tmux    <span class="comment">//新建一个tmux终端</span>
+tmux <span class="keyword">ls</span>    <span class="comment">//显示已经存在的tmux终端</span>
+tmux attach-session -t 窗口号    <span class="comment">//打开之前创建的tmux终端</span>
+</code></pre><p>tmux终端下：</p>
+<pre><code>Ctrl-b再按<span class="keyword">d</span>        <span class="comment">//该tmux终端隐藏运行</span>
+Ctrl-<span class="keyword">d</span>            <span class="comment">//直接退出tmux终端</span>
+<span class="keyword">exit</span>            <span class="comment">//同上</span>
+标准中下其他指令
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -252,7 +269,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾历史"><span class="toc-number">1.</span> <span class="toc-text">回顾历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序来源"><span class="toc-number">2.</span> <span class="toc-text">程序来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体程序"><span class="toc-number">3.</span> <span class="toc-text">具体程序</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#回顾历史"><span class="toc-number">1.</span> <span class="toc-text">回顾历史</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#程序来源"><span class="toc-number">2.</span> <span class="toc-text">程序来源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体程序"><span class="toc-number">3.</span> <span class="toc-text">具体程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2015-8-3更新"><span class="toc-number">4.</span> <span class="toc-text">2015-8-3更新</span></a></li></ol>
  
   </div>
 
