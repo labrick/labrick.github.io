@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的uart输出是怎样的，接着就去接A20的uart的。
 面对实验室的条件只能说无语。没有串口线怎么搞？后来我从606拿过来两根，一根试了半天还不能用，恶心，另一根则是个锈迹斑斑的，插个杜邦线插的手疼，终于搞定电路问题后发现输出都是乱码？">
-<meta property="og:updated_time" content="2015-08-09T09:01:16.779Z">
+<meta property="og:updated_time" content="2015-08-09T09:07:28.821Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TTL电平与RS232电平的区别">
 <meta name="twitter:description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的uart输出是怎样的，接着就去接A20的uart的。
@@ -122,8 +122,41 @@
 <span class="number">4</span>.如果还是存在问题，可以先用<span class="literal">PC</span>来测试外部设备是否能正常通信的，如果是完全OK的，应该是设置波特率和串口号出问题，或者是<span class="number">232</span>串口到外部设备这端需要把TX和RX交叉，
 </code></pre><p>这样就很明白问题所在。</p>
 <p>这里有个问题：我采用RS232对接TTL为什么会产生乱码呢？</p>
-<h2 id="TTL与RS232的区别">TTL与RS232的区别</h2><p>我们再加上一个CMOS电平，看看下面的表格</p>
-<p>| 电平名称    | 输出L        | 输出H        | 输入L        | 输入H        |<br>| :———-    | :———-    | :————    | ：———    | ：——    |<br>| TTL        | <0.8v |="">2.4V        | <1.2v |="">2.0V        |<br>| RS232        | +3~+15V    | -3~-15V    | +3~+15V    | -3~-15V    |<br>| CMOS        | <0.1*vcc |="">0.9<em>Vcc    | &lt;0.3</em>Vcc    | &gt;0.7*Vcc    |</0.1*vcc></1.2v></0.8v></p>
+<h2 id="TTL与RS232的区别">TTL与RS232的区别</h2><p>我们再加上一个CMOS电平，看看下面的表格:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">电平名称</th>
+<th style="text-align:left">输出L</th>
+<th style="text-align:left">输出H</th>
+<th style="text-align:left">输入L</th>
+<th style="text-align:left">输入H</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">TTL</td>
+<td style="text-align:left">&lt;0.8V</td>
+<td style="text-align:left">&gt;2.4V</td>
+<td style="text-align:left">&lt;1.2V</td>
+<td style="text-align:left">&gt;2.0V</td>
+</tr>
+<tr>
+<td style="text-align:left">RS232</td>
+<td style="text-align:left">+3~+15V</td>
+<td style="text-align:left">-3~-15V</td>
+<td style="text-align:left">+3~+15V</td>
+<td style="text-align:left">-3~-15V</td>
+</tr>
+<tr>
+<td style="text-align:left">CMOS</td>
+<td style="text-align:left">&lt;0.1*Vcc</td>
+<td style="text-align:left">&gt;0.9*Vcc</td>
+<td style="text-align:left">&lt;0.3*Vcc</td>
+<td style="text-align:left">&gt;0.7*Vcc</td>
+</tr>
+</tbody>
+</table>
 <h3 id="TTL与RS232">TTL与RS232</h3><p>我们先看TTL与RS232两行，现在我们A20板子上的输出是TTL电平，然后我采用RS232接口进行衔接（GND—GND | TXD—RXD | RXD—TXD），看看会出现什么结果：</p>
 <p>TTL输出<0.8v为低电平（应该不会为负），rs232则进行检测这个电压接近于0v，这样是无效？？如果ttl输出>2.4V，RS232检测这个电压最有可能为逻辑<code>0</code>，这样的结果也就是说RS232只能将TTL输出的高电平检测为低电平，TTL输出的低电平作为无效，这样为什么会出现乱码呢？</0.8v为低电平（应该不会为负），rs232则进行检测这个电压接近于0v，这样是无效？？如果ttl输出></p>
 <p>有两种可能：</p>
@@ -138,7 +171,42 @@
 <li>很多器件都是兼容TTL和CMOS的，datasheet会有说明。如果不考虑速度和性能，一般器件可以互换。但是需要注意有时候负载效应可能引起电路工作不正常，因为有些ttl电路需要下一级的输入阻抗作为负载才能正常工作。</li>
 </ol>
 <p>TTL和CMOS的逻辑电平转换<br>CMOS电平能驱动TTL电平，TTL电平不能驱动CMOS电平，需加上拉电阻。</p>
-<h3 id="常用逻辑芯片特点">常用逻辑芯片特点</h3><p>| 系列        | 类型    | 输入    | 输出    |<br>| ：——    | ：—-    | :——    | :—-    |<br>| 74LS系列    | TTL    | TTL    | TTL    |<br>| 74HC系列    | CMOS    | CMOS    | CMOS    |<br>| 74HCT系列    | CMOS    | TTL    | CMOS    |<br>| CD4000系列|CMOS    | CMOS    | CMOS    |</p>
+<h3 id="常用逻辑芯片特点">常用逻辑芯片特点</h3><table>
+<thead>
+<tr>
+<th style="text-align:left">系列</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">输入</th>
+<th style="text-align:left">输出</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">74LS系列</td>
+<td style="text-align:left">TTL</td>
+<td style="text-align:left">TTL</td>
+<td style="text-align:left">TTL</td>
+</tr>
+<tr>
+<td style="text-align:left">74HC系列</td>
+<td style="text-align:left">CMOS</td>
+<td style="text-align:left">CMOS</td>
+<td style="text-align:left">CMOS</td>
+</tr>
+<tr>
+<td style="text-align:left">74HCT系列</td>
+<td style="text-align:left">CMOS</td>
+<td style="text-align:left">TTL</td>
+<td style="text-align:left">CMOS</td>
+</tr>
+<tr>
+<td style="text-align:left">CD4000系列</td>
+<td style="text-align:left">CMOS</td>
+<td style="text-align:left">CMOS</td>
+<td style="text-align:left">CMOS</td>
+</tr>
+</tbody>
+</table>
   
 	</div>
 		<footer class="article-footer clearfix">
