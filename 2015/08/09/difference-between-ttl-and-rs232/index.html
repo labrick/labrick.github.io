@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的uart输出是怎样的，接着就去接A20的uart的。
 面对实验室的条件只能说无语。没有串口线怎么搞？后来我从606拿过来两根，一根试了半天还不能用，恶心，另一根则是个锈迹斑斑的，插个杜邦线插的手疼，终于搞定电路问题后发现输出都是乱码？">
-<meta property="og:updated_time" content="2015-08-09T09:07:28.821Z">
+<meta property="og:updated_time" content="2015-08-09T09:09:52.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TTL电平与RS232电平的区别">
 <meta name="twitter:description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的uart输出是怎样的，接着就去接A20的uart的。
@@ -116,10 +116,10 @@
 <p>对于串口调试助手我采用了两个，一个是友善的串口，里面没有对编码设置的情况，输出是乱码，另一个采用secureCRT，默认和utf-8都试了下，效果没有得到改善。</p>
 <p>数据线接触不良的情况是全志的一位同事提出的，我没有遇到过这种情况，由于线比较老，不能排除这一点，但是我已经尽自己最大的努力让数据线接触良好，所以基本也可以排除。</p>
 <p>最后就剩下一个电平逻辑不对。我为什么会怀疑这个问题呢？因为我看到SMDT论坛上说明UART的测试方法如下：</p>
-<pre><code><span class="number">1</span>. 先短路板子上的UART－TX和UART－RX，用<span class="keyword">ANDROID上的串口测试程序，采用自发自收的测试方式，是否能正常 </span>的数据通信
-<span class="number">2</span>. 再连接好<span class="preprocessor">TTL</span>－RS232串口板，再短路串口板后端，再采用串口工具，同样的方式，测试是否正常
-<span class="number">3</span>. 再连接好外部设备，设置好波特率，串口号（一般为ttySx），测试是否正常，
-<span class="number">4</span>.如果还是存在问题，可以先用<span class="literal">PC</span>来测试外部设备是否能正常通信的，如果是完全OK的，应该是设置波特率和串口号出问题，或者是<span class="number">232</span>串口到外部设备这端需要把TX和RX交叉，
+<pre><code><span class="number">1</span>. 先短路板子上的UART－TX和UART－RX，用<span class="keyword">ANDROID上的串口测试程序，采用自发自收的测试方式，是否能正常的数据通信
+</span><span class="number">2</span>. 再连接好<span class="preprocessor">TTL</span>－RS232串口板，再短路串口板后端，再采用串口工具，同样的方式，测试是否正常
+<span class="number">3</span>. 再连接好外部设备，设置好波特率，串口号（一般为ttySx），测试是否正常
+<span class="number">4</span>.如果还是存在问题，可以先用<span class="literal">PC</span>来测试外部设备是否能正常通信的，如果是完全OK的，应该是设置波特率和串口号出问题，或者是<span class="number">232</span>串口到外部设备这端需要把TX和RX交叉
 </code></pre><p>这样就很明白问题所在。</p>
 <p>这里有个问题：我采用RS232对接TTL为什么会产生乱码呢？</p>
 <h2 id="TTL与RS232的区别">TTL与RS232的区别</h2><p>我们再加上一个CMOS电平，看看下面的表格:</p>
