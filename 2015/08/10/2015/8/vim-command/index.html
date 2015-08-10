@@ -12,18 +12,108 @@
 
     
     <meta name="description" content="vi的使用vi有三种模式一般模式打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。
-一般模式按键说明：|            | 移动光标的方法        || :———    | :——————-        || h/←        | 光标向左移动一个字符    || j/↓        | 光标向下移动一个字符">
+一般模式按键说明：
+
+
+
+
+移动光标的方法
+
+
+
+
+h/←
+光标向左移动一个字符
+
+
+j/↓
+光标向下移动一个字符
+
+
+k/↑
+光标向上移动一个字符
+
+
+l/→
+光标向右移动一个字符
+
+
+Ctrl+f
+屏幕向下移动一页，相当于Page Down按键
+
+
+C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="vim基本指令">
 <meta property="og:url" content="http://yoursite.com/2015/08/10/2015/8/vim-command/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="vi的使用vi有三种模式一般模式打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。
-一般模式按键说明：|            | 移动光标的方法        || :———    | :——————-        || h/←        | 光标向左移动一个字符    || j/↓        | 光标向下移动一个字符">
-<meta property="og:updated_time" content="2015-08-10T04:07:42.532Z">
+一般模式按键说明：
+
+
+
+
+移动光标的方法
+
+
+
+
+h/←
+光标向左移动一个字符
+
+
+j/↓
+光标向下移动一个字符
+
+
+k/↑
+光标向上移动一个字符
+
+
+l/→
+光标向右移动一个字符
+
+
+Ctrl+f
+屏幕向下移动一页，相当于Page Down按键
+
+
+C">
+<meta property="og:updated_time" content="2015-08-10T04:19:40.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="vim基本指令">
 <meta name="twitter:description" content="vi的使用vi有三种模式一般模式打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。
-一般模式按键说明：|            | 移动光标的方法        || :———    | :——————-        || h/←        | 光标向左移动一个字符    || j/↓        | 光标向下移动一个字符">
+一般模式按键说明：
+
+
+
+
+移动光标的方法
+
+
+
+
+h/←
+光标向左移动一个字符
+
+
+j/↓
+光标向下移动一个字符
+
+
+k/↑
+光标向上移动一个字符
+
+
+l/→
+光标向右移动一个字符
+
+
+Ctrl+f
+屏幕向下移动一页，相当于Page Down按键
+
+
+C">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -103,9 +193,229 @@
 		</div>
 		
 		<h2 id="vi的使用">vi的使用</h2><h3 id="vi有三种模式">vi有三种模式</h3><h4 id="一般模式">一般模式</h4><p>打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。</p>
-<p>一般模式按键说明：<br>|            | 移动光标的方法        |<br>| :———    | :——————-        |<br>| h/←        | 光标向左移动一个字符    |<br>| j/↓        | 光标向下移动一个字符    |<br>| k/↑        | 光标向上移动一个字符    |<br>| l/→        | 光标向右移动一个字符<br>| Ctrl+f    | 屏幕向下移动一页，相当于Page Down按键<br>| Ctrl+b    | 屏幕向上移动一页，相当于Page Up按键<br>| Ctrl+d    | 屏幕向下移动半页<br>| Ctrl+u    | 屏幕向下移动半页<br>| +            | 光标移动到非空格符的下一列<br>| -            | 光标移动到非空格符的上一列<br>| n<space |="" 按下数字再按空格键，光标会移动到这一行的n个字符。="" 0或home键="" 移动到这一行的最前面字符处="" $或end键="" 移动到这一行的最后面字符处="" h="" 光标移动到这个屏幕的最上方那一行的第一个字符="" m="" 光标移动到这个屏幕的最中央那一行的第一个字符="" l="" 光标移动到这个屏幕的最下那一行的第一个字符="" g="" 移动到这个档案的最后一行="" ng="" 移动到这个档案的第n行="" gg="" 移动到这个档案的第一行="" n<enter="">    | 光标向下移动n行<br>| /word        | 光标向下寻找一个名称为word的字符串<br>| ?word        | 向光标之上寻找一个名称为word的字符串<br>| n            | 重复前一个搜索动作<br>| N            | 反向进行前一个搜寻行动<br>| :1,n2s/word1/word2/g    | 在第n1与n2行之间寻找word1这个字符串，并将该字符串取代为word2<br>| :1，$/word1/word2/g    | 从第一行到最后一行寻找word1字符串，并将该字符串取代为word2。<br>| :1，$/word1/word2/gc    | 从第一行到最后一行寻找word1字符串，并将该字符串取代为word2。且在取代前提示字符给用户确认是否需要取代<br>| x,X                    | 在一行字当中，x为向除一个字符，X为向前删除一个字符<br>| nX                    | 连续向后删除你n个字符<br>| dd    | 删除游标所在的那一整列游标<br>| ndd    | 删除光标所在的向下n列<br>| d1G    | 删除光标所在到第一行的所有数据<br>| dG    | 删除光标所在到最后一行的所有数据<br>| d$    | 删除游标所在处，到该行的最后一个字符<br>| d0    | 删除游标所在处，到该行的最前面一个字符<br>| yy    | 复制游标所在的那一行<br>| nyy    | 复制光标所在的向下n列<br>| y1G    | 复制光标所在列到第一列的所有数据<br>| yG    | 复制光标所在列到最后一列的所有数据<br>| y0    | 复制光标所在的那个字符到该行首的所有数据<br>| y$    | 复制光标所在的那个字符到该行尾有数据<br>| p,P    | p为将已复制的数据在光标的下一行贴上，P则为贴在游标上一行<br>| j        | 将光标所在列与下一行的数据结合成同一列<br>| c        | 重复删除多个数据<br>| u        | 复原前一个动作<br>| Ctrl+r| 重复上一个动作</space></p>
+<p>一般模式按键说明：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">移动光标的方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">h/←</td>
+<td style="text-align:left">光标向左移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">j/↓</td>
+<td style="text-align:left">光标向下移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">k/↑</td>
+<td style="text-align:left">光标向上移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">l/→</td>
+<td style="text-align:left">光标向右移动一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+f</td>
+<td style="text-align:left">屏幕向下移动一页，相当于Page Down按键</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+b</td>
+<td style="text-align:left">屏幕向上移动一页，相当于Page Up按键</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+d</td>
+<td style="text-align:left">屏幕向下移动半页</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+u</td>
+<td style="text-align:left">屏幕向下移动半页</td>
+</tr>
+<tr>
+<td style="text-align:left">+</td>
+<td style="text-align:left">光标移动到非空格符的下一列</td>
+</tr>
+<tr>
+<td style="text-align:left">-</td>
+<td style="text-align:left">光标移动到非空格符的上一列</td>
+</tr>
+<tr>
+<td style="text-align:left">n&lt;space</td>
+<td style="text-align:left">按下数字再按空格键，光标会移动到这一行的n个字符。</td>
+</tr>
+<tr>
+<td style="text-align:left">0或home键</td>
+<td style="text-align:left">移动到这一行的最前面字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">$或End键</td>
+<td style="text-align:left">移动到这一行的最后面字符处</td>
+</tr>
+<tr>
+<td style="text-align:left">H</td>
+<td style="text-align:left">光标移动到这个屏幕的最上方那一行的第一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">M</td>
+<td style="text-align:left">光标移动到这个屏幕的最中央那一行的第一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">L</td>
+<td style="text-align:left">光标移动到这个屏幕的最下那一行的第一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">G</td>
+<td style="text-align:left">移动到这个档案的最后一行</td>
+</tr>
+<tr>
+<td style="text-align:left">nG</td>
+<td style="text-align:left">移动到这个档案的第n行</td>
+</tr>
+<tr>
+<td style="text-align:left">gg</td>
+<td style="text-align:left">移动到这个档案的第一行</td>
+</tr>
+<tr>
+<td style="text-align:left">n<enter></enter></td>
+<td style="text-align:left">光标向下移动n行</td>
+</tr>
+<tr>
+<td style="text-align:left">/word</td>
+<td style="text-align:left">光标向下寻找一个名称为word的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">?word</td>
+<td style="text-align:left">向光标之上寻找一个名称为word的字符串</td>
+</tr>
+<tr>
+<td style="text-align:left">n</td>
+<td style="text-align:left">重复前一个搜索动作</td>
+</tr>
+<tr>
+<td style="text-align:left">N</td>
+<td style="text-align:left">反向进行前一个搜寻行动</td>
+</tr>
+<tr>
+<td style="text-align:left">:1,n2s/word1/word2/g</td>
+<td style="text-align:left">在第n1与n2行之间寻找word1这个字符串，并将该字符串取代为word2</td>
+</tr>
+<tr>
+<td style="text-align:left">:1，$/word1/word2/g</td>
+<td style="text-align:left">从第一行到最后一行寻找word1字符串，并将该字符串取代为word2。</td>
+</tr>
+<tr>
+<td style="text-align:left">:1，$/word1/word2/gc</td>
+<td style="text-align:left">从第一行到最后一行寻找word1字符串，并将该字符串取代为word2。且在取代前提示字符给用户确认是否需要取代</td>
+</tr>
+<tr>
+<td style="text-align:left">x,X</td>
+<td style="text-align:left">在一行字当中，x为向除一个字符，X为向前删除一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">nX</td>
+<td style="text-align:left">连续向后删除你n个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">dd</td>
+<td style="text-align:left">删除游标所在的那一整列游标</td>
+</tr>
+<tr>
+<td style="text-align:left">ndd</td>
+<td style="text-align:left">删除光标所在的向下n列</td>
+</tr>
+<tr>
+<td style="text-align:left">d1G</td>
+<td style="text-align:left">删除光标所在到第一行的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:left">dG</td>
+<td style="text-align:left">删除光标所在到最后一行的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:left">d$</td>
+<td style="text-align:left">删除游标所在处，到该行的最后一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">d0</td>
+<td style="text-align:left">删除游标所在处，到该行的最前面一个字符</td>
+</tr>
+<tr>
+<td style="text-align:left">yy</td>
+<td style="text-align:left">复制游标所在的那一行</td>
+</tr>
+<tr>
+<td style="text-align:left">nyy</td>
+<td style="text-align:left">复制光标所在的向下n列</td>
+</tr>
+<tr>
+<td style="text-align:left">y1G</td>
+<td style="text-align:left">复制光标所在列到第一列的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:left">yG</td>
+<td style="text-align:left">复制光标所在列到最后一列的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:left">y0</td>
+<td style="text-align:left">复制光标所在的那个字符到该行首的所有数据</td>
+</tr>
+<tr>
+<td style="text-align:left">y$</td>
+<td style="text-align:left">复制光标所在的那个字符到该行尾有数据</td>
+</tr>
+<tr>
+<td style="text-align:left">p,P</td>
+<td style="text-align:left">p为将已复制的数据在光标的下一行贴上，P则为贴在游标上一行</td>
+</tr>
+<tr>
+<td style="text-align:left">j</td>
+<td style="text-align:left">将光标所在列与下一行的数据结合成同一列</td>
+</tr>
+<tr>
+<td style="text-align:left">c</td>
+<td style="text-align:left">重复删除多个数据</td>
+</tr>
+<tr>
+<td style="text-align:left">u</td>
+<td style="text-align:left">复原前一个动作</td>
+</tr>
+<tr>
+<td style="text-align:left">Ctrl+r</td>
+<td style="text-align:left">重复上一个动作</td>
+</tr>
+</tbody>
+</table>
 <h4 id="编辑模式">编辑模式</h4><p>按下[i, I, o, O, a, A, r, R]等任何一个字母后才会进入编辑模式。</p>
-<p>一般模式切换到编辑模式的可用按钮说明：<br>|            | 进入插入或取代的编辑模式    |<br>| :———    | :—————————        |<br>| i,I        | 进入插入模式,i为从目前光标所在处插入，I为在目前所在行的第一个非空格符处开始插入<br>| a,A        | 进入插入模式，a为从光标所在的下一字符处开始插入，A为从光标所在行的最后一个字符处开始插入<br>| o,O        | 进入插入模式，o为在目前光标所在的下一行处插入新的一行，O为在目前光标所在处的上一行插入新的一行<br>| r,R        | 进入取代模式，r只会取代光标所在的那一个字符一次，R会一直取代光标所在的文字，直到按下ESC为止</p>
+<p>一般模式切换到编辑模式的可用按钮说明：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">进入插入或取代的编辑模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">i,I</td>
+<td style="text-align:left">进入插入模式,i为从目前光标所在处插入，I为在目前所在行的第一个非空格符处开始插入</td>
+</tr>
+<tr>
+<td style="text-align:left">a,A</td>
+<td style="text-align:left">进入插入模式，a为从光标所在的下一字符处开始插入，A为从光标所在行的最后一个字符处开始插入</td>
+</tr>
+<tr>
+<td style="text-align:left">o,O</td>
+<td style="text-align:left">进入插入模式，o为在目前光标所在的下一行处插入新的一行，O为在目前光标所在处的上一行插入新的一行</td>
+</tr>
+<tr>
+<td style="text-align:left">r,R</td>
+<td style="text-align:left">进入取代模式，r只会取代光标所在的那一个字符一次，R会一直取代光标所在的文字，直到按下ESC为止</td>
+</tr>
+</tbody>
+</table>
 <h4 id="指令列命令模式">指令列命令模式</h4><p>在一般模式中，输入[:/?]三个按钮中的任何一个按钮，就可以将光标移动到最底下那一行。在这个模式中，可以提供搜寻资料的动作，可以完成读取、存盘、大量取代字符、离开vi[:wq]显示行号等动作。</p>
 <p>三种模式只有以按摩时可以与编辑模式、指令列模式切换。</p>
 <p>一般模式切换到指令列模式的可用按钮说明：</p>
