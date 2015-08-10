@@ -1,0 +1,534 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CH">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>改变github-pages的域名 | 工作实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pumpkin">
+    
+
+    
+    <meta name="description" content="背景介绍从N年前开始我就一直梦想着拥有一个自己可以掌握全部权限的博客网站，去年学python折腾了一下Django，两个月前突发奇想折腾了一下各种空间，然后一位好友推荐github pages中的jekyll，又扑腾了一番，做了个简单点demo，但是感觉有点复杂，而且被我改的乱七八杂，奇丑无比，不过确实从其中了解了什么是jekyll？那么多的文件是怎么组织起来的？也为现如今的hexo打下了基础。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="改变github-pages的域名">
+<meta property="og:url" content="http://yoursite.com/2015/08/05/2015/8/change-github-pages-domain/index.html">
+<meta property="og:site_name" content="工作实验室">
+<meta property="og:description" content="背景介绍从N年前开始我就一直梦想着拥有一个自己可以掌握全部权限的博客网站，去年学python折腾了一下Django，两个月前突发奇想折腾了一下各种空间，然后一位好友推荐github pages中的jekyll，又扑腾了一番，做了个简单点demo，但是感觉有点复杂，而且被我改的乱七八杂，奇丑无比，不过确实从其中了解了什么是jekyll？那么多的文件是怎么组织起来的？也为现如今的hexo打下了基础。">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/change-github-pages-domain/domain-list.png">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/change-github-pages-domain/domain-redirect-record.png">
+<meta property="og:updated_time" content="2015-08-06T03:11:34.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="改变github-pages的域名">
+<meta name="twitter:description" content="背景介绍从N年前开始我就一直梦想着拥有一个自己可以掌握全部权限的博客网站，去年学python折腾了一下Django，两个月前突发奇想折腾了一下各种空间，然后一位好友推荐github pages中的jekyll，又扑腾了一番，做了个简单点demo，但是感觉有点复杂，而且被我改的乱七八杂，奇丑无比，不过确实从其中了解了什么是jekyll？那么多的文件是怎么组织起来的？也为现如今的hexo打下了基础。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="工作实验室" title="工作实验室"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="工作实验室">工作实验室</a></h1>
+				<h2 class="blog-motto">专注于自我心智成长</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 287383847596682460 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/05/2015/8/change-github-pages-domain/" title="改变github-pages的域名" itemprop="url">改变github-pages的域名</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-05T09:01:10.000Z" itemprop="datePublished"> 发表于 2015-08-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍"><span class="toc-number">1.</span> <span class="toc-text">背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建站之后"><span class="toc-number">2.</span> <span class="toc-text">建站之后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改变域名说明"><span class="toc-number">3.</span> <span class="toc-text">改变域名说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改变域名步骤"><span class="toc-number">4.</span> <span class="toc-text">改变域名步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">5.</span> <span class="toc-text">遇到的问题</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="背景介绍">背景介绍</h2><p>从N年前开始我就一直梦想着拥有一个自己可以掌握全部权限的博客网站，去年学python折腾了一下Django，两个月前突发奇想折腾了一下各种空间，然后一位好友推荐github pages中的jekyll，又扑腾了一番，做了个简单点demo，但是感觉有点复杂，而且被我改的乱七八杂，奇丑无比，不过确实从其中了解了什么是jekyll？那么多的文件是怎么组织起来的？也为现如今的hexo打下了基础。</p>
+<p>注：hexo用起来真心简单，对于一个需要长期坚持的事情来说，简单才是真理。</p>
+<h2 id="建站之后">建站之后</h2><p>配置了百度的统计，百度站内搜索（看到要备案就流产了），多说评论系统，另外加入我的一些基本的链接，但是域名一直没有购买。上午闲来无事，突发奇想的去看看域名，在万网、godaddy都搜索了一下，比较了一下价格还是选择了万网的域名，相比较来说便宜很多，而且第一次购买域名作为测试使用也就没太多的讲究。</p>
+<h2 id="改变域名说明">改变域名说明</h2><p>首先github-pages是支持域名切换的，这是个至关重要。按照<a href="https://help.github.com/articles/setting-up-a-custom-domain-with-github-pages/" target="_blank" rel="external">github help说明</a>：</p>
+<pre><code>我们只需要在仓库根目录下创建一个以`<span class="tag">CNAME</span>`命名的文件，里面写入重定向的域名，然后在<span class="tag">DNS</span>提供商网站（我这里是万网）创建两个`<span class="tag">A</span>`记录分别解析<span class="tag">ip</span>地址：192<span class="class">.30</span><span class="class">.252</span><span class="class">.153</span>和192<span class="class">.30</span><span class="class">.252</span><span class="class">.154</span>；
+</code></pre><p>ok, let’s go!</p>
+<h2 id="改变域名步骤">改变域名步骤</h2><ol>
+<li><p>创建<code>CNAME</code>文件，写入重定向的域名，比如我的显示如下：</p>
+<p> labrick.xyz</p>
+</li>
+<li><p>push到git根目录【在hexo中只要放入source目录，然后执行<code>hexo g; hexo d</code>即可】</p>
+</li>
+<li>到万网创建解析节点如下：</li>
+</ol>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/change-github-pages-domain/domain-list.png" alt="domain-list"><br><img src="http://7xkoxp.com1.z0.glb.clouddn.com/change-github-pages-domain/domain-redirect-record.png" alt="domain-redirect-record"></p>
+<h2 id="遇到的问题">遇到的问题</h2><p>上一步走完之后，万网说名是10分钟左右起效，但是我等了半个小时还是解析不成功，很是郁闷，毕竟是第一次使用，总觉得是自己哪一步走的不对，一直在查找万网和github的帮助文档，一遍一遍的检查之前所走的路，并没有什么过错，但是就是不能重定向成功，输入原来的io网址能够重定向到<code>labrick.xyz</code>，但是无法显示正常的网站。</p>
+<p>一个偶然的机会我采用了IE尝试访问了一下，竟然进去了，遂怀疑chrome之前缓存内容的关系，清除chrome一周之内的缓存，问题解决。~-~</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/突发奇想的小玩意/">突发奇想的小玩意</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/05/2015/8/change-github-pages-domain/" data-title="改变github-pages的域名 | 工作实验室" data-tsina="5261720135" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/08/lab/what-did-i-learn-in-zhihu/" title="这些年我在知乎都学到了什么">
+  <strong>上一篇：</strong><br/>
+  <span>
+  这些年我在知乎都学到了什么</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/08/04/2015/8/connect-host/"  title="多台电脑搭建文件共享系统">
+ <strong>下一篇：</strong><br/> 
+ <span>多台电脑搭建文件共享系统
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/05/2015/8/change-github-pages-domain/" data-title="改变github-pages的域名" data-url="http://yoursite.com/2015/08/05/2015/8/change-github-pages-domain/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景介绍"><span class="toc-number">1.</span> <span class="toc-text">背景介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#建站之后"><span class="toc-number">2.</span> <span class="toc-text">建站之后</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改变域名说明"><span class="toc-number">3.</span> <span class="toc-text">改变域名说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#改变域名步骤"><span class="toc-number">4.</span> <span class="toc-text">改变域名步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遇到的问题"><span class="toc-number">5.</span> <span class="toc-text">遇到的问题</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/有关读书的那些事/" title="有关读书的那些事">有关读书的那些事<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/没事吐糟一下/" title="没事吐糟一下">没事吐糟一下<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/突发奇想的小玩意/" title="突发奇想的小玩意">突发奇想的小玩意<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/让生活更上一层楼/" title="让生活更上一层楼">让生活更上一层楼<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/重要理论理解/" title="重要理论理解">重要理论理解<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.zhihu.com/people/larrybrick" target="_blank" title="我的知乎">我的知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.douban.com/people/larrybrick" target="_blank" title="我的豆瓣">我的豆瓣</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://weibo.com/lbrick" target="_blank" title="我的微博">我的微博</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=5261720135&verifier=bf33fbd4&dpc=1"></iframe>
+</div>
+
+
+  
+
+<div class="doubanshow">
+<p class="asidetitle">豆瓣秀</p>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/larrybrick/?show=collection&amp;n=12&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book|movie" ></script>
+</div>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 知识管理 学习思考 读书写作 <br/>
+			个人总结 生活感悟 网络分享</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/lbrick" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/larrybrick" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:yananback@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="pumpkin">pumpkin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"labrick"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-65978647-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F88010fa72f93e593c7b92e8a4eb25e3b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

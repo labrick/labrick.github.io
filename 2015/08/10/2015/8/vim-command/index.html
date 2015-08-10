@@ -1,0 +1,575 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CH">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>vim基本指令 | 工作实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pumpkin">
+    
+
+    
+    <meta name="description" content="vi的使用vi有三种模式一般模式打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。
+一般模式按键说明：|            | 移动光标的方法        || :———    | :——————-        || h/←        | 光标向左移动一个字符    || j/↓        | 光标向下移动一个字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vim基本指令">
+<meta property="og:url" content="http://yoursite.com/2015/08/10/2015/8/vim-command/index.html">
+<meta property="og:site_name" content="工作实验室">
+<meta property="og:description" content="vi的使用vi有三种模式一般模式打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。
+一般模式按键说明：|            | 移动光标的方法        || :———    | :——————-        || h/←        | 光标向左移动一个字符    || j/↓        | 光标向下移动一个字符">
+<meta property="og:updated_time" content="2015-08-10T04:07:42.532Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vim基本指令">
+<meta name="twitter:description" content="vi的使用vi有三种模式一般模式打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。
+一般模式按键说明：|            | 移动光标的方法        || :———    | :——————-        || h/←        | 光标向左移动一个字符    || j/↓        | 光标向下移动一个字符">
+
+    
+    <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="工作实验室" title="工作实验室"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="工作实验室">工作实验室</a></h1>
+				<h2 class="blog-motto">专注于自我心智成长</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://zhannei.baidu.com/" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 287383847596682460 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/10/2015/8/vim-command/" title="vim基本指令" itemprop="url">vim基本指令</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-10T16:05:25.000Z" itemprop="datePublished"> 发表于 2015-08-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vi的使用"><span class="toc-number">1.</span> <span class="toc-text">vi的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vi有三种模式"><span class="toc-number">1.1.</span> <span class="toc-text">vi有三种模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一般模式"><span class="toc-number">1.1.1.</span> <span class="toc-text">一般模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑模式"><span class="toc-number">1.1.2.</span> <span class="toc-text">编辑模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指令列命令模式"><span class="toc-number">1.1.3.</span> <span class="toc-text">指令列命令模式</span></a></li></ol></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="vi的使用">vi的使用</h2><h3 id="vi有三种模式">vi有三种模式</h3><h4 id="一般模式">一般模式</h4><p>打开一个档案就直接一般模式(默认模式)[vi档名]进入一般模式。可以删除、粘贴、复制数据，但不能进行文本编辑。</p>
+<p>一般模式按键说明：<br>|            | 移动光标的方法        |<br>| :———    | :——————-        |<br>| h/←        | 光标向左移动一个字符    |<br>| j/↓        | 光标向下移动一个字符    |<br>| k/↑        | 光标向上移动一个字符    |<br>| l/→        | 光标向右移动一个字符<br>| Ctrl+f    | 屏幕向下移动一页，相当于Page Down按键<br>| Ctrl+b    | 屏幕向上移动一页，相当于Page Up按键<br>| Ctrl+d    | 屏幕向下移动半页<br>| Ctrl+u    | 屏幕向下移动半页<br>| +            | 光标移动到非空格符的下一列<br>| -            | 光标移动到非空格符的上一列<br>| n<space |="" 按下数字再按空格键，光标会移动到这一行的n个字符。="" 0或home键="" 移动到这一行的最前面字符处="" $或end键="" 移动到这一行的最后面字符处="" h="" 光标移动到这个屏幕的最上方那一行的第一个字符="" m="" 光标移动到这个屏幕的最中央那一行的第一个字符="" l="" 光标移动到这个屏幕的最下那一行的第一个字符="" g="" 移动到这个档案的最后一行="" ng="" 移动到这个档案的第n行="" gg="" 移动到这个档案的第一行="" n<enter="">    | 光标向下移动n行<br>| /word        | 光标向下寻找一个名称为word的字符串<br>| ?word        | 向光标之上寻找一个名称为word的字符串<br>| n            | 重复前一个搜索动作<br>| N            | 反向进行前一个搜寻行动<br>| :1,n2s/word1/word2/g    | 在第n1与n2行之间寻找word1这个字符串，并将该字符串取代为word2<br>| :1，$/word1/word2/g    | 从第一行到最后一行寻找word1字符串，并将该字符串取代为word2。<br>| :1，$/word1/word2/gc    | 从第一行到最后一行寻找word1字符串，并将该字符串取代为word2。且在取代前提示字符给用户确认是否需要取代<br>| x,X                    | 在一行字当中，x为向除一个字符，X为向前删除一个字符<br>| nX                    | 连续向后删除你n个字符<br>| dd    | 删除游标所在的那一整列游标<br>| ndd    | 删除光标所在的向下n列<br>| d1G    | 删除光标所在到第一行的所有数据<br>| dG    | 删除光标所在到最后一行的所有数据<br>| d$    | 删除游标所在处，到该行的最后一个字符<br>| d0    | 删除游标所在处，到该行的最前面一个字符<br>| yy    | 复制游标所在的那一行<br>| nyy    | 复制光标所在的向下n列<br>| y1G    | 复制光标所在列到第一列的所有数据<br>| yG    | 复制光标所在列到最后一列的所有数据<br>| y0    | 复制光标所在的那个字符到该行首的所有数据<br>| y$    | 复制光标所在的那个字符到该行尾有数据<br>| p,P    | p为将已复制的数据在光标的下一行贴上，P则为贴在游标上一行<br>| j        | 将光标所在列与下一行的数据结合成同一列<br>| c        | 重复删除多个数据<br>| u        | 复原前一个动作<br>| Ctrl+r| 重复上一个动作</space></p>
+<h4 id="编辑模式">编辑模式</h4><p>按下[i, I, o, O, a, A, r, R]等任何一个字母后才会进入编辑模式。</p>
+<p>一般模式切换到编辑模式的可用按钮说明：<br>|            | 进入插入或取代的编辑模式    |<br>| :———    | :—————————        |<br>| i,I        | 进入插入模式,i为从目前光标所在处插入，I为在目前所在行的第一个非空格符处开始插入<br>| a,A        | 进入插入模式，a为从光标所在的下一字符处开始插入，A为从光标所在行的最后一个字符处开始插入<br>| o,O        | 进入插入模式，o为在目前光标所在的下一行处插入新的一行，O为在目前光标所在处的上一行插入新的一行<br>| r,R        | 进入取代模式，r只会取代光标所在的那一个字符一次，R会一直取代光标所在的文字，直到按下ESC为止</p>
+<h4 id="指令列命令模式">指令列命令模式</h4><p>在一般模式中，输入[:/?]三个按钮中的任何一个按钮，就可以将光标移动到最底下那一行。在这个模式中，可以提供搜寻资料的动作，可以完成读取、存盘、大量取代字符、离开vi[:wq]显示行号等动作。</p>
+<p>三种模式只有以按摩时可以与编辑模式、指令列模式切换。</p>
+<p>一般模式切换到指令列模式的可用按钮说明：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">指令列的储存、离开等指令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">:w</td>
+<td style="text-align:left">将编辑的数据写入硬盘档案中</td>
+</tr>
+<tr>
+<td style="text-align:left">:w!</td>
+<td style="text-align:left">若文件属性为只读写入该档案，能不能写入要看该档案的档案权限</td>
+</tr>
+<tr>
+<td style="text-align:left">:q</td>
+<td style="text-align:left">离开vi</td>
+</tr>
+<tr>
+<td style="text-align:left">:q!</td>
+<td style="text-align:left">若曾修改过档案，又不想储存，使用！为强制离开不储存档案</td>
+</tr>
+<tr>
+<td style="text-align:left">:wq</td>
+<td style="text-align:left">储存后离开，若为：wq!则为强制储存后离开</td>
+</tr>
+<tr>
+<td style="text-align:left">ZZ</td>
+<td style="text-align:left">若档案没有更动，则不储存离开，若档案已被更动过，则储存后离开</td>
+</tr>
+<tr>
+<td style="text-align:left">:w[filename]</td>
+<td style="text-align:left">将编辑的数据储存成另一个档案</td>
+</tr>
+<tr>
+<td style="text-align:left">:r[]filename]</td>
+<td style="text-align:left">在编辑的数据中，读入另一个档案的数据，即将[filename]这个档案内容加到游标所在行后面</td>
+</tr>
+<tr>
+<td style="text-align:left">:n1,n2 w [filename]</td>
+<td style="text-align:left">讲n1到n2的内容储存成filename这个档案</td>
+</tr>
+<tr>
+<td style="text-align:left">:! Command</td>
+<td style="text-align:left">暂时离开vi到指令列模式下执行command的显示结果</td>
+</tr>
+<tr>
+<td style="text-align:left">:set nu</td>
+<td style="text-align:left">显示行号，设定之后，会在每一行的前缀显示该行的行号</td>
+</tr>
+<tr>
+<td style="text-align:left">:set nonu</td>
+<td style="text-align:left">与set nu相反，为取消行号</td>
+</tr>
+</tbody>
+</table>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux学习/">linux学习</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/10/2015/8/vim-command/" data-title="vim基本指令 | 工作实验室" data-tsina="5261720135" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/09/2015/8/difference-between-ttl-and-rs232/"  title="TTL电平与RS232电平的区别">
+ <strong>下一篇：</strong><br/> 
+ <span>TTL电平与RS232电平的区别
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/10/2015/8/vim-command/" data-title="vim基本指令" data-url="http://yoursite.com/2015/08/10/2015/8/vim-command/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#vi的使用"><span class="toc-number">1.</span> <span class="toc-text">vi的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vi有三种模式"><span class="toc-number">1.1.</span> <span class="toc-text">vi有三种模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一般模式"><span class="toc-number">1.1.1.</span> <span class="toc-text">一般模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑模式"><span class="toc-number">1.1.2.</span> <span class="toc-text">编辑模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#指令列命令模式"><span class="toc-number">1.1.3.</span> <span class="toc-text">指令列命令模式</span></a></li></ol></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/有关读书的那些事/" title="有关读书的那些事">有关读书的那些事<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/没事吐糟一下/" title="没事吐糟一下">没事吐糟一下<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/突发奇想的小玩意/" title="突发奇想的小玩意">突发奇想的小玩意<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/让生活更上一层楼/" title="让生活更上一层楼">让生活更上一层楼<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/重要理论理解/" title="重要理论理解">重要理论理解<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.zhihu.com/people/larrybrick" target="_blank" title="我的知乎">我的知乎</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.douban.com/people/larrybrick" target="_blank" title="我的豆瓣">我的豆瓣</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://weibo.com/lbrick" target="_blank" title="我的微博">我的微博</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=5261720135&verifier=bf33fbd4&dpc=1"></iframe>
+</div>
+
+
+  
+
+<div class="doubanshow">
+<p class="asidetitle">豆瓣秀</p>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/larrybrick/?show=collection&amp;n=12&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book|movie" ></script>
+</div>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 知识管理 学习思考 读书写作 <br/>
+			个人总结 生活感悟 网络分享</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/lbrick" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/larrybrick" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:yananback@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="pumpkin">pumpkin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"labrick"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-65978647-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F88010fa72f93e593c7b92e8a4eb25e3b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
