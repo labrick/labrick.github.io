@@ -15,13 +15,13 @@
 结合Linux-0.11这里我们可">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux-0.11启动过程描述">
-<meta property="og:url" content="http://yoursite.com/2015/08/12/linux-0-11-start/index.html">
+<meta property="og:url" content="http://yoursite.com/2015/08/13/linux-0-11-start/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
 结合Linux-0.11这里我们可">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png">
-<meta property="og:updated_time" content="2015-08-13T02:46:09.137Z">
+<meta property="og:updated_time" content="2015-08-13T07:28:00.413Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux-0.11启动过程描述">
 <meta name="twitter:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
@@ -84,14 +84,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/08/12/linux-0-11-start/" title="linux-0.11启动过程描述" itemprop="url">linux-0.11启动过程描述</a>
+      <a href="/2015/08/13/linux-0-11-start/" title="linux-0.11启动过程描述" itemprop="url">linux-0.11启动过程描述</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
 		
   <p class="article-time">
-    <time datetime="2015-08-13T01:20:27.000Z" itemprop="datePublished"> 发表于 2015-08-12</time>
+    <time datetime="2015-08-14T01:20:27.000Z" itemprop="datePublished"> 发表于 2015-08-13</time>
     
   </p>
 </header>
@@ -105,16 +105,18 @@
 		</div>
 		
 		<h2 id="简单描述">简单描述</h2><p>当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。</p>
-<h2 id="结合Linux-0-11">结合Linux-0.11</h2><p><a href="https://github.com/labrick/linux-0.11/tree/master/boot" target="_blank" rel="external">这里</a>我们可以看到linux/boot/目录下有三个文件和启动相关。</p>
-<h3 id="BIOS和boot/bootsect-s">BIOS和boot/bootsect.s</h3><p>Linux最开始的部分是用8086汇编语言编写的(boot/bootsect.s)，它将由BIOS读入到内存绝对地址0x7C00(31KB)处，当它被执行时就会把自己<a href="是谁将bootsect移动到内存绝对地址0x90000(576KB)处，是bootsect自身？">^hello</a>移动到内存绝对地址0x90000(576KB)处，并把启动设备中后2KB字节代码(boot/setup.s)读入到内存0x90200处，而内核的其他部分（system模块）则被读入到内存地址0x10000(64KB)开始处，因此从机器加电开始顺序执行的程序如下图：</p>
+<h2 id="结合Linux-0-11">结合Linux-0.11</h2><p><a href="https://github.com/labrick/linux-0.11/tree/v1.0/boot" target="_blank" rel="external">这里</a>我们可以看到linux/boot/目录下有三个文件和启动相关。</p>
+<h3 id="BIOS和boot/bootsect-s">BIOS和boot/bootsect.s</h3><p>Linux最开始的部分是用8086汇编语言编写的(boot/bootsect.s)，它将由BIOS读入到内存绝对地址0x7C00(31KB)处，当它被执行时就会把自己[^1]移动到内存绝对地址0x90000(576KB)处，并把启动设备中后2KB字节代码(boot/setup.s)读入到内存0x90200处，而内核的其他部分（system模块）则被读入到内存地址0x10000(64KB)开始处，因此从机器加电开始顺序执行的程序如下图：</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png" alt="从系统加点起所执行程序的顺序"></p>
-<h3 id="boot/setup-s">boot/setup.s</h3><p>因为当时system模块的长度不会超过0x80000字节大小（即512KB），所以bootsect程序把system模块读入物理地址0x10000开始位置处时并不会覆盖在0x90000(576KB)处开始的bootsect和setup模块。后面setup程序将会把system模块移动到物理内存起始位置处<a href="系统上电时BOIS已经在起始位置（也就是物理地址0位置）初始化了中断向量，此处将system模块还移动到物理内存其实位置处不会覆盖之前的中断向量？">^2</a>，这样system模块中代码的地址也即等于实际的物理地址，便于对内核代码和数据进行操作。下图清晰地显示出Linux系统启动时这几个程序或模块在内存中的动态位置。其中，每一竖条框代表某一时刻内存中个程序的映像位置图。在系统加载期间将显示信息“Loading…”。然后控制权将传递给boot/setup.s中的代码，这是另一个实模式汇编语言程序。</p>
+<h3 id="boot/setup-s">boot/setup.s</h3><p>因为当时system模块的长度不会超过0x80000字节大小（即512KB），所以bootsect程序把system模块读入物理地址0x10000开始位置处时并不会覆盖在0x90000(576KB)处开始的bootsect和setup模块。后面setup程序将会把system模块移动到物理内存起始位置处[^2]，这样system模块中代码的地址也即等于实际的物理地址，便于对内核代码和数据进行操作。下图清晰地显示出Linux系统启动时这几个程序或模块在内存中的动态位置。其中，每一竖条框代表某一时刻内存中个程序的映像位置图。在系统加载期间将显示信息“Loading…”。然后控制权将传递给boot/setup.s中的代码，这是另一个实模式汇编语言程序。</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png" alt="启动引导时内核在内存中的位置和移动后的情况"></p>
 <h3 id="boot/head-s">boot/head.s</h3><p>启动部分识别主机的某些特性以及VGA卡的类型。如果需要，它会要求用户为控制台选择模式。然后将整个系统从地址0x10000移至0x0000处<a href="上面已经说是setup完成的将system模块（也就是整个系统）移动到物理内存起始位置，但是此处由说是head进行的搬移，似乎出现了矛盾？">^3</a>，进入保护模式并跳转至系统的余下部分（在0x0000处）。此时所有32位运行方式的设置启动被完成：IDT、GDT以及LDT被加载，处理器和协处理器也已确认，分页工作也设置好了；最终调用init/main.c中的main()程序。</p>
 <p>boot/head.s可能是整个内核中最有诀窍的代码。</p>
 <h3 id="注意点">注意点</h3><p>上面的所有过程都不能出错，一旦出错，计算机就会死机，在操作系统还没有完全运转之前是处理不了出错的。</p>
 <h2 id="根文件系统问题^4">根文件系统问题<a href="为什么需要有文件系统才能使Linux系统运行起来，内核模块应该运行起来了吧？">^4</a></h2><p>仅在内存中加载上述内核代码模块并不能让Linux系统运行起来。作为完整可运行的Linux系统还需要有一个基本的文件系统支持，即根文件系统。Linux<br>0.11内核仅支持MINIX的1.0文件系统。根文件系统通常在另一个软盘上或者在一个硬盘分区中。为了通知内核所需要的根文件系统在什么地方，bootsect.s程序的第43行上给出了根文件系统所在的默认块设备号。在内核初始化时会使用编译内核时放在引导扇区第509、510(0x1fc—0x1fd)字节中的指定设备号。</p>
-<h2 id="疑问点">疑问点</h2><p>答：这是因为BIOS ROM中的中断调用（大小为0x400直接，也就是1KB）是用来获取机器的一些参数（例如显示模式、硬盘参数表等）。而启动setup程序时，这些参数已经获取完毕，就可以直接被覆盖掉了，这也是bootsect不把system模块直接加载到物理地址0x0000开始处的原因。(真的是这样吗？系统启动之后就不再需要这些中断了？可是微机实验中的中断都是可用的啊？)</p>
+<h2 id="疑问点">疑问点</h2><p>[^1]:<br>    是谁将bootsect移动到内存绝对地址0x90000(576KB)处，是bootsect自身？</p>
+<p>[^2]:<br>    系统上电时BOIS已经在起始位置（也就是物理地址0位置）初始化了中断向量，此处将system模块还移动到物理内存其实位置处不会覆盖之前的中断向量？</p>
+<p>答：这是因为BIOS ROM中的中断调用（大小为0x400直接，也就是1KB）是用来获取机器的一些参数（例如显示模式、硬盘参数表等）。而启动setup程序时，这些参数已经获取完毕，就可以直接被覆盖掉了，这也是bootsect不把system模块直接加载到物理地址0x0000开始处的原因。(真的是这样吗？系统启动之后就不再需要这些中断了？可是微机实验中的中断都是可用的啊？)</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -132,7 +134,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/08/12/linux-0-11-start/" data-title="linux-0.11启动过程描述 | 工作实验室" data-tsina="5261720135" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/08/13/linux-0-11-start/" data-title="linux-0.11启动过程描述 | 工作实验室" data-tsina="5261720135" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -158,7 +160,7 @@
 
 	
 <section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2015/08/12/linux-0-11-start/" data-title="linux-0.11启动过程描述" data-url="http://yoursite.com/2015/08/12/linux-0-11-start/"></div>
+	<div class="ds-thread" data-thread-key="2015/08/13/linux-0-11-start/" data-title="linux-0.11启动过程描述" data-url="http://yoursite.com/2015/08/13/linux-0-11-start/"></div>
 </section>
 
 
