@@ -12,20 +12,21 @@
 
     
     <meta name="description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
-结合Linux-0.11这里我们可">
+启动之前Linux启动是需要启动盘">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux-0.11启动过程描述">
 <meta property="og:url" content="http://yoursite.com/2015/08/13/linux-0-11-start/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
-结合Linux-0.11这里我们可">
+启动之前Linux启动是需要启动盘">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/disk-of-start-linux-0.11.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png">
-<meta property="og:updated_time" content="2015-08-13T08:13:10.623Z">
+<meta property="og:updated_time" content="2015-08-13T08:42:55.272Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux-0.11启动过程描述">
 <meta name="twitter:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
-结合Linux-0.11这里我们可">
+启动之前Linux启动是需要启动盘">
 
     
     <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
@@ -100,13 +101,17 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单描述"><span class="toc-number">1.</span> <span class="toc-text">简单描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合Linux-0-11"><span class="toc-number">2.</span> <span class="toc-text">结合Linux-0.11</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BIOS和boot/bootsect-s"><span class="toc-number">2.1.</span> <span class="toc-text">BIOS和boot/bootsect.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/setup-s"><span class="toc-number">2.2.</span> <span class="toc-text">boot/setup.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/head-s"><span class="toc-number">2.3.</span> <span class="toc-text">boot/head.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-number">2.4.</span> <span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#根文件系统问题[4]"><span class="toc-number">3.</span> <span class="toc-text">根文件系统问题[4]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#疑问点"><span class="toc-number">4.</span> <span class="toc-text">疑问点</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单描述"><span class="toc-number">1.</span> <span class="toc-text">简单描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动之前"><span class="toc-number">2.</span> <span class="toc-text">启动之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动过程"><span class="toc-number">3.</span> <span class="toc-text">启动过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BIOS和boot/bootsect-s"><span class="toc-number">3.1.</span> <span class="toc-text">BIOS和boot/bootsect.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/setup-s"><span class="toc-number">3.2.</span> <span class="toc-text">boot/setup.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/head-s"><span class="toc-number">3.3.</span> <span class="toc-text">boot/head.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-number">3.4.</span> <span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#根文件系统问题[4]"><span class="toc-number">4.</span> <span class="toc-text">根文件系统问题[4]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#疑问点"><span class="toc-number">5.</span> <span class="toc-text">疑问点</span></a></li></ol>
 		
 		</div>
 		
 		<h2 id="简单描述">简单描述</h2><p>当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。</p>
-<h2 id="结合Linux-0-11">结合Linux-0.11</h2><p><a href="https://github.com/labrick/linux-0.11/tree/v1.0/boot" target="_blank" rel="external">这里</a>我们可以看到linux/boot/目录下有三个文件和启动相关。</p>
-<h3 id="BIOS和boot/bootsect-s">BIOS和boot/bootsect.s</h3><p>Linux最开始的部分是用8086汇编语言编写的(boot/bootsect.s)，它将由BIOS读入到内存绝对地址0x7C00(31KB)处，当它被执行时就会把自己[1]移动到内存绝对地址0x90000(576KB)处，并把启动设备中后2KB字节代码(boot/setup.s)读入到内存0x90200处，而内核的其他部分（system模块）则被读入到内存地址0x10000(64KB)开始处，因此从机器加电开始顺序执行的程序如下图：</p>
+<h2 id="启动之前">启动之前</h2><p>Linux启动是需要启动盘的，这里假定启动盘就是当时的1.44MB的A盘。我们先来看下各个模块在启动盘的位置信息。</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/disk-of-start-linux-0.11.png" alt="Linux 0.11内核在1.44MB磁盘上的分布情况"></p>
+<p>1.44MB磁盘共有2880个扇区（怎么计算的？1.44<em>1024</em>1024/512=2949.12，显然不对），bootsect.s代码是磁盘引导块程序，驻留在磁盘的第一个扇区中（引导扇区，0磁道（柱面），0磁头，第1个扇区），setup模块占用随后的4个扇区，而0.11内核system模块大约占随后的240个扇区。还剩下2630个扇区未被使用。这些剩余的未用空间可被利用来存放一个基本的根文件系统，从而可以创建处使用单张磁盘就能让系统运转起来的集成盘来。</p>
+<h2 id="启动过程">启动过程</h2><p><a href="https://github.com/labrick/linux-0.11/tree/v1.0/boot" target="_blank" rel="external">这里</a>我们可以看到linux/boot/目录下有三个文件和启动相关。</p>
+<h3 id="BIOS和boot/bootsect-s">BIOS和boot/bootsect.s</h3><p>Linux最开始的部分是用8086汇编语言编写的(boot/bootsect.s)，它将由ROM BIOS自检后读入到内存绝对地址0x7C00(31KB)处并执行之，bootsect执行时，就会把自己[1]移动到内存绝对地址0x90000(576KB)处，并把启动设备中后2KB字节代码(boot/setup.s)读入到内存0x90200处，然后利用BIOS终端0x13取磁盘参数表中当前启动引导盘的参数，接着在屏幕上显示“Load<br>system…”字符串。而后将system模块读入到内存地址0x10000(64KB)开始处。随后确定根文件系统的设备号，若没有指定，则根据所保存的引导盘的每磁道扇区数判别出盘的类型和种类（是1.44MB A盘吗？）并保存其设备号于root_dev（引导块的508地址处），最后长跳转到setup程序的开始处(0x90200)执行setup程序。</p>
+<p>从机器加电开始顺序执行的程序如下图：</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png" alt="从系统加点起所执行程序的顺序"></p>
 <h3 id="boot/setup-s">boot/setup.s</h3><p>因为当时system模块的长度不会超过0x80000字节大小（即512KB），所以bootsect程序把system模块读入物理地址0x10000开始位置处时并不会覆盖在0x90000(576KB)处开始的bootsect和setup模块。后面setup程序将会把system模块移动到物理内存起始位置处[2]，这样system模块中代码的地址也即等于实际的物理地址，便于对内核代码和数据进行操作。下图清晰地显示出Linux系统启动时这几个程序或模块在内存中的动态位置。其中，每一竖条框代表某一时刻内存中个程序的映像位置图。在系统加载期间将显示信息“Loading…”。然后控制权将传递给boot/setup.s中的代码，这是另一个实模式汇编语言程序。</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png" alt="启动引导时内核在内存中的位置和移动后的情况"></p>
@@ -116,6 +121,7 @@
 <h2 id="根文件系统问题[4]">根文件系统问题[4]</h2><p>仅在内存中加载上述内核代码模块并不能让Linux系统运行起来。作为完整可运行的Linux系统还需要有一个基本的文件系统支持，即根文件系统。Linux<br>0.11内核仅支持MINIX的1.0文件系统。根文件系统通常在另一个软盘上或者在一个硬盘分区中。为了通知内核所需要的根文件系统在什么地方，bootsect.s程序的第43行上给出了根文件系统所在的默认块设备号。在内核初始化时会使用编译内核时放在引导扇区第509、510(0x1fc—0x1fd)字节中的指定设备号。</p>
 <h2 id="疑问点">疑问点</h2><ol>
 <li><p>是谁将bootsect移动到内存绝对地址0x90000(576KB)处，是bootsect自身？</p>
+<p> 答：按照上述理解与分析，搬移bootsect程序的应该是它自身。</p>
 </li>
 <li><p>系统上电时BOIS已经在起始位置（也就是物理地址0位置）初始化了中断向量，此处将system模块还移动到物理内存其实位置处不会覆盖之前的中断向量？</p>
 <p> 答：这是因为BIOS ROM中的中断调用（大小为0x400直接，也就是1KB）是用来获取机器的一些参数（例如显示模式、硬盘参数表等）。而启动setup程序时，这些参数已经获取完毕，就可以直接被覆盖掉了，这也是bootsect不把system模块直接加载到物理地址0x0000开始处的原因。(真的是这样吗？系统启动之后就不再需要这些中断了？可是微机实验中的中断都是可用的啊？)</p>
@@ -178,7 +184,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单描述"><span class="toc-number">1.</span> <span class="toc-text">简单描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结合Linux-0-11"><span class="toc-number">2.</span> <span class="toc-text">结合Linux-0.11</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BIOS和boot/bootsect-s"><span class="toc-number">2.1.</span> <span class="toc-text">BIOS和boot/bootsect.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/setup-s"><span class="toc-number">2.2.</span> <span class="toc-text">boot/setup.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/head-s"><span class="toc-number">2.3.</span> <span class="toc-text">boot/head.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-number">2.4.</span> <span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#根文件系统问题[4]"><span class="toc-number">3.</span> <span class="toc-text">根文件系统问题[4]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#疑问点"><span class="toc-number">4.</span> <span class="toc-text">疑问点</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#简单描述"><span class="toc-number">1.</span> <span class="toc-text">简单描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动之前"><span class="toc-number">2.</span> <span class="toc-text">启动之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#启动过程"><span class="toc-number">3.</span> <span class="toc-text">启动过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BIOS和boot/bootsect-s"><span class="toc-number">3.1.</span> <span class="toc-text">BIOS和boot/bootsect.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/setup-s"><span class="toc-number">3.2.</span> <span class="toc-text">boot/setup.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#boot/head-s"><span class="toc-number">3.3.</span> <span class="toc-text">boot/head.s</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注意点"><span class="toc-number">3.4.</span> <span class="toc-text">注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#根文件系统问题[4]"><span class="toc-number">4.</span> <span class="toc-text">根文件系统问题[4]</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#疑问点"><span class="toc-number">5.</span> <span class="toc-text">疑问点</span></a></li></ol>
  
   </div>
 
