@@ -1,11 +1,10 @@
 
-  
-    <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html lang="zh-CH">
 <head>
   <meta charset="UTF-8">
   
-    <title>工作实验室</title>
+    <title>search | 工作实验室</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="pumpkin">
@@ -14,13 +13,13 @@
     
     <meta name="description">
 <meta property="og:type" content="website">
-<meta property="og:title" content="工作实验室">
+<meta property="og:title" content="search">
 <meta property="og:url" content="http://yoursite.com/search/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description">
-<meta property="og:updated_time" content="2015-08-13T14:29:37.207Z">
+<meta property="og:updated_time" content="2015-08-13T14:34:56.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="工作实验室">
+<meta name="twitter:title" content="search">
 <meta name="twitter:description">
 
     
@@ -36,9 +35,9 @@
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
 
-      <body>
-        <header>
-          
+    <body>
+      <header>
+        
 <div>
 		
 			<div id="imglogo">
@@ -72,59 +71,31 @@
 				</ul>
 			</nav>			
 </div>
-        </header>
-        <div id="container">
-          <div id="main" class="page" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/search/index.html" title="" itemprop="url"></a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
-		
-  <p class="article-time">
-    <time datetime="2015-08-13T14:29:37.207Z" itemprop="datePublished"> 发表于 2015-08-13</time>
-    
-  </p>
-</header>
-	<div class="article-content">
-		
-		  
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-
+      </header>
+      <div id="container">
+        
+<div  id="main" class="page">
+  <div id='cse' style='width:100%;text-align:center'>正在加载搜索结果，请稍等。</div>
 </div>
+<script src="http://www.google.com.hk/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+google.load('search', '1', {language : 'zh-CN',style: google.loader.themes.MINIMALIST});
+google.setOnLoadCallback(function(){
+  var customSearchControl = new google.search.CustomSearchControl('008984172250276443431:avs3xarmjtm');
+  customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+  var options = new google.search.DrawOptions();
+  options.setAutoComplete(true);
+  customSearchControl.draw('cse', options);
+  var match = location.search.match(/q=([^&]*)(&|$)/);
+  if(match && match[1]){
+    var search = decodeURIComponent(match[1]); 
+    customSearchControl.execute(search);
+  }
+},true);
+</script>
 
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/search/index.html" data-title="工作实验室" data-tsina="5261720135" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="search/index.html" data-title="" data-url="http://yoursite.com/search/index.html"></div>
-</section>
-
-
-</div>  
-        </div>
-        <footer><div id="footer" >
+      </div>
+      <footer><div id="footer" >
 	
 	<div class="line">
 		<span></span>
@@ -167,7 +138,7 @@
 		</p>
 </div>
 </footer>
-        <script src="/js/jquery-2.0.3.min.js"></script>
+      <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 <script src="/js/jquery.qrcode-0.12.0.min.js"></script>
@@ -217,55 +188,6 @@ $(document).ready(function(){
 });
 </script>
 
-
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
-
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
 
 
 
@@ -351,6 +273,5 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 
 <!-- Tiny_search End -->
 
-      </body>
-     </html>
-     
+    </body>
+   </html>
