@@ -21,8 +21,9 @@
 启动之前Linux启动是需要启动盘">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/disk-of-start-linux-0.11.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/param-of-setup-reading.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png">
-<meta property="og:updated_time" content="2015-08-15T11:47:25.411Z">
+<meta property="og:updated_time" content="2015-08-15T11:49:19.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux-0.11启动过程描述">
 <meta name="twitter:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
@@ -114,7 +115,7 @@
 <p>从机器加电开始顺序执行的程序如下图：</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png" alt="从系统加点起所执行程序的顺序"></p>
 <h3 id="boot/setup-s">boot/setup.s</h3><p>boot/setup.s主要负责利用ROB BIOS终端读取机器系统数据，并将这些数据保存到0x90000开始的位置（覆盖掉了bootsect程序所在的位置），所去读取的参数和保留的内存位置如下表：（这些参数将被内核中的相关程序使用）</p>
-<p>![setup程序读取并保存的参数]<a href="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/param-of-setup-reading.png(" target="_blank" rel="external">http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/param-of-setup-reading.png(</a>)</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/param-of-setup-reading.png" alt="setup程序读取并保存的参数"></p>
 <p>然后setup程序将system模块移动到物理内存起始位置处[2]，这样system模块中代码的地址也即等于实际的物理地址，便于对内核代码和数据进行操作。下图清晰地显示出Linux系统启动时这几个程序或模块在内存中的动态位置。其中，每一竖条框代表某一时刻内存中个程序的映像位置图。在系统加载期间将显示信息“Loading…”。然后控制权将传递给boot/setup.s中的代码，这是另一个实模式汇编语言程序。</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png" alt="启动引导时内核在内存中的位置和移动后的情况"></p>
 <p>接下来加载中断描述符表寄存器(idtr)和全局描述符表寄存器(gdtr)，开启A20地址线，重新设置两个终端控制芯片8259A，将硬件中断号重新设置为0x20-0x2f。最后设置CPU的控制寄存器CR0(也称机器状态字),从而进入32位保护模式运行，并跳转到位于system模块最前端部分的head.s程序继续运行。</p>
