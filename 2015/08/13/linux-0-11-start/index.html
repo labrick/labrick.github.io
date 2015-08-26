@@ -23,7 +23,9 @@
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/process-of-linux-starting.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/param-of-setup-reading.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png">
-<meta property="og:updated_time" content="2015-08-18T08:34:57.919Z">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/idt-interrupt-diagram.png">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/page-iterm-and-structure.png">
+<meta property="og:updated_time" content="2015-08-26T14:25:11.603Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux-0.11启动过程描述">
 <meta name="twitter:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
@@ -120,7 +122,17 @@
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png" alt="启动引导时内核在内存中的位置和移动后的情况"></p>
 <p>接下来加载中断描述符表寄存器(idtr)和全局描述符表寄存器(gdtr)，开启A20地址线，重新设置两个终端控制芯片8259A，将硬件中断号重新设置为0x20-0x2f。最后设置CPU的控制寄存器CR0(也称机器状态字),从而进入32位保护模式运行，并跳转到位于system模块最前端部分的head.s程序继续运行。</p>
 <p>为了能够head.s在32位保护模式下运行，在本程序中临时设置了中断描述符表(IDT)和全局描述符表(GDT)，并在GDT中设置了当前内核代码段的描述符和数据段的描述符。下面在head.s程序中会根据内核的需要重新设置这些描述符表。</p>
-<h3 id="boot/head-s">boot/head.s</h3><p>启动部分识别主机的某些特性以及VGA卡的类型。如果需要，它会要求用户为控制台选择模式。然后将整个系统从地址0x10000移至0x0000处[3]，进入保护模式并跳转至系统的余下部分（在0x0000处）。此时所有32位运行方式的设置启动被完成：IDT、GDT以及LDT被加载，处理器和协处理器也已确认，分页工作也设置好了；最终调用init/main.c中的main()程序。</p>
+<h3 id="boot/head-s">boot/head.s</h3><p>head.s程序在被编译生成目标文件后会与内核其他程序一起被链接成system模块，位于system模块的最前面开始部分，这也就是为什么称其为头部(head)程序的原因。system模块将被放置在磁盘上setup模块之后开始的扇区中，即从磁盘上第6个扇区开始放置。一般情况下Linux0.11内核的system模块大约有120KB左右，因此在磁盘上大约占240个扇区。</p>
+<p>从这里开始，内核完全都是在保护模式下运行了。head.s汇编程序与前面的语法格式不同，它采用的是AT&amp;T的汇编语言格式，并且需要使用GNU的gas和gld进行编译链接。因此要注意代码中赋值的方向是从左到右。</p>
+<p>这段程序实际上处于内存绝对地址0处开始的地方。这个程序的功能比较单一。首先是加载各个数据段寄存器，重新设置中断描述符表idt，共256项，并使各个表项均指向一个只报错误的哑中断子程序ignore_int。中断描述符表中每个描述符项也占8字节，其格式如下：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/idt-interrupt-diagram.png" alt="中断描述符表IDT中的中断门描述符格式"></p>
+<p>在设置好中断描述符表之后，本程序又重新设置了全局段描述符表gdt。实际上新设置的GDT表与原来在setup.s程序中设置的GDT表描述符除了在段限长上有些区别以外(原为8MB，现为16MB)，其他内容完全一样。当然我们也可以在setup.s程序中就把描述符的段限长直接设置成16MB，然后直接把原GDT表移动到内存适当位置处。因此这里重新设置GDT的主要原因是为了把gdt表放在内存内核代码比较合理的地方。前面设置的GDT表处于内存0x902XX处。这个地方将在内核初始化后用作内存高速缓冲区的一部分。</p>
+<p>接着使用物理地址0与1MB开始处的字节内容相比较的方法，检测A20地址线是否已真的开启。如果没有开启，则在访问高于1MB物理内存地址时CPU实际只会循环访问(IP MOD 1Mb)地址处的内容，也即与访问从0地址开始对应字节的内容都相同。如果检测下来发现没有开启，则进入死循环。然后程序测试PC机是否含有数学协处理芯片(80287、80387或兼容芯片)，并在控制寄存器CR0中设置相应的标志位。</p>
+<p>接着设置管理内存的分页处理机制，将页目录表放在绝对物理地址0开始处(也是本程序所处的物理内存位置，因此这段程序将被覆盖掉)，紧随后面放置共可寻址16MB的4个页表，并分别设置它们的表项。页目录表项和页表项格式如下。</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/page-iterm-and-structure.png" alt="页目录表项和页表项结构"></p>
+<p>这里每个表项的属性标志都被设置成0x07(P=1、U/S=1、R/W=1)，表示该页存在、用户可读写。这样设置内核页表属性的原因是:CPU的分页机制和分页管理都有保护方法。分页机制中页目录表和页表项中设置的保护标志(U/S、R/W)需要与段描述符中的特权级(PL)保护机制一起组合使用。但段描述符中的PL其主要作用。CPU会首先检查段保护，然后再检查页保护。如果当前特权级CPL&lt;3(例如0)，则说明CPU正在以超级用户(Supervisor)身份运行。此时所有页面都能访问，并可随意进行内存读写操作。入宫CPL=3，则说明CPU正在以用户(User)身份运行。此时只有属于User的页面(U/S=1)可以访问，并且只有标记为可读写的页面(W/R=1)是可写的。而此时属于超级用户的页面(U/S=0)则既不可写、也不可以读。由于内核代码有些特别之处，即其中包含有任务0和任务1的代码和数据。因此这里把页面属性为0x7就可保护这两种任务代码不仅可以在用户态下执行，而且又不能随意访问内核资源。</p>
+<p>最后，head.s程序利用返回指令将预先放置在对战中的/init/main.c程序的入口地址弹出，去运行main()程序。</p>
+<p>启动部分识别主机的某些特性以及VGA卡的类型。如果需要，它会要求用户为控制台选择模式。然后将整个系统从地址0x10000移至0x0000处[3]，进入保护模式并跳转至系统的余下部分（在0x0000处）。此时所有32位运行方式的设置启动被完成：IDT、GDT以及LDT被加载，处理器和协处理器也已确认，分页工作也设置好了；最终调用init/main.c中的main()程序。</p>
 <p>boot/head.s可能是整个内核中最有诀窍的代码。</p>
 <h3 id="注意点">注意点</h3><p>上面的所有过程都不能出错，一旦出错，计算机就会死机，在操作系统还没有完全运转之前是处理不了出错的。</p>
 <h2 id="根文件系统问题[4]">根文件系统问题[4]</h2><p>仅在内存中加载上述内核代码模块并不能让Linux系统运行起来。作为完整可运行的Linux系统还需要有一个基本的文件系统支持，即根文件系统。Linux<br>0.11内核仅支持MINIX的1.0文件系统。根文件系统通常在另一个软盘上或者在一个硬盘分区中。为了通知内核所需要的根文件系统在什么地方，bootsect.s程序的第43行上给出了根文件系统所在的默认块设备号。在内核初始化时会使用编译内核时放在引导扇区第509、510(0x1fc—0x1fd)字节中的指定设备号。</p>
