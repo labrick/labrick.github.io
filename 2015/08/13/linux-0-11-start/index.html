@@ -25,7 +25,8 @@
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/placement-and-movement-of-linux-kernel-in-mm-when-start.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/idt-interrupt-diagram.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/page-iterm-and-structure.png">
-<meta property="og:updated_time" content="2015-08-26T14:25:11.603Z">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/system-in-memory.png">
+<meta property="og:updated_time" content="2015-08-28T06:38:15.957Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux-0.11启动过程描述">
 <meta name="twitter:description" content="简单描述当PC的电源打开后，80X86结构的CPU将自动进入实模式，并从地址0xFFFF0开始自动执行程序代码，这个地址通常是ROM-BIOS中的地址。PC机的BIOS将执行某些系统的检测，并在物理地址0处开始初始化中断向量。此后，它将可启动设备的第一个扇区（磁盘引导扇区，512字节）读入内存绝对地址0x7C00处，并跳转到这个地方。启动设备通常是软驱或是硬盘。
@@ -132,6 +133,8 @@
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/page-iterm-and-structure.png" alt="页目录表项和页表项结构"></p>
 <p>这里每个表项的属性标志都被设置成0x07(P=1、U/S=1、R/W=1)，表示该页存在、用户可读写。这样设置内核页表属性的原因是:CPU的分页机制和分页管理都有保护方法。分页机制中页目录表和页表项中设置的保护标志(U/S、R/W)需要与段描述符中的特权级(PL)保护机制一起组合使用。但段描述符中的PL其主要作用。CPU会首先检查段保护，然后再检查页保护。如果当前特权级CPL&lt;3(例如0)，则说明CPU正在以超级用户(Supervisor)身份运行。此时所有页面都能访问，并可随意进行内存读写操作。入宫CPL=3，则说明CPU正在以用户(User)身份运行。此时只有属于User的页面(U/S=1)可以访问，并且只有标记为可读写的页面(W/R=1)是可写的。而此时属于超级用户的页面(U/S=0)则既不可写、也不可以读。由于内核代码有些特别之处，即其中包含有任务0和任务1的代码和数据。因此这里把页面属性为0x7就可保护这两种任务代码不仅可以在用户态下执行，而且又不能随意访问内核资源。</p>
 <p>最后，head.s程序利用返回指令将预先放置在对战中的/init/main.c程序的入口地址弹出，去运行main()程序。</p>
+<p>head.s程序执行结束后，已经正式完成内存页目录和页表的设置，并重新设置了内核实际使用的中断描述符表idt和全局描述符表gdt。另外还为软盘驱动程序开辟了1KB字节的缓冲区。此时system模块在内存中的详细映像如下：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0.11-start/system-in-memory.png" alt="system模块在内存中的映像示意图"></p>
 <p>启动部分识别主机的某些特性以及VGA卡的类型。如果需要，它会要求用户为控制台选择模式。然后将整个系统从地址0x10000移至0x0000处[3]，进入保护模式并跳转至系统的余下部分（在0x0000处）。此时所有32位运行方式的设置启动被完成：IDT、GDT以及LDT被加载，处理器和协处理器也已确认，分页工作也设置好了；最终调用init/main.c中的main()程序。</p>
 <p>boot/head.s可能是整个内核中最有诀窍的代码。</p>
 <h3 id="注意点">注意点</h3><p>上面的所有过程都不能出错，一旦出错，计算机就会死机，在操作系统还没有完全运转之前是处理不了出错的。</p>
