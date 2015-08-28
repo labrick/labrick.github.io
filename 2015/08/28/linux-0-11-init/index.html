@@ -1,0 +1,568 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CH">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>linux-0.11内核初始化过程 | 工作实验室</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="pumpkin">
+    
+
+    
+    <meta name="description" content="功能描述系统在执行完boot/目录中的head.s程序后就会将执行权交给main.c。该程序虽然不长，但却包括了内核初始化的所有工作。
+main.c程序首先利用前面setup.s程序取得的系统参数设置系统的跟文件设备号以及一些内存全局变量。这些内存变量指明了主内存的开始地址、系统所拥有的内存容量和作为高速缓冲区内存的末端地址。如果还定义了虚拟盘(RAMDISK)，则主内存将适当减少。整个内存的映像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux-0.11内核初始化过程">
+<meta property="og:url" content="http://yoursite.com/2015/08/28/linux-0-11-init/index.html">
+<meta property="og:site_name" content="工作实验室">
+<meta property="og:description" content="功能描述系统在执行完boot/目录中的head.s程序后就会将执行权交给main.c。该程序虽然不长，但却包括了内核初始化的所有工作。
+main.c程序首先利用前面setup.s程序取得的系统参数设置系统的跟文件设备号以及一些内存全局变量。这些内存变量指明了主内存的开始地址、系统所拥有的内存容量和作为高速缓冲区内存的末端地址。如果还定义了虚拟盘(RAMDISK)，则主内存将适当减少。整个内存的映像">
+<meta property="og:updated_time" content="2015-08-28T08:20:47.852Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="linux-0.11内核初始化过程">
+<meta name="twitter:description" content="功能描述系统在执行完boot/目录中的head.s程序后就会将执行权交给main.c。该程序虽然不长，但却包括了内核初始化的所有工作。
+main.c程序首先利用前面setup.s程序取得的系统参数设置系统的跟文件设备号以及一些内存全局变量。这些内存变量指明了主内存的开始地址、系统所拥有的内存容量和作为高速缓冲区内存的末端地址。如果还定义了虚拟盘(RAMDISK)，则主内存将适当减少。整个内存的映像">
+
+    
+    <link rel="alternative" href="/atom.xml" title="工作实验室" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="工作实验室" title="工作实验室"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="工作实验室">工作实验室</a></h1>
+				<h2 class="blog-motto">专注于自我心智成长</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">文章列表</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="/search/index.html" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" autocomplete="off" name="q" maxlength="20" placeholder="搜索" />
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/28/linux-0-11-init/" title="linux-0.11内核初始化过程" itemprop="url">linux-0.11内核初始化过程</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="pumpkin" target="_blank" itemprop="author">pumpkin</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-28T06:48:09.000Z" itemprop="datePublished"> 发表于 2015-08-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#功能描述"><span class="toc-number">1.</span> <span class="toc-text">功能描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">2.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">3.</span> <span class="toc-text">注释</span></a></li></ol>
+		
+		</div>
+		
+		<h2 id="功能描述">功能描述</h2><p>系统在执行完boot/目录中的head.s程序后就会将执行权交给main.c。该程序虽然不长，但却包括了内核初始化的所有工作。</p>
+<p>main.c程序首先利用前面setup.s程序取得的系统参数<strong>设置系统的跟文件设备号</strong>以及一些内存全局变量。这些内存变量指明了主内存的开始地址、系统所拥有的内存容量和作为高速缓冲区内存的末端地址。如果还定义了虚拟盘(RAMDISK)，则主内存将适当减少。整个内存的映像示意图如下：</p>
+<p><img src="" alt="系统中内存功能划分示意图"></p>
+<p>图中，高速缓冲部分还要扣除被显存和ROM BIOS占用的部分。高速缓冲区是用于磁盘等块设备临时存放数据的地方，以1K(1024)字节为一个数据块单元。主内存区域的内存由内存管理模块mm通过分页机制进行管理分配，以4K字节为一个内存页单位。内核程序可以自由访问高速缓冲中的数据，但需要通过mm才能使用分配到的内存页面。</p>
+<p>然后，内核进行所有方面的硬件初始化工作。包括陷阱门、块设备、字符设备和tty，还包括人工设置第一个任务(task 0)。待所有初始化工作完成后程序就设置中断允许标志以开启中断，并切换到任务0中运行。</p>
+<p>在整个内核完成初始化后，内核将执行权切换到了用户模式(任务0)，也即CPU从0特权级切换到了第3特权级。此时main.c的主程序就工作在任务0中。然后系统第一次调用进程创建函数fork()，创建出一个用于运行init()的子进程(通常被称为init进程)。系统整个初始化过程如下图：</p>
+<p><img src="" alt="内核初始化程序流程示意图"></p>
+<p>main.c程序首先确定如何分配使用系统物理内存，然后调用内核各部分的初始化函数分别对内存管理、中断处理、块设备和字符设备、进程管理以及硬盘和软盘硬件进行初始化处理。在完成了这些操作之后，该系统各部分已经处于可运行状态。此后程序把自己“手工”移动到任务0(进程0)中运行，并使用fork()调用首次创建出进程1(init进程)，并在其中调用init()函数。在该函数中程序将继续进行应用环境的初始化并执行shell登录程序。而原进程0则会在系统空闲时被调度执行，因此进程0通常也被称为idle进程。此时进程0仅执行pause()系统调用，并又会调用调度函数。</p>
+<p>init()函数的功能可分为4个部分：</p>
+<ol>
+<li>安装根文件系统；</li>
+<li>显示系统信息；</li>
+<li>运行系统初始资源配置文件rc中的命令；</li>
+<li>执行用户登录shell程序。</li>
+</ol>
+<p>代码首先调用系统调用setup()，用来收集硬盘设备分区表信息并安装根文件系统。在安装根文件系统之前，系统会先判断是否需要先建立虚拟盘。若编译内核时设置了虚拟盘的大小，并在前面内核初始化过程中已经开辟了一块内存用作虚拟盘，则内核就会首先尝试把根文件系统加载到内存的虚拟盘区中。</p>
+<p>然后init()打开了一个中断设备tty0，并复制器文件描述符以产生标准输入stdin、标准输出stdout和错误输出stderr设备。内存随后利用这些描述符在终端上显示一些系统信息，例如高速缓冲区中缓冲块总数、主内存区空闲内存总字节数等。</p>
+<p>接着init()又新建了一个进程(进程2)，并在其中为建立用于交互使用环境而执行一些初始配置操作，即在用户可以使用shell命令行环境之前，内核调用/bin/sh程序运行了配置文件etc/rc中设置的命令。rc文件的作用与DOS系统根目录上的AUTOEXEC.BAT文件类似。这段代码首先通过关闭文件描述符0，并立刻打开文件/etc/rc，从而把标准输入stdin定向到etc/rc文件上。这样，所有的标准输入数据都将从该文件中读取。然后内核以非交互形式执行/bin/sh，从而实现执行/etc/rc文件中的命令。当该文件中的命令执行完毕后，/bin/sh就会立刻退出。因此进程2也就随之结束。</p>
+<p>init()函数的最后一部分用于在新建进程中为用户建立一个新的会话，并运行用户登录shell程序/bin/sh。在系统执行进程2中的程序时，父进程(init进程)一直等待着它的结束。随着进程2的退出，父进程就进入了一个无限循环中。在该循环中，父进程会再次生成一个新进程，然后在该进程中创建一个新的会话，并以登录shell方式再次执行程序/bin/sh，以创建用户交互shell环境。然后父进程继续等待该子进程。登录shell虽然与前面的非交互式shell是同一个程序/bin/sh，但是所使用的命令行参数(argv[])不同。登录shell的第0个命令行参数的第1个字符一定是一个减少’-‘。这个特定的标志会在/bin/sh执行时通知它这不是一次普通的运行，而是作为登录shell运行/bin/sh的。从这时开始，用户就可以正常使用Linux命令行环境了，而父进程随之又进入等待状态。此后若用户在命令上执行了exit或logout命令，那么在显示一条当前登录shell退出的信息后，系统就会在这个无限循环中再次重复以上创建登录shell进程的过程。</p>
+<p>任务1中运行的init()函数的后两部分实际上应该是独立的环境初始化程序init等的功能。</p>
+<h2 id="注意">注意</h2><p>由于创建新进程的过程是通过完全复制父进程代码段和数据段的方式实现，因此在首次使用fork()创建新进程init时，为了确保新进程用户态栈中没有进程0的多余信息，要求进程0在创建首个新进程(进程1)之前不要使用其用户态栈，<strong>即要求任务0不要调用函数</strong>。因此在main.c主程序移动到任务0执行后，任务0中的代码fork()不能以函数形式进行调用。程序中实现的方法是采用如下所示的gcc函数内嵌(内联)形式来执行这个系统调度：</p>
+<pre><code><span class="keyword">static</span> <span class="keyword">inline</span> _syscall0(<span class="keyword">int</span>,fork)
+</code></pre><p>其中_syscall0()是unistd.h种的内嵌宏代码，它以嵌入汇编的形式调用Linux的系统调用中断int 0x80。根据include/unistd.h文件第133行上的宏定义，我们把这个宏展开并替代进上面一行中就可以看到这条语句实际上是int fork()创建进程系统调用，见如下：</p>
+<pre><code><span class="comment">//unistd.h文件中_syscall0()的定义。即为不带参数的系统调用宏函数:type name(void)</span>
+#define _syscall0(<span class="class"><span class="keyword">type</span>,<span class="title">name</span>) \</span>
+<span class="class"><span class="keyword">type</span> <span class="title">name</span></span>(<span class="keyword">void</span>) \
+{ \
+long __res; \
+__asm__ volatile (<span class="string">"int $0x80"</span> \        <span class="comment">// 调用系统中断0x80</span>
+    : <span class="string">"=a"</span> (__res) \                <span class="comment">// 返回值--&gt;eax(__res)</span>
+    : <span class="string">"0"</span> (__NR_##name)); \            <span class="comment">// 输入为系统中断调用号__NR_name</span>
+<span class="keyword">if</span> (__res &gt;= <span class="number">0</span>) \
+    <span class="keyword">return</span> (<span class="class"><span class="keyword">type</span>) <span class="title">__res</span>; \</span>
+errno = -__res; \                    <span class="comment">// 否则置出错号，并返回-1</span>
+<span class="keyword">return</span> -<span class="number">1</span>; \
+}
+</code></pre><p>根据上面定义把_syscall0(int,fork)展开代进第23行后我们可以得到如下语句：</p>
+<pre><code><span class="keyword">static</span> inline <span class="function"><span class="keyword">int</span> <span class="title">fork</span><span class="params">(<span class="keyword">void</span>)</span>
+</span>{
+    <span class="keyword">long</span> __res;
+    __asm__ <span class="keyword">volatile</span> (<span class="string">"int $0x80"</span> : <span class="string">"=a"</span> (__res) : <span class="string">"0"</span> (__NR_fork));
+    <span class="keyword">if</span> (__res &gt;= <span class="number">0</span>)
+        <span class="keyword">return</span> (<span class="keyword">int</span>) __res;
+    errno = -__res;
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}
+</code></pre><p>gcc会把上述“函数”体中的语句直接插入到调用fork()语句的代码处，因此执行fork()不会引起函数调用。另外，宏名称字符串“syscall0”中最后的0表示无参数，1表示带1个参数。如果系统调用带有1个参数，那么久应该使用宏_syscall1()。</p>
+<p>虽然上面系统中断调用执行中断指令INT时还是避免不了使用堆栈，但是系统调用使用任务的内核态栈而非用户栈，并且每个任务都有自己独立的内核态栈，因此系统调用不会影响这里讨论的用户态栈。</p>
+<p>另外，在创建新进程init(即进程1)的过程中，系统对其进行了一些特殊处理。进程0和进程init实际上同时使用着内核代码区内(小于1MB的物理内存)相同的代码和数据物理内存页面(640KB)，只是执行的代码不再一处，因此实际上它们也同时使用着相同的用户堆栈区。在为新进程init复制器父进程(进程0)的页目录和页表项时，进程0的640KB页表项属性没有改动过(仍然可读写)，但是进程1的640KB对应的页表项却被设置成了只读。因此当进程1开始执行时，其对用户栈的出入栈操作将导致页面写保护异常，从而会使得内核的内存管理为进程1在主内存区中分配一内存页面，并把任务0栈中相应页面内容复制到此新页面上。从此时起，任务1的用户态栈开始有自己独立的内存页面。即从任务1执行过出/入栈操作后，任务0和任务1的用户栈才变成相互独立的栈。为了不出现冲突问题，就必须要求任务0在任务1执行栈操作之前禁止使用到用户堆栈区域，而让进程init能单独使用堆栈。因为在内核调度进程运行时次序是随机的，有可能在任务0创建了任务1后仍然先允许任务0。因此任务0执行fork()操作后，随后的pause()函数也必须采用内嵌函数形式来实现，以避免任务0在任务1之前使用用户栈。</p>
+<p>当系统中一个进程(例如init进程的子进程，进程2)执行过execve()调用后，进程2的代码和数据区会位于系统的主内存区中，因此系统此后可以随时利用写时复制技术(Cpoy on Write)来处理其他新进程的创建和执行。</p>
+<p>对于Linux来说，所有任务都是在用户模式下运行的，包括很多系统应用程序，如shell程序、网络子系统程序等。内核源代码lib/目录的库文件(除其中的string.c程序)就是专门为这里新创建的进程提供函数支持，内核代码本身并不使用这些库函数。</p>
+<h2 id="注释">注释</h2><ol>
+<li>内联(inline)函数：通过声明一个内联函数，可以让gcc把函数的代码集成到调用它的代码中。这会提高代码执行的速度，因为省去了函数调用的开销。另外，如果任何一个实际参数是一个常量，那么在编译时这些已知值就可能使用无需把内嵌函数的所有代码都包括进来而让代码也得到简化。</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/linux0-11相关/">linux0.11相关</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/28/linux-0-11-init/" data-title="linux-0.11内核初始化过程 | 工作实验室" data-tsina="5261720135" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/26/8259A-interrupt-control/"  title="8259A中断控制器编程方法">
+ <strong>下一篇：</strong><br/> 
+ <span>8259A中断控制器编程方法
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2015/08/28/linux-0-11-init/" data-title="linux-0.11内核初始化过程" data-url="http://yoursite.com/2015/08/28/linux-0-11-init/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#功能描述"><span class="toc-number">1.</span> <span class="toc-text">功能描述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注意"><span class="toc-number">2.</span> <span class="toc-text">注意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注释"><span class="toc-number">3.</span> <span class="toc-text">注释</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/linux0-11相关/" title="linux0.11相关">linux0.11相关<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/linux学习/" title="linux学习">linux学习<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>7</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/有关读书的那些事/" title="有关读书的那些事">有关读书的那些事<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/没事吐糟一下/" title="没事吐糟一下">没事吐糟一下<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/突发奇想的小玩意/" title="突发奇想的小玩意">突发奇想的小玩意<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/让生活更上一层楼/" title="让生活更上一层楼">让生活更上一层楼<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/重要理论理解/" title="重要理论理解">重要理论理解<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.read.org.cn/" target="_blank" title="战隼">战隼</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://www.douban.com/people/larrybrick" target="_blank" title="我的豆瓣">我的豆瓣</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://weibo.com/lbrick" target="_blank" title="我的微博">我的微博</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="weiboshow">
+  <p class="asidetitle">新浪微博</p>
+    <iframe width="100%" height="119" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=119&fansRow=2&ptype=1&speed=0&skin=9&isTitle=1&noborder=1&isWeibo=0&isFans=0&uid=5261720135&verifier=bf33fbd4&dpc=1"></iframe>
+</div>
+
+
+  
+
+<div class="doubanshow">
+<p class="asidetitle">豆瓣秀</p>
+<div>
+<script type="text/javascript" src="http://www.douban.com/service/badge/larrybrick/?show=collection&amp;n=12&amp;columns=3&amp;hidelogo=yes&amp;hideself=yes&amp;cat=book|movie" ></script>
+</div>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 知识管理 学习思考 读书写作 <br/>
+			个人总结 生活感悟 网络分享</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/lbrick" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		
+		
+		
+		
+		
+		<a href="https://www.douban.com/people/larrybrick" target="_blank" class="icon-douban" title="豆瓣"></a>
+		
+		
+		
+		
+		<a href="mailto:yananback@gmail.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="pumpkin">pumpkin</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"labrick"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-65978647-1', 'null');  
+ga('send', 'pageview');
+</script>
+
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F88010fa72f93e593c7b92e8a4eb25e3b' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
