@@ -21,7 +21,8 @@
 <meta property="og:description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：
 
 中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
-<meta property="og:updated_time" content="2015-08-26T11:44:24.359Z">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/8259A-interrupt-control/8259A-interrupt-control.png">
+<meta property="og:updated_time" content="2015-08-28T08:27:35.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8259A中断控制器编程方法">
 <meta name="twitter:description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：
@@ -106,7 +107,7 @@
 		</div>
 		
 		<h2 id="8259A芯片工作原理">8259A芯片工作原理</h2><p>PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：</p>
-<p><img src="" alt="可编程中断控制器8259A芯片框图"></p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/8259A-interrupt-control/8259A-interrupt-control.png" alt="可编程中断控制器8259A芯片框图"></p>
 <p>中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8个比特位(D7—D0)分别对应引脚IR7—IR0。</p>
 <p>中断屏蔽寄存器IMR(Interrupt Mask Register)用于保存被屏蔽的中断请求线对应的比特位，寄存器的8位也是对应8个中断级。哪个比特位被置1就屏蔽哪一级中断请求。即IMR对IRR进行处理，其每个比特位对应IRR的每个请求比特位。对高优先级输入线的屏蔽并不会影响低优先级中断请求线的输入。</p>
 <p>优先级解析器PR(Priority Resolver)用于确定IRR中所设置比特位的优先级，选通最高优先级的中断请求到正在服务寄存器ISR(In-Service Register)中。ISR中保存着正在接受服务的中断请求。</p>
