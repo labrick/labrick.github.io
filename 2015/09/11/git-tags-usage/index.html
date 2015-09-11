@@ -11,18 +11,18 @@
     
 
     
-    <meta name="description" content="tag北京之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
+    <meta name="description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
 tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git-tag使用">
 <meta property="og:url" content="http://yoursite.com/2015/09/11/git-tags-usage/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="tag北京之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
+<meta property="og:description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
 tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
-<meta property="og:updated_time" content="2015-09-11T13:37:19.004Z">
+<meta property="og:updated_time" content="2015-09-11T13:38:45.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git-tag使用">
-<meta name="twitter:description" content="tag北京之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
+<meta name="twitter:description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
 tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
 
     
@@ -98,11 +98,11 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag北京"><span class="toc-number">1.</span> <span class="toc-text">tag北京</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tag使用"><span class="toc-number">2.</span> <span class="toc-text">tag使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看tag"><span class="toc-number">2.1.</span> <span class="toc-text">查看tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tag"><span class="toc-number">2.2.</span> <span class="toc-text">创建tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除tag"><span class="toc-number">2.3.</span> <span class="toc-text">删除tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证tag"><span class="toc-number">2.4.</span> <span class="toc-text">验证tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享tag"><span class="toc-number">2.5.</span> <span class="toc-text">共享tag</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag背景"><span class="toc-number">1.</span> <span class="toc-text">tag背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tag使用"><span class="toc-number">2.</span> <span class="toc-text">tag使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看tag"><span class="toc-number">2.1.</span> <span class="toc-text">查看tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tag"><span class="toc-number">2.2.</span> <span class="toc-text">创建tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除tag"><span class="toc-number">2.3.</span> <span class="toc-text">删除tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证tag"><span class="toc-number">2.4.</span> <span class="toc-text">验证tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享tag"><span class="toc-number">2.5.</span> <span class="toc-text">共享tag</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h2 id="tag北京">tag北京</h2><p>之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。</p>
+		<h2 id="tag背景">tag背景</h2><p>之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。</p>
 <h2 id="tag使用">tag使用</h2><p>我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看tag、创建tag、验证tag以及共享tag。</p>
 <h3 id="查看tag">查看tag</h3><p>列出所有tag：</p>
 <pre><code>git <span class="built_in">tag</span>
@@ -181,7 +181,7 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag北京"><span class="toc-number">1.</span> <span class="toc-text">tag北京</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tag使用"><span class="toc-number">2.</span> <span class="toc-text">tag使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看tag"><span class="toc-number">2.1.</span> <span class="toc-text">查看tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tag"><span class="toc-number">2.2.</span> <span class="toc-text">创建tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除tag"><span class="toc-number">2.3.</span> <span class="toc-text">删除tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证tag"><span class="toc-number">2.4.</span> <span class="toc-text">验证tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享tag"><span class="toc-number">2.5.</span> <span class="toc-text">共享tag</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tag背景"><span class="toc-number">1.</span> <span class="toc-text">tag背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tag使用"><span class="toc-number">2.</span> <span class="toc-text">tag使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#查看tag"><span class="toc-number">2.1.</span> <span class="toc-text">查看tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建tag"><span class="toc-number">2.2.</span> <span class="toc-text">创建tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除tag"><span class="toc-number">2.3.</span> <span class="toc-text">删除tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证tag"><span class="toc-number">2.4.</span> <span class="toc-text">验证tag</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#共享tag"><span class="toc-number">2.5.</span> <span class="toc-text">共享tag</span></a></li></ol></li></ol>
  
   </div>
 
