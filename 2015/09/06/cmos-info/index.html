@@ -20,7 +20,7 @@ CMOS的地址空间在基本地址空间之外，因此其中不包括可执行�
 <meta property="og:description" content="CMOS信息PC机的CMOS内存是由电池供电的64或128字节内存块，通常是系统实时钟芯片RTC(Real Time Chip)的一部分。有些机器还有更大的内存容量。该64字节的CMOS原先在IBM PC-XT机器上用于保存时钟和日期信息，存放的格式是BCD码。由于这些信息仅用去14字节，因此剩余的字节就可用来存放一些系统配置数据。
 CMOS的地址空间在基本地址空间之外，因此其中不包括可执行代码。">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/cmos-info/cmos-info.png">
-<meta property="og:updated_time" content="2015-09-06T07:09:24.070Z">
+<meta property="og:updated_time" content="2015-09-06T07:11:43.095Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CMOS存储的信息">
 <meta name="twitter:description" content="CMOS信息PC机的CMOS内存是由电池供电的64或128字节内存块，通常是系统实时钟芯片RTC(Real Time Chip)的一部分。有些机器还有更大的内存容量。该64字节的CMOS原先在IBM PC-XT机器上用于保存时钟和日期信息，存放的格式是BCD码。由于这些信息仅用去14字节，因此剩余的字节就可用来存放一些系统配置数据。
@@ -105,7 +105,7 @@ CMOS的地址空间在基本地址空间之外，因此其中不包括可执行�
 		
 		<h2 id="CMOS信息">CMOS信息</h2><p>PC机的CMOS内存是由电池供电的64或128字节内存块，通常是系统实时钟芯片RTC(Real Time Chip)的一部分。有些机器还有更大的内存容量。该64字节的CMOS原先在IBM PC-XT机器上用于保存时钟和日期信息，存放的格式是BCD码。由于这些信息仅用去14字节，因此剩余的字节就可用来存放一些系统配置数据。</p>
 <p>CMOS的地址空间在基本地址空间之外，因此其中不包括可执行代码。要访问它需要通过端口0x70、0x71进行。0x70是地址端口，0x71是数据端口。为了读取指定偏移位置的字节，必须首先使用OUT指令向地址端口0x70发送指定字节的偏移位置值，然后使用IN指令从数据端口0x71读取指定的字节信息。同样，对于写操作也需要首先向地址端口0x70发送指定字节的偏移值，然后把数据写到数据端口0x71中去。</p>
-<p>main.c程序第70行语句把欲读取的字节地址与0x80进行或操作是没有必要的。因为那时的CMOS内存容量还没有超过128字节，因此与0x80进行或操作是没有任何作用的。之所以会有这样的操作是因为当时Linus手头缺乏有关CMOS方面的资料，CMOS中时钟和日期的偏移地址都是他逐步实验出来的，也许在他实验中将偏移地址与0x80进行或操作(并且还修改了其他地方)后正好取得了正确的结果，因此他的代码中也就有了这步不必要的操作。不过从1.0版本之后，该操作就被去除了(可参见1.0版内核程序drives/block/hd.c<br>42)。下表是CMOS内存信息的一张简表：</p>
+<p>main.c程序第70行语句把欲读取的字节地址与0x80进行或操作是没有必要的。因为那时的CMOS内存容量还没有超过128字节，因此与0x80进行或操作是没有任何作用的。之所以会有这样的操作是因为当时Linus手头缺乏有关CMOS方面的资料，CMOS中时钟和日期的偏移地址都是他逐步实验出来的，也许在他实验中将偏移地址与0x80进行或操作(并且还修改了其他地方)后正好取得了正确的结果，因此他的代码中也就有了这步不必要的操作。不过从1.0版本之后，该操作就被去除了(可参见1.0版内核程序drives/block/hd.c 42)。下表是CMOS内存信息的一张简表：</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/cmos-info/cmos-info.png" alt="CMOS 64字节信息简表"></p>
   
 	</div>
@@ -137,6 +137,14 @@ CMOS的地址空间在基本地址空间之外，因此其中不包括可执行�
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2015/09/11/git-tags-usage/" title="git-tag使用">
+  <strong>上一篇：</strong><br/>
+  <span>
+  git-tag使用</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2015/09/04/where-are-we-going-Dad/"  title="从爸爸去哪谈孩子的教育">
@@ -182,7 +190,7 @@ CMOS的地址空间在基本地址空间之外，因此其中不包括可执行�
 		  
 		
 		  
-			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>7</sup></a></li>
+			<li><a href="/categories/工作记录/" title="工作记录">工作记录<sup>8</sup></a></li>
 		  
 		
 		  
