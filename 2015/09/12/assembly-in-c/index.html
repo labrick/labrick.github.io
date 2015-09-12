@@ -29,7 +29,7 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
     : 会被修改的寄存器
     );
 带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定">
-<meta property="og:updated_time" content="2015-09-12T04:36:12.755Z">
+<meta property="og:updated_time" content="2015-09-12T04:37:01.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言中嵌入汇编程序">
 <meta name="twitter:description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。
@@ -124,15 +124,15 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
     : 会被修改的寄存器
     );
 </code></pre><p>带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定指定寄存器存放值。</p>
-<h3 id="实例代码">实例代码</h3><pre><code>\<span class="built_in">#</span>define get_seg_byte<span class="params">(seg,addr)</span> <span class="params">({ \
-    register char __res; \
-    __asm__<span class="params">(<span class="string">"push %%fs; \
+<h3 id="实例代码">实例代码</h3><pre><code>#define get_seg_byte<span class="list">(<span class="keyword">seg</span>,addr)</span> <span class="list">({ \
+    register char __res<span class="comment">; \</span>
+    __asm__<span class="list">(<span class="string">"push %%fs; \
         mov %%ax,%%fs; \
         movb %%fs:%2,%%al; \
         pop %%fs"</span> \
-    :<span class="string">"=a"</span> <span class="params">(__res)</span> \
-    :<span class="string">"0"</span> <span class="params">(seg)</span>,<span class="string">"m"</span> <span class="params">(*<span class="params">(addr)</span>)</span>)</span>; \
-    __res;})</span>
+    :<span class="string">"=a"</span> <span class="list">(<span class="keyword">__res</span>)</span> \
+    :<span class="string">"0"</span> <span class="list">(<span class="keyword">seg</span>)</span>,<span class="string">"m"</span> <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">addr</span>)</span>)</span>)</span><span class="comment">; \</span>
+    __res<span class="comment">;})</span></span>
 </code></pre><p>上面是<a href="https://github.com/labrick/linux-0.11/blob/v1.0/kernel/traps.c" target="_blank" rel="external">kernel/traps.c</a>中的一段代码,解析如下：</p>
 <p>“=a”表示输出寄存器是eax，执行完后，eax的值将赋给_res,“0”表示这里使用的寄存器和上面输出寄存器的一样，这里面有个寄存器编号问题。</p>
 <p>编译器规定：标号从输出寄存器的最左边开始，被编号为0，往右和往下将被依次编号。所以这里的“0”表示eax。如果要使用寄存器，如上面的%%fs:%2，通过使用编号2，就可以使用到addr这个变量。</p>
