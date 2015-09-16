@@ -29,7 +29,7 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
     : 会被修改的寄存器
     );
 带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定">
-<meta property="og:updated_time" content="2015-09-12T04:37:01.339Z">
+<meta property="og:updated_time" content="2015-09-16T12:53:56.777Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言中嵌入汇编程序">
 <meta name="twitter:description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。
@@ -113,7 +113,7 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C中嵌入汇编程序"><span class="toc-number">2.</span> <span class="toc-text">C中嵌入汇编程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">2.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例代码"><span class="toc-number">2.2.</span> <span class="toc-text">实例代码</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C中嵌入汇编程序"><span class="toc-number">2.</span> <span class="toc-text">C中嵌入汇编程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">2.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例代码"><span class="toc-number">2.2.</span> <span class="toc-text">实例代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#示例1"><span class="toc-number">2.2.1.</span> <span class="toc-text">示例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例2"><span class="toc-number">2.2.2.</span> <span class="toc-text">示例2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例3"><span class="toc-number">2.2.3.</span> <span class="toc-text">示例3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例4"><span class="toc-number">2.2.4.</span> <span class="toc-text">示例4</span></a></li></ol></li></ol></li></ol>
 		
 		</div>
 		
@@ -124,7 +124,15 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
     : 会被修改的寄存器
     );
 </code></pre><p>带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定指定寄存器存放值。</p>
-<h3 id="实例代码">实例代码</h3><pre><code>#define get_seg_byte<span class="list">(<span class="keyword">seg</span>,addr)</span> <span class="list">({ \
+<h3 id="实例代码">实例代码</h3><h4 id="示例1">示例1</h4><pre><code><span class="keyword">int</span> a=<span class="number">10</span>,b;
+asm(<span class="string">"movl <span class="variable">%1</span>, <span class="variable">%%</span>eax;
+     movl <span class="variable">%%</span>eax, <span class="variable">%0</span>;"</span>
+     :<span class="string">"=r"</span>(b)
+     :<span class="string">"r"</span>(a)
+     :<span class="string">"<span class="variable">%eax</span>"</span>
+    );
+</code></pre><p>表示C语言里的“b=a;”。<br>“r”表示使用任意寄存器，%0、%1表示使用两个寄存器，一般只能%0~%9共十个操作数，按输入输出寄存器出现顺序进行映射。<br>寄存器用两个百分号，是因为使用了%0%1这些数字使百分号有了特殊意义，所以在操作数出现的寄存器必须用双百分表示。<br>会被修改的寄存器里边的%eax表示eax寄存器在汇编代码块执行过程中会被改写，在执行前要保护好，这是提交给编译器决定的。</p>
+<h4 id="示例2">示例2</h4><pre><code>#define get_seg_byte<span class="list">(<span class="keyword">seg</span>,addr)</span> <span class="list">({ \
     register char __res<span class="comment">; \</span>
     __asm__<span class="list">(<span class="string">"push %%fs; \
         mov %%ax,%%fs; \
@@ -133,15 +141,28 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
     :<span class="string">"=a"</span> <span class="list">(<span class="keyword">__res</span>)</span> \
     :<span class="string">"0"</span> <span class="list">(<span class="keyword">seg</span>)</span>,<span class="string">"m"</span> <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">addr</span>)</span>)</span>)</span><span class="comment">; \</span>
     __res<span class="comment">;})</span></span>
-</code></pre><p>上面是<a href="https://github.com/labrick/linux-0.11/blob/v1.0/kernel/traps.c" target="_blank" rel="external">kernel/traps.c</a>中的一段代码,解析如下：</p>
-<p>“=a”表示输出寄存器是eax，执行完后，eax的值将赋给_res,“0”表示这里使用的寄存器和上面输出寄存器的一样，这里面有个寄存器编号问题。</p>
-<p>编译器规定：标号从输出寄存器的最左边开始，被编号为0，往右和往下将被依次编号。所以这里的“0”表示eax。如果要使用寄存器，如上面的%%fs:%2，通过使用编号2，就可以使用到addr这个变量。</p>
-<ol>
-<li>%0 - 输出：eax(__res)；</li>
-<li>%1 - 输入：eax(seg)；</li>
-<li>%2 - 内存地址(*(addr))；</li>
-</ol>
-<p>如何理解？？</p>
+</code></pre><p>表示取段seg中地址addr处的一个字符。<br>上面是<a href="https://github.com/labrick/linux-0.11/blob/v1.0/kernel/traps.c" target="_blank" rel="external">kernel/traps.c</a>中的一段代码，其中：</p>
+<p>参数：seg - 段选择符；addr - 段内指定地址。<br>输出：%0 - eax(__res)；输入：%1 - eax(seg)；%2 - 内存地址(*(addr))。<br>“=a”表示输出寄存器是eax，执行完后，eax的值将赋给_res,“0”表示这里使用的寄存器和上面输出寄存器的一样，这里面有个寄存器编号问题。</p>
+<p>编译器规定：标号从输出寄存器的最左边开始，被编号为0，往右和往下将被依次编号。所以这里的“0”表示eax，“1”表示seg，“2”表示*(addr)。</p>
+<p>%%fs:%2是使用编号为2的变量(*(addr))，这里加上%%fs的意思？？</p>
+<h4 id="示例3">示例3</h4><p>// 取段seg中地址addr处的一个字长(4字节)。<br>// 参数：seg - 段选择符；addr - 段内指定地址。<br>// 输出：%0 - eax(__res)；输入：%1 - eax(seg)；%2 - 内存地址(*(addr))。</p>
+<pre><code>#define get_seg_long<span class="list">(<span class="keyword">seg</span>,addr)</span> <span class="list">({ \
+    register unsigned long __res<span class="comment">; \</span>
+    __asm__<span class="list">(<span class="string">"push %%fs; \
+            mov %%ax,%%fs; \
+            movl %%fs:%2,%%eax; \
+            pop %%fs"</span> \
+    :<span class="string">"=a"</span> <span class="list">(<span class="keyword">__res</span>)</span> \
+    :<span class="string">"0"</span> <span class="list">(<span class="keyword">seg</span>)</span>,<span class="string">"m"</span> <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">addr</span>)</span>)</span>)</span><span class="comment">; \</span>
+    __res<span class="comment">;})</span></span>
+</code></pre><h4 id="示例4">示例4</h4><p>// 取fs段寄存器的值(选择符)。<br>// 输出：%0 - eax(__res)</p>
+<pre><code><span class="comment">#define _fs() ({ \</span>
+    register unsigned short __res; <span class="string">\</span>
+    __asm__(<span class="string">"mov %%fs,%%ax"</span> <span class="string">\</span>
+    :<span class="string">"=a"</span> (__res) <span class="string">\</span>
+    :); <span class="string">\</span>
+    __res;})
+</code></pre><p>仅仅一个)啥个意思？？？</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -195,7 +216,7 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C中嵌入汇编程序"><span class="toc-number">2.</span> <span class="toc-text">C中嵌入汇编程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">2.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例代码"><span class="toc-number">2.2.</span> <span class="toc-text">实例代码</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C中嵌入汇编程序"><span class="toc-number">2.</span> <span class="toc-text">C中嵌入汇编程序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">2.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实例代码"><span class="toc-number">2.2.</span> <span class="toc-text">实例代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#示例1"><span class="toc-number">2.2.1.</span> <span class="toc-text">示例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例2"><span class="toc-number">2.2.2.</span> <span class="toc-text">示例2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例3"><span class="toc-number">2.2.3.</span> <span class="toc-text">示例3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#示例4"><span class="toc-number">2.2.4.</span> <span class="toc-text">示例4</span></a></li></ol></li></ol></li></ol>
  
   </div>
 
