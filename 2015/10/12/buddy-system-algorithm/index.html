@@ -25,7 +25,7 @@
 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/buddy-memory-allocation.jpg">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg">
-<meta property="og:updated_time" content="2015-10-13T08:23:18.880Z">
+<meta property="og:updated_time" content="2015-10-13T13:24:29.666Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伙伴系统算法">
 <meta name="twitter:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
@@ -106,7 +106,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由分页引起的问题"><span class="toc-number">2.</span> <span class="toc-text">由分页引起的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴的定义"><span class="toc-number">3.</span> <span class="toc-text">伙伴的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统管理策略"><span class="toc-number">4.</span> <span class="toc-text">伙伴系统管理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分配内存："><span class="toc-number">4.1.</span> <span class="toc-text">分配内存：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#释放内存："><span class="toc-number">4.2.</span> <span class="toc-text">释放内存：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统程序分析"><span class="toc-number">5.</span> <span class="toc-text">伙伴系统程序分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#伙伴分配器数据结构"><span class="toc-number">5.1.</span> <span class="toc-text">伙伴分配器数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统优缺点"><span class="toc-number">6.</span> <span class="toc-text">伙伴系统优缺点</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由分页引起的问题"><span class="toc-number">2.</span> <span class="toc-text">由分页引起的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴的定义"><span class="toc-number">3.</span> <span class="toc-text">伙伴的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统管理策略"><span class="toc-number">4.</span> <span class="toc-text">伙伴系统管理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分配内存："><span class="toc-number">4.1.</span> <span class="toc-text">分配内存：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#释放内存："><span class="toc-number">4.2.</span> <span class="toc-text">释放内存：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统程序分析"><span class="toc-number">5.</span> <span class="toc-text">伙伴系统程序分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#伙伴分配器数据结构"><span class="toc-number">5.1.</span> <span class="toc-text">伙伴分配器数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调整参数为2的幂次方"><span class="toc-number">5.2.</span> <span class="toc-text">调整参数为2的幂次方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束"><span class="toc-number">5.3.</span> <span class="toc-text">结束</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统优缺点"><span class="toc-number">6.</span> <span class="toc-text">伙伴系统优缺点</span></a></li></ol>
 		
 		</div>
 		
@@ -169,19 +169,36 @@
         node_size /= <span class="number">2</span>;
     self-&gt;longest[i] = node_size;        <span class="comment">// 经验证，这里可以正确向后访问 </span>
 }
-</code></pre><p>它是不是发生了语法错误（i的值肯定会有大于0的时候），但是我再运行时竟然没有报错。然后我就做了个测试，程序在<a href="https://github.com/labrick/buddy2/blob/master/code_test.c" target="_blank" rel="external">这里</a>，为了解读方便，我再将程序片段拷贝一份：</p>
-<pre><code><span class="keyword">void</span> main()
+</code></pre><p>它是不是发生了语法错误（i的值肯定会有大于0的时候），但是我在运行时竟然没有报错。然后我就做了个测试，程序在<a href="https://github.com/labrick/buddy2/blob/master/code_test.c" target="_blank" rel="external">这里</a>，为了解读方便，我再将程序片段拷贝一份：</p>
+<pre><code>void main()
 {
-      <span class="comment">//struct buddy2* self;</span>
-      <span class="keyword">unsigned</span> node_size;
+    <span class="keyword">struct</span> buddy2 <span class="keyword">self</span>;
+      unsigned node_size;
       <span class="keyword">int</span> i,size=<span class="number">32</span>;
 
-      <span class="comment">//self = (struct buddy2*)ALLOC( 2 * size * sizeof(unsigned));</span>
-    <span class="keyword">struct</span> buddy2 <span class="keyword">self</span>;
       <span class="keyword">self</span>-&gt;size = size;        <span class="comment">// 第一个结构体的size存放总的块数size</span>
       node_size = size * <span class="number">2</span>;        <span class="comment">// 总共的sizeof(unsigned)数</span>
 
-    <span class="comment">//以下是验证longest访问正确性的</span>
+    <span class="keyword">struct</span> buddy2* init = (<span class="keyword">struct</span> buddy2*)&amp;<span class="keyword">self</span>;
+
+    init-&gt;size = <span class="number">32</span>
+    init-&gt;longest[<span class="number">0</span>] = <span class="number">222</span>;
+      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">2</span>; i++)
+          printf(<span class="string">"self-&gt;size=%d\tself-&gt;longest[%d]=%d\r\n"</span>,<span class="keyword">self</span>-&gt;size,i,<span class="keyword">self</span>-&gt;longest[i]);
+}
+</code></pre><p>可以看到这样不符合C语言语法的程序当然会运行错误：segmentation fault，也就是产生了越界错误；</p>
+<p>但是按照buddy2中的程序，我们再做一次实验：</p>
+<pre><code><span class="keyword">void</span> main()
+{
+      <span class="keyword">struct</span> buddy2* <span class="keyword">self</span>;
+      <span class="keyword">unsigned</span> node_size;
+      <span class="keyword">int</span> i,size=<span class="number">32</span>;
+
+      <span class="keyword">self</span> = (<span class="keyword">struct</span> buddy2*)ALLOC( <span class="number">2</span> * size * <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>));
+      <span class="keyword">self</span>-&gt;size = size;        <span class="comment">// 第一个结构体的size存放总的块数size</span>
+      node_size = size * <span class="number">2</span>;        <span class="comment">// 总共的sizeof(unsigned)数</span>
+
+    <span class="comment">// 以下是验证longest访问正确性的</span>
     <span class="keyword">unsigned</span>* init = (<span class="keyword">unsigned</span>*)<span class="keyword">self</span>;
       <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">64</span>; i++,init++)
       {
@@ -195,7 +212,58 @@
       <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++)
           printf(<span class="string">"self-&gt;size=%d\tself-&gt;longest[%d]=%d\r\n"</span>,<span class="keyword">self</span>-&gt;size,i,<span class="keyword">self</span>-&gt;longest[i]);
 }
-</code></pre><h2 id="伙伴系统优缺点">伙伴系统优缺点</h2><p>伙伴分配的实质就是一种特殊的“分离适配”，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。</p>
+</code></pre><p>这里我是将所分配的内存区域按照0 1 2 3 …的方式存放数据，然后按照self-&gt;size,self-&gt;longest[1],self-&gt;longest[1] …的方式进行读取打印，查看显示的内容的存储方式问题，结果很出乎意料：</p>
+<pre><code><span class="number">1</span>. 首先是能正常运行，没有发生数组越界问题，这个和上面一个程序的区别在于内存分配的方式不同；
+<span class="number">2</span>. <span class="keyword">self</span>-&gt;longest[<span class="number">0</span>...]竟然是按照内存的存储方式连续读取的数值，很不可思议，不过这是事实；
+<span class="number">3</span>. 只在分配的内存区域起始位置定义个结构体，<span class="keyword">self</span>-&gt;size出现一次，后面都是<span class="keyword">self</span>-&gt;longest的值；
+</code></pre><p>以上结论出乎我的意料，但是事实证明它就是事实，只能接受，不过<strong>尚缺少理论支持</strong>。</p>
+<p>现在我们在回到原程序当中，并且我对他做了一些改变再看一下结果：</p>
+<pre><code><span class="keyword">void</span> main()
+{
+      <span class="keyword">struct</span> buddy2* <span class="keyword">self</span>;
+      <span class="keyword">unsigned</span> node_size;
+      <span class="keyword">int</span> i,size=<span class="number">32</span>;
+
+      <span class="keyword">self</span> = (<span class="keyword">struct</span> buddy2*)ALLOC( <span class="number">2</span> * size * <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>));
+      <span class="keyword">self</span>-&gt;size = size;        <span class="comment">// 第一个结构体的size存放总的块数size</span>
+      node_size = size * <span class="number">2</span>;        <span class="comment">// 总共的sizeof(unsigned)数</span>
+
+      <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">2</span> * size - <span class="number">1</span>; ++i) {
+        <span class="keyword">if</span> (IS_POWER_OF_2(i+<span class="number">1</span>))
+          node_size /= <span class="number">2</span>;
+        <span class="keyword">self</span>-&gt;longest[i] = node_size;        <span class="comment">// 经验证，这里可以正确向后访问 </span>
+      }
+
+      printf(<span class="string">"memories allocated:\r\n"</span>);
+    <span class="keyword">unsigned</span>* init = (<span class="keyword">unsigned</span>*)<span class="keyword">self</span>;
+      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt; <span class="number">2</span> * size; i++,init++)
+      {
+          printf(<span class="string">"%d\n"</span>,*init);
+      }
+}
+</code></pre><p>我们打印出的结果是：两个32，2个16，4个8，8个4，16个2，32个1</p>
+<p>第一个32是self-&gt;size，第二个是根节点0，后面依次为节点1,2,3…</p>
+<p>这样的存储确实很牛逼，占用空间少，操作简单，不过难以理解；</p>
+<h3 id="调整参数为2的幂次方">调整参数为2的幂次方</h3><pre><code><span class="keyword">static</span> unsigned fixsize(unsigned <span class="keyword">size</span>){
+    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">1</span>;
+    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">2</span>;
+    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">4</span>;
+    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">8</span>;
+    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">16</span>;
+    <span class="keyword">return</span> <span class="keyword">size</span>+<span class="number">1</span>;
+}
+</code></pre><p>找到个注释是这样的：</p>
+<pre><code>/*
+ * 把<span class="built_in">size</span>调整到向上取到最近的<span class="number">2</span>次幂
+ * <span class="built_in">size</span> |= <span class="built_in">size</span> &gt;&gt; n;表示从低位到高位按n位分组,每组内高n位复制到低n位
+ * 最后经过处理<span class="built_in">size</span>是从最高位的<span class="number">1</span>开始往低位全<span class="number">1</span>的整数
+ * <span class="keyword">return</span> <span class="built_in">size</span> + <span class="number">1</span>; 得到向上凑够最近<span class="number">2</span>次幂
+ */
+</code></pre><p>说实话，我没看懂。</p>
+<h3 id="结束">结束</h3><p>搞懂上面的两个问题，尤其是第一个问题，后面的阅读都很顺利了。</p>
+<h2 id="伙伴系统优缺点">伙伴系统优缺点</h2><p>伙伴分配的实质就是一种特殊的“分离适配”，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。</p>
+<p>其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；</p>
+<p>其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。 </p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -249,7 +317,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由分页引起的问题"><span class="toc-number">2.</span> <span class="toc-text">由分页引起的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴的定义"><span class="toc-number">3.</span> <span class="toc-text">伙伴的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统管理策略"><span class="toc-number">4.</span> <span class="toc-text">伙伴系统管理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分配内存："><span class="toc-number">4.1.</span> <span class="toc-text">分配内存：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#释放内存："><span class="toc-number">4.2.</span> <span class="toc-text">释放内存：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统程序分析"><span class="toc-number">5.</span> <span class="toc-text">伙伴系统程序分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#伙伴分配器数据结构"><span class="toc-number">5.1.</span> <span class="toc-text">伙伴分配器数据结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统优缺点"><span class="toc-number">6.</span> <span class="toc-text">伙伴系统优缺点</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#由分页引起的问题"><span class="toc-number">2.</span> <span class="toc-text">由分页引起的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴的定义"><span class="toc-number">3.</span> <span class="toc-text">伙伴的定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统管理策略"><span class="toc-number">4.</span> <span class="toc-text">伙伴系统管理策略</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#分配内存："><span class="toc-number">4.1.</span> <span class="toc-text">分配内存：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#释放内存："><span class="toc-number">4.2.</span> <span class="toc-text">释放内存：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统程序分析"><span class="toc-number">5.</span> <span class="toc-text">伙伴系统程序分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#伙伴分配器数据结构"><span class="toc-number">5.1.</span> <span class="toc-text">伙伴分配器数据结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调整参数为2的幂次方"><span class="toc-number">5.2.</span> <span class="toc-text">调整参数为2的幂次方</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#结束"><span class="toc-number">5.3.</span> <span class="toc-text">结束</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#伙伴系统优缺点"><span class="toc-number">6.</span> <span class="toc-text">伙伴系统优缺点</span></a></li></ol>
  
   </div>
 
