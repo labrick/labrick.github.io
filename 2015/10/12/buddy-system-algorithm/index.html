@@ -23,8 +23,9 @@
 由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：
 1. 第一次申请2N个页呢？简单，连续分2N个页；
 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/buddy-memory-allocation.jpg">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg">
-<meta property="og:updated_time" content="2015-10-13T03:03:19.769Z">
+<meta property="og:updated_time" content="2015-10-13T03:12:18.208Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伙伴系统算法">
 <meta name="twitter:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
@@ -142,7 +143,7 @@
 </li>
 </ol>
 <p>上面这段文字可能看起来很费劲，我们看个内存分配和释放的示意图：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg" alt="内存分配和释放示意图"></p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/buddy-memory-allocation.jpg" alt="内存分配和释放示意图"></p>
 <p>上图中，首先我们假设我们一个内存块有1024K，当我们需要给A分配70K内存的时候，</p>
 <ol>
 <li>我们发现1024K的一半大于70K，然后我们就把1024K的内存分成两半，一半512K。</li>
@@ -150,10 +151,14 @@
 <li>此时，我们发现128K的一半小于70K，于是我们就分配为A分配128K的内存。</li>
 </ol>
 <p>后面的，B，C，D都这样，而释放内存时，则会把相邻的块一步一步地合并起来（合并也必需按分裂的逆操作进行合并）。</p>
-<p>一直到这，<a href="http://coolshell.cn/articles/10427.html" target="_blank" rel="external">这里</a>讲的都很好，但是接下来的内容，在原blog上就有所欠缺了，最起码我是没看到他对程序的解释，下面我就将我对程序的注解贴在下面。</p>
-<h2 id="伙伴系统程序分析">伙伴系统程序分析</h2><p>这样的算法，用二叉树这个数据结构比较合适。</p>
+<p>这样的算法，用二叉树这个数据结构比较合适。</p>
 <p><a href="https://github.com/cloudwu/buddy" target="_blank" rel="external">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2" target="_blank" rel="external">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，而且这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计，<a href="https://github.com/labrick/buddy2/blob/master/buddy2.c" target="_blank" rel="external">这里</a>是我对该程序的注解。</p>
-<p>下面我将几个比较难以理解的点，也是传说中的精华部分：</p>
+<p>分配器的整体思想是，通过一个数组形式的完全二叉树来监控管理内存，二叉树的节点用于标记相应内存块的使用状态，高层节点对应大的块，低层节点对应小的块，在分配和释放中我们就通过这些节点的标记属性来进行块的分离合并。如图所示，假设总大小为16单位的内存，我们就建立一个深度为5的满二叉树，根节点从数组下标[0]开始，监控大小16的块；它的左右孩子节点下标[1~2]，监控大小8的块；第三层节点下标[3~6]监控大小4的块……依此类推。</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg" alt="伙伴系统二叉树"></p>
+<p>在分配阶段，首先要搜索大小适配的块，假设第一次分配3，转换成2的幂是4，我们先要对整个内存进行对半切割，从16切割到4需要两步，那么从下标[0]节点开始深度搜索到下标[3]的节点并将其标记为已分配。第二次再分配3那么就标记下标[4]的节点。第三次分配6，即大小为8，那么搜索下标[2]的节点，因为下标[1]所对应的块被下标[3~4]占用了。</p>
+<p>在释放阶段，我们依次释放上述第一次和第二次分配的块，即先释放[3]再释放[4]，当释放下标[4]节点后，我们发现之前释放的[3]是相邻的，于是我们立马将这两个节点进行合并，这样一来下次分配大小8的时候，我们就可以搜索到下标[1]适配了。若进一步释放下标[2]，同[1]合并后整个内存就回归到初始状态。</p>
+<p>一直到这，<a href="http://coolshell.cn/articles/10427.html" target="_blank" rel="external">这里</a>讲的都很好，但是接下来的内容，在原blog上就有所欠缺了，最起码我是没看懂他对程序的解释，下面我就将我对程序的解释贴在下面。</p>
+<h2 id="伙伴系统程序分析">伙伴系统程序分析</h2><p>下面我将几个比较难以理解的点，也是传说中的精华部分：</p>
 <h2 id="伙伴系统优缺点">伙伴系统优缺点</h2><p>伙伴分配的实质就是一种特殊的“分离适配”，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。</p>
   
 	</div>
