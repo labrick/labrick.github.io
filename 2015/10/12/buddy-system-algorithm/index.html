@@ -23,7 +23,8 @@
 由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：
 1. 第一次申请2N个页呢？简单，连续分2N个页；
 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
-<meta property="og:updated_time" content="2015-10-13T02:58:58.224Z">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg">
+<meta property="og:updated_time" content="2015-10-13T03:03:19.769Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伙伴系统算法">
 <meta name="twitter:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
@@ -141,7 +142,7 @@
 </li>
 </ol>
 <p>上面这段文字可能看起来很费劲，我们看个内存分配和释放的示意图：</p>
-<p><img src="" alt="内存分配和释放示意图"></p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg" alt="内存分配和释放示意图"></p>
 <p>上图中，首先我们假设我们一个内存块有1024K，当我们需要给A分配70K内存的时候，</p>
 <ol>
 <li>我们发现1024K的一半大于70K，然后我们就把1024K的内存分成两半，一半512K。</li>
