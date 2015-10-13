@@ -23,7 +23,7 @@
 由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：
 1. 第一次申请2N个页呢？简单，连续分2N个页；
 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
-<meta property="og:updated_time" content="2015-10-13T02:55:58.519Z">
+<meta property="og:updated_time" content="2015-10-13T02:57:17.247Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伙伴系统算法">
 <meta name="twitter:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
@@ -151,7 +151,7 @@
 <p>后面的，B，C，D都这样，而释放内存时，则会把相邻的块一步一步地合并起来（合并也必需按分裂的逆操作进行合并）。</p>
 <p>一直到这，<a href="http://coolshell.cn/articles/10427.html" target="_blank" rel="external">这里</a>讲的都很好，但是接下来的内容，在原blog上就有所欠缺了，最起码我是没看到他对程序的解释，下面我就将我对程序的注解贴在下面。</p>
 <h2 id="伙伴系统程序分析">伙伴系统程序分析</h2><p>这样的算法，用二叉树这个数据结构比较合适。</p>
-<p><a href="https://github.com/cloudwu/buddy" target="_blank" rel="external">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2" target="_blank" rel="external">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，而且这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计，这里(<a href="https://github.com/labrick/buddy2)是我对该程序的注解。" target="_blank" rel="external">https://github.com/labrick/buddy2)是我对该程序的注解。</a></p>
+<p><a href="https://github.com/cloudwu/buddy" target="_blank" rel="external">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2" target="_blank" rel="external">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，而且这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计，<a href="https://github.com/labrick/buddy2" target="_blank" rel="external">这里</a>是我对该程序的注解。</p>
 <p>下面我将几个比较难以理解的点，也是传说中的精华部分：</p>
 <h2 id="伙伴系统优缺点">伙伴系统优缺点</h2><p>伙伴分配的实质就是一种特殊的“分离适配”，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。</p>
   
