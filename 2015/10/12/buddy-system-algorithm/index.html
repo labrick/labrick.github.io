@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo, Brick" />
 
 
 
@@ -267,6 +267,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/10/12/buddy-system-algorithm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/10/12/buddy-system-algorithm/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -480,6 +487,10 @@
         
   <div class="comments" id="comments">
     
+      <div class="ds-thread" data-thread-key="2015/10/12/buddy-system-algorithm/"
+           data-title="伙伴系统算法" data-url="http://yoursite.com/2015/10/12/buddy-system-algorithm/">
+      </div>
+    
   </div>
 
 
@@ -601,7 +612,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#由分页引起的问题"><span class="nav-number">2.</span> <span class="nav-text">由分页引起的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴的定义"><span class="nav-number">3.</span> <span class="nav-text">伙伴的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统管理策略"><span class="nav-number">4.</span> <span class="nav-text">伙伴系统管理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分配内存："><span class="nav-number">4.1.</span> <span class="nav-text">分配内存：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#释放内存："><span class="nav-number">4.2.</span> <span class="nav-text">释放内存：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统程序分析"><span class="nav-number">5.</span> <span class="nav-text">伙伴系统程序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伙伴分配器数据结构"><span class="nav-number">5.1.</span> <span class="nav-text">伙伴分配器数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整参数为2的幂次方"><span class="nav-number">5.2.</span> <span class="nav-text">调整参数为2的幂次方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束"><span class="nav-number">5.3.</span> <span class="nav-text">结束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统优缺点"><span class="nav-number">6.</span> <span class="nav-text">伙伴系统优缺点</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#由分页引起的问题"><span class="nav-text">由分页引起的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴的定义"><span class="nav-text">伙伴的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统管理策略"><span class="nav-text">伙伴系统管理策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分配内存："><span class="nav-text">分配内存：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#释放内存："><span class="nav-text">释放内存：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统程序分析"><span class="nav-text">伙伴系统程序分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#伙伴分配器数据结构"><span class="nav-text">伙伴分配器数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调整参数为2的幂次方"><span class="nav-text">调整参数为2的幂次方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结束"><span class="nav-text">结束</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#伙伴系统优缺点"><span class="nav-text">伙伴系统优缺点</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -655,11 +666,28 @@
 
   
     
-    
 
   
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"labrick"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
 
 
+    
   
 
   

@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hexo, Brick" />
 
 
 
@@ -268,6 +268,13 @@ git clone https://tianna1121@bitbucket.org/tianna1121/my-gem5.git
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/07/15/gem5-run-bench-step/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/15/gem5-run-bench-step/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -390,6 +397,10 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
         
   <div class="comments" id="comments">
     
+      <div class="ds-thread" data-thread-key="2015/07/15/gem5-run-bench-step/"
+           data-title="gem5跑bench过程记录" data-url="http://yoursite.com/2015/07/15/gem5-run-bench-step/">
+      </div>
+    
   </div>
 
 
@@ -511,7 +522,7 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装所需工具"><span class="nav-number">1.</span> <span class="nav-text">安装所需工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载我们改过的my-gem5"><span class="nav-number">2.</span> <span class="nav-text">下载我们改过的my-gem5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译gem5"><span class="nav-number">3.</span> <span class="nav-text">编译gem5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载Linux镜像："><span class="nav-number">4.</span> <span class="nav-text">下载Linux镜像：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压系统镜像，并放入正确的目录"><span class="nav-number">5.</span> <span class="nav-text">解压系统镜像，并放入正确的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载benchmark，放到文件系统镜像"><span class="nav-number">6.</span> <span class="nav-text">下载benchmark，放到文件系统镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建仿真目录"><span class="nav-number">7.</span> <span class="nav-text">构建仿真目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动Linux系统(gem5目录下)"><span class="nav-number">8.</span> <span class="nav-text">启动Linux系统(gem5目录下)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="nav-number">8.1.</span> <span class="nav-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="nav-number">8.2.</span> <span class="nav-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跑具体的bench"><span class="nav-number">9.</span> <span class="nav-text">跑具体的bench</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存bench运行信息"><span class="nav-number">10.</span> <span class="nav-text">保存bench运行信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END"><span class="nav-number">11.</span> <span class="nav-text">END</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装所需工具"><span class="nav-text">安装所需工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载我们改过的my-gem5"><span class="nav-text">下载我们改过的my-gem5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译gem5"><span class="nav-text">编译gem5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载Linux镜像："><span class="nav-text">下载Linux镜像：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压系统镜像，并放入正确的目录"><span class="nav-text">解压系统镜像，并放入正确的目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载benchmark，放到文件系统镜像"><span class="nav-text">下载benchmark，放到文件系统镜像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构建仿真目录"><span class="nav-text">构建仿真目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动Linux系统(gem5目录下)"><span class="nav-text">启动Linux系统(gem5目录下)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#用AtomicSimpleCpu模式启动linux，设置一个观察点"><span class="nav-text">用AtomicSimpleCpu模式启动linux，设置一个观察点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用arm_detailed模式从设置的观察点继续执行"><span class="nav-text">用arm_detailed模式从设置的观察点继续执行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#跑具体的bench"><span class="nav-text">跑具体的bench</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保存bench运行信息"><span class="nav-text">保存bench运行信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#END"><span class="nav-text">END</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -565,11 +576,28 @@ m5 <span class="keyword">exit</span>             <span class="comment">#设置�
 
   
     
-    
 
   
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"labrick"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
 
 
+    
   
 
   
