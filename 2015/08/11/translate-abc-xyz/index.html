@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -75,10 +81,16 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -87,15 +99,6 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -113,7 +116,12 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -197,17 +205,16 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
       
       
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -229,8 +236,9 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
@@ -261,7 +269,10 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-08-11T06:54:49+08:00" content="2015-08-11">
               2015-08-11
             </time>
@@ -269,7 +280,11 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/突发奇想的小玩意/" itemprop="url" rel="index">
@@ -297,18 +312,20 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h2 id="文章背景">文章背景</h2><p>今天Google成立了新的母公司Alphabet，话说是因为Google代表搜索引擎，但是公司内部做了很多和核心业务没有关联的项目工程，或者实验，为了更好的组织公司，可能还有其他方面的原因成立了Aphabet，<a href="https://abc.xyz/" target="_blank" rel="external">文章网址在此</a>，和我的域名很像~-~，当时头脑一发热注册abc就发财了~-~</p>
+        <h2 id="文章背景">文章背景</h2><p>今天Google成立了新的母公司Alphabet，话说是因为Google代表搜索引擎，但是公司内部做了很多和核心业务没有关联的项目工程，或者实验，为了更好的组织公司，可能还有其他方面的原因成立了Aphabet，<a href="https://abc.xyz/" target="_blank" rel="external">文章网址在此</a>，和我的域名很像~-~，当时头脑一发热注册abc就发财了~-~</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/translate-abc-xyz/abc-xyz.jpg" alt="abc-xyz"></p>
 <h2 id="G就代表Google">G就代表Google</h2><p>11年前Google刚创建的时候，Sergey和我一同写了一个声明：“Google不是一个传统型公司，我们的目的也不是创建一个传统型公司。”作为那时的补充，我们再次声明：你可能希望我们在一些非常有前景或者比较奇怪的领域，以比我们现在的业务更小的赌注来做事。作为开始，我们总是在努力的路上，用我们所拥有的资源来做重要而有意义的事。</p>
 <p>我们已经做了很多看起来很疯狂的产品，这些产品中已经有很多拥有十亿以上的用户，比如：Google Maps, YouTube, Chrome, 还有Android. 但是我们不会满足于现在。我们仍然要尝试去做人们认为很疯狂，但是能让我们超级兴奋的事情。</p>
@@ -336,7 +353,7 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 </ul>
 <p>什么可以做的更好？不用怀疑，我们在Alphabet家庭里共同愉快的合作。不用担心，我们仍然遵循我们名字的格言。</p>
 <p>Larry Page</p>
-</span>
+
       
     </div>
 
@@ -376,12 +393,11 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
   </div>
 
 
-        </div>
+          </div>
+          
 
-        
 
-
-        
+          
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/08/11/translate-abc-xyz/"
@@ -391,10 +407,9 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
   </div>
 
 
-      </div>
-
-      
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -422,10 +437,12 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg" alt="Brick" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg"
+               alt="Brick" />
           <p class="site-author-name" itemprop="name">Brick</p>
+          <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         </div>
-        <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -433,20 +450,17 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">标签</span>
-              
-          </div>
+          
 
         </nav>
 
@@ -529,7 +543,8 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -539,7 +554,7 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
   &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Brick</span>
 </div>
@@ -563,56 +578,41 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"labrick"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -746,7 +746,7 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -759,11 +759,12 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
+    NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
+
       if (CONFIG.sidebar === 'post') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
+          NexT.utils.displaySidebar();
         }
       }
     };
@@ -772,13 +773,46 @@ G就代表Google11年前Google刚创建的时候，Sergey和我一同写了一�
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"labrick"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
 
   
   
 
   
   
+
 
 </body>
 </html>

@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -67,10 +73,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -79,15 +91,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -105,7 +108,12 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -189,17 +197,16 @@
 
       
       
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -221,8 +228,9 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
@@ -253,7 +261,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-01-31T19:58:00+08:00" content="2015-01-31">
               2015-01-31
             </time>
@@ -261,7 +272,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/让生活更上一层楼/" itemprop="url" rel="index">
@@ -289,18 +304,20 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><p>　　生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就是一句话哲学的合理性。</p>
+        <p>　　生活是智慧的来源，从生活当中我们能够得到很多我们平时不怎么注意的细节，总结出来对自己以后的人生会有很大的帮助，标签的意义就在于想到它就会产生很多它所标识的含义，减少我们记忆的成本，这就是一句话哲学的合理性。</p>
 <a id="more"></a>
 <h3 id="控制语速可以控制底气。">控制语速可以控制底气。</h3><p>　　看到上了年纪或者经历比较多的人，几乎没有说话速度比较快的，或许因为放慢语速可以三思而后行，尽量照顾到每一个细节，找到合适的话语来说明问题，尽量让自己的观点、态度准确的传达给听者；</p>
 <p>　　每次我出场相对正式的场合（工作报告，code-review等），我都会想起来这句话，因为它的存在让我更好的控制自己的底气，让自己看起来比较的自信，从而充满自信；</p>
@@ -313,7 +330,7 @@
 <h3 id="深度给你生存的技能，广度赋予你生活的意义。">深度给你生存的技能，广度赋予你生活的意义。</h3><p>　　本科前两年我一直在思考一个问题：文科的意义？世界上存在科学、哲学后其他学科有什么存在的价值？我对于这个问题在那期间一直是一个否定的回答；</p>
 <p>　　本科里我一直注重的是技能，也就是做好程序；现在虽说技能没有成熟，但是还可以简单混口饭吃，这或许就技能的意义，让我能够在当今社会下生活下去。但如果想生活的很好就不能单单靠单一的技能，因为单一的技能始终是出卖自己的劳动力。</p>
 <p>　　脑海中始终会存在一句话：有所精，有所通。精就是深度，通就是广度，也是见识的多少，通就会赋予我们更丰富美好的生活，通到一定程度可能就会产生另外一番的天地；希望自己在以后的生活里能够做到精通全面；</p>
-</span>
+
       
     </div>
 
@@ -353,12 +370,11 @@
   </div>
 
 
-        </div>
+          </div>
+          
 
-        
 
-
-        
+          
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/01/31/control-self-better/"
@@ -368,10 +384,9 @@
   </div>
 
 
-      </div>
-
-      
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -399,10 +414,12 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg" alt="Brick" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg"
+               alt="Brick" />
           <p class="site-author-name" itemprop="name">Brick</p>
+          <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         </div>
-        <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -410,20 +427,17 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">标签</span>
-              
-          </div>
+          
 
         </nav>
 
@@ -506,7 +520,8 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -516,7 +531,7 @@
   &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Brick</span>
 </div>
@@ -540,56 +555,41 @@
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"labrick"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -723,7 +723,7 @@
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -736,11 +736,12 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
+    NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
+
       if (CONFIG.sidebar === 'post') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
+          NexT.utils.displaySidebar();
         }
       }
     };
@@ -749,13 +750,46 @@
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"labrick"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
 
   
   
 
   
   
+
 
 </body>
 </html>

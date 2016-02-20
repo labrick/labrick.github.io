@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -74,10 +80,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -86,15 +98,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -112,7 +115,12 @@
 
 
 
-  <div class="container one-column page-post-detail">
+
+
+  
+  
+
+  <div class="container one-collumn  page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -196,17 +204,16 @@
 
       
       
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -228,8 +235,9 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
   <div id="posts" class="posts-expand">
     
@@ -260,7 +268,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-08-26T10:25:04+08:00" content="2015-08-26">
               2015-08-26
             </time>
@@ -268,7 +279,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/linux0-11相关/" itemprop="url" rel="index">
@@ -296,18 +311,20 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-        <span itemprop="articleBody"><h2 id="8259A芯片工作原理">8259A芯片工作原理</h2><p>PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：</p>
+        <h2 id="8259A芯片工作原理">8259A芯片工作原理</h2><p>PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/8259A-interrupt-control/8259A-interrupt-control.png" alt="可编程中断控制器8259A芯片框图"></p>
 <p>中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8个比特位(D7—D0)分别对应引脚IR7—IR0。</p>
 <p>中断屏蔽寄存器IMR(Interrupt Mask Register)用于保存被屏蔽的中断请求线对应的比特位，寄存器的8位也是对应8个中断级。哪个比特位被置1就屏蔽哪一级中断请求。即IMR对IRR进行处理，其每个比特位对应IRR的每个请求比特位。对高优先级输入线的屏蔽并不会影响低优先级中断请求线的输入。</p>
@@ -316,7 +333,7 @@
 <p>来自各个设备的中断请求线分别连接到8259A的IR0—IR7中断请求引脚上。当这些引脚上有一个或多个终端请求信号时，中断请求寄存器IRR中相应的比特位被置位所存。此时若中断屏蔽寄存器IMR中对应位被置位，则相应的中断请求就不会被送到优先级解析器中。对于未屏蔽的中断请求被送到优先级解析器之后，优先级最高的中断请求会被选中。此时8259A就会向CPU发出一个INT信号，而CPU则会在执行完当前的一条指令之后向8259A发送一个INTA来相应中断信号。8259A在收到这个相应信号之后就会把所选出的最高优先级中断请求保存到正在服务寄存器ISR中，即ISR中对应中断请求级的比特位被置位。与此同时，中断请求寄存器IRR中的对应比特位被复位，表示该中断请求开始正被处理中。</p>
 <p>此后，CPU会向8259A发送第2个INTA脉冲信号，该信号用于通知8259A送出中断号。因此在该脉冲信号期间8259A就会把一个代表中断号的8位数据发送到数据总线上共CPU读取。</p>
 <p>到此为止，CPU中断周期结束。如果8259A使用的是自动结束中断AEOI(Automatic End of Interrupt)方式，那么在第2个INTA脉冲信号的结尾处正在服务寄存器ISR中的当前服务中断比特位就会被复位。否则的话，若8259A处于非自动结束方式，那么在中断服务程序结束时程序就需要项8259A发送一个结束中断(EOI)命令以复位ISR中的比特位。如果中断请求来自级联的第2个8259A芯片，那么就需要项两个芯片都发送EOI命令。此后8259A就会去判断下一个最高优先级的中断，并重复上述处理过程。</p>
-</span>
+
       
     </div>
 
@@ -356,12 +373,11 @@
   </div>
 
 
-        </div>
+          </div>
+          
 
-        
 
-
-        
+          
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/08/26/8259A-interrupt-control/"
@@ -371,10 +387,9 @@
   </div>
 
 
-      </div>
-
-      
+        </div>
         
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -402,10 +417,12 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg" alt="Brick" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg"
+               alt="Brick" />
           <p class="site-author-name" itemprop="name">Brick</p>
+          <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         </div>
-        <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -413,20 +430,17 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">标签</span>
-              
-          </div>
+          
 
         </nav>
 
@@ -509,7 +523,8 @@
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -519,7 +534,7 @@
   &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Brick</span>
 </div>
@@ -543,56 +558,41 @@
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
-  
-  
-
-  
-    
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"labrick"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-    
-     
-
-
-    
-  
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
-
-
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
-
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  
-  
-<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
 
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
 <script type="text/javascript" id="sidebar.toc.highlight">
   $(document).ready(function () {
@@ -726,7 +726,7 @@
 
     $('.post-toc a').on('click', function (e) {
       e.preventDefault();
-      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
       var offset = $(targetSelector).offset().top;
       hasVelocity ?
         html.velocity('stop').velocity('scroll', {
@@ -739,11 +739,12 @@
     });
 
     // Expand sidebar on post detail page by default, when post has a toc.
-    motionMiddleWares.sidebar = function () {
+    NexT.motion.middleWares.sidebar = function () {
       var $tocContent = $('.post-toc-content');
+
       if (CONFIG.sidebar === 'post') {
         if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          displaySidebar();
+          NexT.utils.displaySidebar();
         }
       }
     };
@@ -752,13 +753,46 @@
 
 
 
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"labrick"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+  
+
+
+
+
 
   
   
 
   
   
+
 
 </body>
 </html>

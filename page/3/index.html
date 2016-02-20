@@ -1,5 +1,11 @@
 <!doctype html>
-<html class="theme-next   use-motion ">
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
@@ -32,7 +38,7 @@
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -46,7 +52,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
 
 
 
@@ -66,10 +72,16 @@
 
 
 <script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: 'post',
-    motion: true
+    sidebar: "post",
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
   };
 </script>
 
@@ -78,15 +90,6 @@
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  <!--[if lte IE 8]>
-  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
-    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
-      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
-           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
-           style='margin-left:auto;margin-right:auto;display: block;'/>
-    </a>
-  </div>
-<![endif]-->
   
 
 
@@ -104,9 +107,14 @@
 
 
 
-  <div class="container one-column 
+
+
+  
+  
+
+  <div class="container one-collumn  
    page-home 
-">
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -190,17 +198,16 @@
 
       
       
+      
     </ul>
   
 
   
     <div class="site-search">
       
-  
   <form class="site-search-form">
-    <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
-  </form>
-
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
 
 <script type="text/javascript">
   (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
@@ -222,8 +229,9 @@
 
     <main id="main" class="main">
       <div class="main-inner">
-        <div id="content" class="content">
-          
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
   <section id="posts" class="posts-expand">
 
     
@@ -263,7 +271,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-28T08:57:46+08:00" content="2015-07-28">
               2015-07-28
             </time>
@@ -271,7 +282,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作记录/" itemprop="url" rel="index">
@@ -299,23 +314,24 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            背景介绍目前来看，我是一位专业的打杂人员，维护网络、文档、共享中心、随时听候大师兄的调遣，这样使得本来很惬意的生活多了点凌乱，少了点自由，多了点忙碌，少了点懒散。更多的时间则集中在了解更多的内容，而不是集中在某一个点上进行学习，这样可能就会产生丢三落四，做这忘那的问题，这就需要有一个很好的计划才行，
-            ...
-          </span>
+          
+          背景介绍目前来看，我是一位专业的打杂人员，维护网络、文档、共享中心、随时听候大师兄的调遣，这样使得本来很惬意的生活多了点凌乱，少了点自由，多了点忙碌，少了点懒散。更多的时间则集中在了解更多的内容，而不是集中在某一个点上进行学习，这样可能就会产生丢三落四，做这忘那的问题，这就需要有一个很好的计划才行，
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/28/markdown-problem-answer/#more" rel="contents">
               阅读全文 &raquo;
@@ -370,7 +386,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-26T09:00:35+08:00" content="2015-07-26">
               2015-07-26
             </time>
@@ -378,7 +397,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作记录/" itemprop="url" rel="index">
@@ -406,26 +429,27 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            网盘链接：http://pan.baidu.com/s/1c096Bi4 密码：batc
+          
+          网盘链接：http://pan.baidu.com/s/1c096Bi4 密码：batc
 安装eclipse方法一从官网下载安装包直接安装
 【网盘：eclipse-standard-luna-R-linux-gtk-x86_64.tar.gz，需要配置路径】。
 方法二在ubuntu terminal
-            ...
-          </span>
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/26/ubuntu-android-sdk/#more" rel="contents">
               阅读全文 &raquo;
@@ -480,7 +504,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-25T09:00:06+08:00" content="2015-07-25">
               2015-07-25
             </time>
@@ -488,7 +515,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作记录/" itemprop="url" rel="index">
@@ -516,24 +547,25 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            调用现成的模板，比如seuthesis、IEEE conference等。插入章节号\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro}
+          
+          调用现成的模板，比如seuthesis、IEEE conference等。插入章节号\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro}
 \section{研究背景与意义}\lable{sec.BG} % 节，类似1.1，正文可引用\
-            ...
-          </span>
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/25/latex-quick-learning/#more" rel="contents">
               阅读全文 &raquo;
@@ -588,7 +620,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-24T08:58:27+08:00" content="2015-07-24">
               2015-07-24
             </time>
@@ -596,7 +631,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作记录/" itemprop="url" rel="index">
@@ -624,23 +663,24 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            说明安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：/192.168.0.227/01.专业软件/matlab/ubuntu-matlab20
-            ...
-          </span>
+          
+          说明安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：/192.168.0.227/01.专业软件/matlab/ubuntu-matlab20
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/24/install-matlab2014b-in-ubuntu14.04/#more" rel="contents">
               阅读全文 &raquo;
@@ -695,7 +735,10 @@
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-07-15T08:57:22+08:00" content="2015-07-15">
               2015-07-15
             </time>
@@ -703,7 +746,11 @@
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作记录/" itemprop="url" rel="index">
@@ -731,25 +778,26 @@
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            安装所需工具sudo apt-get install git scons g++ python-dev swig m4 protobuf
+          
+          安装所需工具sudo apt-get install git scons g++ python-dev swig m4 protobuf
 下载我们改过的my-gem5下载地址如下:（已有的话就git pull更新一下）
 git clone https://tianna1121@bitbucket.o
-            ...
-          </span>
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/07/15/gem5-run-bench-step/#more" rel="contents">
               阅读全文 &raquo;
@@ -804,7 +852,10 @@ git clone https://tianna1121@bitbucket.o
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-06-26T22:06:00+08:00" content="2015-06-26">
               2015-06-26
             </time>
@@ -812,7 +863,11 @@ git clone https://tianna1121@bitbucket.o
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/没事吐糟一下/" itemprop="url" rel="index">
@@ -840,12 +895,14 @@ git clone https://tianna1121@bitbucket.o
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -907,7 +964,10 @@ git clone https://tianna1121@bitbucket.o
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-06-24T21:08:00+08:00" content="2015-06-24">
               2015-06-24
             </time>
@@ -915,7 +975,11 @@ git clone https://tianna1121@bitbucket.o
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/linux学习/" itemprop="url" rel="index">
@@ -943,12 +1007,14 @@ git clone https://tianna1121@bitbucket.o
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
@@ -1010,7 +1076,10 @@ git clone https://tianna1121@bitbucket.o
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-06-18T21:52:00+08:00" content="2015-06-18">
               2015-06-18
             </time>
@@ -1018,7 +1087,11 @@ git clone https://tianna1121@bitbucket.o
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/工作记录/" itemprop="url" rel="index">
@@ -1046,24 +1119,25 @@ git clone https://tianna1121@bitbucket.o
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            　　对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
+          
+          　　对于一个初级网站创建者来说，创建网站还是有一定难处的，虽说git-page已经提供了一个很好的平台，但还是不可避免的会遇到很多意想不到的问题，鉴于网上有关git-page建站的内容比较少，自己做些记录方便以后查询，下面记录这期间所遇到的问题，并且不断的更新问题和解决方法.
 首页显示摘要问题问题:
-            ...
-          </span>
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/06/18/websit-history/#more" rel="contents">
               阅读全文 &raquo;
@@ -1118,7 +1192,10 @@ git clone https://tianna1121@bitbucket.o
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-06-14T20:14:00+08:00" content="2015-06-14">
               2015-06-14
             </time>
@@ -1126,7 +1203,11 @@ git clone https://tianna1121@bitbucket.o
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/颇有技术含量/" itemprop="url" rel="index">
@@ -1154,23 +1235,24 @@ git clone https://tianna1121@bitbucket.o
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            每个程序员都梦想拥有这样的内存：它是私有的、容量无限大的、速度无限快的，并且是永久性的存储器（即断电时不会丢失数据）。计算机中的存储层次结构都是在考虑性价比的前提条件下尽量满足程序员的这一需求，其中虚拟地址的产生在其中起到了至关重要的作用：它允许程序员不用考虑物理内存的使用情况而任意使用整个内存空间
-            ...
-          </span>
+          
+          每个程序员都梦想拥有这样的内存：它是私有的、容量无限大的、速度无限快的，并且是永久性的存储器（即断电时不会丢失数据）。计算机中的存储层次结构都是在考虑性价比的前提条件下尽量满足程序员的这一需求，其中虚拟地址的产生在其中起到了至关重要的作用：它允许程序员不用考虑物理内存的使用情况而任意使用整个内存空间
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/06/14/virtual-to-physical-addr/#more" rel="contents">
               阅读全文 &raquo;
@@ -1225,7 +1307,10 @@ git clone https://tianna1121@bitbucket.o
 
         <div class="post-meta">
           <span class="post-time">
-            发表于
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
             <time itemprop="dateCreated" datetime="2015-03-05T11:41:00+08:00" content="2015-03-05">
               2015-03-05
             </time>
@@ -1233,7 +1318,11 @@ git clone https://tianna1121@bitbucket.o
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
                   <a href="/categories/颇有技术含量/" itemprop="url" rel="index">
@@ -1261,24 +1350,25 @@ git clone https://tianna1121@bitbucket.o
 
           
 
+          
+          
         </div>
       </header>
     
 
 
-    <div class="post-body">
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
         
-          <span itemprop="articleBody">
-            
-            　　对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ 
+          
+          　　对于软件如何控制硬件（比如：在单片机里写个1，一个引脚置高），大部分人是没有真正想过，或者想了也没想明白，这个问题在我们所学的教科书里是没有的，其实总结下来就是这句话：世界上没有软件，软件只是对硬件的一种反映，就像意识是对世界的一种反映是一样的！ 
 先说代码：　　我们是用电脑的键盘来输入的指令，
-            ...
-          </span>
+          ...
+
           <div class="post-more-link text-center">
             <a class="btn" href="/2015/03/05/think-over-code/#more" rel="contents">
               阅读全文 &raquo;
@@ -1312,17 +1402,15 @@ git clone https://tianna1121@bitbucket.o
 
 
 
+          </div>
+          
+
+
+          
+
         </div>
-
         
-
-
-        
-
-      </div>
-
-      
-        
+          
   
   <div class="sidebar-toggle">
     <div class="sidebar-toggle-line-wrap">
@@ -1341,10 +1429,12 @@ git clone https://tianna1121@bitbucket.o
 
       <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg" alt="Brick" itemprop="image"/>
+          <img class="site-author-image" itemprop="image"
+               src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg"
+               alt="Brick" />
           <p class="site-author-name" itemprop="name">Brick</p>
+          <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         </div>
-        <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
@@ -1352,20 +1442,17 @@ git clone https://tianna1121@bitbucket.o
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-
-          <div class="site-state-item site-state-categories">
-            <a href="/categories">
-              <span class="site-state-item-count">8</span>
-              <span class="site-state-item-name">分类</span>
+          
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
               </a>
-          </div>
+            </div>
+          
 
-          <div class="site-state-item site-state-tags">
-            
-              <span class="site-state-item-count">0</span>
-              <span class="site-state-item-name">标签</span>
-              
-          </div>
+          
 
         </nav>
 
@@ -1431,7 +1518,8 @@ git clone https://tianna1121@bitbucket.o
   </aside>
 
 
-      
+        
+      </div>
     </main>
 
     <footer id="footer" class="footer">
@@ -1441,7 +1529,7 @@ git clone https://tianna1121@bitbucket.o
   &copy;  2014 - 
   <span itemprop="copyrightYear">2016</span>
   <span class="with-love">
-    <i class="icon-next-heart fa fa-heart"></i>
+    <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Brick</span>
 </div>
@@ -1465,13 +1553,48 @@ git clone https://tianna1121@bitbucket.o
     <div class="back-to-top"></div>
   </div>
 
+  
+
+
+  
+
+
+
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
   
   
 
   
-    
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
 
   
     
@@ -1489,37 +1612,21 @@ git clone https://tianna1121@bitbucket.o
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
-    
-     
 
-
+  
     
   
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
-  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
 
 
-  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
-<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
 
-<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
-
-
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-
-  <script type="text/javascript" src="/js/bootstrap.js"></script>
 
   
   
 
   
   
+
 
 </body>
 </html>
