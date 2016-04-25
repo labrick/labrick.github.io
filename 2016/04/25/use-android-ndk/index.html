@@ -59,19 +59,46 @@
 
 
 
-<meta name="description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的UART输出是怎样的，接着就去接A20的UART的。
-面对实验室的条件只能说无语。没有串口线怎么搞？后来我从606拿过来两根，一根试了半天还不能用，恶心，另一根则是个锈迹斑斑的，插个杜邦线插的手疼，终于搞定电路问题后发现输出都是乱码？">
+<meta name="description" content="编译Native C的helloworld模块
+在Android源码下的development目录下创建一个名为hello的目录
+在此目录下创建一个名为hello.c的C语言文件，代码如下：
+
+int main()
+{
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
+}
+
+当前目录下创建Android.mk文件（Android Makefile标准命名，不可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TTL电平与RS232电平的区别">
-<meta property="og:url" content="http://yoursite.com/2015/08/09/difference-between-ttl-and-rs232/index.html">
+<meta property="og:title" content="Android运行C程序">
+<meta property="og:url" content="http://yoursite.com/2016/04/25/use-android-ndk/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的UART输出是怎样的，接着就去接A20的UART的。
-面对实验室的条件只能说无语。没有串口线怎么搞？后来我从606拿过来两根，一根试了半天还不能用，恶心，另一根则是个锈迹斑斑的，插个杜邦线插的手疼，终于搞定电路问题后发现输出都是乱码？">
-<meta property="og:updated_time" content="2015-10-13T08:23:46.496Z">
+<meta property="og:description" content="编译Native C的helloworld模块
+在Android源码下的development目录下创建一个名为hello的目录
+在此目录下创建一个名为hello.c的C语言文件，代码如下：
+
+int main()
+{
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
+}
+
+当前目录下创建Android.mk文件（Android Makefile标准命名，不可">
+<meta property="og:updated_time" content="2016-04-25T14:15:49.355Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TTL电平与RS232电平的区别">
-<meta name="twitter:description" content="背后的故事最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的UART输出是怎样的，接着就去接A20的UART的。
-面对实验室的条件只能说无语。没有串口线怎么搞？后来我从606拿过来两根，一根试了半天还不能用，恶心，另一根则是个锈迹斑斑的，插个杜邦线插的手疼，终于搞定电路问题后发现输出都是乱码？">
+<meta name="twitter:title" content="Android运行C程序">
+<meta name="twitter:description" content="编译Native C的helloworld模块
+在Android源码下的development目录下创建一个名为hello的目录
+在此目录下创建一个名为hello.c的C语言文件，代码如下：
+
+int main()
+{
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
+}
+
+当前目录下创建Android.mk文件（Android Makefile标准命名，不可">
 
 
 
@@ -89,7 +116,7 @@
   };
 </script>
 
-  <title> TTL电平与RS232电平的区别 | 工作实验室 </title>
+  <title> Android运行C程序 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +292,7 @@
             
             
               
-                TTL电平与RS232电平的区别
+                Android运行C程序
               
             
           </h1>
@@ -277,8 +304,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-09T03:45:33+08:00" content="2015-08-09">
-              2015-08-09
+            <time itemprop="dateCreated" datetime="2016-04-25T21:56:34+08:00" content="2016-04-25">
+              2016-04-25
             </time>
           </span>
 
@@ -291,8 +318,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/颇有技术含量/" itemprop="url" rel="index">
-                    <span itemprop="name">颇有技术含量</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -307,8 +334,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/09/difference-between-ttl-and-rs232/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/09/difference-between-ttl-and-rs232/" itemprop="commentsCount"></span>
+                <a href="/2016/04/25/use-android-ndk/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/25/use-android-ndk/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,113 +356,51 @@
       
 
       
-        <h2 id="背后的故事">背后的故事</h2><p>最近在调试全志A20的一块板子，找了个视频通话的安卓源码想在其上运行，但是一旦软件执行视频通话功能就会死掉，而在普通的手机里都能正常运行，所以就像看一下它的UART输出是怎样的，接着就去接A20的UART的。</p>
-<p>面对实验室的条件只能说无语。没有串口线怎么搞？后来我从606拿过来两根，一根试了半天还不能用，恶心，另一根则是个锈迹斑斑的，插个杜邦线插的手疼，终于搞定电路问题后发现输出都是乱码？这个怎么理解？</p>
-<h2 id="原因分析">原因分析</h2><p>串口出现乱码可能是因为哪些原因呢？出现了乱码基本可以判断com口正确。其他可能原因如下：</p>
-<ol>
-<li>驱动不对</li>
-<li>串口和驱动的配置不对应（波特率、起始位、校验位、停止位）</li>
-<li>串口调试助手的文字编码格式不对</li>
-<li>数据线接触不良</li>
-<li>电平逻辑不对</li>
+        <h4 id="编译Native_C的helloworld模块">编译Native C的helloworld模块</h4><ol>
+<li>在Android源码下的development目录下创建一个名为hello的目录</li>
+<li>在此目录下创建一个名为hello.c的C语言文件，代码如下：</li>
 </ol>
-<p>对于现在调的这块板子，驱动是全志做在系统中的，他们都是经过细心调试，而且时刻在用的工具，驱动应该没有问题，设置是按照全志提供的参数进行配置应该也没有问题。</p>
-<p>对于串口调试助手我采用了两个，一个是友善的串口，里面没有对编码设置的情况，输出是乱码，另一个采用secureCRT，默认和utf-8都试了下，效果没有得到改善。</p>
-<p>数据线接触不良的情况是全志的一位同事提出的，我没有遇到过这种情况，由于线比较老，不能排除这一点，但是我已经尽自己最大的努力让数据线接触良好，所以基本也可以排除。</p>
-<p>最后就剩下一个电平逻辑不对。我为什么会怀疑这个问题呢？因为我看到SMDT论坛上说明UART的测试方法如下：</p>
-<pre><code><span class="number">1</span>. 先短路板子上的UART－TX和UART－RX，用<span class="keyword">ANDROID上的串口测试程序，采用自发自收的测试方式，是否能正常的数据通信
-</span><span class="number">2</span>. 再连接好<span class="preprocessor">TTL</span>－RS232串口板，再短路串口板后端，再采用串口工具，同样的方式，测试是否正常
-<span class="number">3</span>. 再连接好外部设备，设置好波特率，串口号（一般为ttySx），测试是否正常
-<span class="number">4</span>.如果还是存在问题，可以先用<span class="literal">PC</span>来测试外部设备是否能正常通信的，如果是完全OK的，应该是设置波特率和串口号出问题，或者是<span class="number">232</span>串口到外部设备这端需要把TX和RX交叉
-</code></pre><p>这样就很明白问题所在。</p>
-<p>这里有个问题：我采用RS232对接TTL为什么会产生乱码呢？</p>
-<h2 id="TTL与RS232的区别">TTL与RS232的区别</h2><p>我们再加上一个CMOS电平，看看下面的表格:</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">电平名称</th>
-<th style="text-align:left">输出L</th>
-<th style="text-align:left">输出H</th>
-<th style="text-align:left">输入L</th>
-<th style="text-align:left">输入H</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">TTL</td>
-<td style="text-align:left">&lt;0.8V</td>
-<td style="text-align:left">&gt;2.4V</td>
-<td style="text-align:left">&lt;1.2V</td>
-<td style="text-align:left">&gt;2.0V</td>
-</tr>
-<tr>
-<td style="text-align:left">RS232</td>
-<td style="text-align:left">+3~+15V</td>
-<td style="text-align:left">-3~-15V</td>
-<td style="text-align:left">+3~+15V</td>
-<td style="text-align:left">-3~-15V</td>
-</tr>
-<tr>
-<td style="text-align:left">CMOS</td>
-<td style="text-align:left">&lt;0.1*Vcc</td>
-<td style="text-align:left">&gt;0.9*Vcc</td>
-<td style="text-align:left">&lt;0.3*Vcc</td>
-<td style="text-align:left">&gt;0.7*Vcc</td>
-</tr>
-</tbody>
-</table>
-<h3 id="TTL与RS232">TTL与RS232</h3><p>我们先看TTL与RS232两行，现在我们A20板子上的输出是TTL电平，然后我采用RS232接口进行衔接（GND—GND | TXD—RXD | RXD—TXD），看看会出现什么结果：</p>
-<p>TTL输出<0.8v为低电平（应该不会为负），rs232则进行检测这个电压接近于0v，这样是无效？？如果ttl输出>2.4V，RS232检测这个电压最有可能为逻辑<code>0</code>，这样的结果也就是说RS232只能将TTL输出的高电平检测为低电平，TTL输出的低电平作为无效，这样为什么会出现乱码呢？</0.8v为低电平（应该不会为负），rs232则进行检测这个电压接近于0v，这样是无效？？如果ttl输出></p>
-<p>有两种可能：</p>
-<ol>
-<li>停止位设置为<code>0</code>，这样可能停止，就可以正常接收乱码数据，如果都是<code>0</code>数据应该也比较有规律，从乱码来看，这个是不正确的。</li>
-<li>RS232将TTL &lt;0.8V的低电平检测为RS232的高电平，这样也就是和RS232和TTL的电平完全反过来进行接受，完全乱码，这样是很有可能的，就是我的这个假设是否成立不确定。</li>
+<pre><code><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    <span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><ol>
+<li>当前目录下创建Android.mk文件（Android Makefile标准命名，不可更改，内容可以参考其他已有的Android.mk文件的写法），内容如下：</li>
 </ol>
-<pre><code>我们通常说的UART串口的RXD、TXD等一般直接与处理器芯片的引脚相连，其为TTL电平，而RS<span class="number">232</span>串口的RXD、TXD等一般需要经过电平转换<span class="comment">(通常由Max232等芯片进行电平转换)</span>才能接到处理器芯片的引脚上，否则这么高的电压很可能会把芯片烧坏。<span class="comment">(事实上我就是这样接的，没有烧坏芯片，反而是出现乱码)</span>
-我们平时所用电脑的串口是RS<span class="number">232</span>的，当我们在做电路工作时，应该注意下外设的串口是UART类型的还是RS<span class="number">232</span>类型的，如果不匹配，应当找个转换线<span class="comment">(通常这根转换线内有块类似于Max232的芯片做电平转换工作的)</span>，可不能盲目地将两串口相连。
-</code></pre><h3 id="TTL与CMOS">TTL与CMOS</h3><ol>
-<li>电平的上限和下限定义不一样，CMOS具有更大的抗噪区域。同是5伏供电的话，TTL一般是1.7V和3.5V的样子，CMOS一般是2.2V,2.9V的样子，不准确，仅供参考。</li>
-<li>电流驱动能力不一样，TTL一般提供25毫安的驱动能力，而CMOS一般在10毫安左右。</li>
-<li>需要的电流输入大小也不一样，一般ttl需要2.5毫安左右，CMOS几乎不需要电流输入。</li>
-<li>很多器件都是兼容TTL和CMOS的，datasheet会有说明。如果不考虑速度和性能，一般器件可以互换。但是需要注意有时候负载效应可能引起电路工作不正常，因为有些ttl电路需要下一级的输入阻抗作为负载才能正常工作。</li>
+<pre><code>LO<span class="built_in">CAL_PATH</span>:=$(call my-dir)
+include $(CLEAR_VARS)
+LO<span class="built_in">CAL_SRC_FILES</span>:=\
+hello<span class="variable">.c</span>
+LO<span class="built_in">CAL_MODULE</span> := helloworld
+include $(B<span class="built_in">UILD_EXECUTABLE</span>)
+
+
+<span class="number">1.</span> LO<span class="built_in">CAL_SRC_FILES</span>：用于指定源文件
+<span class="number">2.</span> LO<span class="built_in">CAL_MODULE</span>：用于指定要编译模块的名字，在下一步编译时会用到。
+<span class="number">3.</span> <span class="preprocessor">#include $(BUILD_EXECUTABLE)：表示要编译成一个可执行文件，如果想编译成动态库，则可用BUILD_SHARED_LIBRARY，这些具体用法可以在Android/build/core/config.mk查到。</span>
+</code></pre><ol>
+<li><p>返回Android源码顶层目录进行编译：</p>
+<p> make helloworld</p>
+<p> 需要注意的是make helloworld中的目标名helloworld就是Android.mk文件中由LOCAL_MODULE指定的模块名。</p>
+</li>
+<li><p>编译结果在Android/out/target/generic/system/bin/helloworld目录下</p>
+</li>
 </ol>
-<p>TTL和CMOS的逻辑电平转换<br>CMOS电平能驱动TTL电平，TTL电平不能驱动CMOS电平，需加上拉电阻。</p>
-<h3 id="常用逻辑芯片特点">常用逻辑芯片特点</h3><table>
-<thead>
-<tr>
-<th style="text-align:left">系列</th>
-<th style="text-align:left">类型</th>
-<th style="text-align:left">输入</th>
-<th style="text-align:left">输出</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">74LS系列</td>
-<td style="text-align:left">TTL</td>
-<td style="text-align:left">TTL</td>
-<td style="text-align:left">TTL</td>
-</tr>
-<tr>
-<td style="text-align:left">74HC系列</td>
-<td style="text-align:left">CMOS</td>
-<td style="text-align:left">CMOS</td>
-<td style="text-align:left">CMOS</td>
-</tr>
-<tr>
-<td style="text-align:left">74HCT系列</td>
-<td style="text-align:left">CMOS</td>
-<td style="text-align:left">TTL</td>
-<td style="text-align:left">CMOS</td>
-</tr>
-<tr>
-<td style="text-align:left">CD4000系列</td>
-<td style="text-align:left">CMOS</td>
-<td style="text-align:left">CMOS</td>
-<td style="text-align:left">CMOS</td>
-</tr>
-</tbody>
-</table>
+<p>这样通过adb push将它传送到Android开发板上，再通过adb shell登录到开发板即可执行</p>
+<p>注意这里可能会存在Android文件系统没有权限问题，解决方法如下：</p>
+<pre><code><span class="title">adb</span> remount
+</code></pre><h4 id="手工编译C模块">手工编译C模块</h4><ol>
+<li>在Android编译环境中，提供了showcommands选项来显示编译命令行，可以通过打开这个选项来查看一些编译时的细节。</li>
+<li><p>在具体操作之前，需要使用如下命令把前面中的helloworld模块清除。</p>
+<p> make clean-helloworld</p>
+<p> 上面的make clean-$(LOCAL_MODULE)命令是Android编译环境提供的make clean的方式</p>
+</li>
+<li><p>使用showcommands选项重新编译helloworld，具体命令如下：</p>
+<p> make helloworld showcommands</p>
+</li>
+</ol>
+<p>生成helloworld可执行文件后，同上了</p>
 
       
     </div>
@@ -447,17 +412,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/08/lab/what-did-i-learn-in-zhihu/" rel="next" title="这些年我在知乎都学到了什么">
-                <i class="fa fa-chevron-left"></i> 这些年我在知乎都学到了什么
+              <a href="/2015/12/06/look-at-the-nature-of-phenomenon/" rel="next" title="洞察隐藏世界">
+                <i class="fa fa-chevron-left"></i> 洞察隐藏世界
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/08/10/vim-command/" rel="prev" title="vim基本指令">
-                vim基本指令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -483,8 +444,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/09/difference-between-ttl-and-rs232/"
-           data-title="TTL电平与RS232电平的区别" data-url="http://yoursite.com/2015/08/09/difference-between-ttl-and-rs232/">
+      <div class="ds-thread" data-thread-key="2016/04/25/use-android-ndk/"
+           data-title="Android运行C程序" data-url="http://yoursite.com/2016/04/25/use-android-ndk/">
       </div>
     
   </div>
@@ -613,7 +574,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背后的故事"><span class="nav-text">背后的故事</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原因分析"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TTL与RS232的区别"><span class="nav-text">TTL与RS232的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#TTL与RS232"><span class="nav-text">TTL与RS232</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TTL与CMOS"><span class="nav-text">TTL与CMOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用逻辑芯片特点"><span class="nav-text">常用逻辑芯片特点</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#编译Native_C的helloworld模块"><span class="nav-text">编译Native C的helloworld模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手工编译C模块"><span class="nav-text">手工编译C模块</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
