@@ -59,31 +59,19 @@
 
 
 
-<meta name="description" content="背景介绍实验室的网络环境早已搭建完毕，由于时间的问题一直没有总结记录一下，现在就现在四台服务器构建的文件共享系统大概说明一下，记录以留作以后的查询
-文件共享系统需求说明
-希望四台主机的硬盘以目录的形式进行显示，并可以随意修改目录名称
-四台主机构建的目录能够使计算机(win, linux, mac)不需要任何软件就可以直接访问
-要方便扩展，容易增加其他的主机到该系统当中
-在顶级目录形成目录列表，并以">
+<meta name="description" content="问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
+具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="多台电脑搭建文件共享系统">
-<meta property="og:url" content="http://yoursite.com/2015/08/04/connect-host/index.html">
+<meta property="og:title" content="用户间复制文件的权限问题">
+<meta property="og:url" content="http://yoursite.com/2016/06/03/file-permission-in-multiuser/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="背景介绍实验室的网络环境早已搭建完毕，由于时间的问题一直没有总结记录一下，现在就现在四台服务器构建的文件共享系统大概说明一下，记录以留作以后的查询
-文件共享系统需求说明
-希望四台主机的硬盘以目录的形式进行显示，并可以随意修改目录名称
-四台主机构建的目录能够使计算机(win, linux, mac)不需要任何软件就可以直接访问
-要方便扩展，容易增加其他的主机到该系统当中
-在顶级目录形成目录列表，并以">
-<meta property="og:updated_time" content="2015-08-15T11:45:50.547Z">
+<meta property="og:description" content="问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
+具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理">
+<meta property="og:updated_time" content="2016-06-03T15:46:19.575Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="多台电脑搭建文件共享系统">
-<meta name="twitter:description" content="背景介绍实验室的网络环境早已搭建完毕，由于时间的问题一直没有总结记录一下，现在就现在四台服务器构建的文件共享系统大概说明一下，记录以留作以后的查询
-文件共享系统需求说明
-希望四台主机的硬盘以目录的形式进行显示，并可以随意修改目录名称
-四台主机构建的目录能够使计算机(win, linux, mac)不需要任何软件就可以直接访问
-要方便扩展，容易增加其他的主机到该系统当中
-在顶级目录形成目录列表，并以">
+<meta name="twitter:title" content="用户间复制文件的权限问题">
+<meta name="twitter:description" content="问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
+具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理">
 
 
 
@@ -101,7 +89,7 @@
   };
 </script>
 
-  <title> 多台电脑搭建文件共享系统 | 工作实验室 </title>
+  <title> 用户间复制文件的权限问题 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -277,7 +265,7 @@
             
             
               
-                多台电脑搭建文件共享系统
+                用户间复制文件的权限问题
               
             
           </h1>
@@ -289,8 +277,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-04T02:17:04+08:00" content="2015-08-04">
-              2015-08-04
+            <time itemprop="dateCreated" datetime="2016-06-03T23:28:51+08:00" content="2016-06-03">
+              2016-06-03
             </time>
           </span>
 
@@ -319,8 +307,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/08/04/connect-host/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/04/connect-host/" itemprop="commentsCount"></span>
+                <a href="/2016/06/03/file-permission-in-multiuser/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/file-permission-in-multiuser/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,28 +329,12 @@
       
 
       
-        <h2 id="背景介绍">背景介绍</h2><p>实验室的网络环境早已搭建完毕，由于时间的问题一直没有总结记录一下，现在就现在四台服务器构建的文件共享系统大概说明一下，记录以留作以后的查询</p>
-<h2 id="文件共享系统需求说明">文件共享系统需求说明</h2><ol>
-<li>希望四台主机的硬盘以目录的形式进行显示，并可以随意修改目录名称</li>
-<li>四台主机构建的目录能够使计算机(win, linux, mac)不需要任何软件就可以直接访问</li>
-<li>要方便扩展，容易增加其他的主机到该系统当中</li>
-<li>在顶级目录形成目录列表，并以时间顺序排序自动更新目录结构，方便查看共享文件系统中的目录结构自己存储情况</li>
-</ol>
-<h2 id="实现思想">实现思想</h2><p>多台主机构建共享文件系统首先可以想到NFS服务器文件系统，然后用脚本进行相互挂载，但被挂在的目录是不能轻易修改名字的，所以NFS可以满足需求1的前半部分，但不能满足后半部分。</p>
-<p>需求2我们可以在其中一台主机上采用samba服务器来实现，让其共享NFS共享的上层目录，但还没解决修改名字的问题。</p>
-<p>我们可以想到ln指令链接的文件可以随意修改名称，而不变动被链接的文件，利用这一点，我们是不是可以采用samba服务器共享一个空目录，然后将NFS共享的目录链接到上述空目录中呢？经过查阅，我们可以发现samba其中有个设置是可以追踪链接的，如果这样设置是不是直接就解决了需求1/2了？恩恩！是的，这样已经运行通过。</p>
-<p>这样做可扩展性如何呢？这就要看增加一台主机我们需要做哪些工作：</p>
-<ol>
-<li>为新增加的主机配置NFS服务</li>
-<li>在有samba服务器主机上的挂载脚本中添加挂载新增加的主机，并挂载该主机</li>
-<li>将新挂载的目录链接到samba共享目录中</li>
-<li>Over</li>
-</ol>
-<p>不是太麻烦吧～…～</p>
-<p>对于需求4，如果不需要自动更新只需要一条指令就可以解决：</p>
-<pre><code>cd <span class="escape">`要</span>更新的目录<span class="escape">`
-</span>tree -dtl -L <span class="number">4</span> &gt; 目录结构.txt
-</code></pre><p>要求了自动更新就可以写一个守护进程，定时调用上面的指令，对于守护进程的写法可以参考<a href="/2015/07/31/monitor-prototype/">这篇博文</a>。</p>
+        <h2 id="问题点">问题点</h2><p>最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。</p>
+<h2 id="具体管理措施">具体管理措施</h2><p>存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理。</p>
+<p>如果是上述方式就会存在一个问题：现有文件如何转移到新创建的用户/home目录当中，因为存在文件所有权有所切换，所以存在权限问题。还有个问题是使用是偶尔会用到root权限，那时可能不是很好解决。</p>
+<h2 id="用户间复制文件的权限问题解决">用户间复制文件的权限问题解决</h2><h3 id="利用/tmp目录解决">利用/tmp目录解决</h3><h3 id="利用scp命令复制">利用scp命令复制</h3><p>scp命令原本是用来在不同主机上通过网络复制文件的，在这里正好也可以直接使用</p>
+<pre><code>scp other_user/<span class="type">file</span> current_user/
+</code></pre><p>这里的问题是scp不支持目录传输，使用起来很不方便</p>
 
       
     </div>
@@ -374,16 +346,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/08/01/what-i-think-when-running/" rel="next" title="当我跑步时我想些什么">
-                <i class="fa fa-chevron-left"></i> 当我跑步时我想些什么
+              <a href="/2016/04/25/use-android-ndk/" rel="next" title="Android运行C程序">
+                <i class="fa fa-chevron-left"></i> Android运行C程序
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/08/05/change-github-pages-domain/" rel="prev" title="改变github-pages的域名">
-                改变github-pages的域名 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/06/29/overview-of-first-year-of-graduation/" rel="prev" title="我的研究生之路">
+                我的研究生之路 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -410,8 +382,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/08/04/connect-host/"
-           data-title="多台电脑搭建文件共享系统" data-url="http://yoursite.com/2015/08/04/connect-host/">
+      <div class="ds-thread" data-thread-key="2016/06/03/file-permission-in-multiuser/"
+           data-title="用户间复制文件的权限问题" data-url="http://yoursite.com/2016/06/03/file-permission-in-multiuser/">
       </div>
     
   </div>
@@ -540,7 +512,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景介绍"><span class="nav-text">背景介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件共享系统需求说明"><span class="nav-text">文件共享系统需求说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现思想"><span class="nav-text">实现思想</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题点"><span class="nav-text">问题点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体管理措施"><span class="nav-text">具体管理措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户间复制文件的权限问题解决"><span class="nav-text">用户间复制文件的权限问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用/tmp目录解决"><span class="nav-text">利用/tmp目录解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用scp命令复制"><span class="nav-text">利用scp命令复制</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
