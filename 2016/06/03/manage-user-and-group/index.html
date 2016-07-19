@@ -59,19 +59,28 @@
 
 
 
-<meta name="description" content="问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
-具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理">
+<meta name="description" content="创建组
+$sudo addgroup groupName
+创建用户userName并加入组groupName
+$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
+$sudo useradd userName -g groupName -M -d absolute">
 <meta property="og:type" content="article">
-<meta property="og:title" content="用户间复制文件的权限问题">
-<meta property="og:url" content="http://yoursite.com/2016/06/03/file-permission-in-multiuser/index.html">
+<meta property="og:title" content="Linux用户与组管理">
+<meta property="og:url" content="http://yoursite.com/2016/06/03/manage-user-and-group/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
-具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理">
-<meta property="og:updated_time" content="2016-06-03T15:46:19.575Z">
+<meta property="og:description" content="创建组
+$sudo addgroup groupName
+创建用户userName并加入组groupName
+$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
+$sudo useradd userName -g groupName -M -d absolute">
+<meta property="og:updated_time" content="2016-07-19T02:39:52.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用户间复制文件的权限问题">
-<meta name="twitter:description" content="问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
-具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理">
+<meta name="twitter:title" content="Linux用户与组管理">
+<meta name="twitter:description" content="创建组
+$sudo addgroup groupName
+创建用户userName并加入组groupName
+$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
+$sudo useradd userName -g groupName -M -d absolute">
 
 
 
@@ -89,7 +98,7 @@
   };
 </script>
 
-  <title> 用户间复制文件的权限问题 | 工作实验室 </title>
+  <title> Linux用户与组管理 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -265,7 +274,7 @@
             
             
               
-                用户间复制文件的权限问题
+                Linux用户与组管理
               
             
           </h1>
@@ -307,8 +316,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/03/file-permission-in-multiuser/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/file-permission-in-multiuser/" itemprop="commentsCount"></span>
+                <a href="/2016/06/03/manage-user-and-group/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/manage-user-and-group/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -329,13 +338,32 @@
       
 
       
-        <h2 id="问题点">问题点</h2><p>最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。</p>
-<h2 id="具体管理措施">具体管理措施</h2><p>存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人分配一个账户，然后给每个账户设置一定的存储空间，每个人都能在自己的目录下工作，即安全实用，有适合管理。</p>
-<p>如果是上述方式就会存在一个问题：现有文件如何转移到新创建的用户/home目录当中，因为存在文件所有权有所切换，所以存在权限问题。还有个问题是使用是偶尔会用到root权限，那时可能不是很好解决。</p>
-<h2 id="用户间复制文件的权限问题解决">用户间复制文件的权限问题解决</h2><h3 id="利用/tmp目录解决">利用/tmp目录解决</h3><h3 id="利用scp命令复制">利用scp命令复制</h3><p>scp命令原本是用来在不同主机上通过网络复制文件的，在这里正好也可以直接使用</p>
-<pre><code>scp other_user/<span class="type">file</span> current_user/
-</code></pre><p>这里的问题是scp不支持目录传输，使用起来很不方便</p>
-
+        <p>创建组</p>
+<pre><code><span class="variable">$sudo</span> addgroup <span class="keyword">group</span>Name
+</code></pre><p>创建用户userName并加入组groupName</p>
+<pre><code><span class="variable">$sudo</span> useradd <span class="keyword">user</span>Name -g <span class="keyword">group</span>Name -M                     <span class="comment"># 并指定唯一组groupName，并强制创建HOME目录（默认位置）</span>
+<span class="variable">$sudo</span> useradd <span class="keyword">user</span>Name -g <span class="keyword">group</span>Name -M -d absolutePath     <span class="comment"># +指定HOME所在位置absolutePath</span>
+</code></pre><p>增加已存在用户到指定组</p>
+<pre><code><span class="variable">$sudo</span> adduser <span class="keyword">user</span>Name ccache
+</code></pre><p>显示用户ID及组信息：</p>
+<pre><code>$ id
+uid=<span class="number">1001</span><span class="params">(dbh)</span> gid=<span class="number">1001</span><span class="params">(dbh)</span> groups=<span class="number">115</span><span class="params">(admin)</span>,<span class="number">1001</span><span class="params">(dbh)</span>
+$ cat /etc/group
+groupName:x:<span class="number">1002</span>:userName
+</code></pre><p>口令维护</p>
+<pre><code><span class="variable">$ </span>passwd userName
+</code></pre><p>组用户成员维护</p>
+<pre><code>$ gpasswd –a <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 添加用户到组</span>
+$ gpasswd –d <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 从组中删除</span>
+$ gpasswd –A 组管理员用户列表 <span class="keyword">group</span>Name      <span class="comment"># don't know</span>
+</code></pre><p>显示指定用户所属的组</p>
+<pre><code><span class="variable">$ </span>groups userName
+</code></pre><p>文件属性相关</p>
+<p>改变当前文件所属用户</p>
+<pre><code>$ chown userName -R <span class="built_in">path</span>
+</code></pre><p>改变当前文件所属用户组</p>
+<pre><code>$ chgrp groupName -R <span class="built_in">path</span>
+</code></pre>
       
     </div>
 
@@ -382,8 +410,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/03/file-permission-in-multiuser/"
-           data-title="用户间复制文件的权限问题" data-url="http://yoursite.com/2016/06/03/file-permission-in-multiuser/">
+      <div class="ds-thread" data-thread-key="2016/06/03/manage-user-and-group/"
+           data-title="Linux用户与组管理" data-url="http://yoursite.com/2016/06/03/manage-user-and-group/">
       </div>
     
   </div>
@@ -512,7 +540,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题点"><span class="nav-text">问题点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体管理措施"><span class="nav-text">具体管理措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户间复制文件的权限问题解决"><span class="nav-text">用户间复制文件的权限问题解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用/tmp目录解决"><span class="nav-text">利用/tmp目录解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用scp命令复制"><span class="nav-text">利用scp命令复制</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

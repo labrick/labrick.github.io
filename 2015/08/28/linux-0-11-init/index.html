@@ -69,7 +69,7 @@ main.c程序首先利用前面setup.s程序取得的系统参数设置系统的�
 main.c程序首先利用前面setup.s程序取得的系统参数设置系统的跟文件设备号以及一些内存全局变量。这些内存变量指明了主内存的开始地址、系统所拥有的内存容量和作为高速缓冲区内存的末端地址。如果还定义了虚拟盘(RAMDISK)，则主内存将适当减少。整个内存的映像">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0-11-init/system-in-memory.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/linux-0-11-init/init-kernel-of-main.png">
-<meta property="og:updated_time" content="2015-08-28T08:23:12.428Z">
+<meta property="og:updated_time" content="2016-07-19T01:18:25.015Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux-0.11内核初始化过程">
 <meta name="twitter:description" content="功能描述系统在执行完boot/目录中的head.s程序后就会将执行权交给main.c。该程序虽然不长，但却包括了内核初始化的所有工作。

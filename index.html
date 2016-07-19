@@ -385,8 +385,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/06/03/file-permission-in-multiuser/" itemprop="url">
-                  用户间复制文件的权限问题
+                <a class="post-title-link" href="/2016/06/03/manage-user-and-group/" itemprop="url">
+                  Linux用户与组管理
                 </a>
               
             
@@ -429,8 +429,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/03/file-permission-in-multiuser/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/file-permission-in-multiuser/" itemprop="commentsCount"></span>
+                <a href="/2016/06/03/manage-user-and-group/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/manage-user-and-group/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -453,12 +453,15 @@
       
         
           
-          问题点最近，实验室的硬盘不够用了，七台服务器，7T的空间，竟然就这样用完了，真是佩服。不过也难怪，大家共用一个账户，都能获得root权限，都任意存储文件，用完空间是迟早的事情，没有管理，任何资源都不够用，不管你有多少。
-具体管理措施存在上述问题，就急需管理来进行解决，怎么管理呢？目前的方式是为每个人
+          创建组
+$sudo addgroup groupName
+创建用户userName并加入组groupName
+$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
+
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/06/03/file-permission-in-multiuser/#more" rel="contents">
+            <a class="btn" href="/2016/06/03/manage-user-and-group/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
