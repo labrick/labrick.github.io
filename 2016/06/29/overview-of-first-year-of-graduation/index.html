@@ -27,18 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -52,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -63,7 +90,7 @@
 二首先值得一提的是项目经历，通过对项目从头到尾各个方面的广泛参与，了解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的研究生之路">
-<meta property="og:url" content="http://yoursite.com/2016/06/29/overview-of-first-year-of-graduation/index.html">
+<meta property="og:url" content="http://labrick.github.io/2016/06/29/overview-of-first-year-of-graduation/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="一时光匆匆，研究生的一年时光已转瞬即逝，回首过往的一个学年，我觉得过得比较的充实而有意义，在这一年里有很多的收获，结识一群要好的朋友，学到很多新的知识，获得更强健的身体素质，思想上也有显著的提高，通过素质课也增长了不少的见识等等。这里我对这过往的一年进行一次总结，目的是总结经验，发现不足之处，以便于今后继续发扬优点，弥补不足。
 二首先值得一提的是项目经历，通过对项目从头到尾各个方面的广泛参与，了解">
@@ -79,7 +106,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: "post",
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -88,6 +115,11 @@
     }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="http://labrick.github.io/2016/06/29/overview-of-first-year-of-graduation/"/>
 
   <title> 我的研究生之路 | 工作实验室 </title>
 </head>
@@ -122,10 +154,14 @@
 
 
 
+
+
   
+  
+    
   
 
-  <div class="container one-collumn  page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -154,13 +190,13 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -170,7 +206,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -180,7 +216,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -190,7 +226,7 @@
         <li class="menu-item menu-item-guestbook">
           <a href="/guestbook" rel="section">
             
-              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             留言
           </a>
@@ -200,7 +236,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -208,7 +244,16 @@
       
 
       
-      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
       
     </ul>
   
@@ -318,6 +363,8 @@
 
           
           
+
+          
         </div>
       </header>
     
@@ -339,6 +386,20 @@
 <p>学习不同目的的实现方法：方法是具体的实现途径，给我们一个目的，我们要能够找到可以实现甚至很好的实现目的的方法，对于这个，因为我们所要达到的目的很多，所以我们不可能把所有的方法都实践一遍，那样时间也不够，所以我们需要的也和见识一样，需要大量的间接学习，很多问题我们只需要知道方法可以实现就可以，不需要追究我们必须亲自实现，这样就可以节约大量的时间，而这些时间是用来多了解不同目的的方法。</p>
 <p>在行业领域上学习，看清楚前面的路：见识是大的方向，在一个无数种选择的世界里，我们总是找不到前面的路，如何选择路(领域)就是一种见识，如果我们见识广我们就能够相比较其他人更容易的找到前面的路，然后坚持下去基本就可以达到目的，而如果我们由于见识不足选择一条错误的道路，无论你怎么努力，你的结果都不会太好，甚至可能你走反了方向。</p>
 <h2 id="四">四</h2><p>去年入学时我也写下了研究生应该做的事情：学好英语、增长见识、提升专业技能、自给自足满足温饱，回头看下后三项做的还不错，第一项做的就比较差劲了，买了不少的英语书籍，但也只是开始的一时兴起，并没有特别的进步，需要在英语方面多下点功夫。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
 
       
     </div>
@@ -383,7 +444,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/29/overview-of-first-year-of-graduation/"
-           data-title="我的研究生之路" data-url="http://yoursite.com/2016/06/29/overview-of-first-year-of-graduation/">
+           data-title="我的研究生之路" data-url="http://labrick.github.io/2016/06/29/overview-of-first-year-of-graduation/">
       </div>
     
   </div>
@@ -432,7 +493,7 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-          
+
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
@@ -459,34 +520,38 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/labrick" target="_blank">
+                <a href="https://github.com/labrick" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/lbrick" target="_blank">
+                <a href="http://weibo.com/lbrick" target="_blank" title="WeiBo">
                   
-                    <i class="fa fa-globe"></i> WeiBo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  WeiBo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://douban.com/people/larrybrick" target="_blank">
+                <a href="http://douban.com/people/larrybrick" target="_blank" title="DouBan">
                   
-                    <i class="fa fa-globe"></i> DouBan
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  DouBan
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://zhihu.com/people/larrybrick" target="_blank">
+                <a href="http://zhihu.com/people/larrybrick" target="_blank" title="ZhiHu">
                   
-                    <i class="fa fa-globe"></i> ZhiHu
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  ZhiHu
                 </a>
               </span>
             
@@ -496,17 +561,13 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
 
       </section>
 
       
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
             
               
@@ -514,9 +575,6 @@
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一"><span class="nav-text">一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二"><span class="nav-text">二</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三"><span class="nav-text">三</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四"><span class="nav-text">四</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
           </div>
         </section>
       
@@ -552,213 +610,78 @@
   </a>
 </div>
 
+        
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
 
   
 
 
 
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
-
-  
-  
 
   
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
-</script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -783,18 +706,23 @@
 
   
     
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
 
-  
-  
 
   
   
 
+  
+
+  
+
+  
 
 </body>
 </html>

@@ -27,18 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -52,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -63,7 +90,7 @@
 tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git-tag使用">
-<meta property="og:url" content="http://yoursite.com/2015/09/11/git-tags-usage/index.html">
+<meta property="og:url" content="http://labrick.github.io/2015/09/11/git-tags-usage/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
 tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
@@ -79,7 +106,7 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: "post",
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -88,6 +115,11 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
     }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="http://labrick.github.io/2015/09/11/git-tags-usage/"/>
 
   <title> git-tag使用 | 工作实验室 </title>
 </head>
@@ -122,10 +154,14 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
 
 
 
+
+
   
+  
+    
   
 
-  <div class="container one-collumn  page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -154,13 +190,13 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -170,7 +206,7 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -180,7 +216,7 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -190,7 +226,7 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
         <li class="menu-item menu-item-guestbook">
           <a href="/guestbook" rel="section">
             
-              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             留言
           </a>
@@ -200,7 +236,7 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -208,7 +244,16 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
       
 
       
-      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
       
     </ul>
   
@@ -318,6 +363,8 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
 
           
           
+
+          
         </div>
       </header>
     
@@ -356,6 +403,20 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
 </code></pre><h3 id="共享tag">共享tag</h3><p>我们在执行git push的时候，tag是不会上传到服务器的，比如现在的github，创建tag后git push，在github网页上是看不到tag的，为了共享这些tag，你必须这样：</p>
 <pre><code>git push origin <span class="comment">--tags</span>
 </code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
       
     </div>
 
@@ -403,7 +464,7 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/09/11/git-tags-usage/"
-           data-title="git-tag使用" data-url="http://yoursite.com/2015/09/11/git-tags-usage/">
+           data-title="git-tag使用" data-url="http://labrick.github.io/2015/09/11/git-tags-usage/">
       </div>
     
   </div>
@@ -452,7 +513,7 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-          
+
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
@@ -479,34 +540,38 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/labrick" target="_blank">
+                <a href="https://github.com/labrick" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/lbrick" target="_blank">
+                <a href="http://weibo.com/lbrick" target="_blank" title="WeiBo">
                   
-                    <i class="fa fa-globe"></i> WeiBo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  WeiBo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://douban.com/people/larrybrick" target="_blank">
+                <a href="http://douban.com/people/larrybrick" target="_blank" title="DouBan">
                   
-                    <i class="fa fa-globe"></i> DouBan
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  DouBan
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://zhihu.com/people/larrybrick" target="_blank">
+                <a href="http://zhihu.com/people/larrybrick" target="_blank" title="ZhiHu">
                   
-                    <i class="fa fa-globe"></i> ZhiHu
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  ZhiHu
                 </a>
               </span>
             
@@ -516,17 +581,13 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
 
       </section>
 
       
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
             
               
@@ -534,9 +595,6 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tag背景"><span class="nav-text">tag背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag使用"><span class="nav-text">tag使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看tag"><span class="nav-text">查看tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建tag"><span class="nav-text">创建tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除tag"><span class="nav-text">删除tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证tag"><span class="nav-text">验证tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享tag"><span class="nav-text">共享tag</span></a></li></ol></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
           </div>
         </section>
       
@@ -572,213 +630,78 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
   </a>
 </div>
 
+        
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
 
   
 
 
 
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
-
-  
-  
 
   
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
-</script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -803,18 +726,23 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
 
   
     
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
 
-  
-  
 
   
   
 
+  
+
+  
+
+  
 
 </body>
 </html>

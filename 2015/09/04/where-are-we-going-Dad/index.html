@@ -27,18 +27,45 @@
 
 
 
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
 
-  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
 
 
 
 <link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, Brick" />
@@ -52,7 +79,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
 
 
 
@@ -64,7 +91,7 @@
 人生百年看似短暂，时则长远，长远到让人忘记仅仅是前一两代人的经验教训，也有可能是必须选择忘记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从爸爸去哪谈孩子的教育">
-<meta property="og:url" content="http://yoursite.com/2015/09/04/where-are-we-going-Dad/index.html">
+<meta property="og:url" content="http://labrick.github.io/2015/09/04/where-are-we-going-Dad/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="当今形势辞职之后，我所关注的领域慢慢的多了起来，加上对书籍、博客、知乎周刊的专注阅读，对所关注的领域的理解慢慢的丰盈起来。生活中的一些事情总能触发我的进一步思考，这一年来纠结、困惑、无奈与惊喜并存，偶尔会出现顿悟的感觉。
 对于小孩子的教育问题是我在一年前看到留守儿童的问题时关注的，对这方面有着很大的无奈。
@@ -82,7 +109,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     scheme: 'Mist',
-    sidebar: "post",
+    sidebar: {"position":"left","display":"post"},
     fancybox: true,
     motion: true,
     duoshuo: {
@@ -91,6 +118,11 @@
     }
   };
 </script>
+
+
+
+
+  <link rel="canonical" href="http://labrick.github.io/2015/09/04/where-are-we-going-Dad/"/>
 
   <title> 从爸爸去哪谈孩子的教育 | 工作实验室 </title>
 </head>
@@ -125,10 +157,14 @@
 
 
 
+
+
   
+  
+    
   
 
-  <div class="container one-collumn  page-post-detail ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -157,13 +193,13 @@
   
 
   
-    <ul id="menu" class="menu menu-left">
+    <ul id="menu" class="menu">
       
         
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
             首页
           </a>
@@ -173,7 +209,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
             
             分类
           </a>
@@ -183,7 +219,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
@@ -193,7 +229,7 @@
         <li class="menu-item menu-item-guestbook">
           <a href="/guestbook" rel="section">
             
-              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
             
             留言
           </a>
@@ -203,7 +239,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-user fa-fw"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
           </a>
@@ -211,7 +247,16 @@
       
 
       
-      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
       
     </ul>
   
@@ -321,6 +366,8 @@
 
           
           
+
+          
         </div>
       </header>
     
@@ -352,6 +399,20 @@
 <span class="bullet">3. </span>父母水平很高，并以自己的标准要求孩子：这样的孩子最好的成绩就是与父母齐平，而且有可能因为父母带来的压力而走下坡路；
 <span class="bullet">4. </span>父母水平很高，但无为而治，并不直接评判孩子的好坏，而是营造宽松的环境，引导孩子学会正确的做事和思考方式：这样的孩子身边有最好的成功案例，又能充分发挥自己的聪明才智，往往能够超越父母的成绩。
 </code></pre><p>我觉得这里写的很到位，但超越父母的前提是营造宽松的氛围。之前也听说一句类似的话：能力一般的过来人交给你的思想听听就行，不要认真，因为很可能就是因为这些思想导致他们成为现在的他们。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
 
       
     </div>
@@ -400,7 +461,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2015/09/04/where-are-we-going-Dad/"
-           data-title="从爸爸去哪谈孩子的教育" data-url="http://yoursite.com/2015/09/04/where-are-we-going-Dad/">
+           data-title="从爸爸去哪谈孩子的教育" data-url="http://labrick.github.io/2015/09/04/where-are-we-going-Dad/">
       </div>
     
   </div>
@@ -449,7 +510,7 @@
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
-          
+
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
@@ -476,34 +537,38 @@
           
             
               <span class="links-of-author-item">
-                <a href="https://github.com/labrick" target="_blank">
+                <a href="https://github.com/labrick" target="_blank" title="GitHub">
                   
-                    <i class="fa fa-github"></i> GitHub
+                    <i class="fa fa-fw fa-github"></i>
                   
+                  GitHub
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://weibo.com/lbrick" target="_blank">
+                <a href="http://weibo.com/lbrick" target="_blank" title="WeiBo">
                   
-                    <i class="fa fa-globe"></i> WeiBo
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  WeiBo
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://douban.com/people/larrybrick" target="_blank">
+                <a href="http://douban.com/people/larrybrick" target="_blank" title="DouBan">
                   
-                    <i class="fa fa-globe"></i> DouBan
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  DouBan
                 </a>
               </span>
             
               <span class="links-of-author-item">
-                <a href="http://zhihu.com/people/larrybrick" target="_blank">
+                <a href="http://zhihu.com/people/larrybrick" target="_blank" title="ZhiHu">
                   
-                    <i class="fa fa-globe"></i> ZhiHu
+                    <i class="fa fa-fw fa-globe"></i>
                   
+                  ZhiHu
                 </a>
               </span>
             
@@ -513,17 +578,13 @@
         
         
 
-        <div class="links-of-author motion-element">
-          
-        </div>
+        
+        
 
       </section>
 
       
         <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc-indicator-top post-toc-indicator">
-            <i class="fa fa-angle-double-up"></i>
-          </div>
           <div class="post-toc">
             
               
@@ -531,9 +592,6 @@
             
               <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#当今形势"><span class="nav-text">当今形势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#爸爸去哪儿"><span class="nav-text">爸爸去哪儿</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#教育"><span class="nav-text">教育</span></a></li></ol></div>
             
-          </div>
-          <div class="post-toc-indicator-bottom post-toc-indicator">
-            <i class="fa fa-angle-double-down"></i>
           </div>
         </section>
       
@@ -569,213 +627,78 @@
   </a>
 </div>
 
+        
 
-
+        
       </div>
     </footer>
 
-    <div class="back-to-top"></div>
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
   </div>
 
   
 
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
 
   
 
 
 
+  
   <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
 
+  
   <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
 
+  
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
 
 
-
-  
-  
 
   
   
-<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
 
-<script type="text/javascript" id="sidebar.toc.highlight">
-  $(document).ready(function () {
-    var tocSelector = '.post-toc';
-    var $tocSelector = $(tocSelector);
-    var activeCurrentSelector = '.active-current';
-
-    $tocSelector
-      .on('activate.bs.scrollspy', function () {
-        var $currentActiveElement = $(tocSelector + ' .active').last();
-
-        removeCurrentActiveClass();
-        $currentActiveElement.addClass('active-current');
-
-        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
-      })
-      .on('clear.bs.scrollspy', function () {
-        removeCurrentActiveClass();
-      });
-
-    function removeCurrentActiveClass () {
-      $(tocSelector + ' ' + activeCurrentSelector)
-        .removeClass(activeCurrentSelector.substring(1));
-    }
-
-    function processTOC () {
-      getTOCMaxHeight();
-      toggleTOCOverflowIndicators();
-    }
-
-    function getTOCMaxHeight () {
-      var height = $('.sidebar').height() -
-                   $tocSelector.position().top -
-                   $('.post-toc-indicator-bottom').height();
-
-      $tocSelector.css('height', height);
-
-      return height;
-    }
-
-    function toggleTOCOverflowIndicators () {
-      tocOverflowIndicator(
-        '.post-toc-indicator-top',
-        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
-      );
-
-      tocOverflowIndicator(
-        '.post-toc-indicator-bottom',
-        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
-      )
-    }
-
-    $(document).on('sidebar.motion.complete', function () {
-      processTOC();
-    });
-
-    $('body').scrollspy({ target: tocSelector });
-    $(window).on('resize', function () {
-      if ( $('.sidebar').hasClass('sidebar-active') ) {
-        processTOC();
-      }
-    });
-
-    onScroll($tocSelector);
-
-    function onScroll (element) {
-      element.on('mousewheel DOMMouseScroll', function (event) {
-          var oe = event.originalEvent;
-          var delta = oe.wheelDelta || -oe.detail;
-
-          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
-          event.preventDefault();
-
-          toggleTOCOverflowIndicators();
-      });
-    }
-
-    function tocOverflowIndicator (indicator, action) {
-      var $indicator = $(indicator);
-      var opacity = action === 'show' ? 1 : 0;
-      $indicator.velocity ?
-        $indicator.velocity('stop').velocity({
-          opacity: opacity
-        }, { duration: 100 }) :
-        $indicator.stop().animate({
-          opacity: opacity
-        }, 100);
-    }
-
-  });
-</script>
-
-<script type="text/javascript" id="sidebar.nav">
-  $(document).ready(function () {
-    var html = $('html');
-    var TAB_ANIMATE_DURATION = 200;
-    var hasVelocity = $.isFunction(html.velocity);
-
-    $('.sidebar-nav li').on('click', function () {
-      var item = $(this);
-      var activeTabClassName = 'sidebar-nav-active';
-      var activePanelClassName = 'sidebar-panel-active';
-      if (item.hasClass(activeTabClassName)) {
-        return;
-      }
-
-      var currentTarget = $('.' + activePanelClassName);
-      var target = $('.' + item.data('target'));
-
-      hasVelocity ?
-        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
-          target
-            .velocity('stop')
-            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
-            .addClass(activePanelClassName);
-        }) :
-        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
-          currentTarget.hide();
-          target
-            .stop()
-            .css({'opacity': 0, 'display': 'block'})
-            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
-              currentTarget.removeClass(activePanelClassName);
-              target.addClass(activePanelClassName);
-            });
-        });
-
-      item.siblings().removeClass(activeTabClassName);
-      item.addClass(activeTabClassName);
-    });
-
-    $('.post-toc a').on('click', function (e) {
-      e.preventDefault();
-      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
-      var offset = $(targetSelector).offset().top;
-      hasVelocity ?
-        html.velocity('stop').velocity('scroll', {
-          offset: offset  + 'px',
-          mobileHA: false
-        }) :
-        $('html, body').stop().animate({
-          scrollTop: offset
-        }, 500);
-    });
-
-    // Expand sidebar on post detail page by default, when post has a toc.
-    NexT.motion.middleWares.sidebar = function () {
-      var $tocContent = $('.post-toc-content');
-
-      if (CONFIG.sidebar === 'post') {
-        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
-          NexT.utils.displaySidebar();
-        }
-      }
-    };
-  });
-</script>
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
 
 
 
   
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
 
 
 
@@ -800,18 +723,23 @@
 
   
     
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
   
 
 
 
 
 
-  
-  
 
   
   
 
+  
+
+  
+
+  
 
 </body>
 </html>
