@@ -73,7 +73,7 @@ $sudo addgroup groupName
 创建用户userName并加入组groupName
 $sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
 $sudo useradd userName -g groupName -M -d absolute">
-<meta property="og:updated_time" content="2016-07-19T02:39:52.427Z">
+<meta property="og:updated_time" content="2016-07-20T03:51:52.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux用户与组管理">
 <meta name="twitter:description" content="创建组
@@ -344,18 +344,20 @@ $sudo useradd userName -g groupName -M -d absolute">
 <pre><code><span class="variable">$sudo</span> useradd <span class="keyword">user</span>Name -g <span class="keyword">group</span>Name -M                     <span class="comment"># 并指定唯一组groupName，并强制创建HOME目录（默认位置）</span>
 <span class="variable">$sudo</span> useradd <span class="keyword">user</span>Name -g <span class="keyword">group</span>Name -M -d absolutePath     <span class="comment"># +指定HOME所在位置absolutePath</span>
 </code></pre><p>增加已存在用户到指定组</p>
-<pre><code><span class="variable">$sudo</span> adduser <span class="keyword">user</span>Name ccache
+<pre><code><span class="variable">$sudo</span> adduser <span class="keyword">user</span>Name <span class="keyword">group</span>Name
+</code></pre><p>从组中删除某用户</p>
+<pre><code><span class="variable">$sudo</span> gpasswd -d <span class="keyword">user</span>Name <span class="keyword">group</span>Name
+</code></pre><p>组用户成员维护</p>
+<pre><code><span class="variable">$gpasswd</span> –a <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 添加用户到组</span>
+<span class="variable">$gpasswd</span> –d <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 从组中删除</span>
+<span class="variable">$gpasswd</span> –A 组管理员用户列表 <span class="keyword">group</span>Name      <span class="comment"># don't know</span>
 </code></pre><p>显示用户ID及组信息：</p>
-<pre><code>$ id
+<pre><code>$id
 uid=<span class="number">1001</span><span class="params">(dbh)</span> gid=<span class="number">1001</span><span class="params">(dbh)</span> groups=<span class="number">115</span><span class="params">(admin)</span>,<span class="number">1001</span><span class="params">(dbh)</span>
 $ cat /etc/group
 groupName:x:<span class="number">1002</span>:userName
 </code></pre><p>口令维护</p>
-<pre><code><span class="variable">$ </span>passwd userName
-</code></pre><p>组用户成员维护</p>
-<pre><code>$ gpasswd –a <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 添加用户到组</span>
-$ gpasswd –d <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 从组中删除</span>
-$ gpasswd –A 组管理员用户列表 <span class="keyword">group</span>Name      <span class="comment"># don't know</span>
+<pre><code><span class="variable">$passwd</span> <span class="keyword">user</span>Name
 </code></pre><p>显示指定用户所属的组</p>
 <pre><code><span class="variable">$ </span>groups userName
 </code></pre><p>文件属性相关</p>
