@@ -98,7 +98,7 @@ $sudo addgroup groupName
 创建用户userName并加入组groupName
 $sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
 $sudo useradd userName -g groupName -M -d absolute">
-<meta property="og:updated_time" content="2016-07-20T03:51:52.879Z">
+<meta property="og:updated_time" content="2016-07-22T10:12:14.762Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux用户与组管理">
 <meta name="twitter:description" content="创建组
@@ -397,19 +397,25 @@ $sudo useradd userName -g groupName -M -d absolute">
 <span class="variable">$gpasswd</span> –d <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 从组中删除</span>
 <span class="variable">$gpasswd</span> –A 组管理员用户列表 <span class="keyword">group</span>Name      <span class="comment"># don't know</span>
 </code></pre><p>显示用户ID及组信息：</p>
-<pre><code>$id
-uid=<span class="number">1001</span><span class="params">(dbh)</span> gid=<span class="number">1001</span><span class="params">(dbh)</span> groups=<span class="number">115</span><span class="params">(admin)</span>,<span class="number">1001</span><span class="params">(dbh)</span>
-$ cat /etc/group
-groupName:x:<span class="number">1002</span>:userName
+<pre><code><span class="variable">$id</span>
+uid=<span class="number">1001</span>(dbh) gid=<span class="number">1001</span>(dbh) groups=<span class="number">115</span>(admin),<span class="number">1001</span>(dbh)
+<span class="variable">$cat</span> /etc/<span class="keyword">group</span>
+<span class="keyword">group</span>Name:x:<span class="number">1002</span>:<span class="keyword">user</span>Name
 </code></pre><p>口令维护</p>
 <pre><code><span class="variable">$passwd</span> <span class="keyword">user</span>Name
 </code></pre><p>显示指定用户所属的组</p>
-<pre><code><span class="variable">$ </span>groups userName
+<pre><code><span class="variable">$groups</span> <span class="keyword">user</span>Name
 </code></pre><p>文件属性相关</p>
 <p>改变当前文件所属用户</p>
-<pre><code>$ chown userName -R <span class="built_in">path</span>
+<pre><code><span class="variable">$chown</span> <span class="keyword">user</span>Name -R path
 </code></pre><p>改变当前文件所属用户组</p>
-<pre><code>$ chgrp groupName -R <span class="built_in">path</span>
+<pre><code><span class="variable">$chgrp</span> <span class="keyword">group</span>Name -R path
+</code></pre><p>改变当前目录下所有文件权限</p>
+<pre><code><span class="label">$find</span> -<span class="keyword">type</span> f | xargs chmod xxx
+<span class="label">$chmod</span> xxx `find -<span class="keyword">type</span> f`           <span class="comment">// 这种方法好像问题</span>
+</code></pre><p>改变当前目录下所有文件夹权限</p>
+<pre><code><span class="label">$find</span> -<span class="keyword">type</span> <span class="keyword">d</span> | xargs chmod xxx
+<span class="label">$chmod</span> xxx `find -<span class="keyword">type</span> <span class="keyword">d</span>`           <span class="comment">// 这种方法好像有问题</span>
 </code></pre>
       
     </div>
