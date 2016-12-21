@@ -92,7 +92,9 @@
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="扯扯淡最近一周多的时间真是忙死掉了，为了机器人项目是加班加点的干，几乎每天都要到一两点，接着到市区找宾馆安稳下来都三点多了，坑死人，搞的我的老毛病（咽炎鼻炎）都来了，如果项目能够很好的安排何必要拖到最后才去做呢，而且及时是拖到最后还是一堆的BUG，很多东西都听天由命，嗨，不说了，这里项目管理不是主题，主要是说项目当中解决连个局域网通过公网互联的问题。
 这个问题应该会经常遇到，比如我想在家访问我公司">
-<meta property="og:updated_time" content="2016-12-21T15:23:27.137Z">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_home.png">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_advance.png">
+<meta property="og:updated_time" content="2016-12-21T15:38:34.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="n2n-vpn">
 <meta name="twitter:description" content="扯扯淡最近一周多的时间真是忙死掉了，为了机器人项目是加班加点的干，几乎每天都要到一两点，接着到市区找宾馆安稳下来都三点多了，坑死人，搞的我的老毛病（咽炎鼻炎）都来了，如果项目能够很好的安排何必要拖到最后才去做呢，而且及时是拖到最后还是一堆的BUG，很多东西都听天由命，嗨，不说了，这里项目管理不是主题，主要是说项目当中解决连个局域网通过公网互联的问题。
@@ -394,8 +396,8 @@ sudo <span class="keyword">make</span> install
 <p>这里需要注意的是：<strong>每个和n2n相关的终端都需要安装此软件, 使用时n2n_v的版本要对应</strong></p>
 <p>windows下有<a href="http://www.vpnhosting.cz/n2nguien.exe" target="_blank" rel="external">n2n gui</a><br>android下有<a href="https://play.google.com/store/apps/details?id=org.zhoubug.n2n_gui" target="_blank" rel="external">n2n客户端</a>，这里是我们所采用的</p>
 <h2 id="启动">启动</h2><h3 id="启动中心结点">启动中心结点</h3><p>启动中心结点比较简单，一条命令：</p>
-<pre><code>supernode <span class="operator">-l</span> <span class="number">1024</span>
-</code></pre><p>1024为开发给边缘节点的端口号，默认不显示任何信息，如果需要显示log，加上<code>-v -f</code>参数。</p>
+<pre><code>supernode <span class="operator">-l</span> supernode_port
+</code></pre><p>supernode_port为开发给边缘节点的端口号，默认不显示任何信息，如果需要显示log，加上<code>-v -f</code>参数。</p>
 <pre><code>Welcome to n2n v.2.1.0 <span class="keyword">for</span> x86_64
 Built <span class="keyword">on</span> <span class="keyword">Dec</span> 20 2016 22:13:36
 <span class="keyword">Copyright</span> 2007-09 - http:<span class="comment">//www.ntop.org</span>
@@ -406,7 +408,7 @@ supernode usage
 -v          Increase verbosity. Can be used multiple times.
 -<span class="keyword">h</span>          This <span class="keyword">help</span> message.
 </code></pre><h3 id="启动边缘结点">启动边缘结点</h3><p>这个配置稍微复杂点。</p>
-<h4 id="linux下：">linux下：</h4><pre><code>sudo edge -<span class="keyword">d</span> edge0 -a 192.168.10.24 -c <span class="keyword">test</span> -<span class="keyword">M</span> 1200 -k abc123 -<span class="keyword">l</span> 60.171.108.192:1024 -<span class="keyword">m</span> ae:e0:4f:e7:47:5b
+<h4 id="linux下：">linux下：</h4><pre><code>sudo edge -<span class="keyword">d</span> edge0 -a virtual_ip -c <span class="keyword">test</span> -<span class="keyword">M</span> 1200 -k password -<span class="keyword">l</span> supernode_ip:port -<span class="keyword">m</span> virtual_mac
 
 -<span class="keyword">d</span> 虚拟网卡名称 -a 本地设置的ip地址（相互通信的终端ip需要在同一个网段里） -c 组名称 -<span class="keyword">M</span> MTU值 -k 密码 -<span class="keyword">l</span> 超级结点ip:port -<span class="keyword">m</span> 虚拟网卡<span class="keyword">mac</span>地址
 
@@ -441,10 +443,8 @@ edge -<span class="keyword">d</span> &lt;tun device&gt; -a [static:|dhcp:]&lt;tu
 Environment variables:
     N2N_KEY              | Encryption key (ASCII). Not with -K or -k.
 </code></pre><h4 id="windows和android端">windows和android端</h4><pre><code>windows和android端按照文本提示很容易填写；
-
-![](<span class="string">http:</span><span class="comment">//7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_home.png)</span>
-![](<span class="string">http:</span><span class="comment">//7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_advance.png)</span>
-</code></pre><p>注意<code>advance</code>中的<strong>通信协议版本</strong>的选择</p>
+</code></pre><p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_home.png" alt=""><br><img src="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_advance.png" alt=""></p>
+<p>注意<code>advance</code>中的<strong>通信协议版本</strong>的选择</p>
 
       
     </div>
