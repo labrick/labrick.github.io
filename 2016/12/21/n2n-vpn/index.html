@@ -94,7 +94,7 @@
 这个问题应该会经常遇到，比如我想在家访问我公司">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_home.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_advance.png">
-<meta property="og:updated_time" content="2016-12-23T08:33:57.474Z">
+<meta property="og:updated_time" content="2017-01-09T15:22:50.882Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="n2n内网穿透">
 <meta name="twitter:description" content="扯扯淡最近一周多的时间真是忙死掉了，为了机器人项目是加班加点的干，几乎每天都要到一两点，接着到市区找宾馆安稳下来都三点多了，坑死人，搞的我的老毛病（咽炎鼻炎）都来了，如果项目能够很好的安排何必要拖到最后才去做呢，而且即使是拖到最后还是一堆的BUG，很多东西都听天由命，嗨，不说了，这里项目管理不是主题，主要是说项目当中解决连个局域网通过公网互联的问题。
@@ -390,8 +390,9 @@
 </code></pre><p>源2:</p>
 <pre><code>svn co <span class="symbol">https:</span>/<span class="regexp">/svn.ntop.org/svn</span><span class="regexp">/ntop/trunk</span><span class="regexp">/n2n</span>
 </code></pre><h2 id="编译安装">编译安装</h2><pre><code><span class="keyword">cd</span> n2n/n2n_v2/
+cmake ./
 <span class="keyword">make</span>
-sudo <span class="keyword">make</span> install
+sudo <span class="keyword">make</span> [PREFIX=/usr/local] install
 </code></pre><p>make命令执行时，见招拆招，编译很快，很简单。</p>
 <p>这里需要注意的是：<strong>每个和n2n相关的终端都需要安装此软件, 使用时n2n_v的版本要对应</strong></p>
 <p>windows下有<a href="http://www.vpnhosting.cz/n2nguien.exe" target="_blank" rel="external">n2n gui</a><br>android下有<a href="https://play.google.com/store/apps/details?id=org.zhoubug.n2n_gui" target="_blank" rel="external">n2n客户端</a><br>这里是我们所采用的。</p>
@@ -653,7 +654,7 @@ Environment variables:
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
