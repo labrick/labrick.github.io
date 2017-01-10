@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2. 注册服务 · 深入理解Android系统</title>
+        <title>2.2 注册服务 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -116,7 +116,7 @@
                 <a href="../prepare/">
             
                     
-                    零、准备工作
+                    0. 准备工作
             
                 </a>
             
@@ -130,7 +130,7 @@
                 <a href="../prepare/as-install.html">
             
                     
-                    1. 应用开发环境搭建
+                    0.1 应用开发环境搭建
             
                 </a>
             
@@ -143,7 +143,7 @@
                 <a href="../prepare/system-env.html">
             
                     
-                    2. 系统开发环境搭建
+                    0.2 系统开发环境搭建
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="../application/">
             
                     
-                    一、应用篇
+                    1. 应用篇
             
                 </a>
             
@@ -175,7 +175,7 @@
                 <a href="../application/system-sign.html">
             
                     
-                    1. 获得系统签名
+                    1.1 获得系统签名
             
                 </a>
             
@@ -188,7 +188,20 @@
                 <a href="../application/install-silence.html">
             
                     
-                    2. 静默安装
+                    1.2 静默安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../application/startapp-by-adb.html">
+            
+                <a href="../application/startapp-by-adb.html">
+            
+                    
+                    1.3 adb启动应用
             
                 </a>
             
@@ -206,7 +219,7 @@
                 <a href="./">
             
                     
-                    二、框架篇
+                    2. 框架篇
             
                 </a>
             
@@ -220,7 +233,7 @@
                 <a href="system-lib.html">
             
                     
-                    1. system/lib目录
+                    2.1 system/lib目录
             
                 </a>
             
@@ -233,7 +246,7 @@
                 <a href="add-service.html">
             
                     
-                    2. 注册服务
+                    2.2 注册服务
             
                 </a>
             
@@ -251,11 +264,56 @@
                 <a href="../kernel/">
             
                     
-                    三、内核篇
+                    3. 内核篇
             
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../kernel/operate-dev.html">
+            
+                <a href="../kernel/operate-dev.html">
+            
+                    
+                    3.1 驱动操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../kernel/kernel-version.html">
+            
+                <a href="../kernel/kernel-version.html">
+            
+                    
+                    3.2 内核版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../kernel/source-top-dir.html">
+            
+                <a href="../kernel/source-top-dir.html">
+            
+                    
+                    3.3 源码顶层目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -264,7 +322,7 @@
                 <a href="../uboot/">
             
                     
-                    四、启动篇
+                    4. 启动篇
             
                 </a>
             
@@ -277,7 +335,7 @@
                 <a href="../hardware/">
             
                     
-                    五、硬件篇
+                    5. 硬件篇
             
                 </a>
             
@@ -315,7 +373,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >2. 注册服务</a>
+        <a href=".." >2.2 注册服务</a>
     </h1>
 </div>
 
@@ -340,8 +398,11 @@
 <p>ServerThread&#x5305;&#x542B;&#x4E86;&#x5404;&#x79CD;&#x670D;&#x52A1;&#x7684;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#xFF1B;
 SystemServer&#x5219;&#x5BF9;ServerThread&#x8FDB;&#x884C;&#x4E86;&#x5B9E;&#x4F8B;&#x5316;&#x3002;</p>
 <pre><code>1. init.rc&#x4E2D;&#x542F;&#x52A8;zygote&#x65F6;&#x52A0;&#x4E0A;--start-system-server&#x53C2;&#x6570;&#x542F;&#x52A8;SystemServer
-2. SystemServer&#x4E2D;&#x5B9E;&#x4F8B;&#x5316;ServerThread&#xFF0C;&#x800C;&#x5728;ServerThread&#x4E2D;&#x6CE8;&#x518C;&#x542F;&#x52A8;&#x4E86;&#x5404;&#x79CD;&#x670D;&#x52A1;
-</code></pre>
+2. SystemServer&#x4E2D;&#x5B9E;&#x4F8B;&#x5316;ServerThread&#xFF0C;&#x800C;&#x5728;ServerThread&#x4E2D;&#x6CE8;&#x518C;&#x542F;&#x52A8;&#x4E86;&#x5404;&#x79CD;&#x670D;&#x52A1;&#x5230;Context Manager&#x4E2D;
+</code></pre><hr>
+<p>Context Manager: &#x4E00;&#x79CD;&#x7BA1;&#x7406;&#x670D;&#x52A1;&#x7684;&#x7CFB;&#x7EDF;&#x8FDB;&#x7A0B;</p>
+<p>markdown&#x4E0D;&#x652F;&#x6301;&#x6CE8;&#x811A;&#xFF0C;&#x53EA;&#x80FD;&#x5148;&#x8FD9;&#x6837;&#x4E86;</p>
+
                                 
                                 </section>
                             
@@ -368,12 +429,12 @@ SystemServer&#x5219;&#x5BF9;ServerThread&#x8FDB;&#x884C;&#x4E86;&#x5B9E;&#x4F8B;
 
             
                 
-                <a href="system-lib.html" class="navigation navigation-prev " aria-label="Previous page: 1. system/lib目录">
+                <a href="system-lib.html" class="navigation navigation-prev " aria-label="Previous page: 2.1 system/lib目录">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../kernel/" class="navigation navigation-next " aria-label="Next page: 三、内核篇">
+                <a href="../kernel/" class="navigation navigation-next " aria-label="Next page: 3. 内核篇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -384,7 +445,7 @@ SystemServer&#x5219;&#x5BF9;ServerThread&#x8FDB;&#x884C;&#x4E86;&#x5B9E;&#x4F8B;
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2. 注册服务","level":"1.4.2","depth":2,"next":{"title":"三、内核篇","level":"1.5","depth":1,"path":"kernel/README.md","ref":"kernel/README.md","articles":[]},"previous":{"title":"1. system/lib目录","level":"1.4.1","depth":2,"path":"framework/system-lib.md","ref":"framework/system-lib.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"framework/add-service.md","mtime":"2017-01-10T02:57:31.777Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T03:29:49.588Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2.2 注册服务","level":"1.4.2","depth":2,"next":{"title":"3. 内核篇","level":"1.5","depth":1,"path":"kernel/README.md","ref":"kernel/README.md","articles":[{"title":"3.1 驱动操作","level":"1.5.1","depth":2,"path":"kernel/operate-dev.md","ref":"kernel/operate-dev.md","articles":[]},{"title":"3.2 内核版本","level":"1.5.2","depth":2,"path":"kernel/kernel-version.md","ref":"kernel/kernel-version.md","articles":[]},{"title":"3.3 源码顶层目录","level":"1.5.3","depth":2,"path":"kernel/source-top-dir.md","ref":"kernel/source-top-dir.md","articles":[]}]},"previous":{"title":"2.1 system/lib目录","level":"1.4.1","depth":2,"path":"framework/system-lib.md","ref":"framework/system-lib.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"framework/add-service.md","mtime":"2017-01-10T06:08:40.470Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T11:18:10.394Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

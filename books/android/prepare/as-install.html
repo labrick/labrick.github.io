@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>1. 应用开发环境搭建 · 深入理解Android系统</title>
+        <title>0.1 应用开发环境搭建 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -116,7 +116,7 @@
                 <a href="./">
             
                     
-                    零、准备工作
+                    0. 准备工作
             
                 </a>
             
@@ -130,7 +130,7 @@
                 <a href="as-install.html">
             
                     
-                    1. 应用开发环境搭建
+                    0.1 应用开发环境搭建
             
                 </a>
             
@@ -143,7 +143,7 @@
                 <a href="system-env.html">
             
                     
-                    2. 系统开发环境搭建
+                    0.2 系统开发环境搭建
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="../application/">
             
                     
-                    一、应用篇
+                    1. 应用篇
             
                 </a>
             
@@ -175,7 +175,7 @@
                 <a href="../application/system-sign.html">
             
                     
-                    1. 获得系统签名
+                    1.1 获得系统签名
             
                 </a>
             
@@ -188,7 +188,20 @@
                 <a href="../application/install-silence.html">
             
                     
-                    2. 静默安装
+                    1.2 静默安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../application/startapp-by-adb.html">
+            
+                <a href="../application/startapp-by-adb.html">
+            
+                    
+                    1.3 adb启动应用
             
                 </a>
             
@@ -206,7 +219,7 @@
                 <a href="../framework/">
             
                     
-                    二、框架篇
+                    2. 框架篇
             
                 </a>
             
@@ -220,7 +233,7 @@
                 <a href="../framework/system-lib.html">
             
                     
-                    1. system/lib目录
+                    2.1 system/lib目录
             
                 </a>
             
@@ -233,7 +246,7 @@
                 <a href="../framework/add-service.html">
             
                     
-                    2. 注册服务
+                    2.2 注册服务
             
                 </a>
             
@@ -251,11 +264,56 @@
                 <a href="../kernel/">
             
                     
-                    三、内核篇
+                    3. 内核篇
             
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../kernel/operate-dev.html">
+            
+                <a href="../kernel/operate-dev.html">
+            
+                    
+                    3.1 驱动操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../kernel/kernel-version.html">
+            
+                <a href="../kernel/kernel-version.html">
+            
+                    
+                    3.2 内核版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../kernel/source-top-dir.html">
+            
+                <a href="../kernel/source-top-dir.html">
+            
+                    
+                    3.3 源码顶层目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -264,7 +322,7 @@
                 <a href="../uboot/">
             
                     
-                    四、启动篇
+                    4. 启动篇
             
                 </a>
             
@@ -277,7 +335,7 @@
                 <a href="../hardware/">
             
                     
-                    五、硬件篇
+                    5. 硬件篇
             
                 </a>
             
@@ -315,7 +373,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >1. 应用开发环境搭建</a>
+        <a href=".." >0.1 应用开发环境搭建</a>
     </h1>
 </div>
 
@@ -330,7 +388,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="1&#x5E94;&#x7528;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x642D;&#x5EFA;">1.&#x5E94;&#x7528;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x642D;&#x5EFA;</h1>
+                                <h1 id="&#x5E94;&#x7528;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x642D;&#x5EFA;">&#x5E94;&#x7528;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x642D;&#x5EFA;</h1>
 <p>&#x4F5C;&#x4E3A;Google&#x7684;&#x91CD;&#x8981;&#x4EA7;&#x54C1;&#xFF0C;Google&#x4E3A;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x51C6;&#x5907;&#x4E86;&#x5BB9;&#x6613;&#x642D;&#x5EFA;&#x5E76;&#x4E14;&#x6613;&#x7528;&#x7684;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF0C;&#x4EE5;&#x6C42;Android&#x5177;&#x6709;&#x66F4;&#x5927;&#x7684;&#x7ADE;&#x4E89;&#x529B;&#x3002;</p>
 <p>Android&#x5E94;&#x7528;&#x5C42;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x6709;&#x4E24;&#x4E2A;&#xFF1A;Eclipse&#x548C;Android Studio&#x3002;</p>
 <p>Eclipse&#x662F;Android Studio&#x51FA;&#x73B0;&#x4E4B;&#x524D;&#x7684;&#x4E3B;&#x8981;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF0C;&#x7531;IBM&#x5F00;&#x6E90;&#x4E3B;&#x5BFC;&#x7684;&#x5F00;&#x53D1;&#x6846;&#x67B6;&#xFF0C;Google&#x5728;&#x5176;&#x4E2D;&#x96C6;&#x6210;&#x81EA;&#x5DF1;&#x7684;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#xFF08;ADT+SDK&#xFF09;&#xFF0C;&#x5B9E;&#x73B0;&#x4E86;Android&#x5E94;&#x7528;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x4E2A;&#x8FC7;&#x6E21;&#x8FC7;&#x7A0B;&#x3002;</p>
@@ -364,12 +422,12 @@
 
             
                 
-                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 零、准备工作">
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 0. 准备工作">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="system-env.html" class="navigation navigation-next " aria-label="Next page: 2. 系统开发环境搭建">
+                <a href="system-env.html" class="navigation navigation-next " aria-label="Next page: 0.2 系统开发环境搭建">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -380,7 +438,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"1. 应用开发环境搭建","level":"1.2.1","depth":2,"next":{"title":"2. 系统开发环境搭建","level":"1.2.2","depth":2,"path":"prepare/system-env.md","ref":"prepare/system-env.md","articles":[]},"previous":{"title":"零、准备工作","level":"1.2","depth":1,"path":"prepare/README.md","ref":"prepare/README.md","articles":[{"title":"1. 应用开发环境搭建","level":"1.2.1","depth":2,"path":"prepare/as-install.md","ref":"prepare/as-install.md","articles":[]},{"title":"2. 系统开发环境搭建","level":"1.2.2","depth":2,"path":"prepare/system-env.md","ref":"prepare/system-env.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"prepare/as-install.md","mtime":"2017-01-10T03:04:37.670Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T03:29:49.588Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"0.1 应用开发环境搭建","level":"1.2.1","depth":2,"next":{"title":"0.2 系统开发环境搭建","level":"1.2.2","depth":2,"path":"prepare/system-env.md","ref":"prepare/system-env.md","articles":[]},"previous":{"title":"0. 准备工作","level":"1.2","depth":1,"path":"prepare/README.md","ref":"prepare/README.md","articles":[{"title":"0.1 应用开发环境搭建","level":"1.2.1","depth":2,"path":"prepare/as-install.md","ref":"prepare/as-install.md","articles":[]},{"title":"0.2 系统开发环境搭建","level":"1.2.2","depth":2,"path":"prepare/system-env.md","ref":"prepare/system-env.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"prepare/as-install.md","mtime":"2017-01-10T04:23:59.956Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T11:18:10.394Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

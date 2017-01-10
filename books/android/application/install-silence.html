@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>2. 静默安装 · 深入理解Android系统</title>
+        <title>1.2 静默安装 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,7 +57,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../framework/" />
+    <link rel="next" href="startapp-by-adb.html" />
     
     
     <link rel="prev" href="system-sign.html" />
@@ -116,7 +116,7 @@
                 <a href="../prepare/">
             
                     
-                    零、准备工作
+                    0. 准备工作
             
                 </a>
             
@@ -130,7 +130,7 @@
                 <a href="../prepare/as-install.html">
             
                     
-                    1. 应用开发环境搭建
+                    0.1 应用开发环境搭建
             
                 </a>
             
@@ -143,7 +143,7 @@
                 <a href="../prepare/system-env.html">
             
                     
-                    2. 系统开发环境搭建
+                    0.2 系统开发环境搭建
             
                 </a>
             
@@ -161,7 +161,7 @@
                 <a href="./">
             
                     
-                    一、应用篇
+                    1. 应用篇
             
                 </a>
             
@@ -175,7 +175,7 @@
                 <a href="system-sign.html">
             
                     
-                    1. 获得系统签名
+                    1.1 获得系统签名
             
                 </a>
             
@@ -188,7 +188,20 @@
                 <a href="install-silence.html">
             
                     
-                    2. 静默安装
+                    1.2 静默安装
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="startapp-by-adb.html">
+            
+                <a href="startapp-by-adb.html">
+            
+                    
+                    1.3 adb启动应用
             
                 </a>
             
@@ -206,7 +219,7 @@
                 <a href="../framework/">
             
                     
-                    二、框架篇
+                    2. 框架篇
             
                 </a>
             
@@ -220,7 +233,7 @@
                 <a href="../framework/system-lib.html">
             
                     
-                    1. system/lib目录
+                    2.1 system/lib目录
             
                 </a>
             
@@ -233,7 +246,7 @@
                 <a href="../framework/add-service.html">
             
                     
-                    2. 注册服务
+                    2.2 注册服务
             
                 </a>
             
@@ -251,11 +264,56 @@
                 <a href="../kernel/">
             
                     
-                    三、内核篇
+                    3. 内核篇
             
                 </a>
             
 
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../kernel/operate-dev.html">
+            
+                <a href="../kernel/operate-dev.html">
+            
+                    
+                    3.1 驱动操作
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../kernel/kernel-version.html">
+            
+                <a href="../kernel/kernel-version.html">
+            
+                    
+                    3.2 内核版本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../kernel/source-top-dir.html">
+            
+                <a href="../kernel/source-top-dir.html">
+            
+                    
+                    3.3 源码顶层目录
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
             
         </li>
     
@@ -264,7 +322,7 @@
                 <a href="../uboot/">
             
                     
-                    四、启动篇
+                    4. 启动篇
             
                 </a>
             
@@ -277,7 +335,7 @@
                 <a href="../hardware/">
             
                     
-                    五、硬件篇
+                    5. 硬件篇
             
                 </a>
             
@@ -315,7 +373,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >2. 静默安装</a>
+        <a href=".." >1.2 静默安装</a>
     </h1>
 </div>
 
@@ -358,12 +416,12 @@
 
             
                 
-                <a href="system-sign.html" class="navigation navigation-prev " aria-label="Previous page: 1. 获得系统签名">
+                <a href="system-sign.html" class="navigation navigation-prev " aria-label="Previous page: 1.1 获得系统签名">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../framework/" class="navigation navigation-next " aria-label="Next page: 二、框架篇">
+                <a href="startapp-by-adb.html" class="navigation navigation-next " aria-label="Next page: 1.3 adb启动应用">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -374,7 +432,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"2. 静默安装","level":"1.3.2","depth":2,"next":{"title":"二、框架篇","level":"1.4","depth":1,"path":"framework/README.md","ref":"framework/README.md","articles":[{"title":"1. system/lib目录","level":"1.4.1","depth":2,"path":"framework/system-lib.md","ref":"framework/system-lib.md","articles":[]},{"title":"2. 注册服务","level":"1.4.2","depth":2,"path":"framework/add-service.md","ref":"framework/add-service.md","articles":[]}]},"previous":{"title":"1. 获得系统签名","level":"1.3.1","depth":2,"path":"application/system-sign.md","ref":"application/system-sign.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"application/install-silence.md","mtime":"2017-01-10T03:01:22.583Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T03:29:49.588Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"1.2 静默安装","level":"1.3.2","depth":2,"next":{"title":"1.3 adb启动应用","level":"1.3.3","depth":2,"path":"application/startapp-by-adb.md","ref":"application/startapp-by-adb.md","articles":[]},"previous":{"title":"1.1 获得系统签名","level":"1.3.1","depth":2,"path":"application/system-sign.md","ref":"application/system-sign.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"application/install-silence.md","mtime":"2017-01-10T03:01:22.583Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T11:18:10.394Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
