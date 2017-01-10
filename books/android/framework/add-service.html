@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>四、启动篇 · 深入理解Android系统</title>
+        <title>2. 注册服务 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../hardware/" />
+    <link rel="next" href="../kernel/" />
     
     
-    <link rel="prev" href="../kernel/" />
+    <link rel="prev" href="system-lib.html" />
     
 
     </head>
@@ -201,9 +201,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../framework/">
+        <li class="chapter " data-level="1.4" data-path="./">
             
-                <a href="../framework/">
+                <a href="./">
             
                     
                     二、框架篇
@@ -215,9 +215,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../framework/system-lib.html">
+        <li class="chapter " data-level="1.4.1" data-path="system-lib.html">
             
-                <a href="../framework/system-lib.html">
+                <a href="system-lib.html">
             
                     
                     1. system/lib目录
@@ -228,9 +228,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../framework/add-service.html">
+        <li class="chapter active" data-level="1.4.2" data-path="add-service.html">
             
-                <a href="../framework/add-service.html">
+                <a href="add-service.html">
             
                     
                     2. 注册服务
@@ -259,9 +259,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6" data-path="./">
+        <li class="chapter " data-level="1.6" data-path="../uboot/">
             
-                <a href="./">
+                <a href="../uboot/">
             
                     
                     四、启动篇
@@ -315,7 +315,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >四、启动篇</a>
+        <a href=".." >2. 注册服务</a>
     </h1>
 </div>
 
@@ -330,8 +330,18 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x56DB;&#x3001;&#x542F;&#x52A8;&#x7BC7;">&#x56DB;&#x3001;&#x542F;&#x52A8;&#x7BC7;</h1>
-
+                                <h1 id="&#x6CE8;&#x518C;&#x670D;&#x52A1;">&#x6CE8;&#x518C;&#x670D;&#x52A1;</h1>
+<p>2017-01-09</p>
+<hr>
+<p>&#x5728;frameworks/base/services/java/com/android/server/SystemServer.java&#x4E2D;:</p>
+<pre><code>ServiceManager.addService(Context.POWER_SERVICE, new PowerManagerService());
+</code></pre><p>addService()&#x51FD;&#x6570;&#x5C06;&#x5404;&#x4E2A;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x5230;Context Manager&#x4E2D;&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x5305;&#x542B;&#x4E86;&#x4E24;&#x4E2A;&#x7C7B;&#xFF1A;</p>
+<p>ServerThread&#x5305;&#x542B;&#x4E86;&#x5404;&#x79CD;&#x670D;&#x52A1;&#x7684;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#xFF1B;
+SystemServer&#x5219;&#x5BF9;ServerThread&#x8FDB;&#x884C;&#x4E86;&#x5B9E;&#x4F8B;&#x5316;&#x3002;</p>
+<pre><code>1. init.rc&#x4E2D;&#x542F;&#x52A8;zygote&#x65F6;&#x52A0;&#x4E0A;--start-system-server&#x53C2;&#x6570;&#x542F;&#x52A8;SystemServer
+2. SystemServer&#x4E2D;&#x5B9E;&#x4F8B;&#x5316;ServerThread&#xFF0C;&#x800C;&#x5728;ServerThread&#x4E2D;&#x6CE8;&#x518C;&#x542F;&#x52A8;&#x4E86;&#x5404;&#x79CD;&#x670D;&#x52A1;
+</code></pre>
                                 
                                 </section>
                             
@@ -358,12 +368,12 @@
 
             
                 
-                <a href="../kernel/" class="navigation navigation-prev " aria-label="Previous page: 三、内核篇">
+                <a href="system-lib.html" class="navigation navigation-prev " aria-label="Previous page: 1. system/lib目录">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../hardware/" class="navigation navigation-next " aria-label="Next page: 五、硬件篇">
+                <a href="../kernel/" class="navigation navigation-next " aria-label="Next page: 三、内核篇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -374,7 +384,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"四、启动篇","level":"1.6","depth":1,"next":{"title":"五、硬件篇","level":"1.7","depth":1,"path":"hardware/README.md","ref":"hardware/README.md","articles":[]},"previous":{"title":"三、内核篇","level":"1.5","depth":1,"path":"kernel/README.md","ref":"kernel/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"uboot/README.md","mtime":"2016-12-23T06:43:34.285Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T03:29:49.588Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"2. 注册服务","level":"1.4.2","depth":2,"next":{"title":"三、内核篇","level":"1.5","depth":1,"path":"kernel/README.md","ref":"kernel/README.md","articles":[]},"previous":{"title":"1. system/lib目录","level":"1.4.1","depth":2,"path":"framework/system-lib.md","ref":"framework/system-lib.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"framework/add-service.md","mtime":"2017-01-10T02:57:31.777Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-10T03:29:49.588Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
