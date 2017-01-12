@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3.5 合成内核镜像 · 深入理解Android系统</title>
+        <title>3.6 内核命令行 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="start-kernel.html" />
+    <link rel="next" href="../uboot/" />
     
     
-    <link rel="prev" href="config-kernel.html" />
+    <link rel="prev" href="start-kernel.html" />
     
 
     </head>
@@ -325,7 +325,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.5" data-path="synthetize-image.html">
+        <li class="chapter " data-level="1.5.5" data-path="synthetize-image.html">
             
                 <a href="synthetize-image.html">
             
@@ -351,7 +351,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.7" data-path="kernel-cmd.html">
+        <li class="chapter active" data-level="1.5.7" data-path="kernel-cmd.html">
             
                 <a href="kernel-cmd.html">
             
@@ -425,7 +425,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3.5 合成内核镜像</a>
+        <a href=".." >3.6 内核命令行</a>
     </h1>
 </div>
 
@@ -440,88 +440,50 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5408;&#x6210;&#x5185;&#x6838;&#x955C;&#x50CF;">&#x5408;&#x6210;&#x5185;&#x6838;&#x955C;&#x50CF;</h1>
-<p>2017-01-11</p>
+                                <h1 id="&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;">&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;</h1>
+<p>2017-01-12</p>
 <hr>
-<p>&#x7ECF;&#x8FC7;&#x7F16;&#x8BD1;&#x7684;linux&#x5185;&#x6838;&#x4EA7;&#x751F;&#x4E86;&#x5F88;&#x591A;&#x955C;&#x50CF;&#x7248;&#x672C;&#xFF0C;&#x8FD9;&#x91CC;&#x5BF9;&#x4ED6;&#x4EEC;&#x8FDB;&#x884C;&#x4E86;&#x4E0B;&#x5206;&#x6790;&#xFF1A;</p>
-<h2 id="&#x5185;&#x6838;&#x955C;&#x50CF;&#x7684;&#x4E3B;&#x8981;&#x7EC4;&#x4EF6;">&#x5185;&#x6838;&#x955C;&#x50CF;&#x7684;&#x4E3B;&#x8981;&#x7EC4;&#x4EF6;</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">&#x7EC4;&#x4EF6;&#x540D;&#x79F0;</th>
-<th style="text-align:left">&#x63CF;&#x8FF0;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">vmlinx</td>
-<td style="text-align:left">ELF&#x683C;&#x5F0F;&#x7684;&#x5185;&#x6838;&#x4E3B;&#x4F53;&#xFF0C;&#x5305;&#x542B;&#x7B26;&#x53F7;&#x3001;&#x6CE8;&#x91CA;&#x3001;&#x8C03;&#x8BD5;&#x4FE1;&#x606F;&#xFF08;&#x7F16;&#x8BD1;&#x65F6;&#x52A0;-g&#x9009;&#x9879;&#xFF09;&#x548C;&#x4E0E;&#x67B6;&#x6784;&#x76F8;&#x5173;&#x7684;&#x90E8;&#x5206;</td>
-</tr>
-<tr>
-<td style="text-align:left">System.map</td>
-<td style="text-align:left">&#x57FA;&#x4E8E;&#x6587;&#x672C;&#x7684;&#x5185;&#x6838;&#x7B26;&#x53F7;&#x8868;&#xFF0C;&#x9488;&#x5BF9;vmlinux&#x6A21;&#x5757;</td>
-</tr>
-<tr>
-<td style="text-align:left">.tmp_System.map</td>
-<td style="text-align:left">&#x751F;&#x6210;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x5BF9;System.map&#x8FDB;&#x884C;&#x5B8C;&#x597D;&#x6027;&#x68C0;&#x67E5;&#xFF1B;&#x5426;&#x5219;&#x4E0D;&#x4F1A;&#x7528;&#x4E8E;&#x6700;&#x540E;&#x7684;&#x6784;&#x5EFA;&#x955C;&#x50CF;&#x4E2D;</td>
-</tr>
-<tr>
-<td style="text-align:left">Image</td>
-<td style="text-align:left">&#x4E8C;&#x8FDB;&#x5236;&#x5185;&#x6838;&#x6A21;&#x5757;&#xFF0C;&#x53BB;&#x9664;&#x4E86;&#x7B26;&#x53F7;&#x3001;&#x6807;&#x8BB0;&#x548C;&#x6CE8;&#x91CA;</td>
-</tr>
-<tr>
-<td style="text-align:left">head.o</td>
-<td style="text-align:left">&#x4E0E;ARM&#x76F8;&#x5173;&#x7684;&#x542F;&#x52A8;&#x4EE3;&#x7801;&#xFF0C;&#x5BF9;&#x6240;&#x6709;&#x7684;ARM&#x5904;&#x7406;&#x5668;&#x901A;&#x7528;&#x3002;&#x5F15;&#x5BFC;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;&#x4F1A;&#x5C06;&#x63A7;&#x5236;&#x6743;&#x4EA4;&#x7ED9;&#x8FD9;&#x4E2A;&#x5BF9;&#x8C61;</td>
-</tr>
-<tr>
-<td style="text-align:left">piggy.gz</td>
-<td style="text-align:left">&#x7ECF;&#x8FC7;gzip&#x538B;&#x7F29;&#x7684;Image&#x6587;&#x4EF6;</td>
-</tr>
-<tr>
-<td style="text-align:left">piggy.o</td>
-<td style="text-align:left">&#x5C06;&#x6587;&#x4EF6;piggy.gz&#x8FDB;&#x884C;&#x6C47;&#x7F16;&#x540E;&#x751F;&#x6210;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x8FD9;&#x6837;&#x5B83;&#x5C31;&#x53EF;&#x4EE5;&#x548C;&#x4E0B;&#x4E00;&#x4E2A;&#x5BF9;&#x8C61;misc.o&#x94FE;&#x63A5;&#x5728;&#x4E00;&#x8D77;&#x4E86;</td>
-</tr>
-<tr>
-<td style="text-align:left">misc.o</td>
-<td style="text-align:left">&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E86;&#x7528;&#x4E8E;&#x89E3;&#x538B;&#x5185;&#x6838;&#x955C;&#x50CF;piggy.gz&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x53E6;&#x5916;&#xFF0C;&#x6211;&#x4EEC;&#x5728;&#x4E00;&#x4E9B;&#x67B6;&#x6784;&#x4E0A;&#x5E38;&#x4F1A;&#x770B;&#x5230;&#x7684;&#x5F15;&#x5BFC;&#x6D88;&#x606F;&#x201D;Uncompressing Linux ...Done&#x201C;&#x4E5F;&#x662F;&#x7531;&#x5B83;&#x4EA7;&#x751F;&#x7684;</td>
-</tr>
-<tr>
-<td style="text-align:left">head-xscale.o</td>
-<td style="text-align:left">&#x4E13;&#x95E8;&#x9488;&#x5BF9;XScale&#x5904;&#x7406;&#x5668;&#x521D;&#x59CB;&#x5316;</td>
-</tr>
-<tr>
-<td style="text-align:left">big-endian.o</td>
-<td style="text-align:left">&#x8FD9;&#x662F;&#x4E2A;&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x7F16;&#x5199;&#x7684;&#x5C0F;&#x7A0B;&#x5E8F;&#xFF0C;&#x7528;&#x4E8E;&#x5C06;XScale&#x5904;&#x7406;&#x5668;&#x8F6C;&#x6362;&#x5230;&#x5927;&#x7AEF;&#x5B57;&#x8282;&#x5E8F;&#x6A21;&#x5F0F;</td>
-</tr>
-<tr>
-<td style="text-align:left">vmlinux</td>
-<td style="text-align:left">&#x5408;&#x6210;&#x5185;&#x6838;&#x955C;&#x50CF;&#x3002;&#x548C;&#x7B2C;&#x4E00;&#x4E2A;vmlinux&#x4E0D;&#x4E00;&#x6837;&#xFF0C;&#x8FD9;&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x955C;&#x50CF;&#x662F;&#x7531;&#x5185;&#x6838;&#x4E3B;&#x4F53;&#x548C;&#x8868;&#x683C;&#x4E2D;&#x7684;&#x5BF9;&#x8C61;&#x94FE;&#x63A5;&#x751F;&#x6210;&#x7684;</td>
-</tr>
-<tr>
-<td style="text-align:left">zImage</td>
-<td style="text-align:left">&#x6700;&#x7EC8;&#x7684;&#x5408;&#x6210;&#x5185;&#x6838;&#x955C;&#x50CF;&#xFF0C;&#x7531;&#x5F15;&#x5BFC;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;&#x52A0;&#x8F7D;</td>
-</tr>
-</tbody>
-</table>
-<h2 id="&#x5408;&#x6210;&#x5185;&#x6838;&#x955C;&#x50CF;">&#x5408;&#x6210;&#x5185;&#x6838;&#x955C;&#x50CF;</h2>
-<pre><code>        objcopy                      gzip              asm
-vmlinux -------&gt; Image&#x4E8C;&#x8FDB;&#x5236;&#x76EE;&#x6807;&#x6587;&#x4EF6; ------&gt; piggy.gz -----&gt; piggy.o
-&#x5185;&#x6838;&#x4E3B;&#x4F53;        &#x53BB;&#x9664;&#x7B26;&#x53F7;&#x3001;&#x6807;&#x8BB0;&#x3001;&#x6CE8;&#x91CA;       &#x538B;&#x7F29;&#x7684;&#x4E8C;
-                    &#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x955C;&#x50CF;           &#x8FDB;&#x5236;&#x5185;&#x6838;
+<p>&#x5F15;&#x5BFC;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;&#x5F15;&#x5BFC;&#x5230;&#x5185;&#x6838;&#x540E;&#x4F1A;&#x5C06;&#x63A7;&#x5236;&#x6743;&#x4EA4;&#x7ED9;&#x5185;&#x6838;&#xFF0C;&#x540C;&#x65F6;&#x4F1A;&#x4F20;&#x9012;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x7ED9;&#x5185;&#x6838;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x5373;&#x4E3A;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x3002;</p>
+<p><strong>&#x662F;&#x4E0A;&#x9762;&#x8FD9;&#x6837;&#x7684;&#x5417;&#xFF1F;</strong></p>
+<p>&#x6BD4;&#x5982;Linux&#x542F;&#x52A8;&#x65F6;&#x7684;&#x4E00;&#x53E5;log&#x4FE1;&#x606F;&#xFF1A;</p>
+<pre><code>Kernel command line: console=ttyS0,115200 root=/dev/nfs ip=dhcp
+</code></pre><p>.../init/main.c&#x4E2D;&#x8C03;&#x7528;&#x7684;setup_arch()&#x6240;&#x63A5;&#x6536;&#x7684;&#x53C2;&#x6570;&#x5373;&#x4E3A;&#x6307;&#x5411;&#x8FD9;&#x4E2A;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x7684;&#x6307;&#x9488;&#x3002;</p>
+<pre><code>setup_arch(&amp;command_line);
+</code></pre><p>.../Document&#x5B50;&#x76EE;&#x5F55;&#x4E0B;&#x7684;kernel-parameters.txt&#x6587;&#x4EF6;&#x4E2D;&#x8BB0;&#x5F55;&#x6240;&#x6709;&#x7684;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;(&#x7531;&#x4E8E;&#x672A;&#x80FD;&#x53CA;&#x65F6;&#x66F4;&#x65B0;&#x53EF;&#x80FD;&#x4E0D;&#x591F;&#x5168;&#x9762;)</p>
+<h2 id="setup&#x5B8F;">__setup&#x5B8F;</h2>
+<p>__setup&#x662F;&#x5B9A;&#x4E49;&#x5728;.../include/linux/init.h&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5B8F;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x5C06;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x540C;&#x67D0;&#x4E2A;&#x51FD;&#x6570;&#x5173;&#x8054;&#x8D77;&#x6765;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4F1A;&#x5904;&#x7406;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x90A3;&#x4E2A;&#x90E8;&#x5206;&#x3002;</p>
+<pre><code>/*
+ * Only for really core code.  See moduleparam.h for the normal way.
+ *
+ * Force the alignment so the compiler doesn&apos;t space elements of the
+ * obs_kernel_param &quot;array&quot; too far apart in .init.setup.
+ */
+#define __setup_param(str, unique_id, fn, early)            \
+    static const char __setup_str_##unique_id[] __initconst \
+        __aligned(1) = str; \
+    static struct obs_kernel_param __setup_##unique_id  \
+        __used __section(.init.setup)           \
+        __attribute__((aligned((sizeof(long)))))    \
+        = { __setup_str_##unique_id, fn, early }
 
-cat Image | gzip -f -9 &gt; piggy.gz
-
-___________________________________________________________________
-|     piggy.o    | misc.o | big_endian.o | head-xscale.o | head.o |
-&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;&#xFFE3;
-| &#x4E8C;&#x8FDB;&#x5236;&#x5185;&#x6838;&#x955C;&#x50CF; |              &#x542F;&#x52A8;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;                         |
-                    &#x53EF;&#x542F;&#x52A8;&#x7684;&#x5185;&#x6838;&#x955C;&#x50CF;
-</code></pre><h3 id="vmlinux&#x955C;&#x50CF;&#x90E8;&#x5206;&#x56FE;">vmlinux&#x955C;&#x50CF;&#x90E8;&#x5206;&#x56FE;</h3>
-<p><img src="vmlinux.png" alt="vmlinux&#x955C;&#x50CF;&#x90E8;&#x5206;&#x56FE;"></p>
-<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x5305;&#x542B;&#x4E86;&#x5F88;&#x591A;&#x53EF;&#x8BC6;&#x522B;&#x7684;&#x7B26;&#x53F7;&#xFF0C;&#x9700;&#x8981;&#x5904;&#x7406;&#x624D;&#x80FD;&#x8FD0;&#x884C;&#x5728;&#x771F;&#x5B9E;&#x7684;&#x786C;&#x4EF6;&#x4E0A;</p>
-<h3 id="image&#x955C;&#x50CF;&#x90E8;&#x5206;&#x56FE;">Image&#x955C;&#x50CF;&#x90E8;&#x5206;&#x56FE;</h3>
-<p><img src="Image.png" alt="Image&#x955C;&#x50CF;&#x90E8;&#x5206;&#x56FE;"></p>
-<p>&#x8FD9;&#x91CC;&#x5DF2;&#x7ECF;&#x6CA1;&#x6709;&#x4E86;&#x53EF;&#x8BC6;&#x522B;&#x7684;&#x5B57;&#x7B26;&#x4E86;&#xFF0C;&#x7EAF;&#x7CB9;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x4EE3;&#x7801;</p>
+#define __setup(str, fn)                    \
+    __setup_param(str, fn, fn, 0)
+</code></pre><p>&#x8FD9;&#x91CC;&#x4EE5;&#x6307;&#x5B9A;&#x63A7;&#x5236;&#x53F0;&#x8BBE;&#x5907;&#x4E3A;&#x4F8B;&#x8FDB;&#x884C;&#x8BF4;&#x660E;&#xFF1A;</p>
+<p>&#x6307;&#x5B9A;&#x63A7;&#x5236;&#x53F0;&#x8BBE;&#x5907;&#x7684;&#x521D;&#x59CB;&#x5316;&#x5DE5;&#x4F5C;&#x662F;printk.c&#x4E2D;&#x7684;console_setup()&#x51FD;&#x6570;&#x5B8C;&#x6210;&#x7684;&#x3002;</p>
+<pre><code>/*
+ * Set up a list of consoles.  Called from init/main.c
+ */
+static int __init console_setup(char *str)
+{
+   char buf[sizeof(console_cmdline[0].name) + 4]; /* 4 for index */
+   char *s, *options, *brl_options = NULL;
+   int idx;
+   ...
+   return 1;
+}
+__setup(&quot;console=&quot;, console_setup);
+</code></pre><p>&#x4F60;&#x53EF;&#x4EE5;&#x5C06;__setup&#x5B8F;&#x770B;&#x505A;&#x4E00;&#x4E2A;&#x6CE8;&#x518C;&#x51FD;&#x6570;&#xFF0C;&#x5373;&#x4E3A;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x63A7;&#x5236;&#x53F0;&#x76F8;&#x5173;&#x53C2;&#x6570;&#x6CE8;&#x518C;&#x7684;&#x5904;&#x7406;&#x51FD;&#x6570;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x6307;&#xFF0C;&#x5F53;&#x5728;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x78B0;&#x5230;console=&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#xFF0C;&#x5C31;&#x8C03;&#x7528;__setup&#x5B8F;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x6240;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x662F;&#x8C03;&#x7528;&#x51FD;&#x6570;console_setup()&#x3002;</p>
+<p>&#x8FD9;&#x91CC;&#x7684;&#x539F;&#x7406;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x540E;&#x7EED;&#x9700;&#x8981;&#x8BA4;&#x771F;&#x7814;&#x7A76;&#x4E0B;</p>
 
                                 
                                 </section>
@@ -549,12 +511,12 @@ ___________________________________________________________________
 
             
                 
-                <a href="config-kernel.html" class="navigation navigation-prev " aria-label="Previous page: 3.4 内核配置">
+                <a href="start-kernel.html" class="navigation navigation-prev " aria-label="Previous page: 3.6 Linux启动">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="start-kernel.html" class="navigation navigation-next " aria-label="Next page: 3.6 Linux启动">
+                <a href="../uboot/" class="navigation navigation-next " aria-label="Next page: 4. 启动篇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -565,7 +527,7 @@ ___________________________________________________________________
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.5 合成内核镜像","level":"1.5.5","depth":2,"next":{"title":"3.6 Linux启动","level":"1.5.6","depth":2,"path":"kernel/start-kernel.md","ref":"kernel/start-kernel.md","articles":[]},"previous":{"title":"3.4 内核配置","level":"1.5.4","depth":2,"path":"kernel/config-kernel.md","ref":"kernel/config-kernel.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/synthetize-image.md","mtime":"2017-01-11T13:38:05.641Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-12T14:19:18.761Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.6 内核命令行","level":"1.5.7","depth":2,"next":{"title":"4. 启动篇","level":"1.6","depth":1,"path":"uboot/README.md","ref":"uboot/README.md","articles":[]},"previous":{"title":"3.6 Linux启动","level":"1.5.6","depth":2,"path":"kernel/start-kernel.md","ref":"kernel/start-kernel.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/kernel-cmd.md","mtime":"2017-01-12T13:35:07.592Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-12T14:19:18.761Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
