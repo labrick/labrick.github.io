@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3.4 内核配置 · 深入理解Android系统</title>
+        <title>3.8 init进程 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="synthetize-image.html" />
+    <link rel="next" href="../uboot/" />
     
     
-    <link rel="prev" href="source-top-dir.html" />
+    <link rel="prev" href="kernel-cmd.html" />
     
 
     </head>
@@ -312,7 +312,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.4" data-path="config-kernel.html">
+        <li class="chapter " data-level="1.5.4" data-path="config-kernel.html">
             
                 <a href="config-kernel.html">
             
@@ -364,7 +364,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.8" data-path="init-process.html">
+        <li class="chapter active" data-level="1.5.8" data-path="init-process.html">
             
                 <a href="init-process.html">
             
@@ -438,7 +438,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3.4 内核配置</a>
+        <a href=".." >3.8 init进程</a>
     </h1>
 </div>
 
@@ -453,64 +453,59 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5185;&#x6838;&#x914D;&#x7F6E;">&#x5185;&#x6838;&#x914D;&#x7F6E;</h1>
-<p>2017-01-11</p>
+                                <h1 id="init&#x8FDB;&#x7A0B;">init&#x8FDB;&#x7A0B;</h1>
+<p>2017-01-16</p>
 <hr>
-<p>linux&#x662F;&#x4E00;&#x4E2A;&#x7CBE;&#x5BC6;&#x800C;&#x590D;&#x6742;&#x7684;&#x7CFB;&#x7EDF;&#xFF0C;&#x5177;&#x6709;&#x592A;&#x591A;&#x7684;&#x529F;&#x80FD;&#x6A21;&#x5757;&#xFF0C;&#x4ED6;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x6709;&#x6548;&#x7684;&#x5173;&#x8054;&#x4E0E;&#x89E3;&#x8026;&#x662F;&#x4E2A;&#x5173;&#x952E;&#xFF0C;linux&#x91C7;&#x7528;.config&#x6765;&#x914D;&#x7F6E;&#x6700;&#x7EC8;&#x955C;&#x50CF;&#x6240;&#x5305;&#x542B;&#x7684;&#x529F;&#x80FD;&#x6A21;&#x5757;&#x3002;</p>
-<p>&#x800C;&#x5BF9;.config&#x7684;&#x7F16;&#x8F91;&#x662F;&#x4E2A;&#x590D;&#x6742;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x4ECE;&#x6700;&#x5F00;&#x59CB;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x65B9;&#x5F0F;&#x914D;&#x7F6E;(make config)&#x53D1;&#x5C55;&#x5230;&#x73B0;&#x5728;&#x7684;&#x6700;&#x5E38;&#x7528;&#x7684;&#x83DC;&#x5355;&#x914D;&#x7F6E;(make menuconfig)&#xFF0C;&#x5F53;&#x7136;&#x8FD8;&#x6709;&#x5F88;&#x591A;&#x5176;&#x4ED6;&#x7684;&#x914D;&#x7F6E;&#x65B9;&#x5F0F;&#xFF0C;&#x5177;&#x4F53;&#x7684;&#x53EF;&#x4EE5;&#x53C2;&#x89C1;<code>make help</code>&#x3002;</p>
-<h2 id="&#x5BF9;config&#x7684;&#x5904;&#x7406;">&#x5BF9;.config&#x7684;&#x5904;&#x7406;</h2>
-<p>&#x5927;&#x591A;&#x6570;&#x8F6F;&#x4EF6;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x6784;&#x5EFA;&#x7CFB;&#x7EDF;&#x4F1A;&#x5904;&#x7406;&#x8FD9;&#x4E2A;.config&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;autoconf.h(<strong>&#x8FD9;&#x91CC;&#x624D;&#x662F;.config&#x7684;&#x672C;&#x8D28;</strong>)&#x7684;C&#x8BED;&#x8A00;&#x6587;&#x4EF6;&#xFF0C;&#x653E;&#x5728;&#x76EE;&#x5F55;include/generated/&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x662F;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;&#x3002;&#x5F88;&#x591A;&#x5185;&#x6838;&#x6E90;&#x6587;&#x4EF6;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x9884;&#x5904;&#x7406;&#x6307;&#x4EE4;<code>#include</code>&#x6765;&#x5305;&#x542B;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x3002;</p>
-<p>&#x591A;&#x52A0;&#x6CE8;&#x610F;&#x4E0B;&#x9762;&#x8FD9;&#x4E2A;&#x6307;&#x4EE4;&#xFF1A;</p>
-<pre><code>make ARCH=arm help
-</code></pre><p>&#x5728;&#x8FD9;&#x91CC;&#x4F1A;&#x5217;&#x51FA;&#x5BF9;&#x4E8E;&#x67D0;&#x4E2A;SOC&#x7CFB;&#x5217;&#x7684;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x77E5;&#x9053;&#x91C7;&#x7528;&#x90A3;&#x4E2A;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x5230;&#x8FD9;&#x91CC;&#x67E5;&#x627E;&#x4E00;&#x4E0B;&#x3002;</p>
-<p>&#x6BD4;&#x5982;&#xFF1A;</p>
-<pre><code>sun8iw1p1smp_defconfig   - Build for sun8iw1p1smp
-sun8iw3p1smp_android_defconfig - Build for sun8iw3p1smp_android
-sun8iw3p1smp_defconfig   - Build for sun8iw3p1smp
-sun8iw3p1smp_min_defconfig - Build for sun8iw3p1smp_min
-sun8iw5p1smp_android_defconfig - Build for sun8iw5p1smp_android
-sun8iw5p1smp_defconfig   - Build for sun8iw5p1smp
-sun8iw5p1smp_min_defconfig - Build for sun8iw5p1smp_min
-sun8iw5p1smp_tina_defconfig - Build for sun8iw5p1smp_tina
-sun8iw6p1smp_defconfig   - Build for sun8iw6p1smp
-sun8iw6p1smp_min_defconfig - Build for sun8iw6p1smp_min
-sun8iw7p1smp_defconfig   - Build for sun8iw7p1smp
-sun8iw8p1smp_defconfig   - Build for sun8iw8p1smp
-sun8iw9p1smp_defconfig   - Build for sun8iw9p1smp
-</code></pre><p>&#x4EA7;&#x751F;&#x7684;&#x6587;&#x4EF6;&#xFF1A;</p>
-<pre><code>Architecture specific targets (arm):
-* zImage        - Compressed kernel image (arch/arm/boot/zImage)
-  Image         - Uncompressed kernel image (arch/arm/boot/Image)
-* xipImage      - XIP kernel image, if configured (arch/arm/boot/xipImage)
-  uImage        - U-Boot wrapped zImage
-  bootpImage    - Combined zImage and initial RAM disk
-                  (supply initrd image via make variable INITRD=&lt;path&gt;)
-  dtbs          - Build device tree blobs for enabled boards
-  install       - Install uncompressed kernel
-  zinstall      - Install compressed kernel
-  uinstall      - Install U-Boot wrapped compressed kernel
-                  Install using (your) ~/bin/installkernel or
-                  (distribution) /sbin/installkernel or
-                  install to $(INSTALL_PATH) and run lilo
-</code></pre><p>make&#x7684;&#x9009;&#x9879;&#x542B;&#x4E49;&#xFF1A;</p>
-<pre><code>make V=0|1 [targets] 0 =&gt; quiet build (default), 1 =&gt; verbose build
-make V=2   [targets] 2 =&gt; give reason for rebuild of target
-make O=dir [targets] Locate all output files in &quot;dir&quot;, including .config
-make C=1   [targets] Check all c source with $CHECK (sparse by default)
-make C=2   [targets] Force check of all c source with $CHECK
-make RECORDMCOUNT_WARN=1 [targets] Warn about ignored mcount sections
-make W=n   [targets] Enable extra gcc checks, n=1,2,3 where
-            1: warnings which may be relevant and do not occur too often
-            2: warnings which occur quite often but may still be relevant
-            3: more obscure warnings, can most likely be ignored
-            Multiple levels can be combined with W=12 or W=123
-</code></pre><h2 id="kconfig">Kconfig</h2>
-<p>scripts/kconfig/Makefile&#x8D1F;&#x8D23;&#x5BF9;Kconfig&#x5206;&#x6790;&#x5904;&#x7406;&#xFF1A;</p>
-<pre><code>menuconfig: $(obj)/mconf
-     $&lt; $(Kconfig)
-</code></pre><h2 id="&#x5C06;&#x7F16;&#x8BD1;&#x4FE1;&#x606F;&#x8F93;&#x51FA;&#x5230;&#x6587;&#x4EF6;&#x4E2D;">&#x5C06;&#x7F16;&#x8BD1;&#x4FE1;&#x606F;&#x8F93;&#x51FA;&#x5230;&#x6587;&#x4EF6;&#x4E2D;</h2>
-<pre><code>make 2&gt;&amp;1 | tee build.out
-</code></pre>
+<p>init&#x8FDB;&#x7A0B;&#x662F;&#x5185;&#x6838;&#x5728;&#x5B8C;&#x6210;&#x5F15;&#x5BFC;&#x8FC7;&#x7A0B;&#x4E4B;&#x540E;&#x521B;&#x5EFA;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x8FDB;&#x7A0B;&#xFF08;&#x54EA;&#x4E2A;&#x7A7A;&#x95F4;&#x8FDB;&#x7A0B;&#x662F;&#x5728;&#x54EA;&#x91CC;&#x51B3;&#x5B9A;&#x7684;&#xFF1F;&#x4EE3;&#x7801;&#x6BB5;&#x5728;&#x54EA;&#xFF1F;&#xFF09;&#x3002;&#x5728;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x4E2D;&#x7684;Linux&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x90FD;&#x4F1A;&#x548C;&#x53E6;&#x5916;&#x67D0;&#x4E2A;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#x7236;&#x5B50;&#x5173;&#x7CFB;&#x3002;init&#x662F;Linux&#x7CFB;&#x7EDF;&#x4E2D;<strong>&#x6240;&#x6709;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x8FDB;&#x7A0B;</strong>&#x7684;&#x6700;&#x7EC8;&#x7236;&#x8FDB;&#x7A0B;&#x3002;&#x6B64;&#x5916;&#xFF0C;init&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x7EC4;&#x9ED8;&#x8BA4;&#x7684;&#x73AF;&#x5883;&#x53C2;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#x521D;&#x59CB;&#x7684;&#x7CFB;&#x7EDF;&#x8DEF;&#x5F84;PATH&#xFF0C;&#x800C;&#x6240;&#x6709;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x90FD;&#x4F1A;&#x7EE7;&#x627F;&#x8FD9;&#x7EC4;&#x53C2;&#x6570;&#x3002;</p>
+<p>init&#x7684;&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x662F;&#x6839;&#x636E;&#x4E00;&#x4E2A;&#x7279;&#x5B9A;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x751F;&#x6210;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x3002;&#x8FD9;&#x4E2A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x901A;&#x5E38;&#x662F;&#x6307;/etc/inittab(&#x6CA1;&#x627E;&#x5230;&#x554A;&#xFF1F;)&#x3002;init&#x6709;&#x8FD0;&#x884C;&#x7EA7;&#x522B;(runlevel)&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x770B;&#x4F5C;&#x7CFB;&#x7EDF;&#x72B6;&#x6001;&#x3002;&#x6BCF;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x662F;&#x7531;&#x8FDB;&#x5165;&#x8FD9;&#x4E2A;&#x7EA7;&#x522B;&#x65F6;&#x6240;&#x8FD0;&#x884C;&#x7684;&#x670D;&#x52A1;&#x548C;&#x751F;&#x6210;&#x7684;&#x7A0B;&#x5E8F;&#x51B3;&#x5B9A;&#x7684;&#x3002;</p>
+<p>&#x4EFB;&#x610F;&#x65F6;&#x523B;&#xFF0C;init&#x53EA;&#x80FD;&#x8FD0;&#x884C;&#x4E8E;&#x4E00;&#x4E2D;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x4E4B;&#x4E2D;(&#x8FD9;&#x662F;&#x8BF4;init&#x53EF;&#x4EE5;&#x5728;8&#x4E2D;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x95F4;&#x5207;&#x6362;&#xFF1F;)&#x3002;init&#x4F7F;&#x7528;&#x7684;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x4E3A;0~6&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x88AB;&#x79F0;&#x4E3A;S&#x7684;&#x7279;&#x6B8A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x3002;&#x8FD0;&#x884C;&#x7EA7;&#x522B;0&#x547D;&#x4EE4;init&#x7EC8;&#x6B62;&#x7CFB;&#x7EDF;&#xFF0C;&#x800C;&#x8FD0;&#x884C;&#x7EA7;&#x522B;6&#x5219;&#x4F1A;&#x91CD;&#x542F;&#x7CFB;&#x7EDF;&#x3002;&#x6BCF;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x4E00;&#x822C;&#x90FD;&#x6709;&#x4E00;&#x7EC4;&#x76F8;&#x5173;&#x7684;&#x542F;&#x52A8;&#x548C;&#x5173;&#x95ED;&#x811A;&#x672C;&#xFF0C;&#x5B83;&#x4EEC;&#x5B9A;&#x4E49;&#x4E86;&#x7CFB;&#x7EDF;&#x5904;&#x4E8E;&#x8FD9;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x65F6;&#x7684;&#x52A8;&#x4F5C;&#x548C;&#x884C;&#x4E3A;&#x3002;&#x914D;&#x7F6E;&#x6587;&#x4EF6;/etc/inittab&#x51B3;&#x5B9A;&#x4E86;&#x7CFB;&#x7EDF;&#x5904;&#x4E8E;&#x67D0;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x65F6;&#x6240;&#x6267;&#x884C;&#x7684;&#x52A8;&#x4F5C;&#x3002;</p>
+<p>Linux&#x53D1;&#x884C;&#x7248;&#x4E2D;&#x5E38;&#x7528;&#x7684;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x53CA;&#x5176;&#x4F5C;&#x7528;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x8FD0;&#x884C;&#x7EA7;&#x522B;</th>
+<th style="text-align:left">&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">0</td>
+<td style="text-align:left">&#x7CFB;&#x7EDF;&#x5173;&#x673A;&#xFF08;&#x7EC8;&#x6B62;&#xFF09;</td>
+</tr>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:left">&#x5355;&#x7528;&#x6237;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;&#xFF0C;&#x7528;&#x4E8E;&#x7EF4;&#x62A4;</td>
+</tr>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:left">&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;</td>
+</tr>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:left">&#x901A;&#x7528;&#x7684;&#x591A;&#x7528;&#x6237;&#x914D;&#x7F6E;</td>
+</tr>
+<tr>
+<td style="text-align:center">4</td>
+<td style="text-align:left">&#x7528;&#x6237;&#x81EA;&#x5B9A;&#x4E49;</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:left">&#x591A;&#x7528;&#x6237;&#x914D;&#x7F6E;&#xFF0C;&#x542F;&#x52A8;&#x540E;&#x8FDB;&#x5165;&#x56FE;&#x5F62;&#x754C;&#x9762;</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:left">&#x7CFB;&#x7EDF;&#x91CD;&#x542F;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x5BF9;&#x5E94;&#x7684;&#x811A;&#x672C;">&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x5BF9;&#x5E94;&#x7684;&#x811A;&#x672C;</h2>
+<p>&#x4E0E;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x76F8;&#x5173;&#x7684;&#x811A;&#x672C;&#x6587;&#x4EF6;&#x4E00;&#x822C;&#x4F4D;&#x4E8E;&#x76EE;&#x5F55;/etc/init.d&#x4E2D;</p>
+<p>&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x662F;&#x7531;&#x5B83;&#x6240;&#x542F;&#x52A8;&#x7684;&#x670D;&#x52A1;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x4E0E;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x76F8;&#x5173;&#x76EE;&#x5F55;&#x4E00;&#x822C;&#x662F;/etc/rcN.d&#xFF0C;&#x4E00;&#x822C;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x76EE;&#x5F55;&#x4E2D;&#x5305;&#x542B;&#x6BCF;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x7684;&#x542F;&#x52A8;&#x548C;&#x5173;&#x95ED;&#x811A;&#x672C;&#x3002;init&#x53EA;&#x662F;&#x5728;&#x8FDB;&#x5165;&#x548C;&#x9000;&#x51FA;&#x4E00;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#x65F6;&#x6267;&#x884C;&#x8FD9;&#x4E9B;&#x811A;&#x672C;&#x3002;&#x8FD9;&#x4E9B;&#x811A;&#x672C;&#x5B9A;&#x4E49;&#x4E86;&#x7CFB;&#x7EDF;&#x72B6;&#x6001;&#xFF0C;&#x800C;inittab&#x5219;&#x662F;&#x544A;&#x8BC9;init&#x67D0;&#x4E2A;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x548C;&#x54EA;&#x4E9B;&#x811A;&#x672C;&#x76F8;&#x5173;&#x8054;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;/etc/rcN.d&#x76EE;&#x5F55;&#x90FD;&#x5305;&#x542B;&#x5927;&#x91CF;&#x7684;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF0C;&#x5B83;&#x4EEC;&#x6309;&#x7167;&#x7279;&#x5B9A;&#x7684;&#x987A;&#x5E8F;&#x6392;&#x5217;&#xFF08;&#x4E5F;&#x6309;&#x7167;&#x987A;&#x5E8F;&#x542F;&#x52A8;&#x811A;&#x672C;&#xFF09;&#x3002;&#x8FD9;&#x4E9B;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x7684;&#x540D;&#x5B57;&#x4EE5;K&#x6216;S&#x5F00;&#x5934;&#x3002;&#x4EE5;S&#x5F00;&#x5934;&#x7684;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x6307;&#x5411;&#x542F;&#x52A8;&#x65F6;&#xFF08;&#x8FDB;&#x5165;&#x8FD9;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#xFF09;&#x6267;&#x884C;&#x7684;&#x670D;&#x52A1;&#x811A;&#x672C;&#xFF0C;&#x4EE5;K&#x5F00;&#x5934;&#x7684;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x6307;&#x5411;&#x5173;&#x95ED;&#x65F6;&#xFF08;&#x9000;&#x51FA;&#x8FD9;&#x4E2A;&#x8FD0;&#x884C;&#x7EA7;&#x522B;&#xFF09;&#x6267;&#x884C;&#x7684;&#x670D;&#x52A1;&#x811A;&#x672C;&#x3002;</p>
+<p>&#x9700;&#x8981;&#x627E;&#x4E2A;&#x4F8B;&#x5B50;&#x5206;&#x6790;&#x4E0B;........</p>
+<h2 id="inittab&#x811A;&#x672C;">inittab&#x811A;&#x672C;</h2>
+<p>init&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x9876;&#x5C42;&#x7684;&#x811A;&#x672C;&#xFF0C;&#x5B83;&#x8D1F;&#x8D23;&#x6267;&#x884C;&#x8FD9;&#x4E9B;&#x542F;&#x52A8;&#x548C;&#x5173;&#x95ED;&#x670D;&#x52A1;&#x7684;&#x811A;&#x672C;&#xFF0C;&#x8FD9;&#x4E2A;&#x9876;&#x5C42;&#x811A;&#x672C;&#x5C31;&#x662F;inittab&#x3002;</p>
+
                                 
                                 </section>
                             
@@ -537,12 +532,12 @@ make W=n   [targets] Enable extra gcc checks, n=1,2,3 where
 
             
                 
-                <a href="source-top-dir.html" class="navigation navigation-prev " aria-label="Previous page: 3.3 源码顶层目录">
+                <a href="kernel-cmd.html" class="navigation navigation-prev " aria-label="Previous page: 3.7 内核命令行">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="synthetize-image.html" class="navigation navigation-next " aria-label="Next page: 3.5 合成内核镜像">
+                <a href="../uboot/" class="navigation navigation-next " aria-label="Next page: 4. 启动篇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -553,7 +548,7 @@ make W=n   [targets] Enable extra gcc checks, n=1,2,3 where
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.4 内核配置","level":"1.5.4","depth":2,"next":{"title":"3.5 合成内核镜像","level":"1.5.5","depth":2,"path":"kernel/synthetize-image.md","ref":"kernel/synthetize-image.md","articles":[]},"previous":{"title":"3.3 源码顶层目录","level":"1.5.3","depth":2,"path":"kernel/source-top-dir.md","ref":"kernel/source-top-dir.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/config-kernel.md","mtime":"2017-01-11T05:12:22.964Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-16T05:52:12.729Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.8 init进程","level":"1.5.8","depth":2,"next":{"title":"4. 启动篇","level":"1.6","depth":1,"path":"uboot/README.md","ref":"uboot/README.md","articles":[]},"previous":{"title":"3.7 内核命令行","level":"1.5.7","depth":2,"path":"kernel/kernel-cmd.md","ref":"kernel/kernel-cmd.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/init-process.md","mtime":"2017-01-16T05:39:19.757Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-01-16T05:52:12.729Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
