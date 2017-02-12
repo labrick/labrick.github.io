@@ -94,7 +94,7 @@
 这个问题应该会经常遇到，比如我想在家访问我公司">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_home.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_advance.png">
-<meta property="og:updated_time" content="2017-02-10T05:00:39.416Z">
+<meta property="og:updated_time" content="2017-02-10T05:03:29.294Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="n2n内网穿透">
 <meta name="twitter:description" content="扯扯淡最近一周多的时间真是忙死掉了，为了机器人项目是加班加点的干，几乎每天都要到一两点，接着到市区找宾馆安稳下来都三点多了，坑死人，搞的我的老毛病（咽炎鼻炎）都来了，如果项目能够很好的安排何必要拖到最后才去做呢，而且即使是拖到最后还是一堆的BUG，很多东西都听天由命，嗨，不说了，这里项目管理不是主题，主要是说项目当中解决两个局域网通过公网互联的问题。
@@ -411,7 +411,7 @@ supernode usage
 -v          Increase verbosity. Can be used multiple times.
 -<span class="keyword">h</span>          This <span class="keyword">help</span> message.
 </code></pre><h3 id="启动边缘结点">启动边缘结点</h3><p>这个配置稍微复杂点。</p>
-<h4 id="linux下：">linux下：</h4><pre><code>sudo edge -<span class="keyword">d</span> edge0 -a virtual_ip -c <span class="keyword">test</span> -<span class="keyword">M</span> 1200 -k password -<span class="keyword">l</span> supernode_ip:port -<span class="keyword">m</span> virtual_mac
+<h4 id="linux下">linux下</h4><pre><code>sudo edge -<span class="keyword">d</span> edge0 -a virtual_ip -c <span class="keyword">test</span> -<span class="keyword">M</span> 1200 -k password -<span class="keyword">l</span> supernode_ip:port -<span class="keyword">m</span> virtual_mac
 
 -<span class="keyword">d</span> 虚拟网卡名称 -a 本地设置的ip地址（相互通信的终端ip需要在同一个网段里） -c 组名称 -<span class="keyword">M</span> MTU值 -k 密码 -<span class="keyword">l</span> 超级结点ip:port -<span class="keyword">m</span> 虚拟网卡<span class="keyword">mac</span>地址
 
@@ -491,6 +491,10 @@ make: *** [all] <span class="keyword">Error</span> 2
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2017/02/10/ubuntu-configure/" rel="prev" title="ubuntu配置脚本">
+                ubuntu配置脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -561,7 +565,7 @@ make: *** [all] <span class="keyword">Error</span> 2
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">41</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -647,7 +651,7 @@ make: *** [all] <span class="keyword">Error</span> 2
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#扯扯淡"><span class="nav-text">扯扯淡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#n2n源码获取"><span class="nav-text">n2n源码获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译安装"><span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动中心结点"><span class="nav-text">启动中心结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动边缘结点"><span class="nav-text">启动边缘结点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux下："><span class="nav-text">linux下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows和android端"><span class="nav-text">windows和android端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA"><span class="nav-text">QA</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#扯扯淡"><span class="nav-text">扯扯淡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#n2n源码获取"><span class="nav-text">n2n源码获取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译安装"><span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动"><span class="nav-text">启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动中心结点"><span class="nav-text">启动中心结点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动边缘结点"><span class="nav-text">启动边缘结点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#linux下"><span class="nav-text">linux下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#windows和android端"><span class="nav-text">windows和android端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA"><span class="nav-text">QA</span></a></li></ol></div>
             
           </div>
         </section>
