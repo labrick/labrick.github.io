@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3.11.01 设备驱动模块工具 · 深入理解Android系统</title>
+        <title>3.11.02 完整驱动示例 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="driver-example.html" />
+    <link rel="next" href="device-node.html" />
     
     
-    <link rel="prev" href="../device-driver.html" />
+    <link rel="prev" href="module-tools.html" />
     
 
     </head>
@@ -417,7 +417,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.5.11.1" data-path="module-tools.html">
+        <li class="chapter " data-level="1.5.11.1" data-path="module-tools.html">
             
                 <a href="module-tools.html">
             
@@ -430,7 +430,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.11.2" data-path="driver-example.html">
+        <li class="chapter active" data-level="1.5.11.2" data-path="driver-example.html">
             
                 <a href="driver-example.html">
             
@@ -548,7 +548,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >3.11.01 设备驱动模块工具</a>
+        <a href="../.." >3.11.02 完整驱动示例</a>
     </h1>
 </div>
 
@@ -563,40 +563,99 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="31101-&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x6A21;&#x5757;&#x5DE5;&#x5177;">3.11.01 &#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x6A21;&#x5757;&#x5DE5;&#x5177;</h1>
-<p>2017-02-13</p>
+                                <h1 id="31102-&#x5B8C;&#x6210;&#x9A71;&#x52A8;&#x793A;&#x4F8B;">3.11.02 &#x5B8C;&#x6210;&#x9A71;&#x52A8;&#x793A;&#x4F8B;</h1>
+<p>2017-02-14</p>
 <hr>
-<ol>
-<li><p>insmod</p>
-<p> &#x5B89;&#x88C5;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x6A21;&#x5757;&#x3002;
- &#x8FD9;&#x4E2A;&#x5E94;&#x8BE5;&#x662F;&#x6700;&#x5E38;&#x7528;&#x7684;&#x4E86;&#xFF0C;&#x4F46;&#x4E5F;&#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x5B83;&#x4E0D;&#x9700;&#x8981;&#x4E5F;&#x4E0D;&#x63A5;&#x53D7;&#x4EFB;&#x4F55;&#x7684;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x4ED6;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x8DEF;&#x5F84;&#x540D;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4E0D;&#x5305;&#x542B;&#x7528;&#x4E8E;&#x641C;&#x7D22;&#x6A21;&#x5757;&#x7684;&#x903B;&#x8F91;&#x5904;&#x7406;&#x3002;</p>
-</li>
-<li><p>lsmod</p>
-<p> &#x663E;&#x793A;&#x4E00;&#x4E2A;&#x683C;&#x5F0F;&#x5316;&#x7684;&#x5217;&#x8868;&#xFF0C;&#x5217;&#x51FA;&#x52A0;&#x8F7D;&#x5230;&#x5185;&#x6838;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6A21;&#x5757;&#x3002;&#x672C;&#x8D28;&#x662F;&#x4EC5;&#x4EC5;&#x662F;&#x5C06;/proc/modules&#x7684;&#x8F93;&#x51FA;&#x4FE1;&#x606F;&#x8C03;&#x6574;&#x4E00;&#x4E0B;&#x683C;&#x5F0F;&#x3002;</p>
-</li>
-<li><p>modprobe</p>
-<p> modprobe&#x662F;&#x4E2A;&#x5DE7;&#x5999;&#x7684;&#x5DE5;&#x5177;&#x3002;&#x5176;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#x6A21;&#x5757;&#x4E4B;&#x95F4;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x5E76;&#x6309;&#x7167;&#x5408;&#x9002;&#x7684;&#x987A;&#x5E8F;&#x81EA;&#x52A8;&#x52A0;&#x8F7D;&#x8FD9;&#x4E9B;&#x4F9D;&#x8D56;&#x3002;&#x6BD4;&#x5982;&#xFF1A;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;ext3.ko&#x4F9D;&#x8D56;&#x4E8E;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x65E5;&#x5FD7;&#x51FD;&#x6570;jbd.ko&#xFF0C;&#x6240;&#x4EE5;&#x6267;&#x884C;<code>modprobe ext3</code>&#x8FD9;&#x6761;&#x547D;&#x4EE4;&#x5C31;&#x4F1A;&#x81EA;&#x52A8;&#x52A0;&#x8F7D;jbd.ko&#x548C;ext3.ko&#x4E24;&#x4E2A;&#x9A71;&#x52A8;&#x6A21;&#x5757;&#x3002;&#x800C;<code>modprobe -r ext3</code>&#x4F1A;&#x5C06;jbd.ko&#x548C;ext3.ko&#x90FD;&#x5220;&#x9664;&#x6389;&#x3002;</p>
-<p> modprobe&#x5DE5;&#x5177;&#x662F;&#x7531;&#x914D;&#x7F6E;&#x6587;&#x4EF6;modprobe.conf&#x9A71;&#x52A8;&#x7684;&#x3002;&#x8FD9;&#x4E2A;&#x53EF;&#x4EE5;&#x5E2E;&#x52A9;&#x7CFB;&#x7EDF;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x5C06;&#x8BBE;&#x5907;&#x548C;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x5173;&#x8054;&#x8D77;&#x6765;&#x3002;modprobe&#x5DE5;&#x5177;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x6709;&#x6548;&#x7684;modprobe.conf&#x6587;&#x4EF6;&#xFF0C;&#x5B83;&#x4F1A;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x521B;&#x5EFA;&#x4E00;&#x4E9B;&#x5217;&#x9ED8;&#x8BA4;&#x503C;&#x3002;&#x91C7;&#x7528;<code>modprobe -c</code>&#x53EF;&#x4EE5;&#x5148;&#x663E;&#x793A;&#x51FA;modprobe&#x6240;&#x4F7F;&#x7528;&#x7684;&#x8FD9;&#x7EC4;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x3002;</p>
-<p> <strong>modprobe.conf&#x53EF;&#x4EE5;&#x914D;&#x7F6E;&#x5185;&#x6838;&#x542F;&#x52A8;&#x65F6;&#x53D1;&#x73B0;&#x76F8;&#x5E94;&#x82AF;&#x7247;&#x52A0;&#x8F7D;&#x5BF9;&#x5E94;&#x7684;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x529F;&#x80FD;&#x6B63;&#x5728;&#x88AB;udev&#x6240;&#x53D6;&#x4EE3;&#x3002;</strong></p>
-</li>
-<li><p>depmod</p>
-<p> modprobe&#x662F;&#x600E;&#x6837;&#x76F4;&#x5230;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x6A21;&#x5757;&#x6240;&#x4F9D;&#x8D56;&#x7684;&#x5176;&#x4ED6;&#x6A21;&#x5757;&#x7684;&#x5462;&#xFF1F;</p>
-<p> &#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;depmod&#x5DE5;&#x5177;&#x8D77;&#x5230;&#x4E86;&#x5173;&#x952E;&#x7684;&#x4F5C;&#x7528;&#x3002;&#x5F53;modprobe&#x6267;&#x884C;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;&#x6A21;&#x5757;&#x7684;&#x5B89;&#x88C5;&#x76EE;&#x5F55;&#x4E2D;&#x641C;&#x7D22;&#x4E00;&#x4E2A;&#x540D;&#x4E3A;modules.dep&#x7684;&#x6587;&#x4EF6;&#x3002;depmod&#x5DE5;&#x5177;&#x521B;&#x5EFA;&#x4E86;&#x63CF;&#x8FF0;&#x6A21;&#x5757;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7684;&#x6587;&#x4EF6;&#x3002;</p>
-<p> &#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#x4E2D;&#x5217;&#x51FA;&#x4E86;&#x5185;&#x6838;&#x6784;&#x5EFA;&#x7CFB;&#x7EDF;&#x6240;&#x914D;&#x7F6E;&#x7684;&#x6240;&#x6709;&#x6A21;&#x5757;&#x3002;</p>
-<p> modules.dep&#x4E2D;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x770B;&#x8D77;&#x6765;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;</p>
-<pre><code> ext3.ko: jbd.ko
- ...
-</code></pre><p> &#x901A;&#x5E38;&#xFF0C;depmod&#x90FD;&#x662F;&#x5728;&#x5185;&#x6838;&#x6784;&#x5EFA;&#x65F6;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x3002;&#x7136;&#x800C;&#xFF0C;&#x5728;&#x4E00;&#x4E2A;&#x4EA4;&#x53C9;&#x5F00;&#x53D1;&#x73AF;&#x5883;&#x4E2D;&#xFF0C;&#x4F60;&#x5FC5;&#x987B;&#x6709;&#x4E00;&#x4E2A;&#x8F83;&#x5DEE;&#x7248;&#x672C;&#x7684;depmod&#xFF0C;&#x5B83;&#x77E5;&#x9053;&#x5982;&#x4F55;&#x8BC6;&#x522B;&#x54EA;&#x4E9B;&#x9488;&#x5BF9;&#x76EE;&#x6807;&#x67B6;&#x6784;&#x4EE5;&#x672C;&#x5730;&#x6A21;&#x5F0F;&#x7F16;&#x8BD1;&#x7684;&#x7248;&#x672C;&#x3002;&#x53E6;&#x5916;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x5D4C;&#x5165;&#x5F0F;&#x53D1;&#x884C;&#x7248;&#x90FD;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;init&#x811A;&#x672C;&#xFF0C;&#x4F7F;&#x7CFB;&#x7EDF;&#x5728;&#x6BCF;&#x6B21;&#x5F00;&#x542F;&#x65F6;&#x8FD0;&#x884C;depmod&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x6A21;&#x5757;&#x95F4;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x5F97;&#x5230;&#x53CA;&#x65F6;&#x66F4;&#x65B0;&#x3002;</p>
-</li>
-<li><p>rmmod</p>
-<p> rmmod&#x5DE5;&#x5177;&#x4E5F;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5B83;&#x662F;&#x5C06;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x4ECE;&#x8FD0;&#x884C;&#x4E2D;&#x7684;&#x5185;&#x6838;&#x4E2D;&#x5220;&#x9664;&#x3002;</p>
-<pre><code> rmmod hello
-</code></pre><p> <strong>&#x4E0E;modprobe&#x4E0D;&#x540C;&#xFF0C;rmmod&#x4E0D;&#x4F1A;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x6A21;&#x5757;&#x6240;&#x4F9D;&#x8D56;&#x7684;&#x6A21;&#x5757;&#x3002;</strong>&#x5982;&#x679C;&#x60F3;&#x5220;&#x9664;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;modprobe -r</p>
-</li>
-<li><p>modinfo</p>
-<p> modinfo&#x4F1A;&#x4EE5;&#x5217;&#x8868;&#x7684;&#x5F62;&#x5F0F;&#x5448;&#x73B0;&#x51FA;filename/license/description/author/depends/vermagic/parm</p>
-</li>
-</ol>
+<pre><code>#include &lt;linux/module.h&gt;
+#incldue &lt;linux/fs.h&gt;
+
+#define HELLO_MAJOR 234
+
+static int debug_enable = 0;            /* &#x6DFB;&#x52A0;&#x7684;&#x9A71;&#x52A8;&#x53C2;&#x6570; */
+module_param(debug_enable, int, 0);     /* &#x6DFB;&#x52A0;&#x8FD9;&#x4E24;&#x884C; */
+MODULE_PARM_DESC(debug_enable, &quot;Enable module debug mode.&quot;);
+
+struct file_operations hello_fops;
+
+static int hello_open(struct inode *inode, struct file *file)       // inode&#x7684;&#x4F5C;&#x7528;&#x5462;&#xFF1F;
+{
+    printk(&quot;hello_open: successful\n&quot;);
+
+    return 0;
+}
+
+static int hello_release(struct inode *inode, struct file *file)    // inode&#x7684;&#x4F5C;&#x7528;&#x5462;&#xFF1F;
+{
+    printk(&quot;hello_release: successful\n&quot;);
+
+    return 0;
+}
+
+static ssize_t hello_read(struct file *file, char *buf, size_t count,
+                loff_t *ptr)                                        // ptr&#x7684;&#x4F5C;&#x7528;&#x5462;&#xFF1F;
+{
+    printk(&quot;hello_read: returning zero bytes\n&quot;);
+
+    return 0;
+}
+
+static ssize_t hello_write(struct file *file, const char *buf,
+                size_t count, loff_t * ppos)                        // ppos&#x7684;&#x4F5C;&#x7528;&#x5462;&#xFF1F;
+{
+    printk(&quot;hello_write: accepting zero bytes\n&quot;);
+
+    return 0;
+}
+
+static int hello_ioctl(struct inode *inode, struct file *file,      // inode&#x7684;&#x4F5C;&#x7528;&#x5462;&#xFF1F;
+            unsigned int cmd, unsigned long arg)
+{
+    printk(&quot;hello_ioctl: cmd=%ld, arg=%ld\n&quot;, cmd, arg);
+
+    return 0;
+}
+
+static int __init hello_init(void)
+{
+    int ret;
+    printk(&quot;Hello Example Init - debug mode is %s\n&quot;,
+        debug_enable ? &quot;enabled&quot; : &quot;disabled&quot;);
+    ret = register_chardev(HELLO_MAJOR, &quot;hello&quot;, %hello_fops);
+    if (ret &lt; 0){
+        printk(&quot;Error registering hello device\n&quot;);    
+        goto hello_fail;
+    }
+    printk(&quot;Hello: registered module successfully!\n&quot;);
+
+    /* &#x4ECE;&#x8FD9;&#x91CC;&#x5F00;&#x59CB;&#x521D;&#x59CB;&#x5316; */
+
+    return 0;
+
+    hello_fail:
+        return ret;
+}
+
+static void __init hello_exit(void)
+{
+    printk(&quot;Hello Example Exit\n&quot;);
+}
+
+struct file_operations hello_fops = {
+    owner:      THIS_MODULE,
+    read:       hello_read,
+    write:      hello_write,
+    ioctl:      hello_ioctl,
+    open:       hello_open,
+    release:    hello_release,
+};
+
+module_init(hello_init);
+module_exit(hello_exit);
+
+MODULE_AUTHOR(&quot;BRICK&quot;);
+MODULE_DESCRIPTION(&quot;Hello World Example&quot;);
+MODULE_LICENSE(&quot;GPL&quot;);
+</code></pre><p>register_chrdev&#x5411;&#x5185;&#x6838;&#x6CE8;&#x518C;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x3002;&#x5185;&#x6838;&#x4F7F;&#x7528;struct file_operations&#x7ED3;&#x6784;&#x4F53;&#x5C06;&#x8BBE;&#x5907;&#x51FD;&#x6570;&#x548C;&#x6765;&#x81EA;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7684;&#x76F8;&#x5173;&#x8BF7;&#x6C42;&#x7ED1;&#x5B9A;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x6253;&#x5F00;&#x4E86;&#x8FD9;&#x4E2A;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x6240;&#x4EE3;&#x8868;&#x7684;&#x8BBE;&#x5907;&#xFF0C;&#x5E76;&#x8BF7;&#x6C42;&#x4E00;&#x4E2A;read()&#x64CD;&#x4F5C;&#x65F6;&#xFF0C;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4F1A;&#x5C06;&#x8FD9;&#x4E2A;&#x901A;&#x7528;&#x7684;read()&#x8BF7;&#x6C42;&#x548C;&#x6A21;&#x5757;&#x7684;hello_read()&#x51FD;&#x6570;&#x5173;&#x8054;&#x8D77;&#x6765;&#x3002;</p>
 
                                 
                                 </section>
@@ -624,12 +683,12 @@
 
             
                 
-                <a href="../device-driver.html" class="navigation navigation-prev " aria-label="Previous page: 3.11 设备驱动">
+                <a href="module-tools.html" class="navigation navigation-prev " aria-label="Previous page: 3.11.01 设备驱动模块工具">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="driver-example.html" class="navigation navigation-next " aria-label="Next page: 3.11.02 完整驱动示例">
+                <a href="device-node.html" class="navigation navigation-next " aria-label="Next page: 3.11.03 设备节点">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -640,7 +699,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.11.01 设备驱动模块工具","level":"1.5.11.1","depth":3,"next":{"title":"3.11.02 完整驱动示例","level":"1.5.11.2","depth":3,"path":"kernel/drivers/driver-example.md","ref":"kernel/drivers/driver-example.md","articles":[]},"previous":{"title":"3.11 设备驱动","level":"1.5.11","depth":2,"path":"kernel/device-driver.md","ref":"kernel/device-driver.md","articles":[{"title":"3.11.01 设备驱动模块工具","level":"1.5.11.1","depth":3,"path":"kernel/drivers/module-tools.md","ref":"kernel/drivers/module-tools.md","articles":[]},{"title":"3.11.02 完整驱动示例","level":"1.5.11.2","depth":3,"path":"kernel/drivers/driver-example.md","ref":"kernel/drivers/driver-example.md","articles":[]},{"title":"3.11.03 设备节点","level":"1.5.11.3","depth":3,"path":"kernel/drivers/device-node.md","ref":"kernel/drivers/device-node.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/drivers/module-tools.md","mtime":"2017-02-14T11:46:45.425Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-02-14T13:45:28.042Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.11.02 完整驱动示例","level":"1.5.11.2","depth":3,"next":{"title":"3.11.03 设备节点","level":"1.5.11.3","depth":3,"path":"kernel/drivers/device-node.md","ref":"kernel/drivers/device-node.md","articles":[]},"previous":{"title":"3.11.01 设备驱动模块工具","level":"1.5.11.1","depth":3,"path":"kernel/drivers/module-tools.md","ref":"kernel/drivers/module-tools.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/drivers/driver-example.md","mtime":"2017-02-14T13:36:15.213Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-02-14T13:45:28.042Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
