@@ -84,25 +84,25 @@
 
 
 
-<meta name="description" content="一由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
+<meta name="description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
 安装sudo apt-get install quota
 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
-/dev/sdb1   /mnt">
+/dev/sdb1   /mnt/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="定额分配硬盘空间">
 <meta property="og:url" content="http://labrick.github.io/2017/02/15/quota-partition/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="一由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
+<meta property="og:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
 安装sudo apt-get install quota
 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
-/dev/sdb1   /mnt">
-<meta property="og:updated_time" content="2017-02-17T13:05:44.787Z">
+/dev/sdb1   /mnt/">
+<meta property="og:updated_time" content="2017-02-17T13:11:51.465Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定额分配硬盘空间">
-<meta name="twitter:description" content="一由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
+<meta name="twitter:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
 安装sudo apt-get install quota
 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
-/dev/sdb1   /mnt">
+/dev/sdb1   /mnt/">
 
 
 
@@ -380,7 +380,7 @@
       
 
       
-        <h2 id="一">一</h2><p>由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。</p>
+        <p>由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。</p>
 <h2 id="安装">安装</h2><pre><code>sudo apt-<span class="keyword">get</span> install quota
 </code></pre><h2 id="配置">配置</h2><p>编辑/etc/fstab，在所要配置quota的磁盘分区中添加<code>usrquota, grpquota</code>选项。</p>
 <pre><code><span class="regexp">/dev/</span>sdb1   <span class="regexp">/mnt/</span>hdd2   ext4    defaults,usrquota,grpquota <span class="number">1</span>  <span class="number">2</span>
@@ -464,10 +464,12 @@ EOF
 
 rm -rf ./tmpfile
 </code></pre><p>其中.supuserdb中记录中级用户的用户名，配额为：500G<br>.miduserdb中记录中级用户的用户名，配额为：300G<br>其他用户为普通用户，配额为：100G</p>
-<h2 id="QA">QA</h2><p>Q1. 为已存在的用户分配配额后删除该用户，在repquota报告中认为以之前用户ID的形式显示之前的配额。</p>
-<p>A1. 可以采用如下命令找到已删除用户的所有文件，删除掉即可：</p>
+<h2 id="QA">QA</h2><h3 id="QA1">QA1</h3><p>Q. 为已存在的用户分配配额后删除该用户，在repquota报告中认为以之前用户ID的形式显示之前的配额。</p>
+<p>A. 可以采用如下命令找到已删除用户的所有文件，删除掉即可：</p>
 <pre><code>find ./ -<span class="built_ins">user</span> delusr_id
-</code></pre>
+</code></pre><h3 id="QA2">QA2</h3><p>Q. 磁盘定额配置中存在soft/hard配置之分，他们的区别，如果soft&lt;用户所用磁盘&lt;hard会如何？</p>
+<p>A. 磁盘分配hard是绝对无法越过的磁盘占用，而磁盘占用超过soft则会为用户提出警告，在约定时间（默认7days）未能降到soft以下的则soft等同于hard，无法再继续创建文件，占用更多的空间。</p>
+
       
     </div>
 
@@ -656,7 +658,7 @@ rm -rf ./tmpfile
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一"><span class="nav-text">一</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启quota服务"><span class="nav-text">开启quota服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户配置策略"><span class="nav-text">用户配置策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA"><span class="nav-text">QA</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-text">配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启quota服务"><span class="nav-text">开启quota服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户配置策略"><span class="nav-text">用户配置策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QA"><span class="nav-text">QA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QA1"><span class="nav-text">QA1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QA2"><span class="nav-text">QA2</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
