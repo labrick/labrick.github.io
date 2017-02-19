@@ -96,7 +96,7 @@
 安装sudo apt-get install quota
 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
 /dev/sdb1   /mnt/">
-<meta property="og:updated_time" content="2017-02-17T13:11:51.465Z">
+<meta property="og:updated_time" content="2017-02-19T09:00:49.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定额分配硬盘空间">
 <meta name="twitter:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
@@ -403,7 +403,7 @@ quotacheck: Checked 60202 directories and 495168 files</span>
 </code></pre><h2 id="开启quota服务">开启quota服务</h2><pre><code>sudo quotaon -av <span class="regexp">/mnt/</span>hdd2
 </code></pre><p>关闭可以用：</p>
 <pre><code>sudo quotaoff -av <span class="regexp">/mnt/</span>hdd2
-</code></pre><h2 id="用户配置策略">用户配置策略</h2><p>这里我写了个脚本，根据.miduserdb和.supuserdb中的用户名称来对每个用户进行分配硬盘额度。</p>
+</code></pre><h2 id="用户配置策略">用户配置策略</h2><p><a href="https://github.com/labrick/study/blob/master/shell/quota.sh" target="_blank" rel="external">这里</a>我写了个脚本，根据.miduserdb和.supuserdb中的用户名称来对每个用户进行分配硬盘额度。</p>
 <pre><code><span class="shebang">#!/bin/bash
 </span>
 <span class="function"><span class="title">quota_init</span></span>() {
