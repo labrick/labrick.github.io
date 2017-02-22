@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3.07 内核命令行 · 深入理解Android系统</title>
+        <title>3.13 BusyBox · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="init-process.html" />
+    <link rel="next" href="../uboot/" />
     
     
-    <link rel="prev" href="start-kernel.html" />
+    <link rel="prev" href="fs/create-fs-image.html" />
     
 
     </head>
@@ -351,7 +351,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.7" data-path="kernel-cmd.html">
+        <li class="chapter " data-level="1.5.7" data-path="kernel-cmd.html">
             
                 <a href="kernel-cmd.html">
             
@@ -564,7 +564,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.13" data-path="busybox.html">
+        <li class="chapter active" data-level="1.5.13" data-path="busybox.html">
             
                 <a href="busybox.html">
             
@@ -651,7 +651,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3.07 内核命令行</a>
+        <a href=".." >3.13 BusyBox</a>
     </h1>
 </div>
 
@@ -666,50 +666,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;">&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;</h1>
-<p>2017-01-12</p>
+                                <h1 id="313-busybox">3.13 BusyBox</h1>
+<p>2017-02-22</p>
 <hr>
-<p>&#x5F15;&#x5BFC;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;&#x5F15;&#x5BFC;&#x5230;&#x5185;&#x6838;&#x540E;&#x4F1A;&#x5C06;&#x63A7;&#x5236;&#x6743;&#x4EA4;&#x7ED9;&#x5185;&#x6838;&#xFF0C;&#x540C;&#x65F6;&#x4F1A;&#x4F20;&#x9012;&#x4E00;&#x4E9B;&#x53C2;&#x6570;&#x7ED9;&#x5185;&#x6838;&#xFF0C;&#x8FD9;&#x4E2A;&#x53C2;&#x6570;&#x5373;&#x4E3A;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x3002;</p>
-<p><strong>&#x662F;&#x4E0A;&#x9762;&#x8FD9;&#x6837;&#x7684;&#x5417;&#xFF1F;</strong></p>
-<p>&#x6BD4;&#x5982;Linux&#x542F;&#x52A8;&#x65F6;&#x7684;&#x4E00;&#x53E5;log&#x4FE1;&#x606F;&#xFF1A;</p>
-<pre><code>Kernel command line: console=ttyS0,115200 root=/dev/nfs ip=dhcp
-</code></pre><p>.../init/main.c&#x4E2D;&#x8C03;&#x7528;&#x7684;setup_arch()&#x6240;&#x63A5;&#x6536;&#x7684;&#x53C2;&#x6570;&#x5373;&#x4E3A;&#x6307;&#x5411;&#x8FD9;&#x4E2A;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x7684;&#x6307;&#x9488;&#x3002;</p>
-<pre><code>setup_arch(&amp;command_line);
-</code></pre><p>.../Document&#x5B50;&#x76EE;&#x5F55;&#x4E0B;&#x7684;kernel-parameters.txt&#x6587;&#x4EF6;&#x4E2D;&#x8BB0;&#x5F55;&#x6240;&#x6709;&#x7684;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x53C2;&#x6570;(&#x7531;&#x4E8E;&#x672A;&#x80FD;&#x53CA;&#x65F6;&#x66F4;&#x65B0;&#x53EF;&#x80FD;&#x4E0D;&#x591F;&#x5168;&#x9762;)</p>
-<h2 id="setup&#x5B8F;">__setup&#x5B8F;</h2>
-<p>__setup&#x662F;&#x5B9A;&#x4E49;&#x5728;.../include/linux/init.h&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x5B8F;&#xFF0C;&#x5B83;&#x7528;&#x4E8E;&#x5C06;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x540C;&#x67D0;&#x4E2A;&#x51FD;&#x6570;&#x5173;&#x8054;&#x8D77;&#x6765;&#xFF0C;&#x800C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4F1A;&#x5904;&#x7406;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x90A3;&#x4E2A;&#x90E8;&#x5206;&#x3002;</p>
-<pre><code>/*
- * Only for really core code.  See moduleparam.h for the normal way.
- *
- * Force the alignment so the compiler doesn&apos;t space elements of the
- * obs_kernel_param &quot;array&quot; too far apart in .init.setup.
- */
-#define __setup_param(str, unique_id, fn, early)            \
-    static const char __setup_str_##unique_id[] __initconst \
-        __aligned(1) = str; \
-    static struct obs_kernel_param __setup_##unique_id  \
-        __used __section(.init.setup)           \
-        __attribute__((aligned((sizeof(long)))))    \
-        = { __setup_str_##unique_id, fn, early }
-
-#define __setup(str, fn)                    \
-    __setup_param(str, fn, fn, 0)
-</code></pre><p>&#x8FD9;&#x91CC;&#x4EE5;&#x6307;&#x5B9A;&#x63A7;&#x5236;&#x53F0;&#x8BBE;&#x5907;&#x4E3A;&#x4F8B;&#x8FDB;&#x884C;&#x8BF4;&#x660E;&#xFF1A;</p>
-<p>&#x6307;&#x5B9A;&#x63A7;&#x5236;&#x53F0;&#x8BBE;&#x5907;&#x7684;&#x521D;&#x59CB;&#x5316;&#x5DE5;&#x4F5C;&#x662F;printk.c&#x4E2D;&#x7684;console_setup()&#x51FD;&#x6570;&#x5B8C;&#x6210;&#x7684;&#x3002;</p>
-<pre><code>/*
- * Set up a list of consoles.  Called from init/main.c
- */
-static int __init console_setup(char *str)
-{
-   char buf[sizeof(console_cmdline[0].name) + 4]; /* 4 for index */
-   char *s, *options, *brl_options = NULL;
-   int idx;
-   ...
-   return 1;
-}
-__setup(&quot;console=&quot;, console_setup);
-</code></pre><p>&#x4F60;&#x53EF;&#x4EE5;&#x5C06;__setup&#x5B8F;&#x770B;&#x505A;&#x4E00;&#x4E2A;&#x6CE8;&#x518C;&#x51FD;&#x6570;&#xFF0C;&#x5373;&#x4E3A;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x63A7;&#x5236;&#x53F0;&#x76F8;&#x5173;&#x53C2;&#x6570;&#x6CE8;&#x518C;&#x7684;&#x5904;&#x7406;&#x51FD;&#x6570;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x6307;&#xFF0C;&#x5F53;&#x5728;&#x5185;&#x6838;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#x78B0;&#x5230;console=&#x5B57;&#x7B26;&#x4E32;&#x65F6;&#xFF0C;&#x5C31;&#x8C03;&#x7528;__setup&#x5B8F;&#x7684;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x6240;&#x6307;&#x5B9A;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x662F;&#x8C03;&#x7528;&#x51FD;&#x6570;console_setup()&#x3002;</p>
-<p>&#x8FD9;&#x91CC;&#x7684;&#x539F;&#x7406;&#x6BD4;&#x8F83;&#x590D;&#x6742;&#xFF0C;&#x540E;&#x7EED;&#x9700;&#x8981;&#x8BA4;&#x771F;&#x7814;&#x7A76;&#x4E0B;</p>
 
                                 
                                 </section>
@@ -737,12 +696,12 @@ __setup(&quot;console=&quot;, console_setup);
 
             
                 
-                <a href="start-kernel.html" class="navigation navigation-prev " aria-label="Previous page: 3.06 Linux启动">
+                <a href="fs/create-fs-image.html" class="navigation navigation-prev " aria-label="Previous page: 3.12.03 创建文件系统镜像">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="init-process.html" class="navigation navigation-next " aria-label="Next page: 3.08 init进程">
+                <a href="../uboot/" class="navigation navigation-next " aria-label="Next page: 4. 启动篇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -753,7 +712,7 @@ __setup(&quot;console=&quot;, console_setup);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.07 内核命令行","level":"1.5.7","depth":2,"next":{"title":"3.08 init进程","level":"1.5.8","depth":2,"path":"kernel/init-process.md","ref":"kernel/init-process.md","articles":[]},"previous":{"title":"3.06 Linux启动","level":"1.5.6","depth":2,"path":"kernel/start-kernel.md","ref":"kernel/start-kernel.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/kernel-cmd.md","mtime":"2017-01-12T13:35:07.592Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-02-22T15:21:14.271Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.13 BusyBox","level":"1.5.13","depth":2,"next":{"title":"4. 启动篇","level":"1.6","depth":1,"path":"uboot/README.md","ref":"uboot/README.md","articles":[]},"previous":{"title":"3.12.03 创建文件系统镜像","level":"1.5.12.3","depth":3,"path":"kernel/fs/create-fs-image.md","ref":"kernel/fs/create-fs-image.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/busybox.md","mtime":"2017-02-22T13:52:06.340Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-02-22T15:21:14.271Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
