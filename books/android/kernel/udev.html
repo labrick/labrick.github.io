@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>3.10 设备树对象 · 深入理解Android系统</title>
+        <title>3.14 udev系统 · 深入理解Android系统</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -57,10 +57,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="device-driver.html" />
+    <link rel="next" href="../uboot/" />
     
     
-    <link rel="prev" href="initial-ramdisk.html" />
+    <link rel="prev" href="busybox.html" />
     
 
     </head>
@@ -422,7 +422,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.5.10" data-path="device-tree-blob.html">
+        <li class="chapter " data-level="1.5.10" data-path="device-tree-blob.html">
             
                 <a href="device-tree-blob.html">
             
@@ -609,7 +609,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.14" data-path="udev.html">
+        <li class="chapter active" data-level="1.5.14" data-path="udev.html">
             
                 <a href="udev.html">
             
@@ -696,7 +696,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >3.10 设备树对象</a>
+        <a href=".." >3.14 udev系统</a>
     </h1>
 </div>
 
@@ -711,17 +711,69 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="310-&#x8BBE;&#x5907;&#x6811;&#x5BF9;&#x8C61;">3.10 &#x8BBE;&#x5907;&#x6811;&#x5BF9;&#x8C61;</h1>
-<p>2017-02-13</p>
+                                <h1 id="314-udev&#x7CFB;&#x7EDF;">3.14 udev&#x7CFB;&#x7EDF;</h1>
+<p>2017-02-28</p>
 <hr>
-<p>&#x8BBE;&#x5907;&#x6811;&#x5BF9;&#x8C61;(Device Tree Blob)&#x4E5F;&#x88AB;&#x79F0;&#x4F5C;&#x6241;&#x5E73;&#x8BBE;&#x5907;&#x6811;&#x3001;&#x8BBE;&#x5907;&#x6811;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x6216;&#x8005;&#x7B80;&#x79F0;&#x8BBE;&#x5907;&#x6811;&#x3002;</p>
-<p>DTB&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5E93;&#xFF0C;&#x4EE3;&#x8868;&#x4E86;&#x4E00;&#x4E2A;&#x7ED9;&#x5B9A;&#x677F;&#x5361;&#x4E0A;&#x7684;&#x786C;&#x4EF6;&#x539F;&#x4EF6;&#xFF0C;&#x5B83;&#x662F;&#x7531;IBM&#x516C;&#x53F8;&#x7684;OpenFirmware&#x89C4;&#x8303;&#x884D;&#x751F;&#x800C;&#x6765;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x88AB;&#x9009;&#x62E9;&#x4F5C;&#x4E3A;&#x4E00;&#x79CD;&#x9ED8;&#x8BA4;&#x7684;&#x673A;&#x5236;&#xFF0C;&#x7528;&#x4E8E;&#x5C06;&#x5E95;&#x5C42;&#x786C;&#x4EF6;&#x4FE1;&#x606F;&#x4ECE;&#x5F15;&#x5BFC;&#x52A0;&#x8F7D;&#x7A0B;&#x5E8F;&#x4F20;&#x9012;&#x81F3;&#x5185;&#x6838;&#x3002;</p>
-<p>&#x8BBE;&#x5907;&#x6811;&#x5BF9;&#x8C61;&#x662F;&#x7531;&#x4E00;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x7F16;&#x8BD1;&#x5668;&#x201C;&#x7F16;&#x8BD1;&#x201D;&#x751F;&#x6210;&#x7684;&#xFF0C;&#x751F;&#x6210;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x91C7;&#x7528;U-boot&#x548C;Linux&#x80FD;&#x591F;&#x7406;&#x89E3;&#x7684;&#x683C;&#x5F0F;&#x3002;dtc&#x7F16;&#x8BD1;&#x5668;&#x4E00;&#x822C;&#x662F;&#x7531;&#x5D4C;&#x5165;&#x5F0F;Linux&#x53D1;&#x884C;&#x7248;&#x63D0;&#x4F9B;&#x7684;&#x3002;</p>
-<p>&#x8BBE;&#x5907;&#x6811;&#x8BED;&#x6CD5;&#x53EF;&#x4EE5;&#x53C2;&#x8003;<a href="http://www.power.org/resources/downloads/Power_ePAPR_APPROVED_v1.0.pdf" target="_blank">Power.org&#x5236;&#x4F5C;&#x7684;&#x6587;&#x6863;</a>&#x3002;</p>
-<p>&#x8BBE;&#x5907;&#x6811;&#x6E90;&#x7801;(dts)==&gt;&#x8BBE;&#x5907;&#x6811;&#x5BF9;&#x8C61;(dtb)</p>
-<pre><code>dtc -O dtb -o myboard.dtb -b 0 myboard.dts
-</code></pre><p>&#x8BBE;&#x5907;&#x6811;&#x5BF9;&#x8C61;(dtb)==&gt;&#x8BBE;&#x5907;&#x6811;&#x6E90;&#x7801;(dts)</p>
-<pre><code>dtc -I dtb -O dts xxx.dtb &gt;xxx.dts
+<p>Linux&#x7CFB;&#x7EDF;&#x4E2D;&#x7684;&#x8BBE;&#x5907;&#x7BA1;&#x7406;&#x4E00;&#x5EA6;&#x5F88;&#x6DF7;&#x4E71;&#xFF0C;/dev&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x5F88;&#x591A;&#x6587;&#x4EF6;&#x90FD;&#x662F;&#x65E0;&#x6548;&#x7684;&#xFF0C;&#x5B83;&#x4EEC;&#x5BF9;&#x5E94;&#x7684;&#x8BBE;&#x5907;&#x5B9E;&#x9645;&#x4E0A;&#x5E76;&#x4E0D;&#x5B58;&#x5728;&#xFF0C;&#x672A;&#x89E3;&#x51B3;&#x8FD9;&#x4E00;&#x95EE;&#x9898;&#xFF0C;&#x5185;&#x6838;&#x5F00;&#x53D1;&#x4EBA;&#x5458;&#x5F00;&#x53D1;&#x4E86;devfs&#xFF0C;&#x5B83;&#x80FD;&#x591F;&#x6839;&#x636E;&#x7CFB;&#x7EDF;&#x4E2D;&#x5B9E;&#x9645;&#x5B58;&#x5728;&#x7684;&#x786C;&#x4EF6;&#x52A8;&#x6001;&#x521B;&#x5EFA;/dev&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x6761;&#x76EE;&#x3002;&#x4E0D;&#x8FC7;&#xFF0C;devfs&#x4E5F;&#x5B58;&#x5728;&#x5F88;&#x591A;&#x7684;&#x7F3A;&#x9677;&#xFF0C;&#x88AB;udev&#x6240;&#x53D6;&#x4EE3;&#x3002;</p>
+<p>udev&#x662F;&#x6700;&#x65B0;&#x548C;&#x6700;&#x4F18;&#x79C0;&#x7684;&#x8BBE;&#x5907;&#x7BA1;&#x7406;&#x5B50;&#x7CFB;&#x7EDF;&#xFF0C;&#x5B83;&#x4F7F;&#x7528;&#x5185;&#x6838;&#x5728;&#x53D1;&#x73B0;&#x8BBE;&#x5907;&#x65F6;&#x63D0;&#x4F9B;&#x7684;&#x4FE1;&#x606F;&#x52A8;&#x6001;&#x521B;&#x5EFA;/dev&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x3002;&#x5B83;&#x5DF2;&#x7ECF;&#x53D1;&#x5C55;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#x548C;&#x5F3A;&#x5927;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x80FD;&#x591F;&#x5728;&#x7CFB;&#x7EDF;&#x68C0;&#x6D4B;&#x5230;&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x65F6;&#x8FD0;&#x7528;&#x7B56;&#x7565;&#xFF08;&#x52A0;&#x8F7D;&#x8BBE;&#x5907;&#x9A71;&#x52A8;/&#x521B;&#x5EFA;&#x8BBE;&#x5907;&#x8282;&#x70B9;/&#x8F6F;&#x8FDE;&#x63A5;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x540D;&#x79F0;/&#x81EA;&#x5B9A;&#x4E49;&#x5176;&#x4ED6;&#x884C;&#x4E3A;&#x7B49;&#xFF09;&#x3002;udev&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#x662F;&#x4F7F;&#x7528;&#x5185;&#x6838;&#x63D0;&#x4F9B;&#x7684;&#x8BBE;&#x5907;&#x540D;&#x79F0;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540C;&#x540D;&#x7684;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x3002;</p>
+<h2 id="&#x53D1;&#x73B0;&#x8BBE;&#x5907;">&#x53D1;&#x73B0;&#x8BBE;&#x5907;</h2>
+<p>&#x5F53;&#x5185;&#x6838;&#x53D1;&#x73B0;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x8BBE;&#x5907;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;uevent&#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;<strong>netlink&#x5957;&#x63A5;&#x5B57;</strong>&#x5C06;&#x5B83;&#x53D1;&#x9001;&#x5230;&#x4E00;&#x4E2A;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x7684;&#x4FA6;&#x542C;&#x8005;udev&#x3002;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x7A0B;&#x5E8F;udevadm&#x53EF;&#x4EE5;&#x6355;&#x6349;&#x5230;uevent&#x4E8B;&#x4EF6;&#x3002;</p>
+<pre><code># udevadm monitor --environment
+monitor will print the received events for:
+UDEV - the event which udev sends out after rule processing
+KERNEL - the kernel uevent
+
+UDEV  [547482.722156] add      /devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.4/1-1.4:1.0/0003:04CA:0061.0006/hidraw/hidraw0 (hidraw)
+ACTION=add
+DEVNAME=/dev/hidraw0
+DEVPATH=/devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.4/1-1.4:1.0/0003:04CA:0061.0006/hidraw/hidraw0
+ID_BUS=usb
+ID_MODEL=USB_Optical_Mouse
+ID_MODEL_ENC=USB\x20Optical\x20Mouse
+ID_MODEL_ID=0061
+ID_REVISION=0100
+ID_SERIAL=PixArt_USB_Optical_Mouse
+ID_TYPE=hid
+ID_USB_DRIVER=usbhid
+ID_USB_INTERFACES=:030102:
+ID_USB_INTERFACE_NUM=00
+ID_VENDOR=PixArt
+ID_VENDOR_ENC=PixArt
+ID_VENDOR_ID=04ca
+MAJOR=251
+MINOR=0
+SEQNUM=2489
+SUBSYSTEM=hidraw
+USEC_INITIALIZED=81267772
+
+...........
+</code></pre><p>uevent&#x7B2C;&#x4E00;&#x884C;&#x7684;add&#x8868;&#x793A;&#x8FD9;&#x662F;&#x4E2A;&#x201D;&#x6DFB;&#x52A0;&#x64CD;&#x4F5C;&#x201C;&#xFF0C;&#x610F;&#x5473;&#x7740;&#x5185;&#x6838;&#x68C0;&#x6D4B;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x7684;USB&#x8BBE;&#x5907;&#xFF0C;&#x5B83;&#x7684;&#x5185;&#x6838;&#x540D;&#x79F0;&#x662F;<code>/devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.4/1-1.4:1.0/0003:04CA:0061.0006/hidraw/hidraw0</code>&#x3002;</p>
+<p>&#x5F53;&#x5185;&#x6838;&#x68C0;&#x6D4B;&#x5230;&#x4E00;&#x4E2A;&#x65B0;&#x8BBE;&#x5907;&#x65F6;&#xFF0C;&#x5B83;&#x91C7;&#x53D6;&#x7684;&#x9ED8;&#x8BA4;&#x64CD;&#x4F5C;&#x4E4B;&#x4E00;&#x662F;&#x5728;sysfs&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#xFF08;&#x901A;&#x5E38;&#x6302;&#x8F7D;&#x4E8E;/sys&#x76EE;&#x5F55;&#xFF09;&#x4E2D;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6761;&#x76EE;&#x3002;DEVPATH&#x5C5E;&#x6027;&#x4EE3;&#x8868;&#x5B83;&#x5728;/sys&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;udev&#x89C4;&#x5219;&#x548C;&#x5DE5;&#x5177;&#x7684;&#x5F88;&#x591A;&#x5730;&#x65B9;&#x90FD;&#x5F15;&#x7528;&#x4E86;&#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x3002;</p>
+<p>&#x5176;&#x4ED6;&#x5C5E;&#x6027;&#x63CF;&#x8FF0;&#x4E86;&#x8BBE;&#x5907;&#x7C7B;&#x578B;&#x3001;&#x8BBE;&#x5907;&#x3001;&#x4EA7;&#x54C1;&#xFF08;&#x5382;&#x5546;ID&#x548C;/&#x6216;&#x8BBE;&#x5907;ID&#xFF09;&#x548C;&#x8BBE;&#x5907;&#x5728;USB&#x603B;&#x7EBF;&#x7269;&#x7406;&#x62D3;&#x6251;&#x7ED3;&#x6784;&#x4E2D;&#x7684;&#x4F4D;&#x7F6E;&#x3002;DEVICE&#x5C5E;&#x6027;&#x63CF;&#x8FF0;&#x4E86;&#x5185;&#x6838;&#x4E2D;&#x7684;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x4FE1;&#x606F;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;uevent&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x5E8F;&#x5217;&#x53F7;&#xFF0C;&#x5185;&#x6838;&#x6BCF;&#x53D1;&#x9001;&#x4E00;&#x4E2A;uevent&#xFF0C;&#x5E8F;&#x5217;&#x53F7;&#x5C31;&#x9012;1&#x3002;MAJOR/MINOR&#x5219;&#x662F;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x7684;&#x4E3B;&#x6B21;&#x8BBE;&#x5907;&#x53F7;(251/0)&#x3002;</p>
+<p>&#x5F53;udev&#x63A5;&#x6536;&#x5230;uevent&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x626B;&#x63CF;&#x5176;&#x89C4;&#x5219;&#x6570;&#x636E;&#x5E93;&#x3002;udev&#x5C06;&#x4F7F;&#x7528;&#x8BBE;&#x5907;&#x7684;&#x5C5E;&#x6027;&#x5728;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x67E5;&#x627E;&#x5339;&#x914D;&#x7684;&#x6761;&#x76EE;&#xFF0C;&#x8FD9;&#x4E9B;&#x6761;&#x76EE;&#x89C4;&#x5B9A;&#x4E86;&#x4ED6;&#x8981;&#x6267;&#x884C;&#x7684;&#x52A8;&#x4F5C;&#x3002;&#x5982;&#x679C;&#x627E;&#x4E0D;&#x5230;&#x4EFB;&#x4F55;&#x5339;&#x914D;&#x7684;&#x89C4;&#x5219;&#xFF0C;<strong>udev&#x7684;&#x9ED8;&#x8BA4;&#x52A8;&#x4F5C;&#x53EA;&#x662F;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#xFF0C;&#x5176;&#x540D;&#x79F0;&#x7531;&#x5185;&#x6838;&#x63D0;&#x4F9B;&#xFF0C;&#x4E3B;&#x6B21;&#x8BBE;&#x5907;&#x53F7;&#x7531;uevent&#x6307;&#x5B9A;&#x3002;</strong>udev&#x521B;&#x5EFA;&#x7684;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#xFF1A;</p>
+<pre><code>crw------- 1 root root 251, 0  2&#x6708; 27 21:52 hidraw0
+</code></pre><p>&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;&#x4EBA;&#x5458;&#x6216;&#x53D1;&#x884C;&#x7248;&#x7EF4;&#x62A4;&#x4EBA;&#x5458;&#x53EF;&#x4EE5;&#x5B9A;&#x5236;udev&#x7684;&#x89C4;&#x5219;&#xFF0C;&#x4ECE;&#x800C;&#x8BA9;&#x5B83;&#x6267;&#x884C;&#x9002;&#x5408;&#x5177;&#x4F53;&#x5E94;&#x7528;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x5728;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x9ED8;&#x8BA4;&#x89C4;&#x5219;&#x662F;&#x5728;/dev&#x76EE;&#x5F55;&#x4E2D;&#x521B;&#x5EFA;&#x5408;&#x9002;&#x7684;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x3002;&#x9664;&#x6B64;&#x4E4B;&#x5916;&#xFF0C;&#x5B83;&#x4EEC;&#x4E00;&#x822C;&#x8FD8;&#x4F1A;&#x751F;&#x6210;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x6307;&#x5411;&#x8FD9;&#x4E9B;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x3002;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x7684;&#x540D;&#x79F0;&#x53EF;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x5927;&#x5BB6;&#x719F;&#x77E5;&#x7684;&#x7B80;&#x77ED;&#x540D;&#x79F0;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4F7F;&#x7528;&#x5B83;&#x6765;&#x8BBF;&#x95EE;&#x8BBE;&#x5907;&#x3002;</p>
+<h2 id="udev&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;">udev&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;</h2>
+<p>&#x7B80;&#x5355;&#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#x65F6;&#xFF0C;&#x5185;&#x6838;&#x4F1A;&#x4F1A;&#x53D1;&#x9001;&#x5F88;&#x591A;&#x4E2A;uevent&#xFF0C;&#x7B80;&#x5316;uevent&#x4E8B;&#x4EF6;&#x5217;&#x8868;&#xFF1A;</p>
+<pre><code># udevadm monitor --kernel
+monitor will print the received events for:
+KERNEL - the kernel uevent
+
+KERNEL[547584.214196] add      /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.4 (usb)
+KERNEL[547584.214587] add      /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.4/2-1.4:1.0 (usb)
+KERNEL[547584.217625] add      /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.4/2-1.4:1.0/0003:413C:2107.0007 (hid)
+KERNEL[547584.217721] add      /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.4/2-1.4:1.0/0003:413C:2107.0007/input/input18 (input)
+KERNEL[547584.217763] add      /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.4/2-1.4:1.0/0003:413C:2107.0007/input/input18/event2 (input)
+KERNEL[547584.217789] add      /devices/pci0000:00/0000:00:1d.0/usb2/2-1/2-1.4/2-1.4:1.0/0003:413C:2107.0007/hidraw/hidraw0 (hidraw)
+</code></pre><h2 id="udev&#x89C4;&#x5219;">udev&#x89C4;&#x5219;</h2>
+<p>udev&#x771F;&#x6B63;&#x7684;&#x7684;&#x5F3A;&#x5927;&#x529F;&#x80FD;&#x6765;&#x81EA;&#x4E8E;&#x5B83;&#x7684;&#x89C4;&#x5219;&#x5F15;&#x64CE;&#x3002;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;&#x4EBA;&#x5458;&#x548C;&#x53D1;&#x884C;&#x7248;&#x7EF4;&#x62A4;&#x4EBA;&#x5458;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;udev&#x7684;&#x89C4;&#x5219;&#x6765;&#x7EC4;&#x7EC7;/dev&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x5C42;&#x6B21;&#x7ED3;&#x6784;&#x3001;&#x521B;&#x5EFA;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x3001;&#x4EE5;&#x53CA;&#x4E3A;&#x8FD9;&#x4E9B;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#x5206;&#x914D;&#x6613;&#x4E8E;&#x4F7F;&#x7528;&#x7684;&#x540D;&#x79F0;&#x3002;&#x901A;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;udev&#x4F1A;&#x7528;&#x5185;&#x6838;&#x63D0;&#x4F9B;&#x7684;&#x540D;&#x79F0;&#x521B;&#x5EFA;&#x8BBE;&#x5907;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x7528;&#x4E00;&#x4E2A;&#x6613;&#x4E8E;&#x4F7F;&#x7528;&#x7684;&#x540D;&#x79F0;&#x521B;&#x5EFA;&#x76F8;&#x5E94;&#x7684;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF0C;&#x4ECE;&#x800C;&#x5C06;&#x8FD9;&#x4E24;&#x4E2A;&#x540D;&#x79F0;&#x5173;&#x8054;&#x8D77;&#x6765;&#x3002;</p>
+<p>udev&#x7684;&#x89C4;&#x5219;&#x5F15;&#x64CE;&#x8FD8;&#x53EF;&#x7528;&#x4E8E;&#x52A0;&#x8F7D;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#xFF08;&#x6A21;&#x5757;&#xFF09;&#x3002;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x901A;&#x8FC7;&#x4F7F;&#x7528;udev&#x89C4;&#x5219;&#xFF0C;&#x5728;&#x7CFB;&#x7EDF;&#x68C0;&#x6D4B;&#x5230;&#x8BBE;&#x5907;&#x63D2;&#x5165;&#x6216;&#x62D4;&#x51FA;&#x65F6;&#x6267;&#x884C;&#x51E0;&#x4E4E;&#x4EFB;&#x4F55;&#x4F60;&#x80FD;&#x60F3;&#x51FA;&#x7684;&#x64CD;&#x4F5C;&#x3002;&#x7136;&#x800C;&#xFF0C;udev&#x89C4;&#x5219;&#x6700;&#x5E38;&#x7528;&#x4E8E;&#x8BBE;&#x5907;&#x7684;&#x91CD;&#x547D;&#x540D;&#xFF08;&#x521B;&#x5EFA;&#x5177;&#x6709;&#x6613;&#x8BFB;&#x540D;&#x79F0;&#x7684;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF09;&#x548C;&#x8BBE;&#x5907;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x7684;&#x52A0;&#x8F7D;&#x3002;</p>
+<p>&#x5728;&#x6700;&#x65B0;&#x7684;udev&#x7248;&#x672C;&#x4E2D;&#xFF0C;udev&#x89C4;&#x5219;&#xFF08;&#x6587;&#x4EF6;&#xFF09;&#x7684;&#x9ED8;&#x8BA4;&#x5B58;&#x653E;&#x4F4D;&#x7F6E;&#x662F;&#x76EE;&#x5F55;/lib/udev/rules.d&#xFF0C;&#x800C;&#x5F88;&#x591A;&#x53D1;&#x884C;&#x7248;&#x90FD;&#x5C06;udev&#x89C4;&#x5219;&#x5B58;&#x653E;&#x5728;&#x76EE;&#x5F55;/etc/udev/rules.d&#x4E2D;&#xFF0C;&#x4F46;&#x5982;&#x679C;&#x8FD9;&#x4E24;&#x4E2A;&#x76EE;&#x5F55;&#x4E2D;&#x6709;&#x540C;&#x540D;&#x7684;&#x89C4;&#x5219;&#x6587;&#x4EF6;&#xFF0C;<strong>&#x4EE5;&#x540E;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x4E2D;&#x7684;&#x89C4;&#x5219;&#x6587;&#x4EF6;&#x4E3A;&#x51C6;&#x3002;</strong>&#x8FD9;&#x6837;&#x53EF;&#x4EE5;&#x91C7;&#x7528;/etc/udev/rules.d&#x6765;&#x8986;&#x76D6;/lib/udev/rules.d&#x3002;</p>
+<p>&#x5F53;udev&#x7B2C;&#x4E00;&#x6B21;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x8BFB;&#x53D6;/lib/udev/rules.d&#x4E2D;&#x7684;&#x6240;&#x6709;&#x89C4;&#x5219;&#xFF0C;&#x5E76;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5185;&#x90E8;&#x7684;&#x89C4;&#x5219;&#x8868;&#xFF0C;<strong>&#x5F53;&#x5185;&#x6838;&#x53D1;&#x73B0;&#x4E00;&#x4E2A;&#x8BBE;&#x5907;&#xFF0C;udev&#x4F7F;&#x7528;&#x5185;&#x6838;uevent&#x4E2D;&#x7684;&#x52A8;&#x4F5C;&#x548C;&#x5C5E;&#x6027;&#x5728;&#x89C4;&#x5219;&#x8868;&#x4E2D;&#x67E5;&#x627E;&#x5339;&#x914D;&#x9879;&#xFF0C;&#x5F53;&#x627E;&#x5230;&#x5339;&#x914D;&#x9879;&#x65F6;&#xFF0C;udev&#x5C31;&#x4F1A;&#x6267;&#x884C;&#x90A3;&#x6761;&#x89C4;&#x5219;&#xFF08;&#x6216;&#x4E00;&#x7EC4;&#x89C4;&#x5219;&#xFF09;&#x89C4;&#x5B9A;&#x7684;&#x52A8;&#x4F5C;&#x3002;</strong></p>
+<p>&#x89C4;&#x5219;&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre><code>DRIVER!=&quot;?*&quot;, ENV{MODALIAS}==&quot;?*&quot;, RUN{ignore_error}+=&quot;/sbin/modprobe -b $env{MODALIAS}&quot;
+KERNEL==&quot;mouse*|mice|event*&quot;, NAME=&quot;input/%k&quot;, MODE=&quot;0640&quot;
 </code></pre>
                                 
                                 </section>
@@ -749,12 +801,12 @@
 
             
                 
-                <a href="initial-ramdisk.html" class="navigation navigation-prev " aria-label="Previous page: 3.09 初始RAM磁盘">
+                <a href="busybox.html" class="navigation navigation-prev " aria-label="Previous page: 3.13 BusyBox">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="device-driver.html" class="navigation navigation-next " aria-label="Next page: 3.11 设备驱动">
+                <a href="../uboot/" class="navigation navigation-next " aria-label="Next page: 4. 启动篇">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -765,7 +817,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"3.10 设备树对象","level":"1.5.10","depth":2,"next":{"title":"3.11 设备驱动","level":"1.5.11","depth":2,"path":"kernel/device-driver.md","ref":"kernel/device-driver.md","articles":[{"title":"3.11.01 设备驱动模块工具","level":"1.5.11.1","depth":3,"path":"kernel/drivers/module-tools.md","ref":"kernel/drivers/module-tools.md","articles":[]},{"title":"3.11.02 完整驱动示例","level":"1.5.11.2","depth":3,"path":"kernel/drivers/driver-example.md","ref":"kernel/drivers/driver-example.md","articles":[]},{"title":"3.11.03 设备节点","level":"1.5.11.3","depth":3,"path":"kernel/drivers/device-node.md","ref":"kernel/drivers/device-node.md","articles":[]},{"title":"3.11.04 MTD子系统","level":"1.5.11.4","depth":3,"path":"kernel/drivers/mtd-subsystem.md","ref":"kernel/drivers/mtd-subsystem.md","articles":[{"title":"3.11.04.01 MTD基础","level":"1.5.11.4.1","depth":4,"path":"kernel/drivers/mtd/mtd-element.md","ref":"kernel/drivers/mtd/mtd-element.md","articles":[]},{"title":"3.11.04.02 MTD分区","level":"1.5.11.4.2","depth":4,"path":"kernel/drivers/mtd/mtd-partition.md","ref":"kernel/drivers/mtd/mtd-partition.md","articles":[]}]}]},"previous":{"title":"3.09 初始RAM磁盘","level":"1.5.9","depth":2,"path":"kernel/initial-ramdisk.md","ref":"kernel/initial-ramdisk.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/device-tree-blob.md","mtime":"2017-02-13T08:51:45.226Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-02-28T13:00:22.145Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"3.14 udev系统","level":"1.5.14","depth":2,"next":{"title":"4. 启动篇","level":"1.6","depth":1,"path":"uboot/README.md","ref":"uboot/README.md","articles":[]},"previous":{"title":"3.13 BusyBox","level":"1.5.13","depth":2,"path":"kernel/busybox.md","ref":"kernel/busybox.md","articles":[]},"dir":"ltr"},"config":{"plugins":[],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Brick","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"深入理解Android系统","language":"zh-hans","links":{"sidebar":{"工作实验室":"http://labrick.cc"}},"gitbook":"*","description":"详细记录android系统的种种"},"file":{"path":"kernel/udev.md","mtime":"2017-02-28T13:00:11.078Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-02-28T13:00:22.145Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
