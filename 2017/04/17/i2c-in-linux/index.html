@@ -94,7 +94,7 @@
 <meta property="og:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
 当前在调试and">
-<meta property="og:updated_time" content="2017-04-17T14:56:17.196Z">
+<meta property="og:updated_time" content="2017-04-17T15:07:28.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux中的I2C配置">
 <meta name="twitter:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
@@ -382,7 +382,7 @@
 <p>当前在调试android的屏幕显示问题，因为采用的是双屏，而soc中屏幕接口(lvds/RGB)又是复用的，所以这里采用MIPI转成了lvds，然后外接lvds屏幕（至于为什么要采用lvds屏，也是因为之前项目中的后遗症），这个转换芯片就是icn6201，这时就需要采用某种方式对icn6201转换芯片进行配置，icn6201支持dsi和i2c两种接口进行配置，我们轻易的就选择了i2c配置(没有任何理由？)。</p>
 <p>因为这里只是在开机时对转换芯片进行下配置，不需要衔接android内部的其他接口，所以我就打算直接写个驱动来进行操作就行了。</p>
 <p>这里时添加驱动的操作：</p>
-<pre><code><span class="header">+++ ./drivers/i2c-bak/Makefile    2017-04-13 13:20:16.000000000 +0800</span>
+<pre><code><span class="header">+++ ./drivers/i2c/Makefile    2017-04-13 13:20:16.000000000 +0800</span>
 <span class="chunk">@@ -6,6 +6,7 @@</span>
  obj-$(CONFIG_I2C)        += i2c-core.o
  obj-$(CONFIG_I2C_SMBUS)        += i2c-smbus.o
@@ -392,8 +392,7 @@
  obj-y                += algos/ busses/ muxes/
  obj-$(CONFIG_I2C_STUB)        += i2c-stub.o
 
-<span class="header">--- ../i2c-bak/Kconfig    2017-04-17 22:24:22.365686411 +0800</span>
-<span class="header">+++ ./Kconfig    2017-04-13 13:20:16.000000000 +0800</span>
+<span class="header">+++ ./drivers/i2c/Kconfig    2017-04-17 22:24:22.365686411 +0800</span>
 <span class="chunk">@@ -46,6 +46,13 @@</span>
        This support is also available as a module.  If so, the module 
        will be called i2c-dev.
@@ -409,7 +408,7 @@
      tristate "I2C bus multiplexing support"
      depends on HAS_IOMEM
 </code></pre><p>接下来就是添加驱动文件driver/i2c/icn6201.c了：</p>
-<pre><code><span class="header">+++ icn6201.c    2017-04-17 22:35:17.658101099 +0800</span>
+<pre><code><span class="header">+++ ./drivers/i2c/icn6201.c    2017-04-17 22:35:17.658101099 +0800</span>
 <span class="chunk">@@ -0,0 +1,368 @@</span>
 <span class="addition">+/*</span>
 <span class="addition">+    icn6201.c - init icn6201 for screen 10.1</span>
