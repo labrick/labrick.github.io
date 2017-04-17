@@ -84,16 +84,22 @@
 
 
 
-<meta name="description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
+<meta name="description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
+当前在调试and">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell/vim指令收集">
-<meta property="og:url" content="http://labrick.github.io/2015/06/24/shell-vim-collection/index.html">
+<meta property="og:title" content="C语言中嵌入汇编程序">
+<meta property="og:url" content="http://labrick.github.io/2015/09/12/i2c/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
-<meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
+<meta property="og:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
+当前在调试and">
+<meta property="og:updated_time" content="2017-04-17T13:28:32.612Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell/vim指令收集">
-<meta name="twitter:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
+<meta name="twitter:title" content="C语言中嵌入汇编程序">
+<meta name="twitter:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
+当前在调试and">
 
 
 
@@ -114,9 +120,9 @@
 
 
 
-  <link rel="canonical" href="http://labrick.github.io/2015/06/24/shell-vim-collection/"/>
+  <link rel="canonical" href="http://labrick.github.io/2015/09/12/i2c/"/>
 
-  <title> shell/vim指令收集 | 工作实验室 </title>
+  <title> C语言中嵌入汇编程序 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -305,7 +311,7 @@
             
             
               
-                shell/vim指令收集
+                C语言中嵌入汇编程序
               
             
           </h1>
@@ -317,8 +323,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-06-24T21:08:00+08:00" content="2015-06-24">
-              2015-06-24
+            <time itemprop="dateCreated" datetime="2015-09-12T11:39:07+08:00" content="2015-09-12">
+              2015-09-12
             </time>
           </span>
 
@@ -331,8 +337,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux学习/" itemprop="url" rel="index">
-                    <span itemprop="name">linux学习</span>
+                  <a href="/categories/linux0-11相关/" itemprop="url" rel="index">
+                    <span itemprop="name">linux0.11相关</span>
                   </a>
                 </span>
 
@@ -347,8 +353,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/06/24/shell-vim-collection/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/24/shell-vim-collection/" itemprop="commentsCount"></span>
+                <a href="/2015/09/12/i2c/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/12/i2c/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -371,33 +377,9 @@
       
 
       
-        <p>今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
-<a id="more"></a>
-<p>TOC</p>
-<h4 id="vim跳到指定行"><strong>vim跳到指定行</strong></h4><p>在<strong>编辑模式</strong>下输入：</p>
-<pre><code><span class="title">ngg</span>
-nG
-</code></pre><p>其中n为指定的行数（如25）</p>
-<pre><code>25gg
-25G
-</code></pre><p>跳转到第25行</p>
-<p>在<strong>命令模式</strong>下输入行号n</p>
-<pre><code><span class="attribute">:n</span>
-</code></pre><p>如果想打开文件即跳转</p>
-<pre><code><span class="title">vim</span> +n file_name
-</code></pre><h4 id="查看光标所在行"><strong>查看光标所在行</strong></h4><pre><code>Ctrl+<span class="keyword">g</span>
-</code></pre><h4 id="如何显示一个文件的某几行"><strong>如何显示一个文件的某几行</strong></h4><p>比如:从第3000行开始，显示1000行。即显示3000～3999行</p>
-<pre><code><span class="keyword">cat</span> file_name | tail -<span class="keyword">n</span> +3000 | head -<span class="keyword">n</span> 1000
-</code></pre><p>比如:显示1000行到3000行</p>
-<pre><code><span class="keyword">cat</span> file_name | head -<span class="keyword">n</span> 3000 | tail -<span class="keyword">n</span> +1000
-</code></pre><blockquote>
-<p>   tail -n 1000:    显示最后1000行<br>    tail -n +1000:    从1000行开始显示<br>    head -n 1000:    显示前面1000行</p>
-</blockquote>
-<p>也可以采用sed命令来实现</p>
-<pre><code><span class="title">sed</span> -n <span class="string">'5,10p'</span> file_name
-</code></pre><blockquote>
-<p>   查看文件第5行到第10行<br>    注意这里使用的是’单引号’</p>
-</blockquote>
+        <p>I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。</p>
+<p>对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。</p>
+<p>当前在调试android的屏幕显示问题，因为采用的是双屏，而soc中屏幕接口(lvds/RGB)又是复用的，所以这里采用MIPI转成了lvds，然后外接lvds屏幕（至于为什么要采用lvds屏，也是因为之前项目中的后遗症），这个转换芯片就是icn6201，这时就需要采用某种方式对icn6201转换芯片进行配置，icn6201支持dsi和i2c两种接口进行配置，我们而轻易的就选择了i2c配置，</p>
 
       
     </div>
@@ -423,16 +405,16 @@ nG
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/06/18/websit-history/" rel="next" title="本网站建设中所遇到到的问题及解决方法">
-                <i class="fa fa-chevron-left"></i> 本网站建设中所遇到到的问题及解决方法
+              <a href="/2015/09/11/git-tags-usage/" rel="next" title="git-tag使用">
+                <i class="fa fa-chevron-left"></i> git-tag使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/06/26/first-use-perl/" rel="prev" title="第一次使用perl语言">
-                第一次使用perl语言 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/09/12/assembly-in-c/" rel="prev" title="C语言中嵌入汇编程序">
+                C语言中嵌入汇编程序 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -459,8 +441,8 @@ nG
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/06/24/shell-vim-collection/"
-           data-title="shell/vim指令收集" data-url="http://labrick.github.io/2015/06/24/shell-vim-collection/">
+      <div class="ds-thread" data-thread-key="2015/09/12/i2c/"
+           data-title="C语言中嵌入汇编程序" data-url="http://labrick.github.io/2015/09/12/i2c/">
       </div>
     
   </div>
@@ -591,7 +573,7 @@ nG
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#vim跳到指定行"><span class="nav-text">vim跳到指定行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看光标所在行"><span class="nav-text">查看光标所在行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何显示一个文件的某几行"><span class="nav-text">如何显示一个文件的某几行</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>

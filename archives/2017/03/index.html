@@ -84,16 +84,15 @@
 
 
 
-<meta name="description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="shell/vim指令收集">
-<meta property="og:url" content="http://labrick.github.io/2015/06/24/shell-vim-collection/index.html">
+<meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="工作实验室">
+<meta property="og:url" content="http://labrick.github.io/archives/2017/03/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
-<meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell/vim指令收集">
-<meta name="twitter:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
+<meta name="twitter:title" content="工作实验室">
+<meta name="twitter:description">
 
 
 
@@ -114,9 +113,9 @@
 
 
 
-  <link rel="canonical" href="http://labrick.github.io/2015/06/24/shell-vim-collection/"/>
+  <link rel="canonical" href="http://labrick.github.io/archives/2017/03/"/>
 
-  <title> shell/vim指令收集 | 工作实验室 </title>
+  <title> 归档 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +155,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
+  <div class="container one-collumn sidebar-position-left  page-archive  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -284,172 +283,65 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-collapse">
+    <span class="archive-move-on"></span>
+
+    <span class="archive-page-counter">
+      
+      
+       
+      
+      OK! 目前共计 45 篇日志。 继续努力。
+    </span>
+
     
 
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                shell/vim指令收集
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-06-24T21:08:00+08:00" content="2015-06-24">
-              2015-06-24
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/linux学习/" itemprop="url" rel="index">
-                    <span itemprop="name">linux学习</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/06/24/shell-vim-collection/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/24/shell-vim-collection/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
-      
-        <p>今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
-<a id="more"></a>
-<p>TOC</p>
-<h4 id="vim跳到指定行"><strong>vim跳到指定行</strong></h4><p>在<strong>编辑模式</strong>下输入：</p>
-<pre><code><span class="title">ngg</span>
-nG
-</code></pre><p>其中n为指定的行数（如25）</p>
-<pre><code>25gg
-25G
-</code></pre><p>跳转到第25行</p>
-<p>在<strong>命令模式</strong>下输入行号n</p>
-<pre><code><span class="attribute">:n</span>
-</code></pre><p>如果想打开文件即跳转</p>
-<pre><code><span class="title">vim</span> +n file_name
-</code></pre><h4 id="查看光标所在行"><strong>查看光标所在行</strong></h4><pre><code>Ctrl+<span class="keyword">g</span>
-</code></pre><h4 id="如何显示一个文件的某几行"><strong>如何显示一个文件的某几行</strong></h4><p>比如:从第3000行开始，显示1000行。即显示3000～3999行</p>
-<pre><code><span class="keyword">cat</span> file_name | tail -<span class="keyword">n</span> +3000 | head -<span class="keyword">n</span> 1000
-</code></pre><p>比如:显示1000行到3000行</p>
-<pre><code><span class="keyword">cat</span> file_name | head -<span class="keyword">n</span> 3000 | tail -<span class="keyword">n</span> +1000
-</code></pre><blockquote>
-<p>   tail -n 1000:    显示最后1000行<br>    tail -n +1000:    从1000行开始显示<br>    head -n 1000:    显示前面1000行</p>
-</blockquote>
-<p>也可以采用sed命令来实现</p>
-<pre><code><span class="title">sed</span> -n <span class="string">'5,10p'</span> file_name
-</code></pre><blockquote>
-<p>   查看文件第5行到第10行<br>    注意这里使用的是’单引号’</p>
-</blockquote>
-
-      
-    </div>
-
-    <div>
       
         
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2015/06/18/websit-history/" rel="next" title="本网站建设中所遇到到的问题及解决方法">
-                <i class="fa fa-chevron-left"></i> 本网站建设中所遇到到的问题及解决方法
-              </a>
-            
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/06/26/first-use-perl/" rel="prev" title="第一次使用perl语言">
-                第一次使用perl语言 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+        <div class="collection-title">
+          <h2 class="archive-year motion-element" id="archive-year-2017">2017</h2>
         </div>
       
+      
 
       
-      
-    </footer>
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h1 class="post-title">
+        
+            <a class="post-title-link" href="/2017/03/01/git-usage/" itemprop="url">
+              
+                <span itemprop="name">git-usage</span>
+              
+            </a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-03-01T19:31:07+08:00"
+              content="2017-03-01" >
+          03-01
+        </time>
+      </div>
+
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+    
+
+  </section>
+
+  
+
 
 
           </div>
@@ -457,14 +349,6 @@ nG
 
 
           
-  <div class="comments" id="comments">
-    
-      <div class="ds-thread" data-thread-key="2015/06/24/shell-vim-collection/"
-           data-title="shell/vim指令收集" data-url="http://labrick.github.io/2015/06/24/shell-vim-collection/">
-      </div>
-    
-  </div>
-
 
         </div>
         
@@ -484,17 +368,8 @@ nG
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel ">
+      <section class="site-overview sidebar-panel  sidebar-panel-active ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg"
@@ -584,17 +459,6 @@ nG
 
       </section>
 
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#vim跳到指定行"><span class="nav-text">vim跳到指定行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看光标所在行"><span class="nav-text">查看光标所在行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何显示一个文件的某几行"><span class="nav-text">如何显示一个文件的某几行</span></a></li></ol></div>
-            
-          </div>
-        </section>
       
 
     </div>
@@ -691,9 +555,11 @@ nG
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
+  
+    <script type="text/javascript" id="motion.page.archive">
+      $('.archive-year').velocity('transition.slideLeftIn');
+    </script>
+  
 
 
   
