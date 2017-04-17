@@ -84,19 +84,22 @@
 
 
 
-<meta name="description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
-tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
+<meta name="description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
+当前在调试and">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git-tag使用">
-<meta property="og:url" content="http://labrick.github.io/2015/09/11/git-tags-usage/index.html">
+<meta property="og:title" content="Linux中的I2C配置">
+<meta property="og:url" content="http://labrick.github.io/2017/04/17/i2c/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
-tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
-<meta property="og:updated_time" content="2017-03-01T11:44:00.698Z">
+<meta property="og:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
+当前在调试and">
+<meta property="og:updated_time" content="2017-04-17T13:30:46.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git-tag使用">
-<meta name="twitter:description" content="tag背景之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。
-tag使用我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看t">
+<meta name="twitter:title" content="Linux中的I2C配置">
+<meta name="twitter:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
+当前在调试and">
 
 
 
@@ -117,9 +120,9 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
 
 
 
-  <link rel="canonical" href="http://labrick.github.io/2015/09/11/git-tags-usage/"/>
+  <link rel="canonical" href="http://labrick.github.io/2017/04/17/i2c/"/>
 
-  <title> git-tag使用 | 工作实验室 </title>
+  <title> Linux中的I2C配置 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -308,7 +311,7 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
             
             
               
-                git-tag使用
+                Linux中的I2C配置
               
             
           </h1>
@@ -320,8 +323,8 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-09-11T21:28:54+08:00" content="2015-09-11">
-              2015-09-11
+            <time itemprop="dateCreated" datetime="2017-04-17T21:30:05+08:00" content="2017-04-17">
+              2017-04-17
             </time>
           </span>
 
@@ -334,8 +337,8 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具使用/" itemprop="url" rel="index">
-                    <span itemprop="name">工具使用</span>
+                  <a href="/categories/linux0-11相关/" itemprop="url" rel="index">
+                    <span itemprop="name">linux0.11相关</span>
                   </a>
                 </span>
 
@@ -350,8 +353,8 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/09/11/git-tags-usage/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/11/git-tags-usage/" itemprop="commentsCount"></span>
+                <a href="/2017/04/17/i2c/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/17/i2c/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -374,33 +377,10 @@ tag使用我们可以创建一个tag来指向软件开发中的一个关键时�
       
 
       
-        <h2 id="tag背景">tag背景</h2><p>之前很少用git tag，感觉应该挺好用的，但是懒的去学习，但最近写一些学习代码，分为几个比较明显的版本，所以就差了下怎么用，其实用起来也挺简单的，只不过需要记住条指令，这里就记录一下。</p>
-<h2 id="tag使用">tag使用</h2><p>我们可以创建一个tag来指向软件开发中的一个关键时期，比如版本号更新的时候可以建一个“v2.0”、“v3.1”之类的标签，这样在以后回顾的时候会比较方便。tag的使用很简单，主要操作有：查看tag、创建tag、验证tag以及共享tag。</p>
-<h3 id="查看tag">查看tag</h3><p>列出所有tag：</p>
-<pre><code>git <span class="built_in">tag</span>
-</code></pre><p>这样列出的tag是按字母排序的，和创建时间没关系。如果只是想查看某些tag的话，可以加限定：</p>
-<pre><code><span class="label">git</span> tag -l <span class="literal">v1</span>.*
-</code></pre><p>这样就只会列出1.几的版本。</p>
-<h3 id="创建tag">创建tag</h3><p>创建轻量级tag：</p>
-<pre><code><span class="label">git</span> tag <span class="literal">v1</span>.<span class="number">0</span>
-</code></pre><p>这样创建的tag没有附带其他信息，与之相应的是带信息的tag：</p>
-<pre><code>git tag -<span class="tag">a</span> v1.<span class="number">0</span>-m <span class="string">'first version'</span>
-</code></pre><p>-m后面带的就是注释信息，这样在日后查看的时候会很有用，这种是普通tag，还有一种有签名的tag：</p>
-<pre><code>git tag -s v1.0-m '<span class="keyword">first</span> <span class="property">version</span>'
-</code></pre><p>前提是你有GPG私钥，把上面的a换成s就行了。除了可以为当前的进度添加tag，我们还可以为以前的commit添加tag：</p>
-<pre><code><span class="number">1.</span> <span class="comment">#首先查看以前的commit</span>
-<span class="number">2.</span> git <span class="built_in">log</span> <span class="comment">--oneline</span>
-<span class="number">3.</span> <span class="comment">#假如有这样一个commit：8a5cbc2 updated readme</span>
-<span class="number">4.</span> <span class="comment">#这样为他添加tag</span>
-<span class="number">5.</span> git tag -<span class="operator">a</span> v1.18a5cbc2
-</code></pre><h3 id="删除tag">删除tag</h3><p>很简单，知道tag名称后：</p>
-<pre><code>git tag -d v1.<span class="number">0</span>
-git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0</span>
-</code></pre><h3 id="验证tag">验证tag</h3><p>如果你有GPG私钥的话就可以验证tag：</p>
-<pre><code><span class="label">git</span> tag -v <span class="literal">v1</span>.<span class="number">0</span>
-</code></pre><h3 id="共享tag">共享tag</h3><p>我们在执行git push的时候，tag是不会上传到服务器的，比如现在的github，创建tag后git push，在github网页上是看不到tag的，为了共享这些tag，你必须这样：</p>
-<pre><code>git push origin <span class="comment">--tags</span>
-</code></pre>
+        <p>I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。</p>
+<p>对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。</p>
+<p>当前在调试android的屏幕显示问题，因为采用的是双屏，而soc中屏幕接口(lvds/RGB)又是复用的，所以这里采用MIPI转成了lvds，然后外接lvds屏幕（至于为什么要采用lvds屏，也是因为之前项目中的后遗症），这个转换芯片就是icn6201，这时就需要采用某种方式对icn6201转换芯片进行配置，icn6201支持dsi和i2c两种接口进行配置，我们而轻易的就选择了i2c配置，</p>
+
       
     </div>
 
@@ -425,17 +405,13 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/09/06/cmos-info/" rel="next" title="CMOS存储的信息">
-                <i class="fa fa-chevron-left"></i> CMOS存储的信息
+              <a href="/2017/03/01/git-usage/" rel="next" title="git-usage">
+                <i class="fa fa-chevron-left"></i> git-usage
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/09/12/assembly-in-c/" rel="prev" title="C语言中嵌入汇编程序">
-                C语言中嵌入汇编程序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -461,8 +437,8 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/09/11/git-tags-usage/"
-           data-title="git-tag使用" data-url="http://labrick.github.io/2015/09/11/git-tags-usage/">
+      <div class="ds-thread" data-thread-key="2017/04/17/i2c/"
+           data-title="Linux中的I2C配置" data-url="http://labrick.github.io/2017/04/17/i2c/">
       </div>
     
   </div>
@@ -593,7 +569,7 @@ git push origin <span class="symbol">:refs/tags/v1</span>.<span class="number">0
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tag背景"><span class="nav-text">tag背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tag使用"><span class="nav-text">tag使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#查看tag"><span class="nav-text">查看tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建tag"><span class="nav-text">创建tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除tag"><span class="nav-text">删除tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证tag"><span class="nav-text">验证tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#共享tag"><span class="nav-text">共享tag</span></a></li></ol></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
