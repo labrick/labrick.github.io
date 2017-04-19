@@ -96,7 +96,7 @@ if [ &quot;$color_prompt&quot; = yes ]; then
 基础版修改~/.bashrc文件的PS1变量：
 if [ &quot;$color_prompt&quot; = yes ]; then
     PS1=&apos;${debian_chroot:+($debian_chroot)}\">
-<meta property="og:updated_time" content="2017-04-19T13:13:04.699Z">
+<meta property="og:updated_time" content="2017-04-19T13:19:14.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux中自动切换显示目录的长度">
 <meta name="twitter:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
@@ -407,7 +407,7 @@ fi</span>
 <span class="string">\e</span> ASCII 转义字符（也可以键入 <span class="number">33</span>)
 <span class="string">\[</span> 这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使bash能够正确计算自动换行。
 <span class="string">\]</span> 这个序列应该出现在非打印字符序列之后。
-</code></pre><h2 id="加强版">加强版</h2><p>上面配置的是终端全部显示最后一级目录，这样咋能行呢，路径深了都不知道是怎么进来的，虽说又pwd，但也太不直观了，如果能够根据路径长度自动决定显示路径的深度该多好啊，比如路径深度小的时候显示全路径，路径深度大时显示最后几级路径，这样应该就完美了吧…..</p>
+</code></pre><h2 id="加强版">加强版</h2><p>上面配置的是终端全部显示最后一级目录，这样咋能行呢，路径深了都不知道是怎么进来的，虽说有pwd，但也太不直观了，如果能够根据路径长度自动决定显示路径的深度该多好啊，比如路径深度小的时候显示全路径，路径深度大时显示最后几级路径，这样应该就完美了吧…..</p>
 <p>嗯嗯，google/baidu/github….</p>
 <p>嗨，竟然没有实现我这种想法的原型…..桑心</p>
 <p>自己来吧………</p>
@@ -423,8 +423,8 @@ fi</span>
 <span class="keyword">done</span>
 <span class="variable">$command</span>
 
-<span class="comment">#echo ${\#PWD}</span>
-<span class="built_in">pwd</span>_len=<span class="variable">${\#PWD}</span>
+<span class="comment">#echo ${\#PWD}      # 这里因为hexo的原因多加了个\</span>
+<span class="built_in">pwd</span>_len=<span class="variable">${\#PWD}</span>    <span class="comment"># 这里因为hexo的原因多加了个\</span>
 ((std_len=<span class="number">14</span>+<span class="number">60</span>))  <span class="comment"># 65 halfscreen</span>
 <span class="comment">#echo std_len:$std_len</span>
 <span class="keyword">if</span> [ <span class="variable">$pwd_len</span> -ge <span class="variable">$std_len</span> ]; <span class="keyword">then</span>
