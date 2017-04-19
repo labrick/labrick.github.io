@@ -84,28 +84,25 @@
 
 
 
-<meta name="description" content="创建组
-$sudo addgroup groupName
-创建用户userName并加入组groupName
-$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
-$sudo useradd userName -g groupName -M -d absolute">
+<meta name="description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
+基础版修改~/.bashrc文件的PS1变量：
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&apos;${debian_chroot:+($debian_chroot)}\">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Linux用户与组管理">
-<meta property="og:url" content="http://labrick.github.io/2016/06/03/manage-user-and-group/index.html">
+<meta property="og:title" content="Linux中自动切换显示目录的长度">
+<meta property="og:url" content="http://labrick.github.io/2017/04/19/change-dir-length/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="创建组
-$sudo addgroup groupName
-创建用户userName并加入组groupName
-$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
-$sudo useradd userName -g groupName -M -d absolute">
-<meta property="og:updated_time" content="2016-12-22T13:12:21.697Z">
+<meta property="og:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
+基础版修改~/.bashrc文件的PS1变量：
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&apos;${debian_chroot:+($debian_chroot)}\">
+<meta property="og:updated_time" content="2017-04-19T13:13:04.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Linux用户与组管理">
-<meta name="twitter:description" content="创建组
-$sudo addgroup groupName
-创建用户userName并加入组groupName
-$sudo useradd userName -g groupName -M                     # 并指定唯一组groupName，并强制创建HOME目录（默认位置）
-$sudo useradd userName -g groupName -M -d absolute">
+<meta name="twitter:title" content="Linux中自动切换显示目录的长度">
+<meta name="twitter:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
+基础版修改~/.bashrc文件的PS1变量：
+if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&apos;${debian_chroot:+($debian_chroot)}\">
 
 
 
@@ -126,9 +123,9 @@ $sudo useradd userName -g groupName -M -d absolute">
 
 
 
-  <link rel="canonical" href="http://labrick.github.io/2016/06/03/manage-user-and-group/"/>
+  <link rel="canonical" href="http://labrick.github.io/2017/04/19/change-dir-length/"/>
 
-  <title> Linux用户与组管理 | 工作实验室 </title>
+  <title> Linux中自动切换显示目录的长度 | 工作实验室 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -317,7 +314,7 @@ $sudo useradd userName -g groupName -M -d absolute">
             
             
               
-                Linux用户与组管理
+                Linux中自动切换显示目录的长度
               
             
           </h1>
@@ -329,8 +326,8 @@ $sudo useradd userName -g groupName -M -d absolute">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-06-03T23:28:51+08:00" content="2016-06-03">
-              2016-06-03
+            <time itemprop="dateCreated" datetime="2017-04-19T20:42:12+08:00" content="2017-04-19">
+              2017-04-19
             </time>
           </span>
 
@@ -343,8 +340,8 @@ $sudo useradd userName -g groupName -M -d absolute">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工作记录/" itemprop="url" rel="index">
-                    <span itemprop="name">工作记录</span>
+                  <a href="/categories/突发奇想的小玩意/" itemprop="url" rel="index">
+                    <span itemprop="name">突发奇想的小玩意</span>
                   </a>
                 </span>
 
@@ -359,8 +356,8 @@ $sudo useradd userName -g groupName -M -d absolute">
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/06/03/manage-user-and-group/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/03/manage-user-and-group/" itemprop="commentsCount"></span>
+                <a href="/2017/04/19/change-dir-length/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/19/change-dir-length/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -383,40 +380,74 @@ $sudo useradd userName -g groupName -M -d absolute">
       
 
       
-        <p>创建组</p>
-<pre><code><span class="variable">$sudo</span> addgroup <span class="keyword">group</span>Name
-</code></pre><p>创建用户userName并加入组groupName</p>
-<pre><code><span class="variable">$sudo</span> useradd <span class="keyword">user</span>Name -g <span class="keyword">group</span>Name -M                     <span class="comment"># 并指定唯一组groupName，并强制创建HOME目录（默认位置）</span>
-<span class="variable">$sudo</span> useradd <span class="keyword">user</span>Name -g <span class="keyword">group</span>Name -M -d absolutePath     <span class="comment"># +指定HOME所在位置absolutePath</span>
-</code></pre><p>增加已存在用户到指定组</p>
-<pre><code><span class="variable">$sudo</span> adduser <span class="keyword">user</span>Name <span class="keyword">group</span>Name
-</code></pre><p>从组中删除某用户</p>
-<pre><code><span class="variable">$sudo</span> gpasswd -d <span class="keyword">user</span>Name <span class="keyword">group</span>Name
-</code></pre><p>组用户成员维护</p>
-<pre><code><span class="variable">$gpasswd</span> –a <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 添加用户到组</span>
-<span class="variable">$gpasswd</span> –d <span class="keyword">user</span>Name <span class="keyword">group</span>Name          <span class="comment"># 从组中删除</span>
-<span class="variable">$gpasswd</span> –A 组管理员用户列表 <span class="keyword">group</span>Name      <span class="comment"># don't know</span>
-</code></pre><p>显示用户ID及组信息：</p>
-<pre><code><span class="variable">$id</span>
-uid=<span class="number">1001</span>(dbh) gid=<span class="number">1001</span>(dbh) groups=<span class="number">115</span>(admin),<span class="number">1001</span>(dbh)
-<span class="variable">$cat</span> /etc/<span class="keyword">group</span>
-<span class="keyword">group</span>Name:x:<span class="number">1002</span>:<span class="keyword">user</span>Name
-</code></pre><p>口令维护</p>
-<pre><code><span class="variable">$passwd</span> <span class="keyword">user</span>Name
-</code></pre><p>显示指定用户所属的组</p>
-<pre><code><span class="variable">$groups</span> <span class="keyword">user</span>Name
-</code></pre><p>文件属性相关</p>
-<p>改变当前文件所属用户</p>
-<pre><code><span class="variable">$chown</span> <span class="keyword">user</span>Name -R path
-</code></pre><p>改变当前文件所属用户组</p>
-<pre><code><span class="variable">$chgrp</span> <span class="keyword">group</span>Name -R path
-</code></pre><p>改变当前目录下所有文件权限</p>
-<pre><code><span class="label">$find</span> -<span class="keyword">type</span> f | xargs chmod xxx
-<span class="label">$chmod</span> xxx `find -<span class="keyword">type</span> f`           <span class="comment">// 这种方法好像问题</span>
-</code></pre><p>改变当前目录下所有文件夹权限</p>
-<pre><code><span class="label">$find</span> -<span class="keyword">type</span> <span class="keyword">d</span> | xargs chmod xxx
-<span class="label">$chmod</span> xxx `find -<span class="keyword">type</span> <span class="keyword">d</span>`           <span class="comment">// 这种方法好像有问题</span>
-</code></pre>
+        <p>前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。</p>
+<h2 id="基础版">基础版</h2><p>修改~/.bashrc文件的PS1变量：</p>
+<pre><code>if <span class="special">[</span> "<span class="formula">$color_prompt" = yes <span class="special">]</span>; then
+    PS1='$</span><span class="special">{</span>debian_chroot:+(<span class="formula">$debian_chroot)<span class="special">}</span><span class="command">\[</span>\033<span class="special">[</span>01;32m<span class="command">\]</span><span class="command">\u</span>@<span class="command">\h</span><span class="command">\[</span>\033<span class="special">[</span>00m<span class="command">\]</span>:<span class="command">\[</span>\033<span class="special">[</span>01;34m<span class="command">\]</span><span class="command">\w</span><span class="command">\[</span>\033<span class="special">[</span>00m<span class="command">\]</span><span class="command">\$</span> '
+else
+    PS1='$</span><span class="special">{</span>debian_chroot:+(<span class="formula">$debian_chroot)<span class="special">}</span><span class="command">\u</span>@<span class="command">\h</span>:<span class="command">\W</span><span class="command">\$</span> '
+fi</span>
+</code></pre><p>测试一下就可以知道采用的是第二个PS1，只是简单的把<code>\u@\h:\w\</code>中的小写w改成大小的W就好，具体的规定如下：</p>
+<pre><code><span class="string">\u</span> 用户名
+<span class="string">\h</span> 主机名第一部分
+<span class="string">\H</span> 主机名全称
+<span class="string">\w</span>  当前工作目录（如 “/home/username/mywork”）
+<span class="string">\W</span>  当前工作目录的“基名 (basename)”（如 “mywork”)
+<span class="string">\t</span>    <span class="number">24</span> 小时制时间
+<span class="string">\T</span>  <span class="number">12</span> 小时制时间
+<span class="string">\@</span>  带有 am/pm 的 <span class="number">12</span> 小时制时间
+<span class="string">\d</span>   “Sat Dec <span class="number">18</span>″ 格式的日期
+<span class="string">\s</span> shell 的名称（如 “bash”)
+<span class="string">\v</span> bash 的版本（如 <span class="number">2.04</span>）
+<span class="string">\V</span> Bash 版本（包括补丁级别）
+<span class="string">\n</span> 换行符
+<span class="string">\r</span> 回车符
+<span class="string">\\</span> 反斜杠
+<span class="string">\a</span> ASCII 响铃字符（也可以键入 <span class="number">07</span>）
+<span class="string">\e</span> ASCII 转义字符（也可以键入 <span class="number">33</span>)
+<span class="string">\[</span> 这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使bash能够正确计算自动换行。
+<span class="string">\]</span> 这个序列应该出现在非打印字符序列之后。
+</code></pre><h2 id="加强版">加强版</h2><p>上面配置的是终端全部显示最后一级目录，这样咋能行呢，路径深了都不知道是怎么进来的，虽说又pwd，但也太不直观了，如果能够根据路径长度自动决定显示路径的深度该多好啊，比如路径深度小的时候显示全路径，路径深度大时显示最后几级路径，这样应该就完美了吧…..</p>
+<p>嗯嗯，google/baidu/github….</p>
+<p>嗨，竟然没有实现我这种想法的原型…..桑心</p>
+<p>自己来吧………</p>
+<p>这个手脚应该动在哪呢？</p>
+<p>PS1上？这个在.bashrc文件中，可这个文件不能老是被执行啊，不行</p>
+<p>cd上？每次cd执行之后自动获取当前目录的深度，并重新设置PS1，嗯嗯，可行….动手吧</p>
+<pre><code><span class="shebang">#!/bin/bash
+</span>
+<span class="built_in">command</span>=<span class="string">"cd "</span>
+<span class="keyword">for</span> arg <span class="keyword">in</span> <span class="string">"$*"</span>
+<span class="keyword">do</span>
+    <span class="built_in">command</span>=<span class="variable">${command}</span><span class="string">" <span class="variable">$arg</span>"</span>
+<span class="keyword">done</span>
+<span class="variable">$command</span>
+
+<span class="comment">#echo ${\#PWD}</span>
+<span class="built_in">pwd</span>_len=<span class="variable">${\#PWD}</span>
+((std_len=<span class="number">14</span>+<span class="number">60</span>))  <span class="comment"># 65 halfscreen</span>
+<span class="comment">#echo std_len:$std_len</span>
+<span class="keyword">if</span> [ <span class="variable">$pwd_len</span> -ge <span class="variable">$std_len</span> ]; <span class="keyword">then</span>
+    keep_str=<span class="variable">${PWD:22-$std_len:$pwd_len}</span>
+    <span class="comment">#echo $keep_str</span>
+    keep_str=<span class="variable">${keep_str#*/}</span>
+
+    <span class="built_in">export</span> PS1=<span class="string">'${debian_chroot:+($debian_chroot)}\u@\h:$keep_str\$ '</span>
+<span class="keyword">else</span>
+    <span class="built_in">export</span> PS1=<span class="string">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
+<span class="keyword">fi</span>
+</code></pre><p>挺好，完美！</p>
+<p>执行试下，嗨，不行啊，这个脚本会在后台开个终端，cd到的目录并不更改当前终端的路径啊</p>
+<p>用source来解决吧…..</p>
+<p>这里还真纠结了下：</p>
+<ol>
+<li>source的脚本可以带有参数，意外；</li>
+<li>放在.bashrc中参数竟然还能传递过去，意外的惊喜。</li>
+</ol>
+<p>所以呢，在.bashrc中加入一句话：</p>
+<pre><code><span class="built_in">alias</span> <span class="built_in">cd</span>=<span class="string">"source /mnt/hdd2/yanan/bin/cd.sh"</span>
+</code></pre><p>再<code>source ~/.bashrc</code>，ok！搞定手工。</p>
+
       
     </div>
 
@@ -441,17 +472,13 @@ uid=<span class="number">1001</span>(dbh) gid=<span class="number">1001</span>(d
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/04/25/use-android-ndk/" rel="next" title="Android运行C程序">
-                <i class="fa fa-chevron-left"></i> Android运行C程序
+              <a href="/2017/04/17/i2c-in-linux/" rel="next" title="Linux中的I2C配置">
+                <i class="fa fa-chevron-left"></i> Linux中的I2C配置
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/06/29/overview-of-first-year-of-graduation/" rel="prev" title="我的研究生之路">
-                我的研究生之路 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -477,8 +504,8 @@ uid=<span class="number">1001</span>(dbh) gid=<span class="number">1001</span>(d
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/06/03/manage-user-and-group/"
-           data-title="Linux用户与组管理" data-url="http://labrick.github.io/2016/06/03/manage-user-and-group/">
+      <div class="ds-thread" data-thread-key="2017/04/19/change-dir-length/"
+           data-title="Linux中自动切换显示目录的长度" data-url="http://labrick.github.io/2017/04/19/change-dir-length/">
       </div>
     
   </div>
@@ -609,7 +636,7 @@ uid=<span class="number">1001</span>(dbh) gid=<span class="number">1001</span>(d
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础版"><span class="nav-text">基础版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加强版"><span class="nav-text">加强版</span></a></li></ol></div>
             
           </div>
         </section>
