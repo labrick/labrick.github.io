@@ -92,7 +92,7 @@ abstract — Soun">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="摘要 — 声源定位(SSL)是智能家庭机器人听觉系统的一个主要功能。SRP-PHAT广泛的应用于机器人声源定位系统的一种鲁棒性定位方法，但是，这种定位方法由于需要进行大范围的搜索，需要较长的时间进行定位，实时性不强。本文提出一种适用于小型阵列MIC的SRP-PATH加速方法。实验表明，与传统的方法相比，这种方法可以减少30.6%的待搜索位置，减少46.7%的错误率。
 abstract — Soun">
-<meta property="og:updated_time" content="2017-04-26T06:22:36.290Z">
+<meta property="og:updated_time" content="2017-04-26T08:00:37.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于小型阵列MIC的机器人声源定位方法">
 <meta name="twitter:description" content="摘要 — 声源定位(SSL)是智能家庭机器人听觉系统的一个主要功能。SRP-PHAT广泛的应用于机器人声源定位系统的一种鲁棒性定位方法，但是，这种定位方法由于需要进行大范围的搜索，需要较长的时间进行定位，实时性不强。本文提出一种适用于小型阵列MIC的SRP-PATH加速方法。实验表明，与传统的方法相比，这种方法可以减少30.6%的待搜索位置，减少46.7%的错误率。
@@ -383,7 +383,25 @@ abstract — Soun">
 <p>有很多方法被提出来改进SRP-PHAT的实时性问题。比如：[7]中从粗糙到精细的层级搜索方法，【但这种方法会在搜索完成之前，过早的根据最大功率排除可能存在的声源】；[8]中是一种折中的方法，它首先采用TDOA方法产生一个待确定的声源空间集合，然后采用SRP-PHAT进行网格搜索这个空间集合。如果第一步的TDOA不成功，第二步中的SRP-PHAT也就会失败。这种方法受限于TDOA产生可能位置集合，故而降低了低信噪比中的声源定位性能。[9]中采用互相关函数计算时延，从而确定声源位置。这种方法建立一种时延到待选位置集的拟映射表，它将时延映射到位置对应的输出功率，从而找到最大输出功率。然而，这种方法也可能无法找到最大功率位置集合，因为它只搜索相关时延映射过去的少量位置。总体来说，这几种方法都不太可行，他们的搜索结果都可能与全局网格搜索不同，特别是在噪声回响环境中。</p>
 <p>在配备小型MIC阵列的机器人中，如果采用实时SRP-PHAT方法，我们一直关注总是可以以最大功率定位声源位置有效搜索方法。声源位置的解析度取决于SRP-PHAT方法所依赖的采样率和MIC阵列几何结构。如果我们将整个搜索空间划分为几个子区域，每个子区域都只包含相同TDOA的声音信号点，并且仅检查子区域中具有代表性的点来确定最高功率声源，我们就可以大幅度缩减传统网格搜索方法的计算量。在这篇论文当中，我们提出空间搜索聚类的方法来将整个搜索空间划分为几个子搜索区域，每个区域都仅包含相同TDOA点。这种方法构建了一个查找表，该表包含了不同声音信号的TDOA值对应区域的完整集合。通过搜索子区域中的代表性点可以大幅度缩减计算量，并且与全局网格搜索相比，并不会降低声源定位的精度。我们已经在4MIC阵列小型服务机器人的听觉系统上有效的应用这种方法。</p>
 <p>这篇论文后面是这样组织的。第二三部分，我们回顾下SRP-PHAT理论并为小规模MIC阵列改进实时SRP-PHAT提出搜索空间聚类方法。第四五部分评估了采用搜索空间聚类改进的SRP-PHAT方法在仿真和真实房间环境中的性能。第六部分我们做了个总结。</p>
-<h2 id="SRP-PHAT回顾">SRP-PHAT回顾</h2>
+<h2 id="SRP-PHAT回顾">SRP-PHAT回顾</h2><p>对于N MIC阵列，给出信号源：xn(t)，第n个MIC在时间t时接收到信号，该MIC延时累加后的波束信号为：y(t,q)，其定义如下：</p>
+<pre><code><span class="function"><span class="title">y</span><span class="params">(t,q)</span></span>=n从<span class="number">1</span>到N对<span class="function"><span class="title">xn</span><span class="params">(t+t(n,q)</span></span>)的累加和
+</code></pre><p>其中，t(n,q)是信号从位置q到第n个mic的时间延迟。对于复杂噪声环境，比如回响，则可以采用具有权重函数的过滤累加波束信号，在频率域，过滤累加波束信号如下:</p>
+<pre><code><span class="function"><span class="title">Y</span><span class="params">(w,q)</span></span>=n从<span class="number">1</span>到N对<span class="function"><span class="title">Gn</span><span class="params">(w)</span><span class="title">Xn</span><span class="params">(w)</span><span class="title">e</span><span class="params">(jwt(n,q)</span></span>)的累加和
+</code></pre><p>其中，Xn(w)和Gn(w)是第n个MIC信号和它的相关过滤器经过傅里叶变换后的函数。上式中，应用过滤器后，通过调节延迟累加和可以使得MIC信号相位对齐。</p>
+<p>基于SRP的声源定位算法将整个MIC阵列聚焦在某个空间点q上，并且计算整个MIC阵列的输出功率P(q)，公式如下：</p>
+<pre><code><span class="function"><span class="title">P</span><span class="params">(q)</span></span>=积分计算
+</code></pre><p>其中….，在SRP-PHAT中，滤波器的定义如下：</p>
+<pre><code>滤波器函数
+</code></pre><p>对每个待选位置点计算SRP P(q)后，具有最大输出功率的点q’就是声源的位置：</p>
+<pre><code>q<span class="quoted">'=argmaxP</span><span class="list">(<span class="keyword">q</span>)</span>
+</code></pre><p>因为SRP-PHAT采用网格搜索方法来找到最大输出功率点q’，它需要对三维空间中每一个网格点进行SRP计算，所以具有很高的计算代价。下一节，我们会提出一种搜索空间聚类的方法在不降低定位精度的前提条件下降低SRP-PHAT的搜索空间。</p>
+<h2 id="搜索空间聚类">搜索空间聚类</h2><p>虽然SRP-PHAT计算每个网格点的输出功率，并以最大输出功率来找到声源位置，但受限于模数转化采样率，候选位置的输出功率并不都相同【？？】，如式3所示，待选位置的输出功率取决于所有MIC的信号及它们由于聚焦同一位置而产生的相位差，而且因为信号由模拟转换成数字，相位差也是离散的。如果任意两个待选点的相位差（TDOA）相近或相同，则他们在离散的时间域里就是相同，两个位置的输出的功率也就无法由式3作出区分。因此，如果将具有相同TDOA值的候选位置聚类到一起，并且将每个聚集组的代表坐标预先存储在查找表中，则可以大大减少计算成本，因为只有查找表中预先计算的坐标才能进行搜索，而不需要搜索网格中的每个点。</p>
+<p>采用自上而下预先构建查找表，首先，位置q对每个MIC对的相位差s(k,l,q)可以通过下式获得:</p>
+<pre><code>s<span class="list">(<span class="keyword">k</span>,l,q)</span>=round<span class="list">(<span class="keyword">r*</span><span class="list">(<span class="keyword">t</span><span class="list">(<span class="keyword">l</span>,q)</span>-t<span class="list">(<span class="keyword">k</span>,q)</span>)</span>)</span>
+</code></pre><p>其中，r为采样率。最初，整个搜索空间被聚集为单个块。如果块不够小并且包含至少两个具有不同TDOA的点，则将其划分为八个较小尺寸的块。这种划分过程一直持续下去，直到每个块中仅包含相同TDOA的点。例如：考虑一个4 MIC阵列的情况，对于位置q，我们可以计算6个TDOA值，从而构成一个TDOA向量，如下:</p>
+<pre><code>sq=[<span class="function"><span class="title">s</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">1</span>,<span class="number">3</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">1</span>,<span class="number">4</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">2</span>,<span class="number">3</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">2</span>,<span class="number">4</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">3</span>,<span class="number">4</span>,q)</span></span>]T
+</code></pre><p>给定一个块，如图2(a)，我们可以在块的8个顶点上进行计算，获得8个TDOA向量，如果这8个向量不相同，将这个块划分为8个更小的块，如图a(b)所示。划分之后，对TDOA向量相同的块进行合并。最后，将每个块的中心点存储在查找表中。这种对搜索空间聚类的方法对于小规模MIC阵列系统是非常行之有效的，因为小规模MIC阵列系统当中，具有不同TDOA向量的中心点数要远少于网格中候选位置点的总和。搜索空间聚类算法总结如表1。</p>
+<h2 id="模拟环境中评估">模拟环境中评估</h2>
       
     </div>
 
@@ -572,7 +590,7 @@ abstract — Soun">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#INTRODUCTION"><span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SRP-PHAT回顾"><span class="nav-text">SRP-PHAT回顾</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#INTRODUCTION"><span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SRP-PHAT回顾"><span class="nav-text">SRP-PHAT回顾</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#搜索空间聚类"><span class="nav-text">搜索空间聚类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模拟环境中评估"><span class="nav-text">模拟环境中评估</span></a></li></ol></div>
             
           </div>
         </section>
