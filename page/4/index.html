@@ -430,30 +430,18 @@
       
         
           
-            <h2 id="背景介绍">背景介绍</h2><p>实验室的网络环境早已搭建完毕，由于时间的问题一直没有总结记录一下，现在就现在四台服务器构建的文件共享系统大概说明一下，记录以留作以后的查询</p>
-<h2 id="文件共享系统需求说明">文件共享系统需求说明</h2><ol>
-<li>希望四台主机的硬盘以目录的形式进行显示，并可以随意修改目录名称</li>
-<li>四台主机构建的目录能够使计算机(win, linux, mac)不需要任何软件就可以直接访问</li>
-<li>要方便扩展，容易增加其他的主机到该系统当中</li>
-<li>在顶级目录形成目录列表，并以时间顺序排序自动更新目录结构，方便查看共享文件系统中的目录结构自己存储情况</li>
-</ol>
-<h2 id="实现思想">实现思想</h2><p>多台主机构建共享文件系统首先可以想到NFS服务器文件系统，然后用脚本进行相互挂载，但被挂在的目录是不能轻易修改名字的，所以NFS可以满足需求1的前半部分，但不能满足后半部分。</p>
-<p>需求2我们可以在其中一台主机上采用samba服务器来实现，让其共享NFS共享的上层目录，但还没解决修改名字的问题。</p>
-<p>我们可以想到ln指令链接的文件可以随意修改名称，而不变动被链接的文件，利用这一点，我们是不是可以采用samba服务器共享一个空目录，然后将NFS共享的目录链接到上述空目录中呢？经过查阅，我们可以发现samba其中有个设置是可以追踪链接的，如果这样设置是不是直接就解决了需求1/2了？恩恩！是的，这样已经运行通过。</p>
-<p>这样做可扩展性如何呢？这就要看增加一台主机我们需要做哪些工作：</p>
-<ol>
-<li>为新增加的主机配置NFS服务</li>
-<li>在有samba服务器主机上的挂载脚本中添加挂载新增加的主机，并挂载该主机</li>
-<li>将新挂载的目录链接到samba共享目录中</li>
-<li>Over</li>
-</ol>
-<p>不是太麻烦吧～…～</p>
-<p>对于需求4，如果不需要自动更新只需要一条指令就可以解决：</p>
-<pre><code>cd <span class="escape">`要</span>更新的目录<span class="escape">`
-</span>tree -dtl -L <span class="number">4</span> &gt; 目录结构.txt
-</code></pre><p>要求了自动更新就可以写一个守护进程，定时调用上面的指令，对于守护进程的写法可以参考<a href="/2015/07/31/monitor-prototype/">这篇博文</a>。</p>
-
-          
+          背景介绍实验室的网络环境早已搭建完毕，由于时间的问题一直没有总结记录一下，现在就现在四台服务器构建的文件共享系统大概说明一下，记录以留作以后的查询
+文件共享系统需求说明
+希望四台主机的硬盘以目录的形式进行显示，并可以随意修改目录名称
+四台主机构建的目录能够使计算机(win, linux, mac)不
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/08/04/connect-host/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -603,26 +591,16 @@
       
         
           
-            <h2 id="传说中的模板原型">传说中的模板原型</h2><p>《当我谈跑步时我谈些什么》是我读的第一本村上君的书，离今天相差一个月到一年，那时我还徘徊在工大教室和食堂之间的柏油路上，过着简单而充实的生活。村上君的很多思想到现在还在深深的影响这我，当时读完后，我连续发了两篇微博：</p>
-<pre><code>第一次读村上君的书，还是一位姐姐推荐的，或许和我的生活有关吧，跑步！这种生活哲学类的书我不怎么喜欢，像那悟空传，匆匆看过不知所云，这本书可以说是我读生活哲学书的开始，走在路上慢慢琢磨还别有一番滋味，虽不像小说有血有肉，形象鲜明，但和生活的结合使其具有更高的价值。
-读完给我印象最深的莫过于：先天的东西容易耗尽或者丢失，后天锻炼所得东西容易切换从而导致用之不竭，我深感这句话符合我心意，想我等愚笨之人，别人很轻易表现的优点，我等需要先观察发现，再改造为我所用！虽缓慢而艰难点，但终有其优势所在<span class="attribute">...</span><span class="attribute">...</span>
-</code></pre><p>这本书确实很值得阅读。</p>
-<h2 id="最近的跑步情况">最近的跑步情况</h2><p>来到无锡，刚开始跑步还是比较多的，可以说学校周围方圆五公里以内的康庄大道基本都留下了我的记忆（还没有强壮到留下脚印），然后再找不到合适的未跑路线，所谓柳暗花明又一村，时机送来了一张一卡通，可以顺利的进入学校的健身房，虽然设备短缺简陋点，但还是可以凑合，所以跑步就更少了。最近两天又有点坐着不舒服，于是又想起来去跑步这回事，话说距上次跑步正好一个月。时间一久，跑步都不在顺畅，所以也只是跑了个五公里左右。</p>
-<p>所以呢，这里说的是一般的情况，并不以今天为例。</p>
-<h2 id="前十分钟">前十分钟</h2><p>十分钟近两公里，这个时候基本处于跑步的兴奋状态，因为可以终于从几天（无规律跑步，随心情）的繁琐生活当中脱离出来，开始洒脱的让思想纷飞，之后开始整理分析评估自己的生活问题，让生活的片段快速的头脑中飞过，什么我这几天的心情如何，有没有变得非常浮躁，该做的事情有没有做完，没做的有什么计划等等有关自己的，还有最近周围的环境如何，有没有什么需要改进的地方，需要什么方法来解决问题，当然还会想一些社交方面的：我说的某句话有没有伤害到别人等等，都是生活的中的一些小事。</p>
-<p>但是，就是通过这种方式可以让我留意平时不怎么注意的地方，解决当时无法解决的问题，想出某些问题更为合理的解决方法。当然更多的是原来无解。</p>
-<h2 id="第二个十分钟">第二个十分钟</h2><p>这个过程处于有关运动的思想纷飞。想到《当我谈跑步时我谈些什么》中村上君有关跑步的哲学，每周70公里的习惯，炎热夏天100公里的跑步记录，几乎不错过任何马拉松比赛；《运动改造大脑》和知乎周刊中众多运动心理学的内容：运动会创造新的脑细胞，可以增加神经递质，加粗神经突出等等也会不断的大脑中闪现。</p>
-<p>这些思考导致我真的感觉到我的脑细胞在不断的创造发育生长，一直沉浸在这些这样的思考、感受之中，等我醒来顿时感觉第二个十分钟已经过去。</p>
-<h2 id="第三个十分钟">第三个十分钟</h2><p>这个十分钟跑起来已经不是像前两个十分钟那么惬意了，想的最多的就是：淡定，淡定，我要调整呼吸。这个阶段用的最多的就是知乎周刊中有关健身的知识：努力向外吐气，保持心态的平衡，不要太激进，要淡定，不要说话，不要乱动，保持简单的姿势，减少精力的损失。</p>
-<p>不过可以留意一下沿途的风景，让自己的内心更好的趋于平静。另外想的最多的就是我要跑到十公里，这个过程是必须要经历的，无论如何都要坚持下去，等待着腿脚麻木僵硬的到来。</p>
-<h2 id="第四个十分钟">第四个十分钟</h2><p>跟随上一个十分钟，这个过程会更加的难熬，但是离腿脚麻木，没有直觉已经不远了，不断的给自己加油，用力甩起胳膊来带动身体（这个也是村上君跑100公里里的经验），努力调整呼吸。</p>
-<p>努力让自己想一些自己平常的生活，想一些能让自己沉浸其中的内容，努力让自己看周围移动着的风光，但是也只是提示自己要这样做，事实上这个时候的大脑已经不再听从自己的意识，如果之前没有调整好呼吸，这里也就会很难坚持下去。</p>
-<p>总的来说这个时候已经没有了思维，简单点的想法就是：让跑步坚持下去。</p>
-<h2 id="之后的情况">之后的情况</h2><p>跑步的后期，基本就没有了思维，简单点的就是：我很快就可以达到十公里，而且已经处于双腿带动双脚进行简单的机械运动状态，前期调整的还好，并没有感觉特别的疲惫，我可以这样一直的跑下去，直到身体能量趋于耗尽。</p>
-<p>偶尔会想到村上君《谈跑步》中，一个长跑运动员比赛完毕后，被记者问跑步后期都是在想些什么的问题，长跑运动员说：我TM就是想尽快跑完全程，尽快休息，哪还有精力想别的问题。</p>
-<p>这TM的说的真对。</p>
-
-          
+          传说中的模板原型《当我谈跑步时我谈些什么》是我读的第一本村上君的书，离今天相差一个月到一年，那时我还徘徊在工大教室和食堂之间的柏油路上，过着简单而充实的生活。村上君的很多思想到现在还在深深的影响这我，当时读完后，我连续发了两篇微博：
+第一次读村上君的书，还是一位姐姐推荐的，或许和我的生活有关吧，跑步
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/08/01/what-i-think-when-running/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -772,114 +750,16 @@
       
         
           
-            <h2 id="回顾历史">回顾历史</h2><p>依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。</p>
-<h2 id="程序来源">程序来源</h2><p>实验室各种网络环境基本已经搭建完毕，我们都是在各自的电脑上通过ssh服务远程登陆到四台主机，但我们还是一个问题：通常我们要跑的程序时间都比较长（三四天），如果我们通过远程连接软件在主机中启动程序，一旦关闭远程连接软件，相应的程序也会自动关闭，达不到在服务器上跑程序的目的，问题出来了，就要着手解决啊，所以我就写了个deamon程序来达到这个目的。</p>
-<p>写出来之后发现这就是个对程序进行监控的程序啊，只要能够获得程序运行时的状态就可以随意进行程序控制。其实这个程序可以干更多的事情，你可以想象驻留内存有多么大的优势存在。</p>
-<h2 id="具体程序">具体程序</h2><p>这里是用启动teamviewer作为一个示例，想要启动其他程序可以直接修改system中的参数，或者给该程序一个参数，再者就是让其调用一个shell脚本，然后在shell脚本中写入你想做的事情。</p>
-<pre><code><span class="preprocessor">#<span class="keyword">include</span>&lt;stdio.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span>&lt;stdlib.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span>&lt;string.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span>&lt;fcntl.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span>&lt;sys/types.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span>&lt;unistd.h&gt;</span>
-<span class="preprocessor">#<span class="keyword">include</span>&lt;sys/wait.h&gt;</span>
-
-<span class="preprocessor">#<span class="keyword">include</span> &lt;time.h&gt;</span>
-
-<span class="preprocessor">#<span class="keyword">define</span> MAXFILE        65535</span>
-
-<span class="preprocessor">#<span class="keyword">define</span>    APP_START    0</span>
-<span class="preprocessor">#<span class="keyword">define</span> APP_END        1</span>
-
-<span class="keyword">volatile</span> <span class="keyword">sig_atomic_t</span> _running = <span class="number">1</span>;
-<span class="function"><span class="keyword">int</span> <span class="title">write_log</span><span class="params">(<span class="keyword">int</span> log_id)</span></span>;
-
-<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span>* argv[])</span>
-</span>{
-    <span class="keyword">pid_t</span> pc,pid;        <span class="comment">//创建两个进程的pid变量</span>
-    <span class="keyword">int</span> i;
-    pc = fork(); <span class="comment">//第一步，创建子进程</span>
-
-    <span class="keyword">if</span>(pc&lt;<span class="number">0</span>)
-    {
-        <span class="built_in">printf</span>(<span class="string">"error fork\n"</span>);
-        <span class="built_in">exit</span>(<span class="number">1</span>);
-    }
-    <span class="keyword">else</span> <span class="keyword">if</span>(pc&gt;<span class="number">0</span>)
-        <span class="built_in">exit</span>(<span class="number">0</span>);
-
-    pid = setsid(); <span class="comment">//第二步[1],创建一个新的会话,1）让进程摆脱原会话的控制；2）让进程摆脱原进程组的控制；3）让进程摆脱控制终端的控制</span>
-
-    <span class="keyword">if</span> (pid &lt; <span class="number">0</span>)
-        perror(<span class="string">"setsid error"</span>);
-    chdir(<span class="string">"/"</span>); <span class="comment">//第三步</span>
-    umask(<span class="number">0</span>); <span class="comment">//第四步，收回父进程资源</span>
-    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;MAXFILE;i++) <span class="comment">//第五步</span>
-        close(i);
-
-    <span class="keyword">while</span>( _running )
-    {    
-
-        write_log(APP_START);
-        system(<span class="string">"teamviewer"</span>);
-        write_log(APP_END);
-
-        _running = <span class="number">0</span>;
-        usleep(<span class="number">10</span>*<span class="number">1000</span>); <span class="comment">//10毫秒</span>
-        usleep(<span class="number">1000</span>*<span class="number">1000</span>); <span class="comment">//1秒</span>
-    }
-    <span class="keyword">return</span> <span class="number">0</span>;
-}
-
-<span class="function"><span class="keyword">int</span> <span class="title">write_log</span><span class="params">(<span class="keyword">int</span> log_id)</span>
-</span>{
-    <span class="keyword">char</span>* buf;
-    <span class="keyword">time_t</span> rawtime;
-    <span class="keyword">struct</span> tm * timeinfo;
-    <span class="keyword">int</span> len,fd;
-
-    <span class="keyword">if</span>( (fd=open(<span class="string">"home/lab302/yanan/bin/log/teamviewer.log"</span>,O_CREAT|O_WRONLY|O_APPEND,<span class="number">0600</span>))&lt;<span class="number">0</span>)
-    {
-        perror(<span class="string">"open"</span>);
-        <span class="built_in">exit</span>(<span class="number">1</span>);
-    }
-    time( &amp;rawtime );
-    timeinfo = localtime ( &amp;rawtime );
-    buf = asctime(timeinfo);
-    len = <span class="built_in">strlen</span>(buf);
-    write(fd,buf,len);
-
-    <span class="keyword">if</span>(APP_START == log_id)
-    {
-        buf = <span class="string">"        teamviewer started!\n"</span>;
-    }<span class="keyword">else</span>{
-        buf = <span class="string">"        teamviewer closed!\n"</span>;
-    }
-
-    len = <span class="built_in">strlen</span>(buf);
-    write(fd,buf,len);
-    close(fd);
-    <span class="keyword">return</span> <span class="number">0</span>;
-}
-</code></pre><h2 id="2015-8-3更新">2015-8-3更新</h2><p>现在发现linux自带的有两种工具可以实现脱离终端运行程序：</p>
-<ol>
-<li><p>nohub命令：其将标准输出重定向到当前目录下的nohub.out文件中，指令格式如下：</p>
-<p> nohub 命令        //当前终端不能再执行其他指令，可以关闭终端<br> nohub 命令&amp;        //可以直接按<code>enter</code>键回到终端命令模式执行其他指令</p>
-</li>
-<li><p>tmux工具：可能是谁写的一个工具，常见的命令如下：</p>
-</li>
-</ol>
-<p>标准终端下下：</p>
-<pre><code>tmux    <span class="comment">//新建一个tmux终端</span>
-tmux <span class="keyword">ls</span>    <span class="comment">//显示已经存在的tmux终端</span>
-tmux attach-session -t 窗口号    <span class="comment">//打开之前创建的tmux终端</span>
-</code></pre><p>tmux终端下：</p>
-<pre><code>Ctrl-b再按<span class="keyword">d</span>        <span class="comment">//该tmux终端隐藏运行</span>
-Ctrl-<span class="keyword">d</span>            <span class="comment">//直接退出tmux终端</span>
-<span class="keyword">exit</span>            <span class="comment">//同上</span>
-标准中下其他指令
-</code></pre>
-          
+          回顾历史依稀记得大一时看过一部黑客小说，其中有个细节给我的印象颇深：比赛作品中有个计算机扫描软件，主人公大黑客说，对大学生来说其中的技术含量很高，其需要对计算机有一个很好的认识。对当年电脑小白的我来说，那只是给我提了个醒，以后要留意这方面的信息，先把大概的思路理清楚。
+程序来源实验室各种网络环境基本
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/31/monitor-prototype/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1029,17 +909,16 @@ Ctrl-<span class="keyword">d</span>            <span class="comment">//直接退
       
         
           
-            <h2 id="本书介绍">本书介绍</h2><p>当今知名问答社区“知乎”出的第一本书，采用前所未有的互联网众人合作的方式，经整理而成书，里面记录了有名望的产品经理、风险投资人、经验丰富的创业者等等人对创业前中后期的见解，给初来乍到的创业新人提出可能遇到的问题以及大概的解决方案。</p>
-<h2 id="书本背后我的故事">书本背后我的故事</h2><p>我是知乎的早期用户，喜欢知乎“发现更大世界”的理念，喜欢每一个问题都认真对待的社区氛围，并且知乎在切实的改变着我的思想轨迹，我的生活道路。谈回本书，从互联网来，自然充满了互联网的韵味，其创业的主题吸引着深处电子-互联网领域，热衷于创业的我，所以早期这本书就安排在了我的阅读计划中，不过直到如今才得以拜读，由于生活学习中事情比较多，大概花了一周的时间才阅读完毕。</p>
-<h2 id="读之后的感受">读之后的感受</h2><p>读时浑浑噩噩，看不到首位，读后大脑一片空白，整本书不成系统，这或许是互联网书籍的一个致命缺陷。</p>
-<p>我们可以想象：知乎在周源和创新工场的共同呵护之下长大，知乎作为一个问答社区，上线首先要解决的就是社区活跃度的问题，这个问题由于有创新工场的存在，有李开复的存在可以很好的解决，很自然的就会鼓励周鸿祎、张小龙、王小川等等人来知乎社区探讨问题，一边测试知乎，一边为知乎增加活跃度，当然还有一边方便他们之间进行相互的交流，质量很自然的就会达到优质的水平。</p>
-<p>这里的问题在哪？他们的主要目的是来增加活跃度的，所以大家也基本都在叙述自己在各个问题面前的立场，没有真正的争辩、论证，相当于没事过来写些随笔，并不深入，加上各方言论，更显得连贯性不足，整体读起来不知所云。而传统书籍的作者对待他们缩写的书如同自己的孩子，认真对待，百般呵护，孩子遇到问题，查找各种资料来进行解决论证，充满着作者自身的逻辑性，更容易让读者读懂其中的审深意。</p>
-<p>当然，抱着一种“任何书都能发现它的价值”的观点来这本书，其也充满着价值。</p>
-<p>首先书籍成型的形式：首次采用互联网合作完成，这种形式是一种完全的创新，设想对于同一主题集百家言论而成书，让读者更透彻的了解一个问题。但是如果每个人都不能深入，读者也只能了解一个大概，并不能实际的深入其中，这可能也是互联网成书后续要解决的问题。</p>
-<p>再次是书籍的内容：我浏览过知乎所有的周刊和部分付费刊物，可以深刻体会到那些记不住的内容对自身思想的影响。其实所谓记不住，也可以说是虚，但也可以说是大方向，一方面是大方向容易说，另一方面是只有大方向对，后续的道路才能够容易的多，这或许也是大部分过来人喜欢讲大方向的原因。当然也存在大量记得住的内容影响更甚，比如本书中的创业需要考虑的诸多问题，种子期的方向问题、助跑期的融资问题、起步期的管理问题等等，这些我们只需要有一个大概了解，当我们真正去做创业这件事时能想到有这些问题的存在就是好的。</p>
-<h2 id="总结">总结</h2><p>整体来说，这本书略微有点让我失望，有个朋友有创业的想法，我曾向他推荐过这本书，今天看过之后感觉其中空泛的内容偏多，并不是最合理的创业书籍。不过身处创业路上的朋友随手翻翻，反思一下自己的路却是个很好的选择。</p>
-
-          
+          本书介绍当今知名问答社区“知乎”出的第一本书，采用前所未有的互联网众人合作的方式，经整理而成书，里面记录了有名望的产品经理、风险投资人、经验丰富的创业者等等人对创业前中后期的见解，给初来乍到的创业新人提出可能遇到的问题以及大概的解决方案。
+书本背后我的故事我是知乎的早期用户，喜欢知乎“发现更大世界”
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/30/startup-zhihu/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1189,803 +1068,33 @@ Ctrl-<span class="keyword">d</span>            <span class="comment">//直接退
       
         
           
-            <h2 id="文档更新记录">文档更新记录</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">版本</th>
-<th style="text-align:left">更新时间</th>
-<th style="text-align:left">更新人</th>
-<th style="text-align:left">更新内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">V0.1</td>
-<td style="text-align:left">2015-07-26</td>
-<td style="text-align:left">孙凤影</td>
-<td style="text-align:left">bash shell学习笔记整理</td>
-</tr>
-</tbody>
-</table>
-<h2 id="系统的合法shell与/etc/shells功能">系统的合法shell与/etc/shells功能</h2><h2 id="Bash_shell_的功能">Bash shell 的功能</h2><h3 id="命令编修能力">命令编修能力</h3><p>通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要输入的命令。该功能的核心思想是：bash根据用户已输入的信息来查找以这些信息开头的命令，从而试图完成当前命令的输入工作。用来执行这项功能的键是Tab键，按下Tab键后，bash就试图完成整个命令的输入，并将列出所有能够与当前输入字符相匹配的命令列表。</p>
-<h3 id="命令与档案补全功能">命令与档案补全功能</h3><h3 id="命令别名设定功能">命令别名设定功能</h3><p>别名是bash中用来节省时间的另一项重要功能，它允许用户按照自己喜欢的方式对命令进行自定义。</p>
-<p>别名的创建：alias接命令，例：</p>
-<pre><code>alias <span class="keyword">lm</span>=‘<span class="keyword">ls</span> -<span class="keyword">al</span>’
-</code></pre><p>别名的取消：用unalias 取消别名，例：</p>
-<pre><code><span class="built_in">unalias</span> lm
-</code></pre><h3 id="工作控制、前景背景控制">工作控制、前景背景控制</h3><h3 id="程序化脚本（简单）">程序化脚本（简单）</h3><h3 id="通配符">通配符</h3><p>通配符<code>*</code>的常用方法就是查找具有相同扩展名的文件，比如：</p>
-<pre><code>ls *<span class="class">.tar</span><span class="class">.gz</span>
-</code></pre><p>通配符<code>*</code>有时可以将几百的命令缩短成一个命令。</p>
-<pre><code><span class="title">rm</span> -f <span class="regexp">*.jpg</span>
-</code></pre><p>问号通配符<code>?</code>必须匹配一个且只能匹配一个字符，通常用来查找比<code>*</code>更为精确的匹配。</p>
-<pre><code>ls <span class="keyword">*</span>.???
-</code></pre><h2 id="Bash_shell的内建命令：type">Bash shell的内建命令：type</h2><p>查询是否是bash内部命令：type -t 命令名</p>
-<pre><code><span class="type">file</span> <span class="comment">--外部命令；</span>
-<span class="type">alias</span> <span class="comment">--命令别名；</span>
-builtin <span class="comment">--内部命令</span>
-</code></pre><h2 id="指令的下达">指令的下达</h2><h2 id="变量的取用与设定">变量的取用与设定</h2><pre><code><span class="built_in">echo</span> <span class="variable">$PATH</span>
-<span class="built_in">echo</span> <span class="variable">${PATH}</span>
-</code></pre><h3 id="变量设计规则">变量设计规则</h3><ol>
-<li>环境变量大写，私有变量小写：变量名称只能是字母与数字，开头字符不能是数字</li>
-<li>变量与内容以”=”连接，等号两边不能空格；变量内容若有空格可是有””or’’括起</li>
-<li>区分”” 与’’的使用，前者保留特性，后者内的特殊字符仅为一般字符unset </li>
-<li><p>变量内容可以是命令提供的信息</p>
-<p> version=<code>uname -r</code> or<br> version=$(uname -r)</p>
-</li>
-<li><p>变量可以累加内容：PATH=”$PATH”:/home/bin</p>
-</li>
-<li>自定义变量变成环境变量：export mypath</li>
-</ol>
-<h2 id="环境变量的功能：env_不常见环境变量说明,_set,_export">环境变量的功能：env 不常见环境变量说明, set, export</h2><ul>
-<li>HOME：代表home目录，cd /home 即取用这个变量</li>
-<li>SHELL：告知目前环境使用的shell是哪支程序</li>
-</ul>
-<p>/etc/shells:系统中可用的shell版本</p>
-<pre><code>/bin/sh
-/bin/bash
-/sbin/nologin …
-/etc/passwd <span class="symbol">:</span> 当前用户默认采用哪个shell来工作
-<span class="symbol">root:</span><span class="symbol">x:</span><span class="number">0</span><span class="symbol">:</span><span class="number">0</span><span class="symbol">:root</span><span class="symbol">:/root</span><span class="symbol">:/bin/bash</span>
-<span class="symbol">bin:</span><span class="symbol">x:</span><span class="number">1</span><span class="symbol">:</span><span class="number">1</span><span class="symbol">:bin</span><span class="symbol">:/bin</span><span class="symbol">:/sbin/nologin</span>
-...
-</code></pre><ul>
-<li>HISTSIZE：曾经下达过的命令可以被系统记下来，记录的笔数有这个值来设定。在命令行中输入的每个命令都被保存到一个称为history（命令历史记录）的地方</li>
-<li>MAIL：当我们使用mail这个指令在收信时，系统会去读取的邮件信箱档案(<strong>???</strong>)</li>
-<li>PATH：执行文件的路径，目录与目录中间以冒号分隔</li>
-<li>LANG：语系数据</li>
-<li>RANDOM:随机取得数值。在BASH环境下，RANDOM变量的内容介于0~32767之间，<code>echo $random</code>时系统会随机取出一个介于0~32767的数值。用declare宣告数据类型</li>
-<li>用set观察所有变量（环境变量、自定义变量）</li>
-</ul>
-<p>环境变量：所谓环境，就是各项shell下的控制及设备，包括终端机类型，文件搜索路径，用户目录等。用户在shell下执行程序时，有些程序会用到一些环境变量。登录系统时的工作之一就是在用户登录时就将个人的环境建立好。<br>自定义变量：自定义变量除了在每个进程都能调用的环境变量，还可以设置只能在当前进程使用的私有变量。</p>
-<pre><code><span class="attribute">PS1</span>:（提示字符的设定）
-<span class="string">\d:显示星期</span> 月 日的日期格式。
-<span class="string">\H:完整的主机名。</span>
-<span class="string">\h:仅取主机名在第一个小数点之前的数据。</span>
-<span class="string">\t:显示时间，24小时格式</span>
-<span class="string">\T:显示时间，12小时格式</span>
-<span class="string">\A:显示时间，24小时格式</span>
-<span class="string">\@:显示时间，12小时格式。</span>
-<span class="string">\u:目前使用者的账号，如[root]。</span>
-<span class="string">\v:BASH的版本信息。</span>
-<span class="string">\w:完整的工作目录名称，由根目录写起的目录名称。</span>
-<span class="string">\W:利用basename函数取得工作目录名称，仅列出最后一个目录名。</span>
-<span class="string">\#:下达的第几个指令。</span>
-<span class="string">\$:提示字符</span>
-$、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
-</code></pre><p>export:自定义变量转换成环境变量</p>
-<h2 id="影响显示结果的语系变量_(locale)_（要回前面章节看看）">影响显示结果的语系变量 (locale) （要回前面章节看看）</h2><h2 id="变量的有效范围">变量的有效范围</h2><p>变量可否被引用与export有关，被export后的变量成为环境变量，环境变量可以被子程序引用，自定义变量内容不会存在于子程序中。当启动一个shell，操作系统会分配一记忆区块给shell使用，此内存内之变量可让子程序取用；若在父程序利用export功能，可以让自定义变量的内容写到上述的记忆区块当中（环境变量）；当加载另一个shell时，子shell可以将父程序的环境变量所在的记忆区块导入自己的环境变量区块当中。</p>
-<h2 id="变量键盘读取、数组与宣告：_read,_declare,_array">变量键盘读取、数组与宣告： read, declare, array</h2><pre><code><span class="built_in">read</span> atest 、<span class="built_in">declare</span>或<span class="built_in">typeset</span>：宣告变量的类型
-</code></pre><h2 id="与文件系统和程序的限制关系：ulimit">与文件系统和程序的限制关系：ulimit</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">选项</th>
-<th style="text-align:left">参数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-H</td>
-<td style="text-align:left">Hard limit ,严格的设定，必定不能超过这个设定的数值</td>
-</tr>
-<tr>
-<td style="text-align:left">-S</td>
-<td style="text-align:left">Soft limit，警告的设定，可以超过这个设定值，但是若超过则有警告讯息</td>
-</tr>
-<tr>
-<td style="text-align:left">-a</td>
-<td style="text-align:left">后面不接任何选项与参数，可列出所有的限制额度</td>
-</tr>
-<tr>
-<td style="text-align:left">-c</td>
-<td style="text-align:left">当某些程序发生错误时，系统可能会将该程序在内存中的信息写成档案，这种档案为核心档案，此为限制每个核心档案的最大容量</td>
-</tr>
-<tr>
-<td style="text-align:left">-f</td>
-<td style="text-align:left">此shell可以建立的最大档案容量</td>
-</tr>
-<tr>
-<td style="text-align:left">-d</td>
-<td style="text-align:left">程序可使用的最大断裂内存</td>
-</tr>
-<tr>
-<td style="text-align:left">-l</td>
-<td style="text-align:left">可用于锁定的内存量</td>
-</tr>
-<tr>
-<td style="text-align:left">-t</td>
-<td style="text-align:left">可使用的最大CPU时间</td>
-</tr>
-<tr>
-<td style="text-align:left">-u</td>
-<td style="text-align:left">单一用户可以使用的最大程序数量</td>
-</tr>
-</tbody>
-</table>
-<h2 id="变量内容的删除、取代和替换">变量内容的删除、取代和替换</h2><p>删除：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量设定方式</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">${变量#关键词}</td>
-<td style="text-align:left">若变量内容从头开始的数据符合[关键词]，则将符合的最短数据删除</td>
-</tr>
-<tr>
-<td style="text-align:left">${变量##关键词}</td>
-<td style="text-align:left">若变量内容从头开始的数据符合[关键词]，则将符合的最长数据删除</td>
-</tr>
-<tr>
-<td style="text-align:left">${变量%关键词}</td>
-<td style="text-align:left">若变量内容从尾开始的数据符合[关键词]，则将符合的最短数据删除</td>
-</tr>
-<tr>
-<td style="text-align:left">${变量%%关键词}</td>
-<td style="text-align:left">若变量内容从尾开始的数据符合[关键词]，则将符合的最长数据删除</td>
-</tr>
-<tr>
-<td style="text-align:left">${变量/旧字符串/新字符串}</td>
-<td style="text-align:left">若变量内容符合旧字符串，则第一个旧字符串会被新字符串所取代</td>
-</tr>
-<tr>
-<td style="text-align:left">${变量//旧字符串/新字符串}</td>
-<td style="text-align:left">若变量内容符合旧字符串，则全部的旧字符串会被新字符串所取代</td>
-</tr>
-</tbody>
-</table>
-<p>测试与内容替换：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量设定方式</th>
-<th style="text-align:left">Str没有设定</th>
-<th style="text-align:left">Str为空字符串</th>
-<th style="text-align:left">Str已设定为非空字符串</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">var=${str-expr}</td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=</td>
-<td style="text-align:left">var=$str</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str:-expr}</td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=$str</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str+expr}</td>
-<td style="text-align:left">var=</td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=expr</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str:+expr}</td>
-<td style="text-align:left">var=</td>
-<td style="text-align:left">var=</td>
-<td style="text-align:left">var=expr</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str=expr}</td>
-<td style="text-align:left">str=expr</td>
-<td style="text-align:left">str不变</td>
-<td style="text-align:left">str不变</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=</td>
-<td style="text-align:left">var=$str</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str:=expr}</td>
-<td style="text-align:left">str=expr</td>
-<td style="text-align:left">str=expr</td>
-<td style="text-align:left">str不变</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=expr</td>
-<td style="text-align:left">var=$str</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str?expr}</td>
-<td style="text-align:left">expr输出至stderr</td>
-<td style="text-align:left">var=</td>
-<td style="text-align:left">var=$str</td>
-</tr>
-<tr>
-<td style="text-align:left">var=${str:?expr}</td>
-<td style="text-align:left">expr输出至stderr</td>
-<td style="text-align:left">expr输出stderr</td>
-<td style="text-align:left">var=$str</td>
-</tr>
-</tbody>
-</table>
-<h2 id="命令别名设定：_alias,_unalias（取消）">命令别名设定： alias, unalias（取消）</h2><h2 id="历史命令：_history,_HISTSIZE">历史命令： history, HISTSIZE</h2><p>history [n]…………</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">n</td>
-<td style="text-align:left">列出最近的n笔命令行表</td>
-</tr>
-<tr>
-<td style="text-align:left">-c</td>
-<td style="text-align:left">将目前的的shell中的所有history内容全部消除</td>
-</tr>
-<tr>
-<td style="text-align:left">-a</td>
-<td style="text-align:left">将目前新增的history指令新增入histfiles中，若没有加histfiles，则预设写入~/.bash_history</td>
-</tr>
-<tr>
-<td style="text-align:left">-r</td>
-<td style="text-align:left">讲histfiles的内容读到目前这个shell的history记忆中</td>
-</tr>
-<tr>
-<td style="text-align:left">-w</td>
-<td style="text-align:left">将目前的history记忆内容写入histfiles中</td>
-</tr>
-</tbody>
-</table>
-<p>在正常的情况下，历史命令的读取与记录是这样的：<br>当我们以bash登入Linux主机之后，系统会主动的由家目录的~/.bash_history读取以前曾经下过的命令，那么~/.bash_history记录的数据与bash的HISTFILESIZE这个变量的设定有关.</p>
-<h2 id="路与指令搜寻顺序">路与指令搜寻顺序</h2><ol>
-<li>以相对/绝对路径执行指令</li>
-<li>由alias找到该指令来执行</li>
-<li>由bash内建的builtin指令来执行</li>
-<li>透过$PATH这个变量的顺序搜寻到的第一个指令来执行</li>
-</ol>
-<h2 id="bash_的进站与欢迎讯息：/etc/issue,/etc/motd">bash 的进站与欢迎讯息：/etc/issue,/etc/motd</h2><h2 id="环境配置文件:_login,_non-login_shell,_/etc/profile,_~/-bash_profile,_source,_~/-bashrc_（内容比较繁杂**）">环境配置文件: login, non-login shell, /etc/profile, ~/.bash_profile, source, ~/.bashrc （内容比较繁杂<em>**</em>）</h2><h2 id="终端机的环境设定：_stty,_set">终端机的环境设定： stty, set</h2><p>stty：设定终端机的输入按键代表意义。stty –a</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">eof</td>
-<td style="text-align:left">End of life的意思，代表结束输入</td>
-</tr>
-<tr>
-<td style="text-align:left">erase</td>
-<td style="text-align:left">向后删除字符</td>
-</tr>
-<tr>
-<td style="text-align:left">intr</td>
-<td style="text-align:left">送出一个interrupt的信号给目前正在run的程序</td>
-</tr>
-<tr>
-<td style="text-align:left">kill</td>
-<td style="text-align:left">删除在目前指令列上的所有文字</td>
-</tr>
-<tr>
-<td style="text-align:left">quit</td>
-<td style="text-align:left">送出一个quit的讯号给目前正在run的程序</td>
-</tr>
-<tr>
-<td style="text-align:left">start</td>
-<td style="text-align:left">在某个程序停止后，重新启动他的output</td>
-</tr>
-<tr>
-<td style="text-align:left">stop</td>
-<td style="text-align:left">送出一个terminal stop的讯号给正在run的程序</td>
-</tr>
-<tr>
-<td style="text-align:left">susp</td>
-</tr>
-</tbody>
-</table>
-<p>Set 设定整个指令输入/输出的环境：set [-uvCHhmBx]</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-u</td>
-<td style="text-align:left">预设不启用，若启用后，当使用未设定变量时，会显示错误讯息</td>
-</tr>
-<tr>
-<td style="text-align:left">-v</td>
-<td style="text-align:left">预设不启用，若启用后，在讯息被输出之前，会先显示讯息的原始内容</td>
-</tr>
-<tr>
-<td style="text-align:left">-x</td>
-<td style="text-align:left">预设不启用，若启用后，在指令被执行前，会显示指令内容</td>
-</tr>
-<tr>
-<td style="text-align:left">-h</td>
-<td style="text-align:left">预设启用。与历史命令有关。</td>
-</tr>
-<tr>
-<td style="text-align:left">-H</td>
-<td style="text-align:left">预设启用。与历史命令有关。</td>
-</tr>
-<tr>
-<td style="text-align:left">-m</td>
-<td style="text-align:left">预设启用。与工作管理有关。</td>
-</tr>
-<tr>
-<td style="text-align:left">-B</td>
-<td style="text-align:left">预设启用与括号[]的作用有关</td>
-</tr>
-<tr>
-<td style="text-align:left">-C</td>
-<td style="text-align:left">预设不启用。若使用&gt;等，则若档案存在是，该档案不会被覆盖。</td>
-</tr>
-</tbody>
-</table>
-<p>Bash默认的组合按键：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">组合按键</th>
-<th style="text-align:left">执行结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Ctrl+C</td>
-<td style="text-align:left">中止目前的命令</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+D</td>
-<td style="text-align:left">输入结束eof</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+M</td>
-<td style="text-align:left">Enter</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+S</td>
-<td style="text-align:left">暂停屏幕的输出</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Q</td>
-<td style="text-align:left">恢复屏幕的输出</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+U</td>
-<td style="text-align:left">在提示字符下，将整列命令删除</td>
-</tr>
-<tr>
-<td style="text-align:left">Ctrl+Z</td>
-<td style="text-align:left">暂停目前的命令</td>
-</tr>
-</tbody>
-</table>
-<h2 id="通配符与特殊符号">通配符与特殊符号</h2><p>通配符：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">符号</th>
-<th style="text-align:left">意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">*</td>
-<td style="text-align:left">代表0到无穷多个任意字符</td>
-</tr>
-<tr>
-<td style="text-align:left">？</td>
-<td style="text-align:left">代表一定有一个任意字</td>
-</tr>
-<tr>
-<td style="text-align:left">[]</td>
-<td style="text-align:left">代表一定有一个在括号内的字符</td>
-</tr>
-<tr>
-<td style="text-align:left">[-]</td>
-<td style="text-align:left">若有减号在中括号内时，代表在编码顺序内的所有字符</td>
-</tr>
-<tr>
-<td style="text-align:left">[^]</td>
-<td style="text-align:left">若中括号内的第一个字符为指数符号……，那表示反向选择</td>
-</tr>
-</tbody>
-</table>
-<p>特殊符号：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">符号</th>
-<th style="text-align:left">内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">#</td>
-<td style="text-align:left">批注符号：最常被使用在script当中，视为说明，在后的数据均不执行</td>
-</tr>
-<tr>
-<td style="text-align:left">\</td>
-<td style="text-align:left">跳脱字符，将特殊字符或通配符还原成一般字符</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left"></td>
-<td>管线：分隔两个管线命令的界定</td>
-</tr>
-<tr>
-<td style="text-align:left">；</td>
-<td style="text-align:left">连续指令下达分隔符：连续性命令的界定</td>
-</tr>
-<tr>
-<td style="text-align:left">~</td>
-<td style="text-align:left">用户的家目录</td>
-</tr>
-<tr>
-<td style="text-align:left">$</td>
-<td style="text-align:left">取用变数前导符：亦即是变量之前需要加的变量取代值</td>
-</tr>
-<tr>
-<td style="text-align:left">&amp;</td>
-<td style="text-align:left">工作控制：降脂灵变成背景下工作</td>
-</tr>
-<tr>
-<td style="text-align:left">!</td>
-<td style="text-align:left">非</td>
-</tr>
-<tr>
-<td style="text-align:left">/</td>
-<td style="text-align:left">目录符号：路径分隔的符号</td>
-</tr>
-<tr>
-<td style="text-align:left">&gt;,&gt;&gt;</td>
-<td style="text-align:left">数据流重导向：输出导向，分别是取代与累加</td>
-</tr>
-<tr>
-<td style="text-align:left">&lt;,&lt;&lt;</td>
-<td style="text-align:left">数据流重导向：输入导向</td>
-</tr>
-<tr>
-<td style="text-align:left">‘’</td>
-<td style="text-align:left">单引号，不具有变量置换功能</td>
-</tr>
-<tr>
-<td style="text-align:left">“”</td>
-<td style="text-align:left">具有变量置换功能</td>
-</tr>
-<tr>
-<td style="text-align:left">（）</td>
-<td style="text-align:left">在中间为子shell的起始与结束</td>
-</tr>
-<tr>
-<td style="text-align:left">{ }</td>
-<td style="text-align:left">在中间为命令区块的组合</td>
-</tr>
-</tbody>
-</table>
-<h2 id="数据流重导向？">数据流重导向？</h2><p>标准输出：指令执行所回传的正确的讯息，读取/etc/ontab后，将该档案内容显示到屏幕上。</p>
-<p>标准错误输出：指令执行失败后，所回传的错误讯息。Cat无法找到指令在屏幕上显示错误讯息。</p>
-<p>数据流重导向将standard output 与standard error output 分别传送到其他的档案或装置去，而分别传送所用的特殊字符则如下表示：</p>
-<ol>
-<li>标准输入（stdin）:使用&lt;或&lt;&lt;</li>
-<li>标准输出（stdout）:使用&gt;或&gt;&gt;</li>
-<li>标准错误输出（stderr）:使用2&gt;或2&gt;&gt;</li>
-</ol>
-<h2 id="命令执行的判断依据：；，&amp;&amp;，||">命令执行的判断依据：；，&amp;&amp;，||</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">指令下达情况</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">cmd1&amp;&amp;cmd2</td>
-<td style="text-align:left">1. 若cmd1执行完毕且为正确（$？=0），则cmd2执行</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">2. 若cmd1执行完毕且为错误（$？！=0），则cmd2不执行</td>
-</tr>
-<tr>
-<td style="text-align:left">cmd1\</td>
-<td style="text-align:left">\</td>
-<td>cmd2</td>
-<td>1. 若cmd1执行完毕且为正确（$？=0），则cmd2不执行</td>
-</tr>
-<tr>
-<td style="text-align:left"></td>
-<td style="text-align:left">2. 若cmd1执行完毕且为错误（$？！=0），则cmd2执行</td>
-</tr>
-</tbody>
-</table>
-<h2 id="管线命令_(pipe)">管线命令 (pipe)</h2><p>管线命令仅会处理standard output，对于standard error output会予以忽略；管线命令必须能够结合搜来自前一个指令的数据成为standard input 继续处理。</p>
-<h2 id="攫取命令：_cut,_grep">攫取命令： cut, grep</h2><p>cut –dfc：在一行讯息当中取出我们想要的。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-d</td>
-<td style="text-align:left">后面接分隔字符，与-f一起连用</td>
-</tr>
-<tr>
-<td style="text-align:left">-f</td>
-<td style="text-align:left">一句-d的分隔字符讲一段讯息分割成数段，用-f取出第几段</td>
-</tr>
-<tr>
-<td style="text-align:left">-c</td>
-<td style="text-align:left">以字符的单位取出固定字符区间</td>
-</tr>
-</tbody>
-</table>
-<p>grep:分析一行讯息，若当中有我们所需要的信息，就将改行拿出来。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-a</td>
-<td style="text-align:left">将binary档案以text档案的方式搜寻数据</td>
-</tr>
-<tr>
-<td style="text-align:left">-c</td>
-<td style="text-align:left">计算找到‘搜寻字符串’的次数</td>
-</tr>
-<tr>
-<td style="text-align:left">-i</td>
-<td style="text-align:left">忽略大小写的不同，所以大小写视为相同</td>
-</tr>
-<tr>
-<td style="text-align:left">-n</td>
-<td style="text-align:left">顺便输出行号</td>
-</tr>
-<tr>
-<td style="text-align:left">-v</td>
-<td style="text-align:left">反向选择,显示出没有搜索字符串内容的那一行</td>
-</tr>
-</tbody>
-</table>
-<h2 id="排序命令：_sort,_uniq,_wc">排序命令： sort, uniq, wc</h2><p>sort</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-f</td>
-<td style="text-align:left">忽略大小写的差异</td>
-</tr>
-<tr>
-<td style="text-align:left">-b</td>
-<td style="text-align:left">忽略最前面的空格符部分</td>
-</tr>
-<tr>
-<td style="text-align:left">-M</td>
-<td style="text-align:left">以月份的名字来排序</td>
-</tr>
-<tr>
-<td style="text-align:left">-n</td>
-<td style="text-align:left">使用存数字进行排序</td>
-</tr>
-<tr>
-<td style="text-align:left">-r</td>
-<td style="text-align:left">反向排序</td>
-</tr>
-<tr>
-<td style="text-align:left">-u</td>
-<td style="text-align:left">相同的数据中，仅出现一行代表</td>
-</tr>
-<tr>
-<td style="text-align:left">-t</td>
-<td style="text-align:left">分隔符</td>
-</tr>
-<tr>
-<td style="text-align:left">-k</td>
-<td style="text-align:left">以那个区间来进行排序的意思</td>
-</tr>
-</tbody>
-</table>
-<p>Uniq：将重复的资料仅列出一个</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-i</td>
-<td style="text-align:left">忽略大小写字符的不同</td>
-</tr>
-<tr>
-<td style="text-align:left">-c</td>
-<td style="text-align:left">进行计数</td>
-</tr>
-</tbody>
-</table>
-<p>Wc:计算讯息的整体数据，行、字符、字数等；显示登入账号数。</p>
-<h2 id="双向重导向：tee">双向重导向：tee</h2><p>tee可以让standard output转存一份档案内并将同样的数据继续送到屏幕去处理。</p>
-<h2 id="字符转换命令：_tr,_col,_join,_paste,_expand">字符转换命令： tr, col, join, paste, expand</h2><p>tr可以用来删除一段讯息中的文字，或者是进行文字讯息的替换。tr –ds …</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-d</td>
-<td style="text-align:left">删除讯息当中的…这个字符串</td>
-</tr>
-<tr>
-<td style="text-align:left">-s</td>
-<td style="text-align:left">取代掉重复的字符</td>
-</tr>
-</tbody>
-</table>
-<p>col</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-x</td>
-<td style="text-align:left">将tab键转换成对等的空格键</td>
-</tr>
-<tr>
-<td style="text-align:left">-b</td>
-<td style="text-align:left">在文字内有反斜杠/时，仅保留反斜杠最后接的那个字符</td>
-</tr>
-</tbody>
-</table>
-<p>Join：将有关系的资料放在一起</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-t</td>
-<td style="text-align:left">Join默认以空格符分隔数据，并且比对第一个字段的数据，如果两个档案相同，则将两笔数据联成一行，且第一个字段房子啊第一个</td>
-</tr>
-<tr>
-<td style="text-align:left">-i</td>
-<td style="text-align:left">忽略大小写的差异</td>
-</tr>
-<tr>
-<td style="text-align:left">-1</td>
-<td style="text-align:left">代表第一个档案要用那个字段来分析</td>
-</tr>
-<tr>
-<td style="text-align:left">-2</td>
-<td style="text-align:left">代表第二个档案要用那个字段来分析</td>
-</tr>
-</tbody>
-</table>
-<p>Paste：直接将两行贴在一起，中间以tab键隔开</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-d</td>
-<td style="text-align:left">后面可以接分隔字符，预设是以tab来分隔的</td>
-</tr>
-<tr>
-<td style="text-align:left">-</td>
-<td style="text-align:left">如果file部分写成-，表示来自standard input的资料</td>
-</tr>
-</tbody>
-</table>
-<p>Expand：将tab键转换成空格键[-t]</p>
-<h2 id="分割命令：_split_：将一个大档案依据档案大小或行数来分隔">分割命令： split ：将一个大档案依据档案大小或行数来分隔</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-b</td>
-<td style="text-align:left">后面可接欲分割成的档案大小，可加单位</td>
-</tr>
-<tr>
-<td style="text-align:left">-l</td>
-<td style="text-align:left">以行数来进行分割</td>
-</tr>
-<tr>
-<td style="text-align:left">PREFIX</td>
-<td style="text-align:left">代表前导符，可作为分割档案的前导文字</td>
-</tr>
-</tbody>
-</table>
-<h2 id="参数代换">参数代换</h2><p>xargs：产生某个指令的参数。可以读入stdin的数据，以空格符或断行字符作为分辨，将stdin的资料分割成为arguments。</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">选项与参数</th>
-<th style="text-align:left">说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">-0</td>
-<td style="text-align:left">如果输入的stdin含有特殊字符，可以将它还原成一般字符</td>
-</tr>
-<tr>
-<td style="text-align:left">-e</td>
-<td style="text-align:left">Eof的意思，后面可以接一个字符串，当xargs分析到这个字符串时，就会继续工作</td>
-</tr>
-<tr>
-<td style="text-align:left">-p</td>
-<td style="text-align:left">在执行每个指令的argument时，都会询问使用者</td>
-</tr>
-<tr>
-<td style="text-align:left">-n</td>
-<td style="text-align:left">后面接次数，每次command指令执行时，要使用几个参数的意思</td>
-</tr>
-</tbody>
-</table>
-<h2 id="关于减号_–_的用途">关于减号 – 的用途</h2><p>替代stdin、stdout</p>
+          文档更新记录
 
-          
+
+版本
+更新时间
+更新人
+更新内容
+
+
+
+
+V0.1
+2015-07-26
+孙凤影
+bash shell学习笔记整理
+
+
+
+系统的合法shell与/etc/shells功能Bash shell 的功能命令编修能力通常用户在bash下输入命令时不必把命令输全，shell就能判断出你所要
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/29/bash-learning/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2135,52 +1244,15 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
       
         
           
-            <h2 id="背景介绍">背景介绍</h2><p>目前来看，我是一位专业的打杂人员，维护网络、文档、共享中心、随时听候大师兄的调遣，这样使得本来很惬意的生活多了点凌乱，少了点自由，多了点忙碌，少了点懒散。更多的时间则集中在了解更多的内容，而不是集中在某一个点上进行学习，这样可能就会产生丢三落四，做这忘那的问题，这就需要有一个很好的计划才行，这些罢笔不提。大概半个月之前，大师兄发现自己N年前做的事情，写了文档，但是现在还有很多同学在重复走大师兄当年的路，自己摸索，自己解决问题，不仅烦躁，苦逼，而且节奏慢，效率低，这才引出维护文档的问题。</p>
-<h2 id="为什么采用md格式">为什么采用md格式</h2><p>首先大师兄提出两点要求：</p>
-<ol>
-<li>有版本更新记录</li>
-<li>可以多人维护</li>
-</ol>
-<p>这不就是git嘛，使用git当然要用文本方式了，再加上心中有个对md的大概了解，所以就提议采用md格式来管理文档，就此开始了md的不归路。</p>
-<h2 id="md遇到的问题">md遇到的问题</h2><h3 id="二级列表嵌套问题">二级列表嵌套问题</h3><p>刚刚改写车载台项目文档时遇到，只需要在第一级列表行开头加上一个<code>tab</code>就可以解决问题，示例如下：</p>
-<pre><code>-<span class="ruby"> 这是第一级列表第一行
-</span>    -<span class="ruby"> 这是第一级列表第二行
-</span>    -<span class="ruby"> 这是第二级列表第一行
-</span>-<span class="ruby"> 这是第二级列表第二行
-</span>-<span class="ruby"> 这是第一级列表第三行</span>
-</code></pre><p>显示效果如下：</p>
-<ul>
-<li>这是第一级列表第一行</li>
-<li>这是第一级列表第二行<ul>
-<li>这是第二级列表第一行</li>
-<li>这是第二级列表第二行</li>
-</ul>
-</li>
-<li>这是第一级列表第三行</li>
-</ul>
-<h3 id="如何存放图片的问题">如何存放图片的问题</h3><p>虽然md对图片的支持已经很好用，但是和word比，还是不够方便，如果把图片放到git里也不是很容易管理大量的图片，所以这里借鉴了github-pages常用的解决方案，采用七牛云存储来管理图片，每张图片给出一个确定的链接，也方便md文档的转移。</p>
-<p>七牛云存储免费用户额度如下：</p>
-<ul>
-<li>存储空间1GB</li>
-<li>每月下载流量1GB</li>
-<li>创建1个空间</li>
-<li>每月Put请求1万次</li>
-<li>每月Get请求10万次</li>
-<li>仅支持富媒体上传</li>
-</ul>
-<p>显然免费用户已经够我们使用，也可能得到固定图片链接地址的优势。</p>
-<p>图片引用示例如下：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/ma.jpg" alt="图片引用示例"></p>
-<h3 id="中文段缩进问题">中文段缩进问题</h3><p>由于md是老外的作品，而英文是没有段首缩进这么一说的，所以md也想当然的不支持段首缩进，再者，可能也是因为英文无段首缩进，所以md对空白不敏感，所以这里就需要解决这个问题；</p>
-<p>现在有两种方案：</p>
-<h4 id="圆角空格代替空格实现段首缩进">圆角空格代替空格实现段首缩进</h4><p>可能是因为圆角空格和空白的ASCII都不一样，这样md并不认为圆角空格是空白，利用这个原理可以很容易的实现段首缩进，示例如下</p>
-<p>　　这一段前采用圆角空格实现了段首缩进</p>
-<h4 id="插入html标签">插入html标签</h4><p>md是一门标记语言，并不是用来取代html语言，所以它只是为了方便我们的使用而产生的，所以md从出生开始就支持html标签来优化md的显示效果，对于段首缩进问题，我所发现的是采用<code>pre</code>标签来实现，我对html不熟，可能还会有其他标签，有待于指出更新完善。</p>
-<p><code>pre</code>标签实现段首缩进示例：</p>
-<p><pre>这一段前采用pre标签实现了段首缩进</pre></p>
-<h3 id="文章内插入脚注的问题">文章内插入脚注的问题</h3><p>暂时没有解决。（很多markdown版本对脚注有支持，但是markdown基本功能是包含这一项功能的，github pages帮助里也没有提到这一项）</p>
-
-          
+          背景介绍目前来看，我是一位专业的打杂人员，维护网络、文档、共享中心、随时听候大师兄的调遣，这样使得本来很惬意的生活多了点凌乱，少了点自由，多了点忙碌，少了点懒散。更多的时间则集中在了解更多的内容，而不是集中在某一个点上进行学习，这样可能就会产生丢三落四，做这忘那的问题，这就需要有一个很好的计划才行，
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/28/markdown-problem-answer/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2330,32 +1402,18 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
       
         
           
-            <p>网盘链接：<a href="http://pan.baidu.com/s/1c096Bi4" target="_blank" rel="external">http://pan.baidu.com/s/1c096Bi4</a> 密码：batc</p>
-<h2 id="安装eclipse">安装eclipse</h2><h3 id="方法一">方法一</h3><p>从官网下载安装包直接安装</p>
-<p>【网盘：eclipse-standard-luna-R-linux-gtk-x86_64.tar.gz，需要配置路径】。</p>
-<h3 id="方法二">方法二</h3><p>在ubuntu terminal下输入指令sudo apt-get install eclipse</p>
-<h3 id="方法三">方法三</h3><p>在ubuntu的software center中搜索eclipse，点击“安装”直接安装</p>
-<p><strong>注：</strong>第一次启动会出现An error has occurred. 让你查看一个log文件</p>
-<p>解决方法：链接一个库过去，指令如下：</p>
-<pre><code>ln -s <span class="regexp">/usr/</span>lib<span class="regexp">/jni/</span>libswt-*<span class="number">3740</span>.so ~<span class="regexp">/.swt/</span>lib<span class="regexp">/linux/</span>x86_64<span class="regexp">/</span>
-</code></pre><h2 id="ADT安装">ADT安装</h2><h3 id="方法一，在线安装：">方法一，在线安装：</h3><p>打开Eclipse→Help→Install New Software</p>
-<p>点击Work with的“Add”</p>
-<p>Name：ADT Online（随意）</p>
-<p>Location：<a href="https://dl-ssl.google.com/android/eclipse/" target="_blank" rel="external">https://dl-ssl.google.com/android/eclipse/</a></p>
-<p>由于GFW，ADT的安装比较困难，会提示contact with Server。</p>
-<h3 id="方法二，手动安装：">方法二，手动安装：</h3><p>下载ADT插件【网盘：ADT-23.0.6.zip】</p>
-<p>点击方法一中的“Add”</p>
-<p>Name：ADT Plugin（随意）</p>
-<p>点击Archive…选择ADT路径</p>
-<p>点击完成</p>
-<h2 id="安装Android_SDK">安装Android SDK</h2><p>ADT安装完成后会弹出对话框，直接选择Android SDK的路径【网盘：Android Sdk（include api）.tar.gz】即可</p>
-<p><strong>注</strong>：ubuntu-12.04-SmdtSDK-amd64.iso镜像已经提供java环境，在此不需要重新安装</p>
-<p>编译文件时可能会遇到一个问题： Your project contains error(s)，please fix them before running your application.</p>
-<p>解决方法：</p>
-<pre><code>sudo apt-<span class="keyword">get</span> install lib32z1 lib32stdc++<span class="number">6</span>
-</code></pre><p><strong>注</strong>:lib32z1中最后是数字1</p>
-
-          
+          网盘链接：http://pan.baidu.com/s/1c096Bi4 密码：batc
+安装eclipse方法一从官网下载安装包直接安装
+【网盘：eclipse-standard-luna-R-linux-gtk-x86_64.tar.gz，需要配置路径】。
+方法二在ubuntu terminal
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/26/ubuntu-android-sdk/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2505,59 +1563,16 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
       
         
           
-            <h3 id="调用现成的模板，比如seuthesis、IEEE_conference等。">调用现成的模板，比如seuthesis、IEEE conference等。</h3><h3 id="插入章节号">插入章节号</h3><pre><code>\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似<span class="number">1</span>.，章索引{sec.intro}
-\section{研究背景与意义}\lable{sec.<span class="type">BG</span>} % 节，类似<span class="number">1</span>.<span class="number">1</span>，正文可引用\<span class="keyword">ref</span>{sec.<span class="type">BG</span>}
-\subsection{移动智能软硬件系统发展} % 小节，类似<span class="number">1</span>.<span class="number">1</span>.<span class="number">1</span>
-</code></pre><p>输出PDF如下图所示：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/1.jpg" alt="章节号示例"></p>
-<h3 id="正文插入多行项目符号列表">正文插入多行项目符号列表</h3><pre><code>\<span class="keyword">begin{itemize} </span>
-\<span class="keyword">item </span>第一段文字
-\<span class="keyword">item </span>第二段文字
-\<span class="preprocessor">end</span>{<span class="keyword">itemize}</span>
-</code></pre><p>输出PDF为：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/2.jpg" alt="多行项目符号列表示例"></p>
-<h3 id="插入引用文献">插入引用文献</h3><pre><code>\<span class="tag">cite</span>{<span class="attribute">NeilMawston</span>:<span class="number">2013</span>}
-</code></pre><p>注意：最好在google scholar中找到被引用文献，然后点击链接下方的cite，如下图：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/3.jpg" alt="文献引用示例1"></p>
-<p>然后在弹出窗口中选择BibTex，如下图所示：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/4.jpg" alt="文献引用示例2"></p>
-<p>最后保存输出的所有文本到专门的xxx.bib文件中，正文引用时在\cite{}括号中填入红圈中的名字即可，如下：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/5.jpg" alt="文献引用示例3"></p>
-<h3 id="插入图片：">插入图片：</h3><pre><code>\begin{figure}[ht]
-  \centering % 图片居中对齐
-  \centerline{\includegraphics[width = <span class="number">20</span>.<span class="number">3</span>cm]{figures/fInstMix4.pdf}} %原图路径
-  \caption{图片的中/英文名称和说明，显示在图片下方}
-  \label{fig.fInstMix4} % 图片索引，在正文中用“如图\<span class="keyword">ref</span>{fig.fInstMix4}”即“如图<span class="number">3</span>.<span class="number">4</span>”
-\<span class="keyword">end</span>{figure}
-</code></pre><p>图片保存到figures/这个目录下，最好采用.eps或者.pdf，这是矢量图片。如果是matlab生成图片，需要转换一下，详见matlab的使用方法。输出PDF入下图所示：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/6.jpg" alt="插入图片示例1"></p>
-<p>正文中引用显示为：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/7.jpg" alt="插入图片示例2"></p>
-<h3 id="插入表格">插入表格</h3><pre><code><span class="command">\begin</span><span class="special">{</span>table<span class="special">}</span><span class="special">[</span>ht<span class="special">]</span>
-<span class="command">\begin</span><span class="special">{</span>center<span class="special">}</span>
-<span class="command">\newcommand</span><span class="special">{</span><span class="command">\tabincell</span><span class="special">}</span><span class="special">[</span>2<span class="special">]</span><span class="special">{</span><span class="command">\begin</span><span class="special">{</span>tabular<span class="special">}</span><span class="special">{</span>@<span class="special">{</span><span class="special">}</span><span class="special">#</span>1@<span class="special">{</span><span class="special">}</span><span class="special">}</span><span class="special">#</span>2<span class="command">\end</span><span class="special">{</span>tabular<span class="special">}</span><span class="special">}</span>
-<span class="command">\caption</span><span class="special">{</span>表格的中/英文名称和说明，显示在表格上方<span class="special">}</span><span class="command">\label</span><span class="special">{</span>tab:MICAparams<span class="special">}</span> <span class="comment">% 表格索引</span>
-<span class="command">\begin</span><span class="special">{</span>tabular<span class="special">}</span><span class="special">{</span>l|l<span class="special">}</span> <span class="comment">% 两列表格，均为左对齐；{c|c|r}：3列表格，前两居中最后一列右对齐</span>
-<span class="command">\hline</span> <span class="comment">% 横线，会显示出来</span>
-参数名称<span class="special">&amp;</span>参数含义<span class="command">\\</span> <span class="comment">% 第1行内容，用&amp;分割两列，“\\”表示换行；AAA&amp;BBB&amp;CCC表示三列</span>
-<span class="command">\hline</span> <span class="comment">% 横线分割，也可以不要</span>
-程序指令级并行度（ILP）<span class="special">&amp;</span><span class="command">\tabincell</span><span class="special">{</span>l<span class="special">}</span><span class="special">{</span>理想处理器中，指令窗口容量<span class="command">\\</span>分别为32、64、96和128时，<span class="command">\\</span>可以并发执行的指令条数<span class="special">}</span><span class="command">\\</span> <span class="comment">% 第2行内容，其中第二列分为3行显示（tabincell{l}）左对齐</span>
-<span class="command">\hline</span>
-<span class="command">\tabincell</span><span class="special">{</span>l<span class="special">}</span><span class="special">{</span>指令依赖关系类特征<span class="command">\\</span>（寄存器依赖距离）<span class="special">}</span><span class="special">&amp;</span><span class="command">\tabincell</span><span class="special">{</span>l<span class="special">}</span><span class="special">{</span>两次架构寄存器重用<span class="command">\\</span>之间动态指    令条数的分布<span class="special">}</span><span class="command">\\</span> <span class="comment">% 第3行内容，第1列和第2列均占用2行空间，均为l(左)对其</span>
-<span class="command">\end</span><span class="special">{</span>tabular<span class="special">}</span>
-<span class="command">\end</span><span class="special">{</span>center<span class="special">}</span>
-<span class="command">\end</span><span class="special">{</span>table<span class="special">}</span>
-</code></pre><p>输出pdf如下图所示：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/8.jpg" alt="插入表格示例1"></p>
-<p>正文引用输出效果为：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/9.jpg" alt="插入表格示例2"></p>
-<h3 id="插入公式">插入公式</h3><pre><code>\begin<span class="list">{eqnarray}</span>\label<span class="list">{eqn.cstall}</span> % 公式索引
-  \nonumber % 多行公式共用一个索引号，就需要在不需要编号的行加这个东西
-  c_<span class="list">{stall}</span> &amp;=&amp; max(<span class="number">0</span>;<span class="number">1</span>-\frac<span class="list">{c_{miss}</span>}<span class="list">{N/D+c^{'}</span>_<span class="list">{stall}</span>})\cdot c^<span class="list">{'}</span>_<span class="list">{stall}</span>, \\% &amp;=&amp;表示多行间按“=”对齐；_<span class="list">{}</span>表示下标；\frac<span class="list">{A}</span><span class="list">{B}</span>表示A/B；^<span class="list">{}</span>表示上标；\cdot表示乘号；
-  MLP_<span class="list">{avg}</span> &amp;=&amp; \frac<span class="list">{\sum_{e}</span>m(e)}<span class="list">{\sum_{e}</span><span class="number">1</span>} % \sum表示求和符号
-\end<span class="list">{eqnarray}</span>
-</code></pre>
-          
+          调用现成的模板，比如seuthesis、IEEE conference等。插入章节号\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro}
+\section{研究背景与意义}\lable{sec.BG} % 节，类似1.1，正文可引用\
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/25/latex-quick-learning/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2707,22 +1722,15 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
       
         
           
-            <h2 id="说明">说明</h2><p>安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：<code>/192.168.0.227/01.专业软件/matlab/ubuntu-matlab2014b</code>]。</p>
-<h2 id="准备阶段">准备阶段</h2><ol>
-<li>把镜像文件中的install.jar文件替换为MATLAB_R2014B_MAC_LINUX_crack中的install.jar</li>
-<li>将R2014b_glnxa64.ISO解压到随便某一个目录下（注意：使用ubuntu自带的工具解压，即右键-&gt;archive manager），本教程将解压后的放在<code>/home/lab302/matlab2014b</code>中</li>
-<li>将破解文件MATLAB_R2014B_MAC_LINUX_crack中的install.jar复制到<code>matlab2014b/java/jar/</code>下的覆盖原来的install.jar，并执行指令<code>chmod +x *</code></li>
-<li>进入到java/jar文件夹下，可以看到有install.jar文件，执行命令chmod +x *。然后将该文件删除<code>rm install.jar</code></li>
-</ol>
-<h2 id="安装matlab">安装matlab</h2><ol>
-<li>回到解压后的文件目录matlab2014b/下，可以看到有intall文件，执行<code>sudo ./install</code>命令，开始安装【注意：选择使用文件安装秘钥】</li>
-<li>输入installation key: 29797-39064-48306-32452，安装路径这里选择<code>/usr/local/MATLAB/R2014b</code></li>
-<li>不联网激活：添加MATLAB_R2014B_MAC_LINUX_crack下的license.lic文件激活</li>
-<li>把libmwservices.so文件放入到<code>/usr/local/MATLAB/R2014B/bin/glnxa64</code>文件下</li>
-<li>进入到<code>/usr/local/MATLAB/R2014b/bin</code>文件夹中，输入./matlab启动matlab。</li>
-</ol>
-<h2 id="安装完成。">安装完成。</h2>
-          
+          说明安装所采用的镜像为R2014b_glnxa64.ISO。破解文件分有两个，一个为libmwservices.so文件，另一个为MATLAB_R2014B_MAC_LINUX_crack文件夹[详见共享目录：/192.168.0.227/01.专业软件/matlab/ubuntu-matlab20
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/24/install-matlab2014b-in-ubuntu14.04/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2872,67 +1880,17 @@ $、？、OATYPE、HOSTTYPE、MACHTYPE：（主机硬件与核心的等级）
       
         
           
-            <h2 id="安装所需工具">安装所需工具</h2><pre><code><span class="label">sudo</span> apt-<span class="preprocessor">get</span> install git scons g++ python-dev <span class="keyword">swig </span>m4 protobuf
-</code></pre><h2 id="下载我们改过的my-gem5">下载我们改过的my-gem5</h2><p>下载地址如下:（已有的话就git pull更新一下）</p>
-<pre><code>git clone <span class="string">https:</span><span class="comment">//tianna1121@bitbucket.org/tianna1121/my-gem5.git</span>
-</code></pre><p>如果速度过慢，采用下面地址下载</p>
-<pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/137oku 密码: shs6</span>
-</code></pre><h2 id="编译gem5">编译gem5</h2><p>进入my-gem5文件夹之后</p>
-<pre><code>scons build<span class="regexp">/ARM/g</span>em5.opt
-</code></pre><p>第一次较慢(大概20分钟)，如果以前跑过gem5可以备份一下build文件夹之后再编译</p>
-<h2 id="下载Linux镜像：">下载Linux镜像：</h2><pre><code><span class="label">http:</span>//www.gem5<span class="preprocessor">.org</span>/dist/current/arm/aarch-system-<span class="number">2014</span>-<span class="number">10.</span>tar.xz
-</code></pre><h2 id="解压系统镜像，并放入正确的目录">解压系统镜像，并放入正确的目录</h2><p>将aarch-system-2014-10.tar.xz解压到my-gem5文件夹下的img文件夹中(如果没有则自己创建)</p>
-<p>目录结构如下：</p>
-<blockquote>
-<p>gem5/<br>|——img/<br>|——|——binaries/<em><br>|——|——disks/</em></p>
-</blockquote>
-<h2 id="下载benchmark，放到文件系统镜像">下载benchmark，放到文件系统镜像</h2><p>(此镜像作为linux文件系统)里,下载地址</p>
-<pre><code>链接: <span class="string">http:</span><span class="comment">//pan.baidu.com/s/1qWJZF0S 密码: ms7h</span>
-</code></pre><p>向镜像添加文件指令</p>
-<pre><code>sudo mount -o loop,offset=<span class="number">32256</span> img/disks/linux-aarch32-ael<span class="class">.img</span> /mnt
-cp -<span class="tag">a</span> Mibench /mnt
-cp -<span class="tag">a</span> mediaBench /mnt
-cd /mnt
-chmod +x /mediabench<span class="comment">/* -r
-chmod +x /Mibench<span class="comment">/* -r
-umount /mnt</span></span>
-</code></pre><h2 id="构建仿真目录">构建仿真目录</h2><p>将gem5/build/ARM/gem5.opt和gem5/configs/链接到任一文件夹下（这里采用gem5/parsec-1/)，开始仿真,<strong>注意</strong>为不同的benchmark创建不同的目录</p>
-<p>链接指令如下</p>
-<pre><code>进入parsec-<span class="number">1</span>目录
-ln -s ..<span class="regexp">/build/</span>ARM<span class="regexp">/gem5.opt ./</span>
-ln -s ..<span class="regexp">/configs/</span> .<span class="regexp">/</span>
-</code></pre><p>目录结构如下：</p>
-<blockquote>
-<p>parsec-1/<br>|——board_start.sh<br>|——gem5.opt<br>|——configs/</p>
-</blockquote>
-<h2 id="启动Linux系统(gem5目录下)">启动Linux系统(gem5目录下)</h2><p>仿真的过程首先启动系统，然后在系统中跑bench，为节省时间可以分两步：</p>
-<h3 id="用AtomicSimpleCpu模式启动linux，设置一个观察点">用AtomicSimpleCpu模式启动linux，设置一个观察点</h3><p>修改board_start.sh文件:</p>
-<blockquote>
-<p>1.首先将<code>M5_PATH</code>修改为你自己的img路径</p>
-<p>2.可能需要根据不同的模式进行相应的修改，且注意每种模式后面参数文件是否存在</p>
-</blockquote>
-<p>运行<code>./board_start.sh</code>时可能会出现错误，提示有两个文件不存在：</p>
-<blockquote>
-<p>gem5/img/disks/sdcard-1g-mxplayer.img和gem5/img/binaries/vmlinux-gem5-android-dvfs，从上述网盘可以下载，放入相应的路径下即可</p>
-</blockquote>
-<p>运行<code>gem5/parsec-1/</code>目录下<code>board_start.sh</code></p>
-<p>再开一个终端，运行<code>./util/term/m5term 127.0.0.1 3456</code> 这里的<code>3456</code>是个端口号，开第二个的话就是<code>3457</code>（gem5说明：会自动变化）</p>
-<pre><code><span class="tag">AEL</span> <span class="rule"><span class="attribute">login</span>:<span class="value">root</span></span>
-</code></pre><p>出现<code>#</code>号时，说明linux系统已经启动好</p>
-<pre><code>m5 checkpoint       <span class="comment">#设置观察点</span>
-m5 <span class="keyword">exit</span>             <span class="comment">#设置完成退出，不用关闭窗口 </span>
-</code></pre><p>此时parserc-1/m5out/文件夹里会生成cpt.xxxxx文件夹，即为checkpoint，这个文件夹可以重复使用，跑另一个bench的时候复制其链接到m5out文件夹中</p>
-<h3 id="用arm_detailed模式从设置的观察点继续执行">用arm_detailed模式从设置的观察点继续执行</h3><p>再次运行<code>./util/term/m5term 127.0.0.1 3456</code>就可以看到所跑linux系统的命令行<code>#</code>，即已经进入m5终端</p>
-<h2 id="跑具体的bench">跑具体的bench</h2><p>进入系统后，根据具体的bench指令直接执行应用</p>
-<p><strong>注意：</strong>m5终端下尽量少使用bash指令（比如ls, cd, chmod等等，此会影响所跑应用的状态结果，最好提前修改权限一句指令解决）</p>
-<h2 id="保存bench运行信息">保存bench运行信息</h2><p>进入parsec-1/m5out/Mibench/，复制一份qsort_small为你所跑bench的名字，然后删除qsort_small下去掉检查点文件cpt.xxxxxxx以外的所有文件，重新开启第8.2步跑新的bench</p>
-<h2 id="END">END</h2><p>AtomicSimpeCPU模式：</p>
-<pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=AtomicSimpleCPU</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span>
-</code></pre><p>arm_detailed模式：</p>
-<pre><code><span class="string">.</span><span class="comment">/gem5</span><span class="string">.</span><span class="comment">opt</span> <span class="literal">-</span><span class="comment">d</span> <span class="comment">m5out/Mibench/qsort_small/</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">debug</span><span class="literal">-</span><span class="comment">flags=O3PipeView</span> <span class="comment">configs/example/fs</span><span class="string">.</span><span class="comment">py</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">mem</span><span class="literal">-</span><span class="comment">size=1024MB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">kernel=vmlinux</span><span class="literal">-</span><span class="comment">gem5</span><span class="literal">-</span><span class="comment">android</span><span class="literal">-</span><span class="comment">dvfs</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">disk</span><span class="literal">-</span><span class="comment">image=linux</span><span class="literal">-</span><span class="comment">aarch32</span><span class="literal">-</span><span class="comment">ael</span><span class="string">.</span><span class="comment">img</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">caches</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_size=32kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1d_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l1i_assoc=2</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_assoc=16</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2cache</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">l2_size=128kB</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">num</span><span class="literal">-</span><span class="comment">l2caches=8</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">cpu</span><span class="literal">-</span><span class="comment">type=arm_detailed</span> <span class="literal">-</span><span class="comment">n</span> <span class="comment">1</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">machine</span><span class="literal">-</span><span class="comment">type=VExpress_EMM</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">dtb</span><span class="literal">-</span><span class="comment">filename=vexpress</span><span class="literal">-</span><span class="comment">v2p</span><span class="literal">-</span><span class="comment">ca15</span><span class="literal">-</span><span class="comment">tc1</span><span class="literal">-</span><span class="comment">gem5_dvfs_1cpus</span><span class="string">.</span><span class="comment">dtb</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">frame</span><span class="literal">-</span><span class="comment">capture</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">enable</span><span class="literal">-</span><span class="comment">context</span><span class="literal">-</span><span class="comment">switch</span><span class="literal">-</span><span class="comment">stats</span><span class="literal">-</span><span class="comment">dump</span> <span class="literal">-</span><span class="comment">r</span> <span class="comment">1</span>
-</code></pre><p><strong>注意：</strong>不同的配置信息后加入<code>-r 1</code>代表从观察点启动，没有则表示直接启动，可以设置观察点</p>
-
-          
+          安装所需工具sudo apt-get install git scons g++ python-dev swig m4 protobuf
+下载我们改过的my-gem5下载地址如下:（已有的话就git pull更新一下）
+git clone https://tianna1121@bitbucket.o
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2015/07/15/gem5-run-bench-step/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

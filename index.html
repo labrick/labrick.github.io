@@ -430,45 +430,15 @@
       
         
           
-            <p>摘要 — 声源定位(SSL)是智能家庭机器人听觉系统的一个主要功能。SRP-PHAT广泛的应用于机器人声源定位系统的一种鲁棒性定位方法，但是，这种定位方法由于需要进行大范围的搜索，需要较长的时间进行定位，实时性不强。本文提出一种适用于小型阵列MIC的SRP-PATH加速方法。实验表明，与传统的方法相比，这种方法可以减少30.6%的待搜索位置，减少46.7%的错误率。</p>
-<p>abstract — Sound source localization (SSL) is a major function of robot auditory systems for intelligent home robots. The steered response power-phase transform (SRP-PHAT) is a widely used method for robust SSL. However, it is too slow to run in real time, since SRP-PHAT searches a large number of candidate sound source locations. This paper proposes a search space clustering method designed to speed up the SRPPHAT based sound source localization algorithm for intelligent home robots equipped with small scale microphone arrays. The proposed method reduces the number of candidate sound source locations by 30.6% and achieves 46.7% error reduction compared to conventional methods.</p>
-<p>关键字：声源定位；SRP；空间搜索簇；小型阵列MIC；机器人听觉系统；智能家庭机器人；</p>
-<h2 id="INTRODUCTION">INTRODUCTION</h2><p>随着人形机器人的进步，智能服务机器人将逐渐的走向我们的生活，他们将替代人类做家务，照顾老年人等等，然而在机器人技术的发展进程当中, 为了建立人类与机器人之间的有效沟通，更多关注的是机器人的运动和视觉系统，但语音识别才是人机交流最具前景性的交流工具，因此，机器人听觉系统是智能家庭机器人中一个关键部分。</p>
-<p>机器人听觉系统中，声源定位又是家庭机器人环境当中进行人机交互的核心部分。当一个用户与人形机器人进行语言交流时，机器人必须能够自动定位到用户的位置。图1 描绘了采用Samsung Electronics开发的小型服务机器人的声源定位场景。例如，如果用户距离机器人一段距离说“过来！”，机器人必须能够辨识到用户的位置，从而做出回应。而且声源定位的准确评估可以通过多通道波束形成技术增加语音质量。另外，声源定位也是一种在黑暗中寻找说话者的方法。</p>
-<p>到目前位置，已经有很多的声源定位算法被提出，例如：基于声达时间差方法，基于高分辨率频谱分析方法，基于SRP方法（。。。）。其中SRP-PATH是在有回响室内环境下极具鲁棒性的一种方法。然而，SRP-PHAT是一种网格式空间搜索技术，它需要检查大量可能是声源方向的位置。因此，SRP-PHAT不适用于实时系统当中，比如：计算性能受限的小型服务机器人。</p>
-<p>有很多方法被提出来改进SRP-PHAT的实时性问题。比如：[7]中从粗糙到精细的层级搜索方法，【但这种方法会在搜索完成之前，过早的根据最大功率排除可能存在的声源】；[8]中是一种折中的方法，它首先采用TDOA方法产生一个待确定的声源空间集合，然后采用SRP-PHAT进行网格搜索这个空间集合。如果第一步的TDOA不成功，第二步中的SRP-PHAT也就会失败。这种方法受限于TDOA产生可能位置集合，故而降低了低信噪比中的声源定位性能。[9]中采用互相关函数计算时延，从而确定声源位置。这种方法建立一种时延到待选位置集的拟映射表，它将时延映射到位置对应的输出功率，从而找到最大输出功率。然而，这种方法也可能无法找到最大功率位置集合，因为它只搜索相关时延映射过去的少量位置。总体来说，这几种方法都不太可行，他们的搜索结果都可能与全局网格搜索不同，特别是在噪声回响环境中。</p>
-<p>在配备小型MIC阵列的机器人中，如果采用实时SRP-PHAT方法，我们一直关注总是可以以最大功率定位声源位置有效搜索方法。声源位置的解析度取决于SRP-PHAT方法所依赖的采样率和MIC阵列几何结构。如果我们将整个搜索空间划分为几个子区域，每个子区域都只包含相同TDOA的声音信号点，并且仅检查子区域中具有代表性的点来确定最高功率声源，我们就可以大幅度缩减传统网格搜索方法的计算量。在这篇论文当中，我们提出空间搜索聚类的方法来将整个搜索空间划分为几个子搜索区域，每个区域都仅包含相同TDOA点。这种方法构建了一个查找表，该表包含了不同声音信号的TDOA值对应区域的完整集合。通过搜索子区域中的代表性点可以大幅度缩减计算量，并且与全局网格搜索相比，并不会降低声源定位的精度。我们已经在4MIC阵列小型服务机器人的听觉系统上有效的应用这种方法。</p>
-<p>这篇论文后面是这样组织的。第二三部分，我们回顾下SRP-PHAT理论并为小规模MIC阵列改进实时SRP-PHAT提出搜索空间聚类方法。第四五部分评估了采用搜索空间聚类改进的SRP-PHAT方法在仿真和真实房间环境中的性能。第六部分我们做了个总结。</p>
-<h2 id="SRP-PHAT回顾">SRP-PHAT回顾</h2><p>对于N MIC阵列，给出信号源：xn(t)，第n个MIC在时间t时接收到信号，该MIC延时累加后的波束信号为：y(t,q)，其定义如下：</p>
-<pre><code><span class="function"><span class="title">y</span><span class="params">(t,q)</span></span>=n从<span class="number">1</span>到N对<span class="function"><span class="title">xn</span><span class="params">(t+t(n,q)</span></span>)的累加和
-</code></pre><p>其中，t(n,q)是信号从位置q到第n个mic的时间延迟。对于复杂噪声环境，比如回响，则可以采用具有权重函数的过滤累加波束信号，在频率域，过滤累加波束信号如下:</p>
-<pre><code><span class="function"><span class="title">Y</span><span class="params">(w,q)</span></span>=n从<span class="number">1</span>到N对<span class="function"><span class="title">Gn</span><span class="params">(w)</span><span class="title">Xn</span><span class="params">(w)</span><span class="title">e</span><span class="params">(jwt(n,q)</span></span>)的累加和
-</code></pre><p>其中，Xn(w)和Gn(w)是第n个MIC信号和它的相关过滤器经过傅里叶变换后的函数。上式中，应用过滤器后，通过调节延迟累加和可以使得MIC信号相位对齐。</p>
-<p>基于SRP的声源定位算法将整个MIC阵列聚焦在某个空间点q上，并且计算整个MIC阵列的输出功率P(q)，公式如下：</p>
-<pre><code><span class="function"><span class="title">P</span><span class="params">(q)</span></span>=积分计算
-</code></pre><p>其中….，在SRP-PHAT中，滤波器的定义如下：</p>
-<pre><code>滤波器函数
-</code></pre><p>对每个待选位置点计算SRP P(q)后，具有最大输出功率的点q’就是声源的位置：</p>
-<pre><code>q<span class="quoted">'=argmaxP</span><span class="list">(<span class="keyword">q</span>)</span>
-</code></pre><p>因为SRP-PHAT采用网格搜索方法来找到最大输出功率点q’，它需要对三维空间中每一个网格点进行SRP计算，所以具有很高的计算代价。下一节，我们会提出一种搜索空间聚类的方法在不降低定位精度的前提条件下降低SRP-PHAT的搜索空间。</p>
-<h2 id="搜索空间聚类">搜索空间聚类</h2><p>虽然SRP-PHAT计算每个网格点的输出功率，并以最大输出功率来找到声源位置，但受限于模数转化采样率，候选位置的输出功率并不都相同【？？】，如式3所示，待选位置的输出功率取决于所有MIC的信号及它们由于聚焦同一位置而产生的相位差，而且因为信号由模拟转换成数字，相位差也是离散的。如果任意两个待选点的相位差（TDOA）相近或相同，则他们在离散的时间域里就是相同，两个位置的输出的功率也就无法由式3作出区分。因此，如果将具有相同TDOA值的候选位置聚类到一起，并且将每个聚集组的代表坐标预先存储在查找表中，则可以大大减少计算成本，因为只有查找表中预先计算的坐标才能进行搜索，而不需要搜索网格中的每个点。</p>
-<p>采用自上而下预先构建查找表，首先，位置q对每个MIC对的相位差s(k,l,q)可以通过下式获得:</p>
-<pre><code>s<span class="list">(<span class="keyword">k</span>,l,q)</span>=round<span class="list">(<span class="keyword">r*</span><span class="list">(<span class="keyword">t</span><span class="list">(<span class="keyword">l</span>,q)</span>-t<span class="list">(<span class="keyword">k</span>,q)</span>)</span>)</span>
-</code></pre><p>其中，r为采样率。最初，整个搜索空间被聚集为单个块。如果块不够小并且包含至少两个具有不同TDOA的点，则将其划分为八个较小尺寸的块。这种划分过程一直持续下去，直到每个块中仅包含相同TDOA的点。例如：考虑一个4 MIC阵列的情况，对于位置q，我们可以计算6个TDOA值，从而构成一个TDOA向量，如下:</p>
-<pre><code>sq=[<span class="function"><span class="title">s</span><span class="params">(<span class="number">1</span>,<span class="number">2</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">1</span>,<span class="number">3</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">1</span>,<span class="number">4</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">2</span>,<span class="number">3</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">2</span>,<span class="number">4</span>,q)</span></span>, <span class="function"><span class="title">s</span><span class="params">(<span class="number">3</span>,<span class="number">4</span>,q)</span></span>]T
-</code></pre><p>给定一个块，如图2(a)，我们可以在块的8个顶点上进行计算，获得8个TDOA向量，如果这8个向量不相同，将这个块划分为8个更小的块，如图a(b)所示。划分之后，对TDOA向量相同的块进行合并。最后，将每个块的中心点存储在查找表中。这种对搜索空间聚类的方法对于小规模MIC阵列系统是非常行之有效的，因为小规模MIC阵列系统当中，具有不同TDOA向量的中心点数要远少于网格中候选位置点的总和。搜索空间聚类算法总结如表1。</p>
-<h2 id="模拟环境下评估">模拟环境下评估</h2><p>我们采用图10中描述的MIC阵列及候选声源位置来模拟声音数据，利用所提出的搜索空间聚类方法评估SRP-PHAT，以分析各种SNR和混响条件下的性能。声音数据是在5<em>6</em>2m3的房间内生成的，MIC采用0.17*0.17m2的方形阵列，阵列的中心在房间的(2.5, 2,<br>0.3)位置。声源放置在多个位置，如图3所示。声源高度为1.2m和1.6m。我们在三种不同的SNR条件（10，20和30db）和三种不同的混响时间（20，200和200毫秒）下评估SRP-PHAT和SSC的性能。信号源采用白噪声进行污染以产生不同的SNR信号。声音源持续时间为30s，帧长度为128ms，采样率为16KHz。</p>
-<p>我们将SRP-PHAT与SSC的性能与使用网格搜索方案的常规SRP-PHAT进行了比较，以分析精度。对于传统的SRP-PHAT，我们使用了1至20厘米的各种格栅尺寸，栅格为1cm，传统SRP-PHAT必须搜索6万个候选位置，作为对比，SSC后产生的查找表中只有5203个代表性位置，也就是说搜索空间减少了11531倍。</p>
-<p>图4和图5展示出在不同SNR和不同回响时间的声源定位性能：</p>
-<p>两张图………</p>
-<p>精度用方位角上估计角度与真正角度的百分比来描述，估计角度位于真正方位角的正负10度内算作正确。图4在三种不同的SNR条件（10,20和30dB）下，将SRP-PHAT与SSC的声源定位精度与传统SRP-PHAT进行比较，栅格尺寸采用1cm、10cm、15cm和20cm。类似地，图5比较了三种不同混响时间（20,200和300毫秒）的声源定位精度，图5的平均SNR为30dB。可以看出，不管SNR和回响时间如何，采用SSC改进的SRP-PHAT性能在各栅格尺寸下皆优于传统SRP-PHAT。图4和图5还展示出采用SSC改进的SRP-PHAT方法具有和传统SRP-PHAT以1cm栅格完全搜索具有相同的精度。这表明采用SSC改进的SRP-PHAT时钟可以定位到最大输出功率声源。</p>
-<h2 id="真实环境下评估">真实环境下评估</h2><p>我们在真实的室内环境当中记录声音数据，并采用SSC改进后的SRP-PHAT评估性能，MIC和声源位置，房间大小，声音数据等都和模拟环境相同，房间的回响时间约为530ms，平均SNR约为23dB。只有SNR大于20dB的帧才会被用于声源定位。表II是SSC改进的SRP-PHAT和传统SRP-PHAT在不同栅格下对位置精度，侯选位置和处理时间三个方面进行对比。从表II可以看出，与传统SRP-PHAT相比，在栅格为20cm时，SSC改进的SPR-PHAT候选位置减少了30.6%，然而方向角误差减少了41.9%，垂直方向误差减少50.7%，SSC改进的SRP-PHAT与常规SRP-PHAT方向相比，栅格为1cm时，侯选位置减少了11531倍，而且在位置精度方面没有任何的损失，SSC改进的SRP-PHAT运行时间为0.56s。</p>
-<p>图7采用直方图的方式将SSC改进的SRP-PHAT与传统SRP-PHAT在性能方面进行对比，图中展示出本文所提出的方法与传统SRP-PHAT相比，栅格为20cm时，方位角精度提升4.7%，垂直方向精度提升8.1%。对应的方位角错误率减少41.9，垂直方向错误率减少50.7%。</p>
-<h2 id="结论">结论</h2><p>本文提出一种新颖的SRP-PHAT搜索空间聚类方法，它可以在没有任何性能下降的情况下大幅减少计算时间。这种方法通过显著减少搜索空间来实现性能增益，使用TDOA估计来保证缩减后的搜索空间总是包含具有最高功率的位置点。与[7][8][9]中的常规方法不同，SSC改进的SRP-PHAT时钟可以找到最大输出功率位置，因此本文所提出的SSC改进SRP-PHAT方法可以用于声源定位。</p>
-<p>本文所提的SSC改进SRP-PHAT方法与采用网格搜索的传统SRP-PHAT相比具有很多的优点。首先，在不同SNR和回响时间的情况下，SSC改进SRP-PHAT方法总是可以找到全局最大输出功率点；第二，SSC改进SRP-PHAT方法可以获得大幅缩减后的侯选位置留给SRP-PHAT搜索，急剧减少运算时间；第三，SSC改进SRP-PHAT方法实现了错误率的下降。综上，本文所提出的方法可以成功的应用到具有4MIC阵列的小型家用机器人的实时听觉系统中。</p>
-<p>本文所提出的方法可以大大减少搜索空间的侯选位置，从而大大减少小型MIC阵列的SRP-PHAT的计算成本，虽然我们观察到使用大尺寸麦克风阵列时搜索空间大小的显着减少，但是降低速度并不像小型麦克风阵列那样显着。我们正在开发可扩展到较大系统的搜索空间聚类算法。</p>
-
-          
+          摘要 — 声源定位(SSL)是智能家庭机器人听觉系统的一个主要功能。SRP-PHAT广泛的应用于机器人声源定位系统的一种鲁棒性定位方法，但是，这种定位方法由于需要进行大范围的搜索，需要较长的时间进行定位，实时性不强。本文提出一种适用于小型阵列MIC的SRP-PATH加速方法。实验表明，与传统的方法相
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/25/small-array-ssl-for-robot/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -618,75 +588,17 @@
       
         
           
-            <p>前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。</p>
-<h2 id="基础版">基础版</h2><p>修改~/.bashrc文件的PS1变量：</p>
-<pre><code>if <span class="special">[</span> "<span class="formula">$color_prompt" = yes <span class="special">]</span>; then
-    PS1='$</span><span class="special">{</span>debian_chroot:+(<span class="formula">$debian_chroot)<span class="special">}</span><span class="command">\[</span>\033<span class="special">[</span>01;32m<span class="command">\]</span><span class="command">\u</span>@<span class="command">\h</span><span class="command">\[</span>\033<span class="special">[</span>00m<span class="command">\]</span>:<span class="command">\[</span>\033<span class="special">[</span>01;34m<span class="command">\]</span><span class="command">\w</span><span class="command">\[</span>\033<span class="special">[</span>00m<span class="command">\]</span><span class="command">\$</span> '
-else
-    PS1='$</span><span class="special">{</span>debian_chroot:+(<span class="formula">$debian_chroot)<span class="special">}</span><span class="command">\u</span>@<span class="command">\h</span>:<span class="command">\W</span><span class="command">\$</span> '
-fi</span>
-</code></pre><p>测试一下就可以知道采用的是第二个PS1，只是简单的把<code>\u@\h:\w\</code>中的小写w改成大小的W就好，具体的规定如下：</p>
-<pre><code><span class="string">\u</span> 用户名
-<span class="string">\h</span> 主机名第一部分
-<span class="string">\H</span> 主机名全称
-<span class="string">\w</span>  当前工作目录（如 “/home/username/mywork”）
-<span class="string">\W</span>  当前工作目录的“基名 (basename)”（如 “mywork”)
-<span class="string">\t</span>    <span class="number">24</span> 小时制时间
-<span class="string">\T</span>  <span class="number">12</span> 小时制时间
-<span class="string">\@</span>  带有 am/pm 的 <span class="number">12</span> 小时制时间
-<span class="string">\d</span>   “Sat Dec <span class="number">18</span>″ 格式的日期
-<span class="string">\s</span> shell 的名称（如 “bash”)
-<span class="string">\v</span> bash 的版本（如 <span class="number">2.04</span>）
-<span class="string">\V</span> Bash 版本（包括补丁级别）
-<span class="string">\n</span> 换行符
-<span class="string">\r</span> 回车符
-<span class="string">\\</span> 反斜杠
-<span class="string">\a</span> ASCII 响铃字符（也可以键入 <span class="number">07</span>）
-<span class="string">\e</span> ASCII 转义字符（也可以键入 <span class="number">33</span>)
-<span class="string">\[</span> 这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使bash能够正确计算自动换行。
-<span class="string">\]</span> 这个序列应该出现在非打印字符序列之后。
-</code></pre><h2 id="加强版">加强版</h2><p>上面配置的是终端全部显示最后一级目录，这样咋能行呢，路径深了都不知道是怎么进来的，虽说有pwd，但也太不直观了，如果能够根据路径长度自动决定显示路径的深度该多好啊，比如路径深度小的时候显示全路径，路径深度大时显示最后几级路径，这样应该就完美了吧…..</p>
-<p>嗯嗯，google/baidu/github….</p>
-<p>嗨，竟然没有实现我这种想法的原型…..桑心</p>
-<p>自己来吧………</p>
-<p>这个手脚应该动在哪呢？</p>
-<p>PS1上？这个在.bashrc文件中，可这个文件不能老是被执行啊，不行</p>
-<p>cd上？每次cd执行之后自动获取当前目录的深度，并重新设置PS1，嗯嗯，可行….动手吧</p>
-<pre><code><span class="shebang">#!/bin/bash
-</span>
-<span class="built_in">command</span>=<span class="string">"cd "</span>
-<span class="keyword">for</span> arg <span class="keyword">in</span> <span class="string">"$*"</span>
-<span class="keyword">do</span>
-    <span class="built_in">command</span>=<span class="variable">${command}</span><span class="string">" <span class="variable">$arg</span>"</span>
-<span class="keyword">done</span>
-<span class="variable">$command</span>
-
-<span class="comment">#echo ${\#PWD}      # 这里因为hexo的原因多加了个\</span>
-<span class="built_in">pwd</span>_len=<span class="variable">${\#PWD}</span>    <span class="comment"># 这里因为hexo的原因多加了个\</span>
-((std_len=<span class="number">14</span>+<span class="number">60</span>))  <span class="comment"># 65 halfscreen</span>
-<span class="comment">#echo std_len:$std_len</span>
-<span class="keyword">if</span> [ <span class="variable">$pwd_len</span> -ge <span class="variable">$std_len</span> ]; <span class="keyword">then</span>
-    keep_str=<span class="variable">${PWD:22-$std_len:$pwd_len}</span>
-    <span class="comment">#echo $keep_str</span>
-    keep_str=<span class="variable">${keep_str#*/}</span>
-
-    <span class="built_in">export</span> PS1=<span class="string">'${debian_chroot:+($debian_chroot)}\u@\h:$keep_str\$ '</span>
-<span class="keyword">else</span>
-    <span class="built_in">export</span> PS1=<span class="string">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
-<span class="keyword">fi</span>
-</code></pre><p>挺好，完美！</p>
-<p>执行试下，嗨，不行啊，这个脚本会在后台开个终端，cd到的目录并不更改当前终端的路径啊</p>
-<p>用source来解决吧…..</p>
-<p>这里还真纠结了下：</p>
-<ol>
-<li>source的脚本可以带有参数，意外；</li>
-<li>放在.bashrc中参数竟然还能传递过去，意外的惊喜。</li>
-</ol>
-<p>所以呢，在.bashrc中加入一句话：</p>
-<pre><code><span class="built_in">alias</span> <span class="built_in">cd</span>=<span class="string">"source /mnt/hdd2/yanan/bin/cd.sh"</span>
-</code></pre><p>再<code>source ~/.bashrc</code>，ok！搞定手工。</p>
-
-          
+          前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
+基础版修改~/.bashrc文件的PS1变量：
+if [ "$color_prompt" = yes ];
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/19/change-dir-length/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -836,225 +748,16 @@ fi</span>
       
         
           
-            <p>I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。</p>
-<p>对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。</p>
-<p>当前在调试android的屏幕显示问题，因为采用的是双屏，而soc中屏幕接口(lvds/RGB)又是复用的，所以这里采用MIPI转成了lvds，然后外接lvds屏幕（至于为什么要采用lvds屏，也是因为之前项目中的后遗症），这个转换芯片就是icn6201，这时就需要采用某种方式对icn6201转换芯片进行配置，icn6201支持dsi和i2c两种接口进行配置，我们轻易的就选择了i2c配置(没有任何理由？)。</p>
-<p>因为这里只是在开机时对转换芯片进行下配置，不需要衔接android内部的其他接口，所以我就打算直接写个驱动来进行操作就行了。</p>
-<p>这里时添加驱动的操作：</p>
-<pre><code><span class="header">+++ ./drivers/i2c/Makefile    2017-04-13 13:20:16.000000000 +0800</span>
-<span class="chunk">@@ -6,6 +6,7 @@</span>
- obj-$(CONFIG_I2C)        += i2c-core.o
- obj-$(CONFIG_I2C_SMBUS)        += i2c-smbus.o
- obj-$(CONFIG_I2C_CHARDEV)    += i2c-dev.o
-<span class="addition">+obj-$(CONFIG_I2C_INIT_ICN6201)    += icn6201.o</span>
- obj-$(CONFIG_I2C_MUX)        += i2c-mux.o
- obj-y                += algos/ busses/ muxes/
- obj-$(CONFIG_I2C_STUB)        += i2c-stub.o
-
-<span class="header">+++ ./drivers/i2c/Kconfig    2017-04-17 22:24:22.365686411 +0800</span>
-<span class="chunk">@@ -46,6 +46,13 @@</span>
-       This support is also available as a module.  If so, the module 
-       will be called i2c-dev.
-
-<span class="addition">+config I2C_INIT_ICN6201</span>
-<span class="addition">+    tristate "i2c init icn6201"</span>
-<span class="addition">+    default M</span>
-<span class="addition">+    help</span>
-<span class="addition">+        i2c init icn6201</span>
-<span class="addition">+</span>
-<span class="addition">+</span>
- config I2C_MUX
-     tristate "I2C bus multiplexing support"
-     depends on HAS_IOMEM
-</code></pre><p>接下来就是添加驱动文件driver/i2c/icn6201.c了：</p>
-<pre><code><span class="header">+++ ./drivers/i2c/icn6201.c    2017-04-17 22:35:17.658101099 +0800</span>
-<span class="chunk">@@ -0,0 +1,368 @@</span>
-<span class="addition">+/*</span>
-<span class="addition">+    icn6201.c - init icn6201 for screen 10.1</span>
-<span class="addition">+*/</span>
-<span class="addition">+</span>
-<span class="addition">+#include &lt;linux/kernel.h&gt;</span>
-<span class="addition">+#include &lt;linux/module.h&gt;</span>
-<span class="addition">+#include &lt;linux/device.h&gt;</span>
-<span class="addition">+#include &lt;linux/notifier.h&gt;</span>
-<span class="addition">+#include &lt;linux/fs.h&gt;</span>
-<span class="addition">+#include &lt;linux/slab.h&gt;</span>
-<span class="addition">+#include &lt;linux/init.h&gt;</span>
-<span class="addition">+#include &lt;linux/list.h&gt;</span>
-<span class="addition">+#include &lt;linux/i2c.h&gt;</span>
-<span class="addition">+#include &lt;linux/i2c-dev.h&gt;</span>
-<span class="addition">+#include &lt;linux/jiffies.h&gt;</span>
-<span class="addition">+#include &lt;linux/uaccess.h&gt;</span>
-<span class="addition">+</span>
-<span class="addition">+/*</span>
-<span class="addition">+ * An i2c_dev represents an i2c_adapter ... an I2C or SMBus master, not a</span>
-<span class="addition">+ * slave (i2c_client) with which messages will be exchanged.  It's coupled</span>
-<span class="addition">+ * with a character special file which is accessed by user mode drivers.</span>
-<span class="addition">+ *</span>
-<span class="addition">+ * The list of i2c_dev structures is parallel to the i2c_adapter lists</span>
-<span class="addition">+ * maintained by the driver model, and is updated using bus notifications.</span>
-<span class="addition">+ */</span>
-<span class="addition">+struct i2c_dev {</span>
-<span class="addition">+    struct list_head list;</span>
-<span class="addition">+    struct i2c_adapter *adap;</span>
-<span class="addition">+    struct device *dev;</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+struct icn6201_data {</span>
-<span class="addition">+    struct i2c_client *icn6201_client;</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+static int icn6201_smbus_write_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)</span>
-<span class="addition">+{</span>
-<span class="addition">+    s32 dummy;</span>
-<span class="addition">+    dummy = i2c_smbus_write_byte_data(client, reg_addr, *data);</span>
-<span class="addition">+    if (dummy &lt; 0){</span>
-<span class="addition">+        printk("icn6201_smbus_write_byte: write byte data failed\n");</span>
-<span class="addition">+        return -1;</span>
-<span class="addition">+    }</span>
-<span class="addition">+    printk("icn6201_smbus_write_byte: write data successful!\n");</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+// static int icn6201_smbus_read_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)</span>
-<span class="addition">+// {</span>
-<span class="addition">+//     s32 dummy;</span>
-<span class="addition">+//     dummy = i2c_smbus_read_byte_data(client, reg_addr, *data);</span>
-<span class="addition">+//     if (dummy &lt; 0){</span>
-<span class="addition">+//         printk("icn6201_smbus_read_byte: read byte data failed\n");</span>
-<span class="addition">+//         return -1;</span>
-<span class="addition">+//     }</span>
-<span class="addition">+//     printk("icn6201_smbus_read_byte: read data successful!\n");</span>
-<span class="addition">+//     return 0;</span>
-<span class="addition">+// }</span>
-<span class="addition">+</span>
-<span class="addition">+#define BIST_MODE</span>
-<span class="addition">+static int icn6201_probe(struct i2c_client *client, const struct i2c_device_id *id)</span>
-<span class="addition">+{</span>
-<span class="addition">+    int err = 0, i = 0;</span>
-<span class="addition">+    struct icn6201_data *data;</span>
-<span class="addition">+    unsigned char tmp_value = 0;</span>
-<span class="addition">+    </span>
-<span class="addition">+    unsigned char addr_value[][2] = {</span>
-<span class="addition">+#ifdef BIST_MODE</span>
-<span class="addition">+        {0x20, 0x00}, {0x21, 0x20}, {0x22, 0x35},</span>
-<span class="addition">+        {0x23, 0x55}, {0x24, 0x28}, {0x25, 0xA8},</span>
-<span class="addition">+        {0x26, 0x00}, {0x27, 0x0A}, {0x28, 0x06},</span>
-<span class="addition">+        {0x29, 0x10},</span>
-<span class="addition">+</span>
-<span class="addition">+        {0x34, 0x80}, {0x36, 0x55}, {0xB5, 0xA0},</span>
-<span class="addition">+        {0x5C, 0xFF}, {0x56, 0x90}, {0x6B, 0x21},</span>
-<span class="addition">+        {0x69, 0x26}, {0x10, 0x47}, {0x2A, 0x41},</span>
-<span class="addition">+        {0xB6, 0x20}, {0x51, 0x20}, {0x09, 0x10},</span>
-<span class="addition">+#endif</span>
-<span class="addition">+    };</span>
-<span class="addition">+    printk("icn6201:=============Probe==================\n");</span>
-<span class="addition">+</span>
-<span class="addition">+    if (!i2c_check_functionality(client-&gt;adapter, I2C_FUNC_I2C)){</span>
-<span class="addition">+        dev_err(&amp;client-&gt;dev, "System need I2C function.\n");</span>
-<span class="addition">+        return err;</span>
-<span class="addition">+    }</span>
-<span class="addition">+    </span>
-<span class="addition">+    // 这里也申请了i2c_client的空间，相当于实例化</span>
-<span class="addition">+    data = kzalloc(sizeof(struct icn6201_data), GFP_KERNEL);</span>
-<span class="addition">+    if (!data) {</span>
-<span class="addition">+        return -ENOMEM;</span>
-<span class="addition">+    }</span>
-<span class="addition">+</span>
-<span class="addition">+    i2c_set_clientdata(client, data);</span>
-<span class="addition">+    data-&gt;icn6201_client = client;</span>
-<span class="addition">+</span>
-<span class="addition">+    for(i=0; i&lt;sizeof(addr_value)/2; i++){</span>
-<span class="addition">+        printk("icn6201: write data:%X to addr:%X\n", addr_value[i][1], addr_value[i][0]);</span>
-<span class="addition">+        icn6201_smbus_write_byte(client, addr_value[i][0], &amp;addr_value[i][1]);</span>
-<span class="addition">+        // icn6201_smbus_read_byte(client, addr_value[i][0], &amp;addr_value[i][1]);</span>
-<span class="addition">+        printk("icn6201: read data:%X to addr:%X\n", addr_value[i][1], addr_value[i][0]);</span>
-<span class="addition">+    }</span>
-<span class="addition">+</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static int icn6201_remove(struct i2c_client *client)</span>
-<span class="addition">+{</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static const struct i2c_device_id icn6201_id[] = {</span>
-<span class="addition">+    { "icn6201", 0 },</span>
-<span class="addition">+    {}</span>
-<span class="addition">+};</span>
-<span class="addition">+MODULE_DEVICE_TABLE(i2c, icn6201_id);</span>
-<span class="addition">+</span>
-<span class="addition">+int icn6201_detect(struct i2c_client *client, struct i2c_board_info *info)</span>
-<span class="addition">+{</span>
-<span class="addition">+    // 这里是获取总线信息，然后进行判断</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static const unsigned short normal_i2c[2] = {0x58&gt;&gt;1, I2C_CLIENT_END, };</span>
-<span class="addition">+</span>
-<span class="addition">+static struct i2c_board_info icn6201_board_info = {</span>
-<span class="addition">+    .type = "icn6201",</span>
-<span class="addition">+    .addr = 0x58&gt;&gt;1,</span>
-<span class="addition">+    // {I2C_BOARD_INFO("icn6201", 0x58&gt;&gt;1),},</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+// 每一个I2C设备驱动，必须首先创造一个i2c_driver结构体对象</span>
-<span class="addition">+static struct i2c_driver icn6201_driver = {</span>
-<span class="addition">+    .class = I2C_CLASS_HWMON,</span>
-<span class="addition">+    .probe        = icn6201_probe,</span>
-<span class="addition">+    .remove        = icn6201_remove,</span>
-<span class="addition">+    .id_table    = icn6201_id,</span>
-<span class="addition">+    .driver = {</span>
-<span class="addition">+        .name    = "icn6201",</span>
-<span class="addition">+        .owner = THIS_MODULE,</span>
-<span class="addition">+    },</span>
-<span class="addition">+    .detect         = icn6201_detect,</span>
-<span class="addition">+    .address_list    = normal_i2c,</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+// static void print_i2c_list()</span>
-<span class="addition">+// {</span>
-<span class="addition">+//     </span>
-<span class="addition">+// }</span>
-<span class="addition">+</span>
-<span class="addition">+static struct i2c_client *local_client = NULL;</span>
-<span class="addition">+</span>
-<span class="addition">+static int __init icn6201_init(void)</span>
-<span class="addition">+{</span>
-<span class="addition">+    int ret;</span>
-<span class="addition">+    struct i2c_adapter *i2c_adap;</span>
-<span class="addition">+</span>
-<span class="addition">+    i2c_adap = i2c_get_adapter(0);</span>
-<span class="addition">+    local_client = i2c_new_device(i2c_adap, &amp;icn6201_board_info);</span>
-<span class="addition">+    i2c_put_adapter(i2c_adap);</span>
-<span class="addition">+</span>
-<span class="addition">+    printk("icn6201_init: i2c to init icn6201 driver\n");</span>
-<span class="addition">+    ret = i2c_add_driver(&amp;icn6201_driver);</span>
-<span class="addition">+    if(ret)</span>
-<span class="addition">+        printk("icn6201_init: i2c_add_driver err");</span>
-<span class="addition">+</span>
-<span class="addition">+    // i2c_register_board_info(0, icn6201_board_info, ARRAY_SIZE(icn6201_board_info));</span>
-<span class="addition">+</span>
-<span class="addition">+    return ret;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static void __exit icn6201_exit(void)</span>
-<span class="addition">+{</span>
-<span class="addition">+    printk("icn6201_exit: i2c to del icn6201 driver\n");</span>
-<span class="addition">+    i2c_unregister_device(local_client);</span>
-<span class="addition">+    i2c_del_driver(&amp;icn6201_driver);</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+MODULE_AUTHOR("Frodo Looijaard &lt;frodol@dds.nl&gt; and "</span>
-<span class="addition">+        "Simon G. Vogl &lt;simon@tk.uni-linz.ac.at&gt;");</span>
-<span class="addition">+MODULE_DESCRIPTION("I2C /dev entries driver");</span>
-<span class="addition">+MODULE_LICENSE("GPL");</span>
-<span class="addition">+</span>
-<span class="addition">+module_init(icn6201_init);</span>
-<span class="addition">+module_exit(icn6201_exit);</span>
-</code></pre>
-          
+          I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
+对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/04/17/i2c-in-linux/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1204,8 +907,15 @@ fi</span>
       
         
           
-            
           
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/01/git-usage/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1355,97 +1065,17 @@ fi</span>
       
         
           
-            <p>由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。</p>
-<h2 id="安装">安装</h2><pre><code>sudo apt-<span class="keyword">get</span> install quota
-</code></pre><h2 id="配置">配置</h2><p>编辑/etc/fstab，在所要配置quota的磁盘分区中添加<code>usrquota, grpquota</code>选项。</p>
-<pre><code><span class="regexp">/dev/</span>sdb1   <span class="regexp">/mnt/</span>hdd2   ext4    defaults,usrquota,grpquota <span class="number">1</span>  <span class="number">2</span>
-</code></pre><p>重新挂载该磁盘分区：</p>
-<pre><code>mount -o remount <span class="regexp">/dev/</span>sdb1 <span class="regexp">/mnt/</span>hdd2
-</code></pre><p>在配置quota的磁盘分区的根目录中建立aquota.group, aquota.user, quota.group, quota.user文件</p>
-<pre><code>touch aquota<span class="class">.group</span> aquota<span class="class">.user</span> quota<span class="class">.group</span> quota.user
-</code></pre><p>执行quotacheck扫描</p>
-<pre><code>sudo quotacheck -avug
-quotacheck: Cannot find filesystem to<span class="instruction"> check </span>or filesystem<span class="instruction"> not </span>mounted with quota option.
-</code></pre><p>这一步容易出现上面的问题，所以这里可以强制执行quotacheck扫描：</p>
-<pre><code>sudo quotacheck -cfmvF vfsv0 /mnt/hdd2
-quotacheck: Scanning /dev/sdb1 [/mnt/hdd2]
-|<span class="string">/-</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\
-.
-.
-</span>|<span class="string">/-</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\
-done
-quotacheck: Checked 60202 directories and 495168 files</span>
-</code></pre><h2 id="开启quota服务">开启quota服务</h2><pre><code>sudo quotaon -av <span class="regexp">/mnt/</span>hdd2
-</code></pre><p>关闭可以用：</p>
-<pre><code>sudo quotaoff -av <span class="regexp">/mnt/</span>hdd2
-</code></pre><h2 id="用户配置策略">用户配置策略</h2><p><a href="https://github.com/labrick/study/blob/master/shell/quota.sh" target="_blank" rel="external">这里</a>我写了个脚本，根据.miduserdb和.supuserdb中的用户名称来对每个用户进行分配硬盘额度。</p>
-<pre><code><span class="shebang">#!/bin/bash
-</span>
-<span class="function"><span class="title">quota_init</span></span>() {
-    awk -F: <span class="string">'{if($3&gt;500) print $1&gt;"./tmpfile"}'</span> /etc/passwd
-    <span class="keyword">for</span> user <span class="keyword">in</span> $(cat <span class="string">"./tmpfile"</span>)
-    <span class="keyword">do</span>
-        miduser_flag=<span class="number">0</span>
-        <span class="keyword">for</span> miduser <span class="keyword">in</span> $(cat <span class="string">"/mnt/hdd2/yanan/.miduserdb"</span>)
-        <span class="keyword">do</span>
-            <span class="keyword">if</span> [ <span class="variable">$user</span> = <span class="variable">$miduser</span> ]; <span class="keyword">then</span>
-                miduser_flag=<span class="number">1</span>
-            <span class="keyword">fi</span>
-        <span class="keyword">done</span>
-
-        supuser_flag=<span class="number">0</span>
-        <span class="keyword">for</span> supuser <span class="keyword">in</span> $(cat <span class="string">"/mnt/hdd2/yanan/.supuserdb"</span>)
-        <span class="keyword">do</span>
-            <span class="keyword">if</span> [ <span class="variable">$user</span> = <span class="variable">$supuser</span> ]; <span class="keyword">then</span>
-                supuser_flag=<span class="number">1</span>
-            <span class="keyword">fi</span>
-        <span class="keyword">done</span>
-
-        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$supuser_flag</span>"</span> <span class="operator">-eq</span> <span class="number">1</span> ]; <span class="keyword">then</span>
-            <span class="built_in">echo</span> <span class="variable">$user</span> is a super user, deal with it
-            sudo setquota <span class="variable">$user</span> <span class="number">500000000</span> <span class="number">520000000</span> <span class="number">0</span> <span class="number">0</span> /mnt/hdd2
-        <span class="keyword">elif</span> [ <span class="string">"<span class="variable">$miduser_flag</span>"</span> <span class="operator">-eq</span> <span class="number">1</span> ]; <span class="keyword">then</span>
-            <span class="built_in">echo</span> <span class="variable">$user</span> is a miduser, no deal with it
-            sudo setquota <span class="variable">$user</span> <span class="number">300000000</span> <span class="number">320000000</span> <span class="number">0</span> <span class="number">0</span> /mnt/hdd2
-        <span class="keyword">else</span>
-            <span class="built_in">echo</span> <span class="variable">$user</span> is a general user, deal with it
-            sudo setquota <span class="variable">$user</span> <span class="number">100000000</span> <span class="number">120000000</span> <span class="number">0</span> <span class="number">0</span> /mnt/hdd2
-        <span class="keyword">fi</span>
-    <span class="keyword">done</span>
-}
-
-<span class="function"><span class="title">quota_help</span></span>() {
-    cat &lt;&lt;EOF
-Usage: `basename <span class="variable">$0</span>` replace hexo with parameter <span class="string">"-d"</span> and <span class="string">"-g"</span>.
-options:
-    <span class="operator">-d</span> display the info
-    -i init the quota
-    -h display this <span class="built_in">help</span> menu
-EOF
-}
-
-<span class="function"><span class="title">quota_info</span></span>() {
-    sudo repquota /mnt/hdd2
-}
-
-<span class="keyword">while</span> <span class="built_in">getopts</span> di option; <span class="keyword">do</span>
-    <span class="keyword">case</span> <span class="string">"<span class="variable">$option</span>"</span> <span class="keyword">in</span>
-        d) quota_info;;
-        i) quota_init;;
-        \?) quota_<span class="built_in">help</span>
-            <span class="built_in">exit</span> <span class="number">1</span>;;
-    <span class="keyword">esac</span>
-<span class="keyword">done</span>
-
-rm -rf ./tmpfile
-</code></pre><p>其中.supuserdb中记录中级用户的用户名，配额为：500G<br>.miduserdb中记录中级用户的用户名，配额为：300G<br>其他用户为普通用户，配额为：100G</p>
-<h2 id="QA">QA</h2><h3 id="QA1">QA1</h3><p>Q. 为已存在的用户分配配额后删除该用户，在repquota报告中认为以之前用户ID的形式显示之前的配额。</p>
-<p>A. 可以采用如下命令找到已删除用户的所有文件，删除掉即可：</p>
-<pre><code>find ./ -<span class="built_ins">user</span> delusr_id
-</code></pre><h3 id="QA2">QA2</h3><p>Q. 磁盘定额配置中存在soft/hard配置之分，他们的区别，如果soft&lt;用户所用磁盘&lt;hard会如何？</p>
-<p>A. 磁盘分配hard是绝对无法越过的磁盘占用，而磁盘占用超过soft则会为用户提出警告，在约定时间（默认7days）未能降到soft以下的则soft等同于hard，无法再继续创建文件，占用更多的空间。</p>
-
-          
+          由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
+安装sudo apt-get install quota
+配置编辑/etc/fstab，在所要配置qu
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/15/quota-partition/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1595,16 +1225,23 @@ rm -rf ./tmpfile
       
         
           
-            <pre><code>sudo apt-get install <span class="string">\</span>
-vim <span class="string">\</span>
-git <span class="string">\</span>
-git-core <span class="string">\</span>
-openssl <span class="string">\</span>
-build-essential <span class="string">\</span>
-tmux <span class="string">\</span>
-subversion <span class="string">\</span>
-</code></pre>
+          sudo apt-get install \
+vim \
+git \
+git-core \
+openssl \
+build-essential \
+tmux \
+subversion \
+
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/02/10/ubuntu-configure/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1754,89 +1391,15 @@ subversion <span class="string">\</span>
       
         
           
-            <h2 id="扯扯淡">扯扯淡</h2><p>最近一周多的时间真是忙死掉了，为了机器人项目是加班加点的干，几乎每天都要到一两点，接着到市区找宾馆安稳下来都三点多了，坑死人，搞的我的老毛病（咽炎鼻炎）都来了，如果项目能够很好的安排何必要拖到最后才去做呢，而且即使是拖到最后还是一堆的BUG，很多东西都听天由命，嗨，不说了，这里项目管理不是主题，主要是说项目当中解决两个局域网通过公网互联的问题。</p>
-<p>这个问题应该会经常遇到，比如我想在家访问我公司局域网内部的电脑啦，或者额额额额额？暂时只想到这一个，本来想说建网站的，发现通过n2n还不行，这应该是一个缺陷，n2n不会向公网提供一个公用ip地址，相互访问的各个终端必须要执行edge指令才行，建站显然是不合适的。</p>
-<p>算了不说了，步入正题。</p>
-<h2 id="说明">说明</h2><p>n2n是内网穿透神器，功能强大，基本人手必备，小巧、开源、迅速、免费、无限穿透。</p>
-<p>所需要的条件：</p>
-<ol>
-<li>公网主机作为超级结点（具有公网ip的主机，或者购买阿里云的主机等等，主要用来连接或者中转边缘结点）</li>
-<li>两个局域网（可以指同一局域网）的两台主机</li>
-</ol>
-<h2 id="n2n源码获取">n2n源码获取</h2><p>源1：</p>
-<pre><code>git clone <span class="string">https:</span><span class="comment">//github.com/meyerd/n2n.git</span>
-</code></pre><p>源2:</p>
-<pre><code>svn co <span class="symbol">https:</span>/<span class="regexp">/svn.ntop.org/svn</span><span class="regexp">/ntop/trunk</span><span class="regexp">/n2n</span>
-</code></pre><h2 id="编译安装">编译安装</h2><p>这里推荐源2，采用源1我没有走通。</p>
-<pre><code>sudo apt-<span class="built_in">get</span> install cmake libssl-dev
-<span class="keyword">cd</span> n2n/n2n_v2/
-<span class="keyword">make</span>
-sudo <span class="keyword">make</span> [PREFIX=/usr/local] install
-</code></pre><p>make命令执行时，见招拆招，编译很快，很简单。</p>
-<p>这里需要注意的是：<strong>每个和n2n相关的终端都需要安装此软件, 使用时n2n_v的版本要对应，最好所采用的源码也一样</strong></p>
-<p>windows下有<a href="http://www.vpnhosting.cz/n2nguien.exe" target="_blank" rel="external">n2n gui</a><br>android下有<a href="https://play.google.com/store/apps/details?id=org.zhoubug.n2n_gui" target="_blank" rel="external">n2n客户端</a><br>这里是我们所采用的。</p>
-<h2 id="启动">启动</h2><h3 id="启动中心结点">启动中心结点</h3><p>启动中心结点比较简单，一条命令：</p>
-<pre><code>supernode <span class="operator">-l</span> supernode_port
-</code></pre><p>supernode_port为开发给边缘节点的端口号，默认不显示任何信息，如果需要显示log，加上<code>-v -f</code>参数。</p>
-<pre><code>Welcome to n2n v.2.1.0 <span class="keyword">for</span> x86_64
-Built <span class="keyword">on</span> <span class="keyword">Dec</span> 20 2016 22:13:36
-<span class="keyword">Copyright</span> 2007-09 - http:<span class="comment">//www.ntop.org</span>
-
-supernode usage
--<span class="keyword">l</span> &lt;lport&gt;  <span class="keyword">Set</span> UDP main listen port to &lt;lport&gt;
--f          <span class="keyword">Run</span> <span class="keyword">in</span> foreground.
--v          Increase verbosity. Can be used multiple times.
--<span class="keyword">h</span>          This <span class="keyword">help</span> message.
-</code></pre><h3 id="启动边缘结点">启动边缘结点</h3><p>这个配置稍微复杂点。</p>
-<h4 id="linux下">linux下</h4><pre><code>sudo edge -<span class="keyword">d</span> edge0 -a virtual_ip -c <span class="keyword">test</span> -<span class="keyword">M</span> 1200 -k password -<span class="keyword">l</span> supernode_ip:port -<span class="keyword">m</span> virtual_mac
-
--<span class="keyword">d</span> 虚拟网卡名称 -a 本地设置的ip地址（相互通信的终端ip需要在同一个网段里） -c 组名称 -<span class="keyword">M</span> MTU值 -k 密码 -<span class="keyword">l</span> 超级结点ip:port -<span class="keyword">m</span> 虚拟网卡<span class="keyword">mac</span>地址
-
-Welcome to n2n v.2.1.0 <span class="keyword">for</span> x86_64
-Built <span class="keyword">on</span> <span class="keyword">Dec</span> 20 2016 22:13:36
-<span class="keyword">Copyright</span> 2007-09 - http:<span class="comment">//www.ntop.org</span>
-
-edge -<span class="keyword">d</span> &lt;tun device&gt; -a [static:|dhcp:]&lt;tun IP address&gt; -c &lt;community&gt; [-k &lt;encrypt key&gt; | -K &lt;key <span class="keyword">file</span>&gt;] [-s &lt;netmask&gt;] [-<span class="keyword">u</span> &lt;uid&gt; -<span class="keyword">g</span> &lt;gid&gt;][-f][-<span class="keyword">m</span> &lt;<span class="keyword">MAC</span> address&gt;]
--<span class="keyword">l</span> &lt;supernode host:port&gt; [-p &lt;<span class="keyword">local</span> port&gt;] [-<span class="keyword">M</span> &lt;mtu&gt;] [-r] [-<span class="keyword">E</span>] [-v] [-t &lt;mgmt port&gt;] [-b] [-<span class="keyword">h</span>]
-
--<span class="keyword">d</span> &lt;tun device&gt;          | tun device name
--a &lt;mode:address&gt;        | <span class="keyword">Set</span> interface address. <span class="keyword">For</span> DHCP <span class="keyword">use</span> '-r -a dhcp:0.0.0.0'
--c &lt;community&gt;           | n2n community name the edge belongs to.
--k &lt;encrypt key&gt;         | Encryption key (ASCII) - also N2N_KEY=&lt;encrypt key&gt;. Not with -K.
--K &lt;key <span class="keyword">file</span>&gt;            | Specify a key schedule <span class="keyword">file</span> to load. Not with -k.
--s &lt;netmask&gt;             | Edge interface netmask <span class="keyword">in</span> dotted decimal notation (255.255.255.0).
--<span class="keyword">l</span> &lt;supernode host:port&gt; | Supernode IP:port
--b                       | Periodically resolve supernode IP
-                         : (when supernodes are running <span class="keyword">on</span> dynamic IPs)
--p &lt;<span class="keyword">local</span> port&gt;          | Fixed <span class="keyword">local</span> UDP port.
--<span class="keyword">u</span> &lt;UID&gt;                 | User ID (numeric) to <span class="keyword">use</span> when privileges are dropped.
--<span class="keyword">g</span> &lt;GID&gt;                 | Group ID (numeric) to <span class="keyword">use</span> when privileges are dropped.
--f                       | <span class="keyword">Do</span> not fork and <span class="keyword">run</span> <span class="keyword">as</span> a daemon; rather <span class="keyword">run</span> <span class="keyword">in</span> foreground.
--<span class="keyword">m</span> &lt;<span class="keyword">MAC</span> address&gt;         | Fix <span class="keyword">MAC</span> address <span class="keyword">for</span> the TAP interface (otherwise it may be random)
-                         : eg. -<span class="keyword">m</span> 01:02:03:04:05:06
--<span class="keyword">M</span> &lt;mtu&gt;                 | Specify n2n MTU of edge interface (default 1400).
--r                       | Enable packet forwarding through n2n community.
--<span class="keyword">E</span>                       | Accept multicast <span class="keyword">MAC</span> addresses (default=<span class="keyword">drop</span>).
--v                       | Make <span class="keyword">more</span> verbose. <span class="keyword">Repeat</span> <span class="keyword">as</span> required.
--t                       | Management UDP Port (<span class="keyword">for</span> multiple edges <span class="keyword">on</span> a machine).
-
-Environment variables:
-    N2N_KEY              | Encryption key (ASCII). Not with -K or -k.
-</code></pre><h4 id="windows和android端">windows和android端</h4><p>windows和android端按照文本提示很容易填写；</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_home.png" alt=""><br><img src="http://7xkoxp.com1.z0.glb.clouddn.com/windows_n2n_advance.png" alt=""></p>
-<p>注意<code>Advanced</code>中的<strong>通信协议版本</strong>的选择</p>
-<h2 id="QA">QA</h2><p>Q1: 出现如下错误：</p>
-<pre><code>/root/download/n2n/n2n_v2/transform_aes.c:12:25: fatal <span class="keyword">error</span>: openssl/aes.<span class="keyword">h</span>: <span class="keyword">No</span> such <span class="keyword">file</span> or directory
- #<span class="keyword">include</span> <span class="string">"openssl/aes.h"</span>
-                          ^
-compilation terminated.
-make[2]: *** [CMakeFiles/n2n.<span class="keyword">dir</span>/transform_aes.c.o] <span class="keyword">Error</span> 1
-make[1]: *** [CMakeFiles/n2n.<span class="keyword">dir</span>/all] <span class="keyword">Error</span> 2
-make: *** [all] <span class="keyword">Error</span> 2
-</code></pre><p>A1: 缺少ssl-dev库：</p>
-<pre><code>sudo apt-<span class="built_in">get</span> install libssl-<span class="built_in">dev</span>
-</code></pre>
-          
+          扯扯淡最近一周多的时间真是忙死掉了，为了机器人项目是加班加点的干，几乎每天都要到一两点，接着到市区找宾馆安稳下来都三点多了，坑死人，搞的我的老毛病（咽炎鼻炎）都来了，如果项目能够很好的安排何必要拖到最后才去做呢，而且即使是拖到最后还是一堆的BUG，很多东西都听天由命，嗨，不说了，这里项目管理不是主题
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/12/21/n2n-vpn/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1986,183 +1549,15 @@ make: *** [all] <span class="keyword">Error</span> 2
       
         
           
-            <h2 id="一、什么是频域">一、什么是频域</h2><p>从我们出生，我们看到的世界都以时间贯穿，股票的走势、人的身高、汽车的轨迹都会随着时间发生改变。这种以时间作为参照来观察动态世界的方法我们称其为时域分析。而我们也想当然的认为，世间万物都在随着时间不停的改变，并且永远不会静止下来。但如果我告诉你，用另一种方法来观察世界的话，你会发现世界是永恒不变的，你会不会觉得我疯了？我没有疯，这个静止的世界就叫做频域。</p>
-<p>先举一个<strong>公式上并非很恰当</strong>，但意义上再贴切不过的例子：</p>
-<p>在你的理解中，一段音乐是什么呢？</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft1.jpg" alt=""></p>
-<p>这是我们对音乐最普遍的理解，一个随着时间变化的震动。但我相信对于乐器小能手们来说，音乐更直观的理解是这样的：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft2.jpg" alt=""></p>
-<p>好的！下课，同学们再见。</p>
-<p>是的，其实这一段写到这里已经可以结束了。上图是音乐在时域的样子，而下图则是音乐在频域的样子。所以频域这一概念对大家都从不陌生，只是从来没意识到而已。</p>
-<p>现在我们可以回过头来重新看看一开始那句痴人说梦般的话：世界是永恒的。</p>
-<p>将以上两图简化：</p>
-<p>时域：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft3.jpg" alt=""></p>
-<p>频域：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft4.jpg" alt=""></p>
-<p>在时域，我们观察到钢琴的琴弦一会上一会下的摆动，就如同一支股票的走势；而在频域，只有那一个永恒的音符。</p>
-<p>所以</p>
-<p><strong>你眼中看似落叶纷飞变化无常的世界，实际只是躺在上帝怀中一份早已谱好的乐章。</strong></p>
-<p>抱歉，这不是一句鸡汤文，而是黑板上确凿的公式：傅里叶同学告诉我们，任何周期函数，都可以看作是不同振幅，不同相位正弦波的叠加。在第一个例子里我们可以理解为，利用对不同琴键不同力度，不同时间点的敲击，可以组合出任何一首乐曲。</p>
-<p>而贯穿时域与频域的方法之一，就是传中说的傅里叶分析。傅里叶分析可分为傅里叶级数（Fourier Serie）和傅里叶变换(Fourier Transformation)，我们从简单的开始谈起。</p>
-<h2 id="二、傅里叶级数(Fourier_Series)的频谱">二、傅里叶级数(Fourier Series)的频谱</h2><p>还是举个栗子并且有图有真相才好理解。</p>
-<p>如果我说我能用前面说的正弦曲线波叠加出一个带90度角的矩形波来，你会相信吗？你不会，就像当年的我一样。但是看看下图：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft5.jpg" alt=""></p>
-<p>第一幅图是一个郁闷的正弦波cos（x）</p>
-<p>第二幅图是2个卖萌的正弦波的叠加cos(x)+a.cos(3x)</p>
-<p>第三幅图是4个发春的正弦波的叠加</p>
-<p>第四幅图是10个便秘的正弦波的叠加</p>
-<p>随着正弦波数量逐渐的增长，他们最终会叠加成一个标准的矩形，大家从中体会到了什么道理？</p>
-<p>（只要努力，弯的都能掰直！）</p>
-<p>随着叠加的递增，所有正弦波中上升的部分逐渐让原本缓慢增加的曲线不断变陡，而所有正弦波中下降的部分又抵消了上升到最高处时继续上升的部分使其变为水平线。一个矩形就这么叠加而成了。但是要多少个正弦波叠加起来才能形成一个标准90度角的矩形波呢？不幸的告诉大家，答案是无穷多个。（上帝：我能让你们猜着我？）</p>
-<p>不仅仅是矩形，你能想到的任何波形都是可以如此方法用正弦波叠加起来的。这是没<br>有接触过傅里叶分析的人在直觉上的第一个难点，但是一旦接受了这样的设定，游戏就开始有意思起来了。</p>
-<p>还是上图的正弦波累加成矩形波，我们换一个角度来看看：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft6.jpg" alt=""></p>
-<p>在这几幅图中，最前面黑色的线就是所有正弦波叠加而成的总和，也就是越来越接近矩形波的那个图形。而后面依不同颜色排列而成的正弦波就是组合为矩形波的各个分量。这些正弦波按照频率从低到高从前向后排列开来，而每一个波的振幅都是不同的。一定有细心的读者发现了，每两个正弦波之间都还有一条直线，那并不是分割线，而是振幅为0的正弦波！也就是说，为了组成特殊的曲线，有些正弦波成分是不需要的。</p>
-<p>这里，不同频率的正弦波我们成为频率分量。</p>
-<p>好了，关键的地方来了！！</p>
-<p>如果我们把第一个频率最低的频率分量看作“1”，我们就有了构建频域的最基本单元。</p>
-<p>对于我们最常见的有理数轴，数字“1”就是有理数轴的基本单元。</p>
-<p>时域的基本单元就是“1秒”，如果我们将一个角频率为的正弦波cos（t）看作基础，那么频域的基本单元就是。</p>
-<p>有了“1”，还要有“0”才能构成世界，那么频域的“0”是什么呢？cos（0t）就是一个周期无限长的正弦波，也就是一条直线！所以在频域，0频率也被称为直流分量，在傅里叶级数的叠加中，它仅仅影响全部波形相对于数轴整体向上或是向下而不改变波的形状。</p>
-<p>接下来，让我们回到初中，回忆一下已经死去的八戒，啊不，已经死去的老师是怎么定义正弦波的吧。</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft7.jpg" alt=""></p>
-<p>正弦波就是一个圆周运动在一条直线上的投影。所以频域的基本单元也可以理解为一个始终在旋转的圆</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Fourier_series_square_wave_circles_animation.gif" alt=""></p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Fourier_series_sawtooth_wave_circles_animation.gif" alt=""></p>
-<p>介绍完了频域的基本组成单元，我们就可以看一看一个矩形波，在频域里的另一个模样了：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft8.jpg" alt=""></p>
-<p>这是什么奇怪的东西？</p>
-<p>这就是矩形波在频域的样子，是不是完全认不出来了？教科书一般就给到这里然后留给了读者无穷的遐想，以及无穷的吐槽，其实教科书只要补一张图就足够了：频域图像，也就是俗称的频谱，就是——</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft9.jpg" alt=""></p>
-<p>再清楚一点：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft10.jpg" alt=""></p>
-<p>可以发现，在频谱中，偶数项的振幅都是0，也就对应了图中的彩色直线。振幅为0的正弦波。</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/Fourier_series_and_transform.gif" alt=""></p>
-<p>老实说，在我学傅里叶变换时，维基的这个图还没有出现，那时我就想到了这种表达方法，而且，后面还会加入维基没有表示出来的另一个谱——相位谱。</p>
-<p>但是在讲相位谱之前，我们先回顾一下刚刚的这个例子究竟意味着什么。记得前面说过的那句“世界是静止的”吗？估计好多人对这句话都已经吐槽半天了。想象一下，世界上每一个看似混乱的表象，实际都是一条时间轴上不规则的曲线，但实际这些曲线都是由这些无穷无尽的正弦波组成。我们看似不规律的事情反而是规律的正弦波在时域上的投影，而正弦波又是一个旋转的圆在直线上的投影。那么你的脑海中会产生一个什么画面呢？</p>
-<p>我们眼中的世界就像皮影戏的大幕布，幕布的后面有无数的齿轮，大齿轮带动小齿轮，小齿轮再带动更小的。在最外面的小齿轮上有一个小人——那就是我们自己。我们只看到这个小人毫无规律的在幕布前表演，却无法预测他下一步会去哪。而幕布后面的齿轮却永远一直那样不停的旋转，永不停歇。这样说来有些宿命论的感觉。说实话，这种对人生的描绘是我一个朋友在我们都是高中生的时候感叹的，当时想想似懂非懂，直到有一天我学到了傅里叶级数……</p>
-<h2 id="三、傅里叶级数（Fourier_Series）的相位谱">三、傅里叶级数（Fourier Series）的相位谱</h2><p><strong>上一章的关键词是：从侧面看。这一章的关键词是：从下面看。</strong></p>
-<p>在这一章最开始，我想先回答很多人的一个问题：傅里叶分析究竟是干什么用的？这段相对比较枯燥，已经知道了的同学可以直接跳到下一个分割线。</p>
-<p>先说一个最直接的用途。无论听广播还是看电视，我们一定对一个词不陌生——频道。频道频道，就是频率的通道，不同的频道就是将不同的频率作为一个通道来进行信息传输。下面大家尝试一件事：</p>
-<p>先在纸上画一个sin（x），不一定标准，意思差不多就行。不是很难吧。</p>
-<p>好，接下去画一个sin（3x）+sin（5x）的图形。</p>
-<p>别说标准不标准了，曲线什么时候上升什么时候下降你都不一定画的对吧？</p>
-<p>好，画不出来不要紧，我把sin（3x）+sin（5x）的曲线给你，但是前提是你不知道这个曲线的方程式，现在需要你把sin（5x）给我从图里拿出去，看看剩下的是什么。这基本是不可能做到的。</p>
-<p>但是在频域呢？则简单的很，无非就是几条竖线而已。</p>
-<p>所以很多在时域看似不可能做到的数学操作，在频域相反很容易。这就是需要傅里叶变换的地方。尤其是从某条曲线中去除一些特定的频率成分，这在工程上称为滤波，是信号处理最重要的概念之一，只有在频域才能轻松的做到。</p>
-<p>再说一个更重要，但是稍微复杂一点的用途——求解微分方程。（这段有点难度，看不懂的可以直接跳过这段）微分方程的重要性不用我过多介绍了。各行各业都用的到。但是求解微分方程却是一件相当麻烦的事情。因为除了要计算加减乘除，还要计算微分积分。而傅里叶变换则可以让微分和积分在频域中变为乘法和除法，大学数学瞬间变小学算术有没有。</p>
-<p>傅里叶分析当然还有其他更重要的用途，我们随着讲随着提。</p>
-<p>————————————————————————————————————</p>
-<p>下面我们继续说相位谱：</p>
-<p>通过时域到频域的变换，我们得到了一个从侧面看的频谱，但是这个频谱并没有包含时域中全部的信息。因为频谱只代表每一个对应的正弦波的振幅是多少，而没有提到相位。基础的正弦波A.sin(wt+θ)中，振幅，频率，相位缺一不可，不同相位决定了波的位置，所以对于频域分析，仅仅有频谱（振幅谱）是不够的，我们还需要一个相位谱。那么这个相位谱在哪呢？我们看下图，这次为了避免图片太混论，我们用7个波叠加的图。</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft11.jpg" alt=""></p>
-<p>鉴于正弦波是周期的，我们需要设定一个用来标记正弦波位置的东西。在图中就是那些小红点。小红点是距离频率轴最近的波峰，而这个波峰所处的位置离频率轴有多远呢？为了看的更清楚，我们将红色的点投影到下平面，投影点我们用粉色点来表示。当然，这些粉色的点只标注了波峰距离频率轴的距离，并不是相位。</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft12.jpg" alt=""></p>
-<p>这里需要纠正一个概念：时间差并不是相位差。如果将全部周期看作2Pi或者360度的话，相位差则是时间差在一个周期中所占的比例。我们将时间差除周期再乘2Pi，就得到了相位差。</p>
-<p>在完整的立体图中，我们将投影得到的时间差依次除以所在频率的周期，就得到了最下面的相位谱。所以，频谱是从侧面看，相位谱是从下面看。下次偷看女生裙底被发现的话，可以告诉她：“对不起，我只是想看看你的相位谱。”</p>
-<p>注意到，相位谱中的相位除了0，就是Pi。因为cos（t+Pi）=-cos（t），所以实际上相位为Pi的波只是上下翻转了而已。对于周期方波的傅里叶级数，这样的相位谱已经是很简单的了。另外值得注意的是，由于cos（t+2Pi）=cos（t），所以相位差是周期的，pi和3pi，5pi，7pi都是相同的相位。人为定义相位谱的值域为(-pi，pi]，所以图中的相位差均为Pi。</p>
-<p>最后来一张大集合：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft13.jpg" alt=""></p>
-<h2 id="四、傅里叶变换（Fourier_Transformation）">四、傅里叶变换（Fourier Transformation）</h2><p>相信通过前面三章，大家对频域以及傅里叶级数都有了一个全新的认识。但是文章在一开始关于钢琴琴谱的例子我曾说过，这个栗子是一个公式错误，但是概念典型的例子。所谓的公式错误在哪里呢？</p>
-<p>傅里叶级数的本质是将一个周期的信号分解成无限多分开的（离散的）正弦波，但是宇宙似乎并不是周期的。曾经在学数字信号处理的时候写过一首打油诗：</p>
-<pre><code>往昔连续非周期，
-回忆周期不连续，
-任你ZT、DFT，
-还原不回去。
-</code></pre><p>（请无视我渣一样的文学水平……）</p>
-<p>在这个世界上，有的事情一期一会，永不再来，并且时间始终不曾停息地将那些刻骨铭心的往昔连续的标记在时间点上。但是这些事情往往又成为了我们格外宝贵的回忆，在我们大脑里隔一段时间就会周期性的蹦出来一下，可惜这些回忆都是零散的片段，往往只有最幸福的回忆，而平淡的回忆则逐渐被我们忘却。因为，往昔是一个连续的非周期信号，而回忆是一个周期离散信号。</p>
-<p>是否有一种数学工具将连续非周期信号变换为周期离散信号呢？抱歉，真没有。</p>
-<p>比如傅里叶级数，在时域是一个周期且连续的函数，而在频域是一个非周期离散的函数。这句话比较绕嘴，实在看着费事可以干脆回忆第一章的图片。</p>
-<p>而在我们接下去要讲的傅里叶变换，则是将一个时域非周期的连续信号，转换为一个在频域非周期的连续信号。</p>
-<p>算了，还是上一张图方便大家理解吧：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft14.jpg" alt=""></p>
-<p>或者我们也可以换一个角度理解：傅里叶变换实际上是对一个周期无限大的函数进行傅里叶变换。</p>
-<p>所以说，钢琴谱其实并非一个连续的频谱，而是很多在时间上离散的频率，但是这样的一个贴切的比喻真的是很难找出第二个来了。</p>
-<p>因此在傅里叶变换在频域上就从离散谱变成了连续谱。那么连续谱是什么样子呢？</p>
-<h2 id="你见过大海么？">你见过大海么？</h2><p>为了方便大家对比，我们这次从另一个角度来看频谱，还是傅里叶级数中用到最多的那幅图，我们从频率较高的方向看。</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft15.jpg" alt=""></p>
-<p>以上是离散谱，那么连续谱是什么样子呢？</p>
-<p>尽情的发挥你的想象，想象这些离散的正弦波离得越来越近，逐渐变得连续……</p>
-<p>直到变得像波涛起伏的大海：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft16.jpg" alt=""></p>
-<p>很抱歉，为了能让这些波浪更清晰的看到，我没有选用正确的计算参数，而是选择了一些让图片更美观的参数，不然这图看起来就像屎一样了。</p>
-<p>不过通过这样两幅图去比较，大家应该可以理解如何从离散谱变成了连续谱的了吧？原来离散谱的叠加，变成了连续谱的累积。所以在计算上也从求和符号变成了积分符号。</p>
-<p>不过，这个故事还没有讲完，接下去，我保证让你看到一幅比上图更美丽壮观的图片，但是这里需要介绍到一个数学工具才能然故事继续，这个工具就是——</p>
-<h2 id="五、宇宙耍帅第一公式：欧拉公式">五、宇宙耍帅第一公式：欧拉公式</h2><p>虚数i这个概念大家在高中就接触过，但那时我们只知道它是-1的平方根，可是它真正的意义是什么呢?</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft17.jpg" alt=""></p>
-<p>这里有一条数轴，在数轴上有一个红色的线段，它的长度是1。当它乘以3的时候，它的长度发生了变化，变成了蓝色的线段，而当它乘以-1的时候，就变成了绿色的线段，或者说线段在数轴上围绕原点旋转了180度。</p>
-<p>我们知道乘-1其实就是乘了两次 i使线段旋转了180度，那么乘一次 i 呢——答案很简单——旋转了90度。</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft18.jpg" alt=""></p>
-<p>同时，我们获得了一个垂直的虚数轴。实数轴与虚数轴共同构成了一个复数的平面，也称复平面。这样我们就了解到，乘虚数i的一个功能——旋转。</p>
-<p>现在，就有请宇宙第一耍帅公式欧拉公式隆重登场——</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/equation1.png" alt=""></p>
-<p>这个公式在数学领域的意义要远大于傅里叶分析，但是乘它为宇宙第一耍帅公式是因为它的特殊形式——当x等于Pi的时候。</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/equation2.jpg" alt=""></p>
-<p>经常有理工科的学生为了跟妹子表现自己的学术功底，用这个公式来给妹子解释数学之美：”石榴姐你看，这个公式里既有自然底数e，自然数1和0，虚数i还有圆周率pi，它是这么简洁，这么美丽啊！“但是姑娘们心里往往只有一句话：”臭屌丝……“</p>
-<p>这个公式关键的作用，是将正弦波统一成了简单的指数形式。我们来看看图像上的涵义：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft19.jpg" alt=""></p>
-<p>欧拉公式所描绘的，是一个随着时间变化，在复平面上做圆周运动的点，随着时间的改变，在时间轴上就成了一条螺旋线。如果只看它的实数部分，也就是螺旋线在左侧的投影，就是一个最基础的余弦函数。而右侧的投影则是一个正弦函数。</p>
-<p>关于复数更深的理解，大家可以参考：</p>
-<p><a href="http://www.zhihu.com/question/23234701/answer/26017000" target="_blank" rel="external">复数的物理意义是什么？</a></p>
-<p>这里不需要讲的太复杂，足够让大家理解后面的内容就可以了。</p>
-<h2 id="六、指数形式的傅里叶变换">六、指数形式的傅里叶变换</h2><p>有了欧拉公式的帮助，我们便知道：<strong>正弦波的叠加</strong>，也可以理解为<strong>螺旋线的叠加</strong>在实数空间的投影。而螺旋线的叠加如果用一个形象的栗子来理解是什么呢？</p>
-<h3 id="光波">光波</h3><p>高中时我们就学过，自然光是由不同颜色的光叠加而成的，而最著名的实验就是牛顿师傅的三棱镜实验：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft20.jpg" alt=""></p>
-<p>所以其实我们在很早就接触到了光的频谱，只是并没有了解频谱更重要的意义。</p>
-<p>但不同的是，傅里叶变换出来的频谱不仅仅是可见光这样频率范围有限的叠加，而是频率从0到无穷所有频率的组合。</p>
-<p>这里，我们可以用两种方法来理解正弦波：</p>
-<p>第一种前面已经讲过了，就是螺旋线在实轴的投影。</p>
-<p>另一种需要借助欧拉公式的另一种形式去理解：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/equation3.jpg" alt=""><br><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/equation4.png" alt=""></p>
-<p>将以上两式相加再除2，得到：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/equation5.png" alt=""></p>
-<p>这个式子可以怎么理解呢？</p>
-<p>我们刚才讲过，e^(it)可以理解为一条逆时针旋转的螺旋线，那么e^(-it)则可以理解为一条顺时针旋转的螺旋线。而cos(t)则是这两条旋转方向不同的螺旋线叠加的一半，因为这两条螺旋线的虚数部分相互抵消掉了！</p>
-<p>举个例子的话，就是极化方向不同的两束光波，磁场抵消，电场加倍。</p>
-<p>这里，逆时针旋转的我们称为正频率，而顺时针旋转的我们称为负频率（注意不是复频率）。</p>
-<p>好了，刚才我们已经看到了大海——连续的傅里叶变换频谱，现在想一想，连续的螺旋线会是什么样子：</p>
-<p>想象一下再往下翻：</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p>|</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft21.jpg" alt=""></p>
-<p>是不是很漂亮？</p>
-<p>你猜猜，这个图形在时域是什么样子？</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft22.jpg" alt=""></p>
-<p>哈哈，是不是觉得被狠狠扇了一个耳光。数学就是这么一个把简单的问题搞得很复杂的东西。</p>
-<p>顺便说一句，那个像大海螺一样的图，为了方便观看，我仅仅展示了其中正频率的部分，负频率的部分没有显示出来。</p>
-<p>如果你认真去看，海螺图上的每一条螺旋线都是可以清楚的看到的，每一条螺旋线都有着不同的振幅（旋转半径），频率（旋转周期）以及相位。而将所有螺旋线连成平面，就是这幅海螺图了。</p>
-<p>好了，讲到这里，相信大家对傅里叶变换以及傅里叶级数都有了一个形象的理解了，我们最后用一张图来总结一下：</p>
-<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/fourier-transform-interpretation/fft23.jpg" alt=""></p>
-<p>好了，傅里叶的故事终于讲完了，下面来讲讲我的故事：</p>
-<p>这篇文章第一次被写下来的地方你们绝对猜不到在哪，是在一张高数考试的卷子上。当时为了刷分，我重修了高数（上），但是后来时间紧压根没复习，所以我就抱着裸考的心态去了考场。但是到了考场我突然意识到，无论如何我都不会比上次考的更好了，所以干脆写一些自己对于数学的想法吧。于是用了一个小时左右的时间在试卷上洋洋洒洒写了本文的第一草稿。</p>
-<p>你们猜我的了多少分？</p>
-<p>6分</p>
-<p>没错，就是这个数字。而这6分的成绩是因为最后我实在无聊，把选择题全部填上了C，应该是中了两道，得到了这宝贵的6分。说真的，我很希望那张卷子还在，但是应该不太可能了。</p>
-<p>那么你们猜猜我第一次信号与系统考了多少分呢？</p>
-<p>45分</p>
-<p>没错，刚刚够参加补考的。但是我心一横没去考，决定重修。因为那个学期在忙其他事情，学习真的就抛在脑后了。但是我知道这是一门很重要的课，无论如何我要吃透它。说真的，信号与系统这门课几乎是大部分工科课程的基础，尤其是通信专业。</p>
-<p>在重修的过程中，我仔细分析了每一个公式，试图给这个公式以一个直观的理解。虽然我知道对于研究数学的人来说，这样的学习方法完全没有前途可言，因为随着概念愈加抽象，维度越来越高，这种图像或者模型理解法将完全丧失作用。但是对于一个工科生来说，足够了。</p>
-<p>后来来了德国，这边学校要求我重修信号与系统时，我彻底无语了。但是没办法，德国人有时对中国人就是有种藐视，觉得你的教育不靠谱。所以没办法，再来一遍吧。</p>
-<p>这次，我考了满分，而及格率只有一半。</p>
-<p>老实说，数学工具对于工科生和对于理科生来说，意义是完全不同的。工科生只要理解了，会用，会查，就足够了。但是很多高校却将这些重要的数学课程教给数学系的老师去教。这样就出现一个问题，数学老师讲得天花乱坠，又是推理又是证明，但是学生心里就只有一句话：学这货到底干嘛用的？</p>
-<p>缺少了目标的教育是彻底的失败。</p>
-<p>在开始学习一门数学工具的时候，学生完全不知道这个工具的作用，现实涵义。而教材上有只有晦涩难懂，定语就二十几个字的概念以及看了就眼晕的公式。能学出兴趣来就怪了！</p>
-<p>好在我很幸运，遇到了大连海事大学的吴楠老师。他的课全程来看是两条线索，一条从上而下，一条从下而上。先讲本门课程的意义，然后指出这门课程中会遇到哪样的问题，让学生知道自己学习的某种知识在现实中扮演的角色。然后再从基础讲起，梳理知识树，直到延伸到另一条线索中提出的问题，完美的衔接在一起！</p>
-<p>这样的教学模式，我想才是大学里应该出现的。</p>
-<p>最后，写给所有给我点赞并留言的同学。真的谢谢大家的支持，也很抱歉不能一一回复。因为知乎专栏的留言要逐次加载，为了看到最后一条要点很多次加载。当然我都坚持看完了，只是没办法一一回复。</p>
-<p>本文只是介绍了一种对傅里叶分析新颖的理解方法，对于求学，还是要踏踏实实弄清楚公式和概念，学习，真的没有捷径。但至少通过本文，我希望可以让这条漫长的路变得有意思一些。</p>
-<p>最后，祝大家都能在学习中找到乐趣。…</p>
-<p>作者：Heinrich<br>链接：<a href="https://zhuanlan.zhihu.com/p/19763358" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/19763358</a><br>来源：知乎<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-
-          
+          一、什么是频域从我们出生，我们看到的世界都以时间贯穿，股票的走势、人的身高、汽车的轨迹都会随着时间发生改变。这种以时间作为参照来观察动态世界的方法我们称其为时域分析。而我们也想当然的认为，世间万物都在随着时间不停的改变，并且永远不会静止下来。但如果我告诉你，用另一种方法来观察世界的话，你会发现世界是
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/20/fourier-transform-interpretation/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2312,55 +1707,18 @@ make: *** [all] <span class="keyword">Error</span> 2
       
         
           
-            <p><strong>最佳训练时间：早饭前、午饭前、晚饭前。</strong></p>
-<p>空腹训练有助于胰岛素运用（量力而行啊！如有身体不适、血糖低请立刻喝糖水。尤其糖尿病人不要空腹训练！）。空腹训练也有助于燃烧脂肪。</p>
-<p>而且，力量训练之后要吃东西，所以训练放在饭前。至于最好的训练时间，我认为是晚饭前。</p>
-<p>哈蒂斯堡城南密西西比大学的研究者们让 16 名男性进行训练，在 10 周的时间里，一组在上午 10 点前进行训练，一组在下午 6 点后进行。训练由 45 分钟的重量训练和稍后进行的 45 分钟有氧训练组成。和上午训练的那一组相比，晚上那一组人大约增加了 30%的肌肉，并同时多减少了大约 9%的身体脂肪。</p>
-<p><strong>最佳训练频率：一周 2 次到 4 次。</strong></p>
-<p>依个人情况而定。但不要连续两天都安排训练。肌肉需要时间休息。并且，如果训练的第二天你没有酸疼得不能动，说明你偷懒了，或者你该进阶了。</p>
-<p><strong>最佳训练强度：板凳深蹲和平板支撑交替进行（为了缩短组间间隔），各 6-10 组。</strong></p>
-<p>板凳深蹲每组 15-20 个。这 15-20 个里，要穿插至少 5 次板凳深蹲跳。这有助于改变运动中神经强度，促进去甲肾上腺素等激素分泌，有助于减脂。平板支撑每组至少 45 秒，多了就能撑多久就撑多久。</p>
-<p><strong>训练重点：</strong></p>
-<ol>
-<li>肌肉收缩的离心部分（有控制地下落）速度要慢，至少 3 秒，感受拉伸。肌肉收缩的向心部分（举起来时）都是能多快就多快。</li>
-</ol>
-<p>澳大利亚新南威尔士的悉尼大学科学家们比较了慢速重复动作（3 秒钟主动部分，3 秒钟被动部分）和快速重复动作（主动和被动部分都是 1 秒钟），都是使用肱二头肌弯举这个动作，以断定哪个能对增加肌肉力量有帮助。六周后，使用快速重复动作的那一组要多增长 10%的力量。</p>
-<ol>
-<li>念动一致，做动作时候，要考虑我现在主要练的是哪，哪该发力了。</li>
-</ol>
-<p>2006 年的一项研究中，英国赫尔大学的科学家们让 30 个被测试者做肱二头肌弯举，他们被要求或者将注意力集中到正在训练的肌肉和动作上，或者将思维集中到所举的重量上来。那些将精神集中到肌肉而不是所举的重量的被测试者，肌电图测试下有着更高的肌肉活性。</p>
-<ol>
-<li>越短的休息时间，越高的燃脂速度。</li>
-</ol>
-<p>美国尤因新泽西学院的研究指出当人们进行平板卧推时，如果每个组次之间只有 30 秒的休息时间，他们在整个训练中可以燃烧更多的脂肪，而那些休息时间达到 3 分钟的训练者们，燃烧的脂肪要比前者少 50%。这种状态一直会持续到训练后很久。所以尽量缩短你的休息时间（不过要量力而行）。</p>
-<ol>
-<li>当你越难以做出动作，你做出的动作就越有效，即使做的动作需要别人帮助或者不太标准。</li>
-</ol>
-<p>芬兰的研究者对 16 个男性运动员进行了观察，他们分别进行了一个标准的腿部训练（4 个组次腿举、2 个组次深蹲和 2 个组次腿屈伸，所有组次都要进行 12 个重复动作，直至力竭，每个组次之间休息 2 分钟）或者一个强迫次数腿部训练（与标准的腿部训练有相同的训练内容、组次和重复次数，但重量要增加 15%，所以运动员可能需要依靠一个陪练者来协助完成所有 12<br>个重复动作。）强迫次数训练的结果显示，其睾丸激素水平和生长荷尔蒙水平都要比标准常规训练稍微高一些。另一个研究也认为那些使用强迫次数训练的运动员要比那些训练力竭就停止的人要减少更多的身体脂肪。日本一项研究表明，这样也会刺激更多的生长激素生成。生长激素可以刺激减脂，增强肌肉。也就说，强迫自己多做几次，可以有效地提高自己塑形减脂的速度！</p>
-<ol>
-<li>上面那条很难啊……我都没力了怎么再做。</li>
-</ol>
-<p>英国威尔士大学的一项 2007 年的研究显示，在 24 个男性运动员中，那些使用积极的自我暗示的人在进行直立跳跃测试中，比那些没有使用自我暗示方法的人要多产生 4%的力量。在进行大重量推举前试着和自己说类似这样的话，「我将举起它来」（动机性自我暗示技巧）或者「打败它」（指导性自我暗示技巧）。</p>
-<ol>
-<li>再不行？来点儿 music。由韦德研究机构主导的一项实验发现，当受训者戴着个人的 MP3 播放器并在一个肩部训练中听自己喜欢的音乐时，他们比自己做同一个训练而没有听音乐时平均每个组次要能多做 1-2 个重复动作。</li>
-</ol>
-<p><strong>最佳训练后安排：</strong></p>
-<ol>
-<li>最好的，做一些 HIIT 有氧训练。</li>
-</ol>
-<p>2007 年东京大学的一项研究显示，10 个被测试者在完成力量训练后在静止自行车上进行了有氧训练，与自己先完成有氧训练之后进行力量训练相比，前者燃烧了更多的脂肪。有证据指出，这样也刺激了更多生长激素的分泌。结合最佳训练时间是晚饭前。拉克罗斯市威斯康星大学的研究者发现那些在下午 5-7 点进行有氧训练的人，在训练后拥有更高的静止新陈代谢率，而他们在早上 5-7 点和中午 11-13<br>点训练时则没有这样的效果。</p>
-<p>也就是说，力量训练后有氧运动，可以让两项运动的效率和效果都提高很多！</p>
-<ol>
-<li>做完训练要拉伸。</li>
-</ol>
-<p>在训练前进行伸展并不能导致受伤几率的降低。一系列研究也发现在举重前的伸展实际上使得肌肉变得更虚弱。这一点几乎在所有的主要肌肉群中都有所体现。而且，来自奥斯汀得克萨斯大学的研究发现，当运动员在训练后进行伸展时，他们的身体比训练前进行伸展更加柔韧。拉伸还强化了肌肉的增长的能力！</p>
-<ol>
-<li>训练后最主要安排！吃吃吃吃吃吃吃！多吃碳水化合物和蛋白质（主食、瘦肉）！因为你正在超量恢复！你现在吃下去的碳水化合物首先会充入到你的肌肉里作为肌糖原。而蛋白质+碳水化合物会将肌糖原提升水平拔高一个台阶。</li>
-</ol>
-<p>你力量训练后吃下的热量，不会转化成脂肪，反而会转化成肌糖原和帮助消耗脂肪的肌肉！此时不吃，更待何时！</p>
-<p>这就是我觉得一次差不多完美的训练了。如果你能坚持，必然能增加很多瘦体重，减去很多脂肪。过数周月余，你会欣喜地发现你居然穿得下当年的牛仔裤了。</p>
-
-          
+          最佳训练时间：早饭前、午饭前、晚饭前。
+空腹训练有助于胰岛素运用（量力而行啊！如有身体不适、血糖低请立刻喝糖水。尤其糖尿病人不要空腹训练！）。空腹训练也有助于燃烧脂肪。
+而且，力量训练之后要吃东西，所以训练放在饭前。至于最好的训练时间，我认为是晚饭前。
+哈蒂斯堡城南密西西比大学的研究者们让 16 名
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/05/perfect-plan-of-anaerobic-exercise/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2510,138 +1868,16 @@ make: *** [all] <span class="keyword">Error</span> 2
       
         
           
-            <h2 id="胸">胸</h2><h3 id="训练重点">训练重点</h3><p>无论男女，在胸部训练中，目标就是维度大，形状好（再强调一遍，女性训练也可以让胸部罩杯变大、挺翘美观）。这无疑需要高度关注胸肌的训练。</p>
-<p>然而新开始健身训练常常会遇到这样一个问题：<strong>在胸部的训练中，找不到胸肌被募集的感觉，常常觉得是手臂在发力。长此以往，不仅没有练习到自己想练的胸，反而粗了两条胳膊（形状还不一定好看）</strong>。我们一开始如何解决这个问题呢？今天我就来告诉大家胸部训练的基础原则。</p>
-<p><strong>限制、专注、想象</strong></p>
-<p>我们可以看到，胸肌其实是连着大臂的。</p>
-<p>某种程度上，肌肉的作用是活动它连接的骨头和骨头间的关节。</p>
-<p>所以联系胸肌最重要的一个要点就是——大臂移动，向内夹，活动肩关节水平内收！</p>
-<p>想一想，有多少人在日常的胸肌训练里采用卧推的姿势时，错误地将重点放在了肘关节伸直。</p>
-<p>这样就着重使用了肱三头肌的力量，而没有重点训练到胸肌。</p>
-<p>一句话，胸部训练重点在大臂的夹，不在小臂的伸。</p>
-<p>所以我们要限制小臂的动作，专注大臂的内收，想象胸部的收缩。</p>
-<p>我们要先采用一些孤立的胸部训练手段，首先训练起胸肌的力量感觉。比如拉索夹胸、哑铃卧推等。</p>
-<p>我非常不推荐健身初涉者在一开始就使用杠铃卧推来训练胸肌。这对于不太能找到胸部训练感觉的人来讲是非常低效的。况且胸肌如果只靠杠铃卧推来训练，很容易形状难看，练成卧推胸。</p>
-<p>目前职业圈胸部训练的主流，也是靠哑铃、拉索、悍马机为主。此项尤其适用胸部天生没有优势的运动员。比如菲尔西斯、乔卡特、刘易斯等。这几个人都是胸肌一开始是弱项，后来得到了改善，他们都不太会用杠铃卧推作为主要胸肌训练。</p>
-<p>胸肌训练有如下几个要点：</p>
-<ol>
-<li><p>起快落慢。因起时是等张收缩运动，而落下时控制是拉长收缩。起快是为了锻炼力量与神经，落慢是为了让拉长收缩更确实。拉长收缩会大大刺激生长激素的分泌，也会导致肌肉迅速生长的良性炎症。</p>
-</li>
-<li><p>关节不要锁定。肘关节锁定就代表你倚重肱三头肌和三角肌前束了，都没孤立刺激胸肌。同时锁定关节也代表你放弃了停止时的等长收缩机会。大重量还会给你的关节很多压迫，导致受伤或劳损。</p>
-</li>
-<li><p>沉肩夹胸。这就是刚才说的，不沉肩你用的是三角肌前束，不夹胸你用的是肱三头肌。</p>
-</li>
-<li><p>念动一致。一定要想着自己在夹胸、夹胸，注意肌肉感觉，这是健美孤立训练的重点。</p>
-</li>
-<li><p>多种角度，上斜下斜等。虽然说胸肌的最上最下两端是过顶运动训练决定的。但是胸肌的上部下部丰满程度还是需要上斜下斜的哑铃卧推，经常改变角度的拉锁卧推等。</p>
-</li>
-<li><p>拉伸。拉伸可以在充血时扩张筋膜，促进肌肉生长。但要注意训练前用静态拉伸，训练后再用动态拉伸。</p>
-</li>
-<li><p>多吃多喝多睡。因为胸肌训练就是为了维度、力度。所以一定要让吃喝跟上，确保超量恢复。在训练后两小时内，请进食身体体重乘以两倍克数的糖和身体体重数左右的蛋白质（比如你要是 70 千克，你就应该吃大概 140 克的糖，大概一瓶 1.5 升的脉动，然后再加 70克蛋白质）。这很重要，你生长肌肉不是在训练时。训练时只是契机，真正肌肉的生长阶段是在休息时用你吃下的东西重新建筑肌肉，让它更型更大更强。</p>
-</li>
-</ol>
-<p>对于男性来讲，我们非常看重胸肌的力量维度大小、形状宽阔方正、线条锐利、中缝深邃笔直如一线。</p>
-<p>记得一项调查曾经说，67%的女性，最看重男性的胸肌。这是两扇身材的门面，是心房上的铠甲。</p>
-<p>所以我<strong>推荐给男性的三个训练动作是龙门架拉锁夹胸、悍马机卧推和哑铃卧推</strong>。</p>
-<p><strong>龙门架拉锁夹胸的动作要点在于：</strong></p>
-<p>   悍马专为各个肌群训练打造。其中胸肌训练器不为单纯地推，而是有角度改变地先推、后夹（前提是要设计得好）。在做动作时，注意肘关节不要锁定，也就是不要伸到最直，保持时刻对胸的刺激。</p>
-<p>可使用大重量，胸肌是强大有力的扁平肌，必须在日常训练中给予它很大的重量刺激。悍马机可以用上比杠铃卧推更强的重量。</p>
-<p><strong>平板和上斜哑铃卧推的优点和要点在于：</strong></p>
-<p>推举的幅度更大，对胸肌有更好的刺激。多角度、多关节、自由重量。可以指哪打哪，每个人可用最适合自己的、最能刺激到自己胸肌的方式进行锻炼。</p>
-<p>肘关节不要伸到最直，上推要快，下落要慢而有控制。挺胸，这样三角肌参与得更少。</p>
-<p>最后推荐一个健身房胸肌入门训练计划（所有组间休息时间均为 30-90 秒）：</p>
-<p>热身 10 分钟。</p>
-<p>哑铃平板卧推：8-12 个一组，选取自己最大负重 80%左右的重量，3 组。<br>哑铃上斜卧推：8-12 个一组，选取自己最大负重 80%左右的重量，3 组。</p>
-<p>悍马胸肌训练机：做四组，分别是，8-12 个两组（80%重量）。<br>然后是 5 个一组（90%重量）。此为升序金字塔法。</p>
-<p>最后是龙门架拉锁夹胸：<br>12-15 个一组，70%-80%左右重量。五组。</p>
-<p>20 分钟 HIIT（瘦人增肌可免此项）<br>胸部专项拉伸 10 分钟。</p>
-<p><strong>对于女性来讲，胸部的训练至关重要，其中训练的重点，便是维度、弹性和形状。</strong></p>
-<p>   对很多美女来讲，胸部大一点、再大一点是自己的梦想。然而胸部的发育是天生基因决定，后天无法强求太多。整形丰胸又不利于健康和未来的生育。我们可以采用在胸部底下训练出一层柔软肌肉的方式，健康地增大一到两个罩杯。另外，记得胸大显腰细和脸小！</p>
-<p>   胸部的挺翘、有弹性可以挺拔身姿，上拉视觉的关注点，让自己看起来更窈窕。胸部训练正好可以挺翘你的胸部（想想练翘臀部的方式），同时还可以对抗地球的重力，防止胸部随着岁月下垂。</p>
-<p>女性更要注意胸部训练中下落的缓慢、有控制。因为女性的睾丸酮分泌量天生不如男性。肌肉生长的内分泌主要靠生长激素和 IGF-1 等。有控制地缓慢下落（离心收缩）可以有效地刺激生长激素的分泌，让美女们训练胸部事半功倍。</p>
-<p>胸部训练不要害怕会练出肌肉！咱们就怕练不出肌肉垫在底下呢！</p>
-<p>下面是我推荐的<strong>女性丰胸美胸三个动作：</strong></p>
-<p><strong>俯卧撑或者半俯卧撑（做不了俯卧撑的情况下，双膝着地做半俯卧撑）</strong></p>
-<p>   对于胸部训练，我是推荐大家去健身房的。毕竟那里有更多专项针对胸部的训练器械。但是有时候，女童鞋们不一定有时间或勇气踏足健身房，进行力量训练。这时在家中可以采用俯卧撑或者半俯卧撑的方式锻炼胸部。</p>
-<p>俯卧撑和半俯卧撑的重点和要点：</p>
-<p>俯卧撑大家都看过，但是如果重点训练胸部的话，请双手分开大于肩宽。<br>下推时，注意力在胸部的收紧，大臂内夹，下推到掌根儿。<br>推要快！落要慢而有控制！</p>
-<p>连玛丽莲·梦露这位肉弹美女都采用哑铃卧推的方式美胸丰胸，足见其有效！</p>
-<p><strong>哑铃卧推动作描述和重点：</strong></p>
-<p>屈肘将哑铃下降到上胸，此时注意胸部的被重力拉伸。<br>向上推举，感觉是胸部的收缩带领着大臂的夹紧。<br>推举到最上面，肘关节不要伸到最直，胸部保持发力。<br>下落缓慢有控制。</p>
-<p><strong>最后也是龙门架拉索的夹胸，此动作有针对性，指哪打哪，角度多变。可以专注于胸部发力。</strong></p>
-<p>动作和要点在于：</p>
-<p>小臂不动，肘关节采取外展的姿势，不要固定，双手握把手。<br>胸部收紧，带动大臂，依靠胸肌收缩的力量而不是靠手的力量来牵拉。<br>向前挺胸，不要含胸。限制三角肌前束的运动，让胸肌主要收缩。<br>回复时，有控制且缓慢。</p>
-<h3 id="健身房胸部训练计划（所有组间休息时间均为30-90秒）">健身房胸部训练计划（所有组间休息时间均为30-90秒）</h3><p>热身 10 分钟。</p>
-<p>哑铃平板卧推：8-12 个一组，选取自己最大负重 60%-80%的重量，3 组。<br>哑铃上斜卧推：8-12 个一组，选取自己最大负重 60%-80%的重量，3 组。</p>
-<p>龙门架拉锁夹胸：12-15 个一组，70%-80%重量，5 组。</p>
-<p>20 分钟 HIIT，减脂。<br>胸部专项拉伸 10 分钟。</p>
-<h3 id="家庭训练计划，胸部训练和减脂为主">家庭训练计划，胸部训练和减脂为主</h3><p>俯卧撑或半俯卧撑 10-12 个一组，做 5 组。<br>无氧运动双璧各五组，穿插做。组间少休息。</p>
-<p>HIIT（跳操之类）20 分钟。<br>胸部专项拉伸 10 分钟。</p>
-<h2 id="腹">腹</h2><h3 id="训练重点-1">训练重点</h3><p>清晰的腹肌，是无论男女都十分向往的。然而，在平时的训练中，对于腹肌的误解恐怕也是最多的。今天我们就来说说腹肌的训练。首先普及一下关于腹肌的姿势……也化解大家对于腹肌最大的几个误区吧。</p>
-<p>无论你的腹肌形态有多好，做了多少仰卧起坐、卷腹。体脂含量不够低，你的腹肌永远出不来。所以如果你的目标是清晰可见的腹肌，你首选的应该是运动减脂，而非腹肌的专项训练。</p>
-<p>而对于腹部脂肪的粉碎，目前最有效的是高强度间歇有氧训练 HIIT。</p>
-<p>对于男性来讲，八块的腹肌代表着健康的体脂含量。而对于女性来讲，如果你的腹肌清晰可见，你可能面临许多内分泌方面的问题。</p>
-<p>女性健康的体脂是在 20%-30%。在这个区间内，是不可能清晰地看到八块腹肌的。如果女性的体脂含量太低，非常容易导致月经失调等问题。另外，如果你八块腹肌出现了，证明你两坨大胸不见了……</p>
-<p>仰卧起坐是最好的腹肌运动。实际上，平时我们学习的仰卧起坐很容易借助背阔肌等肌肉的力量。实验来看，对于腹肌的刺激并不是非常明显。</p>
-<p>腹肌的最大作用不是看，而是作为整个身体的一条传承轴。类似网球、排球、拳击等有强大力量输出的运动，在运动学里都被称为「抽击类」运动。力量的来源都是腿。而腿部的力量必须经过强大而有力的腰腹核心力量才能传输到灵活的手臂。所以，强大的腰腹是决定运动水平的关键。</p>
-<p>既然提到了腰腹，不能不说日常生活中有无数人受到过的腰痛困扰。在西方，腰痛被人称为「魔女的一击」。「只听咯嘣儿一响，脊柱周围什么东西断裂后迅速抽动，变成一条令人剧痛的火蛇，在腰间缩成一团。」</p>
-<p>而对抗这种腰痛，最有效的就是加强腹肌等核心力量。腰痛不是腰部的竖脊肌等肌肉力量太弱。恰恰相反，是腹肌部分的力量太弱，身体太过依靠腰背的束棘肌、最长肌等所导致。所以合理的腹部核心训练是最好的对抗腰痛训练。对于白领、程序猿的日常腰痛也是如此哦～</p>
-<p>我不得不告诉大家一个悲伤的消息，腹肌长得不对称是不能靠训练纠正的。这个是天生的生理结构所导致，不是后天训练能够改变的事情。好消息是奥运冠军林丹、奥林匹克先生乔卡特、帅哥明星吴尊，人家腹肌都不对称，一样自信大方地展露腹肌。你还怕什么？</p>
-<p>腹肌训练不同于其他肌群。你可以经常练，也不必把它放到第一组当做训练的重点。最好的办法是，把腹肌放到力量训练之后，有氧训练之前。一周训练 3-5 次。因为腹肌是很耐疲劳的红肌，所以不需要非常长的两三天休息时间（当然前几次训练后，酸疼感非常强……红肌的训练也会有强烈的烧灼感，疼啊……不过练几次，就不再疼了）。很多健美运动员、靠身材吃饭的明星也是天天训练腹肌的。</p>
-<p>虽然说腹肌的清晰出现是靠减少腹部脂肪。但是腹肌的形态、美感，很大程度是依靠腹肌训练的效果。另外腹部核心力量的训练，会给其他所有你所要做的运动带来意想不到的好处。</p>
-<p>腹肌的训练多种多样，对于一般训练者来说，如果只练三个动作，什么最有效呢？</p>
-<p><strong>第一个首选负重俯卧卷腹</strong></p>
-<p>拉索卷腹非常像一个俯卧位的普通卷腹。不同的是，这一回你是向下卷腹的。你选择一个高位的龙门架。采取跪姿，手持把手或绳索，眼看地面。</p>
-<p>从跪姿处，保持骨盆和下背部静止，开始向地板下拉绳索，并向膝盖接近，接触到地板或膝盖，在顶峰收缩 1-2 秒，然后缓缓控制着重量回到起点，随着重量让身体超过水平线，同时背部微拱，拉伸腹肌，停止。</p>
-<p><strong>第二个动作，推荐平板支撑</strong></p>
-<p>我在之前就推荐过平板支撑，因为这个动作是效果最好的入门性核心肌群训练。你能在这个动作中练到你能想到几乎一切的核心肌群。练好这个动作，你几乎不会再因为久坐而腰酸背痛。练好这个动作，你也不会因为容易闪腰而苦恼了。</p>
-<p>而平板支撑的学习和练习也很简单，腰部不可以向下掉，腹部要紧张起来，另外臀也要夹紧。好了，就这么待上一分钟，你的训练就完成了一组。</p>
-<p>虽然平板支撑是非常令人痛苦的一个体验，不过好在它的门槛很低，任何人都能做到，差距只在时间的长短。而核心力量的训练，循序渐进的话进步会非常快。平时多在日常训练中加入平板支撑，会让你杜绝一切腰痛的烦恼。</p>
-<p><strong>第三个推荐动作是腹肌轮训练</strong></p>
-<p>健腹轮训练有一个非常难能可贵的优点：会在训练的过程中，强化离心收缩的作用。所谓离心收缩，就是你有控制地缓慢把肌肉拉开的收缩形式。</p>
-<p>离心收缩，是肌肉形态和力量训练中最重要、最有效的收缩形式[2]，能保证力量训练的效果和肌肉形态训练的成果。某种程度上说，腹肌的离心收缩是所有腹肌训练中最缺乏的一环，而健腹轮正弥补了这一点。</p>
-<p>做健腹轮的时候一定要注意，在动作的每一步都对自己有控制。有能力的童鞋，可以采用站姿做腹肌轮。</p>
-<p>姑娘们就采用跪姿吧～也非常有效哦。</p>
-<p><strong>腹肌训练的几个要点:</strong></p>
-<p>在做腹肌动作时，速度越快、频率越高，腹直肌、腹外斜肌、竖脊肌表面肌电均方根振幅 RMS 值越大，肌肉活动越激烈。[3]</p>
-<p>做腹部训练时，紧绷腹肌肌肉，向外推挤肚脐； 在卷腹的时候，试着缩短胸腔底部和腹股沟之间的距离； 在卷腹的同时，注意让肋部向下和向内。研究报告说这种改良的卷腹训练能有效刺激腹直肌。</p>
-<p>腹外和腹内斜肌可以试试完全卷起腹肌，以使得肚脐朝向地板方向；保持腹肌紧绷，试着背部保持水平；在卷腹时，注意让胸腔保持向前的力量。</p>
-<h2 id="臀">臀</h2><h3 id="训练重点-2">训练重点</h3><p>无论男女，没人不想要一个挺翘的屁股！</p>
-<p>对于女性来讲，臀部是身体丰饶的重心，风情万种的中心！当你有了丰胸细腰，没有一个百般妖娆的臀部，也走不出风摆荷柳的媚姿！</p>
-<p>对于男性来讲，你知道女性看咱们性感不性感最关注的是什么部位？胸部？手臂？错错错……强健挺翘的臀部才是男性性感度的标杆。另外，很多女性会拿臀部挺翘和 X 能力挂钩哦～</p>
-<p>而臀部的最重要肌肉，就是臀大肌！臀大肌是人身体上最大的肌肉，也是很强壮的肌肉，练习好它，燃脂效果一流！</p>
-<p>知道了臀大肌的作用以及重要程度后，我们该如何练好臀大肌呢？臀大肌训练重点有二，一是臀大肌既然主要作用就是改变髋角，那么训练时一定要记住这个重点。二是臀大肌力量极大，小重量训练很难刺激其生长。</p>
-<p>为什么很多人，即使有了一定的运动基础，也很难训练到臀大肌，很难刺激臀部，反而更多刺激到腿部肌肉呢？</p>
-<p>原因在于：一，臀部肌肉不够，不够支持你臀部孤立发力完成这个动作。当一个大重量复合动作全身发力时，肌力不足的部位必然向肌力充沛的肌肉借力。二，没有更多限制腿部发力，膝角改变过大。</p>
-<p>股四头肌（大腿前面肌群）与腘绳肌（大腿后部肌群）是强大、耐久且灵活的肌肉，身体一开始就习惯它俩发力对抗外界阻力。如果你不对它俩的发力加以限制是很难刺激到臀部的。</p>
-<p>结合这两点，我首先推荐找不到臀部训练感觉的人练习孤立臀部的动作，找到臀部训练感觉。同时将臀部力量发展到足够参与大重量复合动作。</p>
-<p><strong>首先动作可以用挺胯或负重挺胯</strong></p>
-<p>仰面躺在地下，双腿弯曲，双脚着地，通过臀大肌的收缩，将髋关节缓缓抬高。</p>
-<p>该动作可以很好地将注意力集中在臀部，避免了一开始训练时臀部训练动作容易让大腿发力的状况。</p>
-<p>进阶的方式可以使用单脚做挺胯，将杠铃或杠铃片放置在小腹上，增加负重。</p>
-<p><strong>罗马尼亚硬拉：</strong></p>
-<p>与传统硬拉不同的是，罗马尼亚硬拉的训练重点更加着重于臀部。杠铃哑铃都可以。</p>
-<p>训练重点：双腿微屈（也就 10°-20°），固定不动。躬身握紧杠铃或哑铃。背部挺直反弓，微仰头双眼看前方。</p>
-<p>此时你的髋关节是折叠到极点的，臀大肌有被拉伸感，收缩臀大肌拉起重物，让身子挺直。</p>
-<p><strong>女性入门动作，侧卧直腿侧平举：</strong></p>
-<p>该动作可以比较好地训练到臀大肌、臀中肌。由于我们说过，臀中肌的位置在臀部上面，所以臀中肌的发展可以将视觉的重心向上拉，让腿看起来更长！</p>
-<p>训练重点：侧卧于地上或瑜伽垫上，通过髋关节外展，让运动腿缓慢上举直至极限，坚持几秒，缓慢下放。</p>
-<p><strong>男性入门动作，板凳深蹲：</strong></p>
-<p>仍然是这个动作之王，男性练好该动作是为了给之后做几百千克的大重量深蹲开路！如果你已经练得不错了，直接扛着杠铃做板凳杠铃深蹲就是！</p>
-<p>训练重点：</p>
-<ol>
-<li><p>手抱头，眼看前方。背挺直、反弓，屁股向后面的板凳坐下（向后坐，不是蹲马扎的向下坐，是接近蹲马桶的向后坐），想象自己有根儿尾巴（赛亚人、变身！），尾巴要冲着天。</p>
-</li>
-<li><p>向后坐时，绝对不要放松地重重向后坐。而是下肢紧张地向后，想象凳子是烧红的烙铁，绝不能放心放松坐实。因为深蹲时下半部肌肉要采取超等长收缩，也就是如同橡皮筋一样拉伸蓄满力量。此时感觉臀部被拉伸。换言之，注意力在髋关节和屁股。</p>
-</li>
-<li><p>屁股一碰到板凳茶几立即弹起，此时就能感觉是屁股发力了，臀大肌从拉伸状态变成收缩。大腿也跟着发力，整个脚踏实地面，整个人站起。</p>
-</li>
-<li><p>如果你觉得上述动作轻松做上 20 个不是事儿，请把最后动作环节改成发全身之力跳起！唤作板凳深蹲跳！在回落过程中应以前脚掌着地，膝关节角度为 140°到 150°。关节角度尽量不变。保证肌腱等弹性成分受到的刺激强度。膝盖不好和体重过大者，慎用此动作。</p>
-</li>
-</ol>
-<p>powered by 斌卡</p>
-
-          
+          胸训练重点无论男女，在胸部训练中，目标就是维度大，形状好（再强调一遍，女性训练也可以让胸部罩杯变大、挺翘美观）。这无疑需要高度关注胸肌的训练。
+然而新开始健身训练常常会遇到这样一个问题：在胸部的训练中，找不到胸肌被募集的感觉，常常觉得是手臂在发力。长此以往，不仅没有练习到自己想练的胸，反而粗了两条胳
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/05/chest-abdomen-buttocks/#далее" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
