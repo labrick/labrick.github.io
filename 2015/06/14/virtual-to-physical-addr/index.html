@@ -92,24 +92,27 @@
 
 <meta name="description" content="每个程序员都梦想拥有这样的内存：它是私有的、容量无限大的、速度无限快的，并且是永久性的存储器（即断电时不会丢失数据）。计算机中的存储层次结构都是在考虑性价比的前提条件下尽量满足程序员的这一需求，其中虚拟地址的产生在其中起到了至关重要的作用：它允许程序员不用考虑物理内存的使用情况而任意使用整个内存空间（CPU地址总线决定）。
 总体概述
-首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通过">
+
+首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通">
 <meta property="og:type" content="article">
 <meta property="og:title" content="虚拟地址向物理地址的转换">
 <meta property="og:url" content="http://labrick.github.io/2015/06/14/virtual-to-physical-addr/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="每个程序员都梦想拥有这样的内存：它是私有的、容量无限大的、速度无限快的，并且是永久性的存储器（即断电时不会丢失数据）。计算机中的存储层次结构都是在考虑性价比的前提条件下尽量满足程序员的这一需求，其中虚拟地址的产生在其中起到了至关重要的作用：它允许程序员不用考虑物理内存的使用情况而任意使用整个内存空间（CPU地址总线决定）。
 总体概述
-首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通过">
+
+首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/va_pa.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/page_table.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/page_fault.png">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/virtual_physical_cache.png">
-<meta property="og:updated_time" content="2016-12-22T13:12:21.665Z">
+<meta property="og:updated_time" content="2017-07-08T11:56:03.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="虚拟地址向物理地址的转换">
 <meta name="twitter:description" content="每个程序员都梦想拥有这样的内存：它是私有的、容量无限大的、速度无限快的，并且是永久性的存储器（即断电时不会丢失数据）。计算机中的存储层次结构都是在考虑性价比的前提条件下尽量满足程序员的这一需求，其中虚拟地址的产生在其中起到了至关重要的作用：它允许程序员不用考虑物理内存的使用情况而任意使用整个内存空间（CPU地址总线决定）。
 总体概述
-首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通过">
+
+首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通">
 
 
 
@@ -435,7 +438,8 @@
 
       
         <p>每个程序员都梦想拥有这样的内存：它是私有的、容量无限大的、速度无限快的，并且是永久性的存储器（即断电时不会丢失数据）。计算机中的存储层次结构都是在考虑性价比的前提条件下尽量满足程序员的这一需求，其中虚拟地址的产生在其中起到了至关重要的作用：它允许程序员不用考虑物理内存的使用情况而任意使用整个内存空间（CPU地址总线决定）。</p>
-<h2 id="总体概述">总体概述</h2><p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/va_pa.png" alt="va_pa.png"></p>
+<h2 id="总体概述">总体概述</h2><div align="center"><br><img src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/va_pa.png" alt="va_pa.png"><br></div>
+
 <p>首先CPU从指令中获取到虚拟地址，然后该虚拟地址交给MMU，通过MMU中的TLB索引物理地址，如果TLB不存在该虚拟地址的entry，则到物理内存中对应的页表中查找，如果页表项存在，则可以根据页表项找到物理地址，并更新TLB，接着根据指令类型和页表项位标识读写cache/mem，如果页表项不存在就会产生缺页异常。</p>
 <h2 id="页表项结构">页表项结构</h2><p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/page_table.png" alt="page_table.png"><br>可以看到虚拟地址包括：虚拟叶号（VPN）和偏移地址<br>而虚拟叶号中包括：叶项有效位，访问控制位（RW）和物理帧号（PFN）<br>重新划分后可以得到物理地址：物理帧号和偏移地址</p>
 <h2 id="缺页异常">缺页异常</h2><p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/virtual-physical-addr-blog/page_fault.png" alt="page_fault.png"></p>
