@@ -312,6 +312,42 @@
 
     
   <url>
+    <loc>http://labrick.github.io/2015/07/28/markdown-problem-answer/</loc>
+    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown使用问题及解决办法</title>
+        <pubTime>2015-07-28T00:57:46.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/2015/07/26/ubuntu-android-sdk/</loc>
+    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
+    <data>
+        <display>
+        <title>ubuntu采用eclips搭建安卓环境记录</title>
+        <pubTime>2015-07-26T01:00:35.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://labrick.github.io/2015/06/26/first-use-perl/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
@@ -330,48 +366,12 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/08/09/difference-between-ttl-and-rs232/</loc>
+    <loc>http://labrick.github.io/2015/07/15/gem5-run-bench-step/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
         <display>
-        <title>TTL电平与RS232电平的区别</title>
-        <pubTime>2015-08-08T19:45:33.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="颇有技术含量" url="http://labrick.github.io/categories/%E9%A2%87%E6%9C%89%E6%8A%80%E6%9C%AF%E5%90%AB%E9%87%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/2015/03/05/think-over-code/</loc>
-    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
-    <data>
-        <display>
-        <title>代码的深思</title>
-        <pubTime>2015-03-05T03:41:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="颇有技术含量" url="http://labrick.github.io/categories/%E9%A2%87%E6%9C%89%E6%8A%80%E6%9C%AF%E5%90%AB%E9%87%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/2015/07/26/ubuntu-android-sdk/</loc>
-    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
-    <data>
-        <display>
-        <title>ubuntu采用eclips搭建安卓环境记录</title>
-        <pubTime>2015-07-26T01:00:35.000Z</pubTime>
+        <title>gem5跑bench过程记录</title>
+        <pubTime>2015-07-15T00:57:22.000Z</pubTime>
         
          
            
@@ -402,12 +402,12 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/07/15/gem5-run-bench-step/</loc>
+    <loc>http://labrick.github.io/2015/08/04/connect-host/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
         <display>
-        <title>gem5跑bench过程记录</title>
-        <pubTime>2015-07-15T00:57:22.000Z</pubTime>
+        <title>多台电脑搭建文件共享系统</title>
+        <pubTime>2015-08-03T18:17:04.000Z</pubTime>
         
          
            
@@ -438,17 +438,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/08/04/connect-host/</loc>
+    <loc>http://labrick.github.io/2015/03/05/think-over-code/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
         <display>
-        <title>多台电脑搭建文件共享系统</title>
-        <pubTime>2015-08-03T18:17:04.000Z</pubTime>
+        <title>代码的深思</title>
+        <pubTime>2015-03-05T03:41:00.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+              <breadCrumb title="颇有技术含量" url="http://labrick.github.io/categories/%E9%A2%87%E6%9C%89%E6%8A%80%E6%9C%AF%E5%90%AB%E9%87%8F/"/>
           
         </display>
     </data>
@@ -456,17 +456,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/07/28/markdown-problem-answer/</loc>
+    <loc>http://labrick.github.io/2015/08/09/difference-between-ttl-and-rs232/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
         <display>
-        <title>Markdown使用问题及解决办法</title>
-        <pubTime>2015-07-28T00:57:46.000Z</pubTime>
+        <title>TTL电平与RS232电平的区别</title>
+        <pubTime>2015-08-08T19:45:33.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+              <breadCrumb title="颇有技术含量" url="http://labrick.github.io/categories/%E9%A2%87%E6%9C%89%E6%8A%80%E6%9C%AF%E5%90%AB%E9%87%8F/"/>
           
         </display>
     </data>
@@ -546,17 +546,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/10/12/buddy-system-algorithm/</loc>
+    <loc>http://labrick.github.io/2016/04/25/use-android-ndk/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
         <display>
-        <title>伙伴系统算法</title>
-        <pubTime>2015-10-12T09:22:51.000Z</pubTime>
+        <title>Android运行C程序</title>
+        <pubTime>2016-04-25T13:56:34.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="颇有技术含量" url="http://labrick.github.io/categories/%E9%A2%87%E6%9C%89%E6%8A%80%E6%9C%AF%E5%90%AB%E9%87%8F/"/>
+              <breadCrumb title="Android" url="http://labrick.github.io/categories/Android/"/>
           
         </display>
     </data>
@@ -651,17 +651,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/07/29/bash-learning/</loc>
+    <loc>http://labrick.github.io/2015/09/12/assembly-in-c/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
         <display>
-        <title>bash学习笔记</title>
-        <pubTime>2015-07-29T00:56:26.000Z</pubTime>
+        <title>C语言中嵌入汇编程序</title>
+        <pubTime>2015-09-12T03:39:07.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+              <breadCrumb title="linux0.11相关" url="http://labrick.github.io/categories/linux0-11%E7%9B%B8%E5%85%B3/"/>
           
         </display>
     </data>
@@ -687,17 +687,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2016/04/25/use-android-ndk/</loc>
+    <loc>http://labrick.github.io/2015/07/29/bash-learning/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
         <display>
-        <title>Android运行C程序</title>
-        <pubTime>2016-04-25T13:56:34.000Z</pubTime>
+        <title>bash学习笔记</title>
+        <pubTime>2015-07-29T00:56:26.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="Android" url="http://labrick.github.io/categories/Android/"/>
+              <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
@@ -723,24 +723,6 @@
 
     
   <url>
-    <loc>http://labrick.github.io/2015/09/12/assembly-in-c/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>C语言中嵌入汇编程序</title>
-        <pubTime>2015-09-12T03:39:07.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="linux0.11相关" url="http://labrick.github.io/categories/linux0-11%E7%9B%B8%E5%85%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://labrick.github.io/2015/08/10/vim-command/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
@@ -752,6 +734,24 @@
            
              
               <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/2015/10/12/buddy-system-algorithm/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>伙伴系统算法</title>
+        <pubTime>2015-10-12T09:22:51.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="颇有技术含量" url="http://labrick.github.io/categories/%E9%A2%87%E6%9C%89%E6%8A%80%E6%9C%AF%E5%90%AB%E9%87%8F/"/>
           
         </display>
     </data>
