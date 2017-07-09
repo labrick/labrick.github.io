@@ -409,7 +409,8 @@
                   <i class="fa fa-comment-o"></i>
                 </span>
                 <a href="/2015/07/31/monitor-prototype/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/07/31/monitor-prototype/" itemprop="commentCount"></span>
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/07/31/monitor-prototype/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -614,8 +615,11 @@ exit            //同上
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/07/31/monitor-prototype/"
-           data-title="后台进程监控软件" data-url="http://labrick.github.io/2015/07/31/monitor-prototype/">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
       </div>
     
   </div>
@@ -892,37 +896,45 @@ exit            //同上
 
   
 
+
   
+
     
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"labrick"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
+      <script id="dsq-count-scr" src="https://labrick.disqus.com/count.js" async></script>
     
+
     
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://labrick.github.io/2015/07/31/monitor-prototype/';
+          this.page.identifier = '2015/07/31/monitor-prototype/';
+          this.page.title = '后台进程监控软件';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://labrick.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
   
 
 
 
 
 
-
-
-
+  
 
 
 
