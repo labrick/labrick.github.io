@@ -92,13 +92,13 @@
 
 <meta name="description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="shell/vim指令收集">
+<meta property="og:title" content="shell&#x2F;vim指令收集">
 <meta property="og:url" content="http://labrick.github.io/2015/06/24/shell-vim-collection/index.html">
 <meta property="og:site_name" content="工作实验室">
 <meta property="og:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
 <meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="shell/vim指令收集">
+<meta name="twitter:title" content="shell&#x2F;vim指令收集">
 <meta name="twitter:description" content="今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。">
 
 
@@ -239,6 +239,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -427,27 +437,27 @@
         <p>今天遇到一个2.5G的txt文件的分析问题，vim都无法打开，瞬间崩溃，想要cat这个文件到某些行，竟然都给忘记了，其实很多时候shell指令不能记得住，而且即使记住不常用很快就会忘记，这是常有的事，所以此处对shell/vim不常用但是重要指令进行收集，方便以后快速的查询。</p>
 <a id="more"></a>
 <p>TOC</p>
-<h4 id="vim跳到指定行"><strong>vim跳到指定行</strong></h4><p>在<strong>编辑模式</strong>下输入：</p>
-<pre><code><span class="title">ngg</span>
+<h4 id="vim跳到指定行"><a href="#vim跳到指定行" class="headerlink" title="vim跳到指定行"></a><strong>vim跳到指定行</strong></h4><p>在<strong>编辑模式</strong>下输入：</p>
+<pre><code>ngg
 nG
 </code></pre><p>其中n为指定的行数（如25）</p>
 <pre><code>25gg
 25G
 </code></pre><p>跳转到第25行</p>
 <p>在<strong>命令模式</strong>下输入行号n</p>
-<pre><code><span class="attribute">:n</span>
+<pre><code>:n
 </code></pre><p>如果想打开文件即跳转</p>
-<pre><code><span class="title">vim</span> +n file_name
-</code></pre><h4 id="查看光标所在行"><strong>查看光标所在行</strong></h4><pre><code>Ctrl+<span class="keyword">g</span>
-</code></pre><h4 id="如何显示一个文件的某几行"><strong>如何显示一个文件的某几行</strong></h4><p>比如:从第3000行开始，显示1000行。即显示3000～3999行</p>
-<pre><code><span class="keyword">cat</span> file_name | tail -<span class="keyword">n</span> +3000 | head -<span class="keyword">n</span> 1000
+<pre><code>vim +n file_name
+</code></pre><h4 id="查看光标所在行"><a href="#查看光标所在行" class="headerlink" title="查看光标所在行"></a><strong>查看光标所在行</strong></h4><pre><code>Ctrl+g
+</code></pre><h4 id="如何显示一个文件的某几行"><a href="#如何显示一个文件的某几行" class="headerlink" title="如何显示一个文件的某几行"></a><strong>如何显示一个文件的某几行</strong></h4><p>比如:从第3000行开始，显示1000行。即显示3000～3999行</p>
+<pre><code>cat file_name | tail -n +3000 | head -n 1000
 </code></pre><p>比如:显示1000行到3000行</p>
-<pre><code><span class="keyword">cat</span> file_name | head -<span class="keyword">n</span> 3000 | tail -<span class="keyword">n</span> +1000
+<pre><code>cat file_name | head -n 3000 | tail -n +1000
 </code></pre><blockquote>
 <p>   tail -n 1000:    显示最后1000行<br>    tail -n +1000:    从1000行开始显示<br>    head -n 1000:    显示前面1000行</p>
 </blockquote>
 <p>也可以采用sed命令来实现</p>
-<pre><code><span class="title">sed</span> -n <span class="string">'5,10p'</span> file_name
+<pre><code>sed -n &apos;5,10p&apos; file_name
 </code></pre><blockquote>
 <p>   查看文件第5行到第10行<br>    注意这里使用的是’单引号’</p>
 </blockquote>

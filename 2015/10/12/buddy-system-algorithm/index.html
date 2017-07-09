@@ -90,27 +90,19 @@
 
 
 
-<meta name="description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
-由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：
-1. 第一次申请2N个页呢？简单，连续分2N个页；
-2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
+<meta name="description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。 由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况： 1. 第一次申请2N个页呢？简单，连续分2N个页； 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
 <meta property="og:type" content="article">
 <meta property="og:title" content="伙伴系统算法">
 <meta property="og:url" content="http://labrick.github.io/2015/10/12/buddy-system-algorithm/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
-由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：
-1. 第一次申请2N个页呢？简单，连续分2N个页；
-2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
+<meta property="og:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。 由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况： 1. 第一次申请2N个页呢？简单，连续分2N个页； 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/buddy-memory-allocation.jpg">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/binary-tree-of-buddy.jpg">
 <meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="伙伴系统算法">
-<meta name="twitter:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。
-由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：
-1. 第一次申请2N个页呢？简单，连续分2N个页；
-2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
+<meta name="twitter:description" content="背景最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。 由分页引起的问题我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况： 1. 第一次申请2N个页呢？简单，连续分2N个页； 2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；">
+<meta name="twitter:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/buddy-system-algorithm/buddy-memory-allocation.jpg">
 
 
 
@@ -250,6 +242,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -435,19 +437,19 @@
       
 
       
-        <h2 id="背景">背景</h2><p>最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。</p>
-<h2 id="由分页引起的问题">由分页引起的问题</h2><p>我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：</p>
-<pre><code><span class="number">1.</span> 第一次申请<span class="number">2</span><span class="keyword">N</span>个页呢？简单，连续分<span class="number">2</span><span class="keyword">N</span>个页；
-<span class="number">2.</span> 第二次再申请<span class="number">2</span><span class="keyword">N</span>个页？简单，接着上次的<span class="number">2</span><span class="keyword">N</span>个页往后分；
-<span class="number">3.</span> 第三次请释放掉第一次申请的<span class="number">2</span><span class="keyword">N</span>个页？简单，直接收回；
-<span class="number">4.</span> 第四次申请<span class="keyword">N</span>个页？是从第一次释放的位置分配还是从第二次申请空间的后面分配呢？
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>最近因为工作的需要开始调研伙伴系统算法，刚开始听到这个名词时竟然是一头雾水，什么都不知道，甚至对它还有一种神秘感、逃离感，不过这终抵不过理智的分析，搜索查一下总可以搞明白的。</p>
+<h2 id="由分页引起的问题"><a href="#由分页引起的问题" class="headerlink" title="由分页引起的问题"></a>由分页引起的问题</h2><p>我们知道内存分配时是按照“页框”进行分配的，一个页框也就4K，考虑多次分配释放之后的情况：</p>
+<pre><code>1. 第一次申请2N个页呢？简单，连续分2N个页；
+2. 第二次再申请2N个页？简单，接着上次的2N个页往后分；
+3. 第三次请释放掉第一次申请的2N个页？简单，直接收回；
+4. 第四次申请N个页？是从第一次释放的位置分配还是从第二次申请空间的后面分配呢？
 </code></pre><p>仔细想想：经过无数次无规律的内存申请释放之后，内存中肯定存在大量的小块内存，无法满足大内存申请的需求，即使小块内存是连着的也需要有种机制来将它们合并。伙伴系统就是解决大块内存管理问题的一种机制；</p>
-<h2 id="伙伴的定义">伙伴的定义</h2><p>这里给出伙伴的概念，满足以下三个条件的称为伙伴：</p>
-<pre><code><span class="bullet">1. </span>两个块大小相同；
-<span class="bullet">2. </span>两个块地址连续；
-<span class="bullet">3. </span>两个块必须是同一个大块中分离出来的；
-</code></pre><h2 id="伙伴系统管理策略">伙伴系统管理策略</h2><p>可以在<a href="https://en.wikipedia.org/wiki/Buddy_memory_allocation" target="_blank" rel="external">维基百科</a>上找到该算法的描述，大体如是：</p>
-<h3 id="分配内存：">分配内存：</h3><ol>
+<h2 id="伙伴的定义"><a href="#伙伴的定义" class="headerlink" title="伙伴的定义"></a>伙伴的定义</h2><p>这里给出伙伴的概念，满足以下三个条件的称为伙伴：</p>
+<pre><code>1. 两个块大小相同；
+2. 两个块地址连续；
+3. 两个块必须是同一个大块中分离出来的；
+</code></pre><h2 id="伙伴系统管理策略"><a href="#伙伴系统管理策略" class="headerlink" title="伙伴系统管理策略"></a>伙伴系统管理策略</h2><p>可以在<a href="https://en.wikipedia.org/wiki/Buddy_memory_allocation" target="_blank" rel="external">维基百科</a>上找到该算法的描述，大体如是：</p>
+<h3 id="分配内存："><a href="#分配内存：" class="headerlink" title="分配内存："></a>分配内存：</h3><ol>
 <li>寻找大小合适的内存块（大于等于所需大小并且最接近2的幂，比如需要27，实际分配32）<ol>
 <li>如果找到了，分配给应用程序。</li>
 <li>如果没找到，分出合适的内存块。<ol>
@@ -460,7 +462,7 @@
 </ol>
 </li>
 </ol>
-<h3 id="释放内存：">释放内存：</h3><ol>
+<h3 id="释放内存："><a href="#释放内存：" class="headerlink" title="释放内存："></a>释放内存：</h3><ol>
 <li>释放该内存块<ol>
 <li>寻找相邻的块，看其是否释放了。</li>
 <li>如果相邻块也释放了，合并这两个块，重复上述步骤直到遇上未释放的相邻块，或者达到最高上限（即所有内存都释放了）。</li>
@@ -482,111 +484,111 @@
 <p>在分配阶段，首先要搜索大小适配的块，假设第一次分配3，转换成2的幂是4，我们先要对整个内存进行对半切割，从16切割到4需要两步，那么从下标[0]节点开始深度搜索到下标[3]的节点并将其标记为已分配。第二次再分配3那么就标记下标[4]的节点。第三次分配6，即大小为8，那么搜索下标[2]的节点，因为下标[1]所对应的块被下标[3~4]占用了。</p>
 <p>在释放阶段，我们依次释放上述第一次和第二次分配的块，即先释放[3]再释放[4]，当释放下标[4]节点后，我们发现之前释放的[3]是相邻的，于是我们立马将这两个节点进行合并，这样一来下次分配大小8的时候，我们就可以搜索到下标[1]适配了。若进一步释放下标[2]，同[1]合并后整个内存就回归到初始状态。</p>
 <p>一直到这，<a href="http://coolshell.cn/articles/10427.html" target="_blank" rel="external">这里</a>讲的都很好，但是接下来的内容，在原blog上就有所欠缺了，最起码我是没看懂他对程序的解释，下面我就将我对程序的解释贴在下面。</p>
-<h2 id="伙伴系统程序分析">伙伴系统程序分析</h2><p><a href="https://github.com/cloudwu/buddy" target="_blank" rel="external">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2" target="_blank" rel="external">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，而且这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计，<strong><a href="https://github.com/labrick/buddy2/blob/master/buddy2.c" target="_blank" rel="external">这里</a>是我对该程序的注解</strong>。</p>
+<h2 id="伙伴系统程序分析"><a href="#伙伴系统程序分析" class="headerlink" title="伙伴系统程序分析"></a>伙伴系统程序分析</h2><p><a href="https://github.com/cloudwu/buddy" target="_blank" rel="external">cloudwu</a>和<a href="https://github.com/wuwenbin/buddy2" target="_blank" rel="external">wuwenbin</a>写的两份开源实现和测试用例。实际上后一份是对前一份的精简和优化，而且这份实现真正体现了“极简”二字，追求突破常规的，极致简单的设计，<strong><a href="https://github.com/labrick/buddy2/blob/master/buddy2.c" target="_blank" rel="external">这里</a>是我对该程序的注解</strong>。</p>
 <p>下面我将几个比较难以理解的点，也是传说中的精华部分在下面解释一下：</p>
-<h3 id="伙伴分配器数据结构">伙伴分配器数据结构</h3><pre><code>truct buddy2{
-    <span class="keyword">unsigned</span> size;            <span class="comment">// 管理内存的总单元数目，unsigned后省略的是int</span>
-    <span class="keyword">unsigned</span> longest[<span class="number">1</span>];    <span class="comment">// 二叉树的节点标记，表明该节点可分配的最大单元数</span>
+<h3 id="伙伴分配器数据结构"><a href="#伙伴分配器数据结构" class="headerlink" title="伙伴分配器数据结构"></a>伙伴分配器数据结构</h3><pre><code>truct buddy2{
+    unsigned size;            // 管理内存的总单元数目，unsigned后省略的是int
+    unsigned longest[1];    // 二叉树的节点标记，表明该节点可分配的最大单元数
 };
 </code></pre><p>不论是从存储结构上还是从变量声明（数组成员数为1）上看，这个结构体都比较有意思，我们结合下面一段程序来看：</p>
-<pre><code><span class="keyword">for</span> <span class="params">(i = <span class="number">0</span>; i &lt; <span class="number">2</span> * size - <span class="number">1</span>; ++i)</span>{
-    <span class="keyword">if</span> <span class="params">(IS_POWER_OF_2<span class="params">(i+<span class="number">1</span>)</span>)</span>
-        node_size /= <span class="number">2</span>;
-    self-&gt;longest[i] = node_size;        <span class="comment">// 经验证，这里可以正确向后访问 </span>
+<pre><code>for (i = 0; i &lt; 2 * size - 1; ++i){
+    if (IS_POWER_OF_2(i+1))
+        node_size /= 2;
+    self-&gt;longest[i] = node_size;        // 经验证，这里可以正确向后访问 
 }
 </code></pre><p>它是不是发生了语法错误（i的值肯定会有大于0的时候），但是我在运行时竟然没有报错。然后我就做了个测试，程序在<a href="https://github.com/labrick/buddy2/blob/master/code_test.c" target="_blank" rel="external">这里</a>，为了解读方便，我再将程序片段拷贝一份：</p>
 <pre><code>void main()
 {
-    <span class="keyword">struct</span> buddy2 <span class="keyword">self</span>;
+    struct buddy2 self;
       unsigned node_size;
-      <span class="keyword">int</span> i,size=<span class="number">32</span>;
+      int i,size=32;
 
-      <span class="keyword">self</span>-&gt;size = size;        <span class="comment">// 第一个结构体的size存放总的块数size</span>
-      node_size = size * <span class="number">2</span>;        <span class="comment">// 总共的sizeof(unsigned)数</span>
+      self-&gt;size = size;        // 第一个结构体的size存放总的块数size
+      node_size = size * 2;        // 总共的sizeof(unsigned)数
 
-    <span class="keyword">struct</span> buddy2* init = (<span class="keyword">struct</span> buddy2*)&amp;<span class="keyword">self</span>;
+    struct buddy2* init = (struct buddy2*)&amp;self;
 
-    init-&gt;size = <span class="number">32</span>
-    init-&gt;longest[<span class="number">0</span>] = <span class="number">222</span>;
-      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">2</span>; i++)
-          printf(<span class="string">"self-&gt;size=%d\tself-&gt;longest[%d]=%d\r\n"</span>,<span class="keyword">self</span>-&gt;size,i,<span class="keyword">self</span>-&gt;longest[i]);
+    init-&gt;size = 32
+    init-&gt;longest[0] = 222;
+      for(i=0; i&lt;2; i++)
+          printf(&quot;self-&gt;size=%d\tself-&gt;longest[%d]=%d\r\n&quot;,self-&gt;size,i,self-&gt;longest[i]);
 }
 </code></pre><p>可以看到这样不符合C语言语法的程序当然会运行错误：segmentation fault，也就是产生了越界错误；</p>
 <p>但是按照buddy2中的程序，我们再做一次实验：</p>
-<pre><code><span class="keyword">void</span> main()
+<pre><code>void main()
 {
-      <span class="keyword">struct</span> buddy2* <span class="keyword">self</span>;
-      <span class="keyword">unsigned</span> node_size;
-      <span class="keyword">int</span> i,size=<span class="number">32</span>;
+      struct buddy2* self;
+      unsigned node_size;
+      int i,size=32;
 
-      <span class="keyword">self</span> = (<span class="keyword">struct</span> buddy2*)ALLOC( <span class="number">2</span> * size * <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>));
-      <span class="keyword">self</span>-&gt;size = size;        <span class="comment">// 第一个结构体的size存放总的块数size</span>
-      node_size = size * <span class="number">2</span>;        <span class="comment">// 总共的sizeof(unsigned)数</span>
+      self = (struct buddy2*)ALLOC( 2 * size * sizeof(unsigned));
+      self-&gt;size = size;        // 第一个结构体的size存放总的块数size
+      node_size = size * 2;        // 总共的sizeof(unsigned)数
 
-    <span class="comment">// 以下是验证longest访问正确性的</span>
-    <span class="keyword">unsigned</span>* init = (<span class="keyword">unsigned</span>*)<span class="keyword">self</span>;
-      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">64</span>; i++,init++)
+    // 以下是验证longest访问正确性的
+    unsigned* init = (unsigned*)self;
+      for(i=0; i&lt;64; i++,init++)
       {
           *init = i;
       }
 
-      init = (<span class="keyword">unsigned</span>*)<span class="keyword">self</span>;
-      printf(<span class="string">"memories allocated:\r\n"</span>);
-      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">64</span>; i++,init++)
-          printf(<span class="string">"%d\t"</span>,*init);
-      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">32</span>; i++)
-          printf(<span class="string">"self-&gt;size=%d\tself-&gt;longest[%d]=%d\r\n"</span>,<span class="keyword">self</span>-&gt;size,i,<span class="keyword">self</span>-&gt;longest[i]);
+      init = (unsigned*)self;
+      printf(&quot;memories allocated:\r\n&quot;);
+      for(i=0; i&lt;64; i++,init++)
+          printf(&quot;%d\t&quot;,*init);
+      for(i=0; i&lt;32; i++)
+          printf(&quot;self-&gt;size=%d\tself-&gt;longest[%d]=%d\r\n&quot;,self-&gt;size,i,self-&gt;longest[i]);
 }
 </code></pre><p>这里我是将所分配的内存区域按照0 1 2 3 …的方式存放数据，然后按照self-&gt;size,self-&gt;longest[1],self-&gt;longest[1] …的方式进行读取打印，查看显示的内容的存储方式问题，结果很出乎意料：</p>
-<pre><code><span class="number">1</span>. 首先是能正常运行，没有发生数组越界问题，这个和上面一个程序的区别在于内存分配的方式不同；
-<span class="number">2</span>. <span class="keyword">self</span>-&gt;longest[<span class="number">0</span>...]竟然是按照内存的存储方式连续读取的数值，很不可思议，不过这是事实；
-<span class="number">3</span>. 只在分配的内存区域起始位置定义个结构体，<span class="keyword">self</span>-&gt;size出现一次，后面都是<span class="keyword">self</span>-&gt;longest的值；
+<pre><code>1. 首先是能正常运行，没有发生数组越界问题，这个和上面一个程序的区别在于内存分配的方式不同；
+2. self-&gt;longest[0...]竟然是按照内存的存储方式连续读取的数值，很不可思议，不过这是事实；
+3. 只在分配的内存区域起始位置定义个结构体，self-&gt;size出现一次，后面都是self-&gt;longest的值；
 </code></pre><p>以上结论出乎我的意料，但是事实证明它就是事实，只能接受，不过<strong>尚缺少理论支持</strong>。</p>
 <p>现在我们在回到原程序当中，并且我对他做了一些改变再看一下结果：</p>
-<pre><code><span class="keyword">void</span> main()
+<pre><code>void main()
 {
-      <span class="keyword">struct</span> buddy2* <span class="keyword">self</span>;
-      <span class="keyword">unsigned</span> node_size;
-      <span class="keyword">int</span> i,size=<span class="number">32</span>;
+      struct buddy2* self;
+      unsigned node_size;
+      int i,size=32;
 
-      <span class="keyword">self</span> = (<span class="keyword">struct</span> buddy2*)ALLOC( <span class="number">2</span> * size * <span class="keyword">sizeof</span>(<span class="keyword">unsigned</span>));
-      <span class="keyword">self</span>-&gt;size = size;        <span class="comment">// 第一个结构体的size存放总的块数size</span>
-      node_size = size * <span class="number">2</span>;        <span class="comment">// 总共的sizeof(unsigned)数</span>
+      self = (struct buddy2*)ALLOC( 2 * size * sizeof(unsigned));
+      self-&gt;size = size;        // 第一个结构体的size存放总的块数size
+      node_size = size * 2;        // 总共的sizeof(unsigned)数
 
-      <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">2</span> * size - <span class="number">1</span>; ++i) {
-        <span class="keyword">if</span> (IS_POWER_OF_2(i+<span class="number">1</span>))
-          node_size /= <span class="number">2</span>;
-        <span class="keyword">self</span>-&gt;longest[i] = node_size;        <span class="comment">// 经验证，这里可以正确向后访问 </span>
+      for (i = 0; i &lt; 2 * size - 1; ++i) {
+        if (IS_POWER_OF_2(i+1))
+          node_size /= 2;
+        self-&gt;longest[i] = node_size;        // 经验证，这里可以正确向后访问 
       }
 
-      printf(<span class="string">"memories allocated:\r\n"</span>);
-    <span class="keyword">unsigned</span>* init = (<span class="keyword">unsigned</span>*)<span class="keyword">self</span>;
-      <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt; <span class="number">2</span> * size; i++,init++)
+      printf(&quot;memories allocated:\r\n&quot;);
+    unsigned* init = (unsigned*)self;
+      for(i=0; i&lt; 2 * size; i++,init++)
       {
-          printf(<span class="string">"%d\n"</span>,*init);
+          printf(&quot;%d\n&quot;,*init);
       }
 }
 </code></pre><p>我们打印出的结果是：两个32，2个16，4个8，8个4，16个2，32个1</p>
 <p>第一个32是self-&gt;size，第二个是根节点0，后面依次为节点1,2,3…</p>
 <p>这样的存储确实很牛逼，占用空间少，操作简单，不过难以理解；</p>
-<h3 id="调整参数为2的幂次方">调整参数为2的幂次方</h3><pre><code><span class="keyword">static</span> unsigned fixsize(unsigned <span class="keyword">size</span>){
-    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">1</span>;
-    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">2</span>;
-    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">4</span>;
-    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">8</span>;
-    <span class="keyword">size</span> |= <span class="keyword">size</span> &gt;&gt; <span class="number">16</span>;
-    <span class="keyword">return</span> <span class="keyword">size</span>+<span class="number">1</span>;
+<h3 id="调整参数为2的幂次方"><a href="#调整参数为2的幂次方" class="headerlink" title="调整参数为2的幂次方"></a>调整参数为2的幂次方</h3><pre><code>static unsigned fixsize(unsigned size){
+    size |= size &gt;&gt; 1;
+    size |= size &gt;&gt; 2;
+    size |= size &gt;&gt; 4;
+    size |= size &gt;&gt; 8;
+    size |= size &gt;&gt; 16;
+    return size+1;
 }
 </code></pre><p>找到个注释是这样的：</p>
 <pre><code>/*
- * 把<span class="built_in">size</span>调整到向上取到最近的<span class="number">2</span>次幂
- * <span class="built_in">size</span> |= <span class="built_in">size</span> &gt;&gt; n;表示从低位到高位按n位分组,每组内高n位复制到低n位
- * 最后经过处理<span class="built_in">size</span>是从最高位的<span class="number">1</span>开始往低位全<span class="number">1</span>的整数
- * <span class="keyword">return</span> <span class="built_in">size</span> + <span class="number">1</span>; 得到向上凑够最近<span class="number">2</span>次幂
+ * 把size调整到向上取到最近的2次幂
+ * size |= size &gt;&gt; n;表示从低位到高位按2n位分组,每组内高n位复制到低n位
+ * 最后经过处理size是从最高位的1开始往低位全1的整数
+ * return size + 1; 得到向上凑够最近2次幂
  */
 </code></pre><p>说实话，我没看懂。</p>
-<h3 id="结束">结束</h3><p>搞懂上面的两个问题，尤其是第一个问题，后面的阅读都很顺利了。</p>
-<h2 id="伙伴系统优缺点">伙伴系统优缺点</h2><p>伙伴分配的实质就是一种特殊的“分离适配”，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。</p>
+<h3 id="结束"><a href="#结束" class="headerlink" title="结束"></a>结束</h3><p>搞懂上面的两个问题，尤其是第一个问题，后面的阅读都很顺利了。</p>
+<h2 id="伙伴系统优缺点"><a href="#伙伴系统优缺点" class="headerlink" title="伙伴系统优缺点"></a>伙伴系统优缺点</h2><p>伙伴分配的实质就是一种特殊的“分离适配”，即将内存按2的幂进行划分，相当于分离出若干个块大小一致的空闲链表，搜索该链表并给出同需求最佳匹配的大小。</p>
 <p>其优点是快速搜索合并（O(logN)时间复杂度）以及低外部碎片（最佳适配best-fit）；</p>
 <p>其缺点是内部碎片，因为按2的幂划分块，如果碰上66单位大小，那么必须划分128单位大小的块。但若需求本身就按2的幂分配，比如可以先分配若干个内存池，在其基础上进一步细分就很有吸引力了。 </p>
 

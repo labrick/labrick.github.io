@@ -90,23 +90,18 @@
 
 
 
-<meta name="description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：
-
-中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
+<meta name="description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：  中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="8259A中断控制器编程方法">
 <meta property="og:url" content="http://labrick.github.io/2015/08/26/8259A-interrupt-control/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：
-
-中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
+<meta property="og:description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：  中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
 <meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/8259A-interrupt-control/8259A-interrupt-control.png">
 <meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="8259A中断控制器编程方法">
-<meta name="twitter:description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：
-
-中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
+<meta name="twitter:description" content="8259A芯片工作原理PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：  中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8">
+<meta name="twitter:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/8259A-interrupt-control/8259A-interrupt-control.png">
 
 
 
@@ -246,6 +241,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -431,13 +436,13 @@
       
 
       
-        <h2 id="8259A芯片工作原理">8259A芯片工作原理</h2><p>PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：</p>
+        <h2 id="8259A芯片工作原理"><a href="#8259A芯片工作原理" class="headerlink" title="8259A芯片工作原理"></a>8259A芯片工作原理</h2><p>PC/AT系列兼容机中使用了级联的两片8259A可编程控制器(PIC)芯片，可共管理15级中断向量，其中从芯片的INT引脚连接到主芯片的IR2引脚上。主8259A芯片的端口基地址是0x20，从芯片是0xA0。一个8259A芯片的逻辑框图如下：</p>
 <p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/8259A-interrupt-control/8259A-interrupt-control.png" alt="可编程中断控制器8259A芯片框图"></p>
-<p>中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8个比特位(D7—D0)分别对应引脚IR7—IR0。</p>
+<p>中断请求寄存器IRR(Interrupt Request Register)用来保存中断请求输入引脚上所有请求服务中断级，寄存器的8个比特位(D7–D0)分别对应引脚IR7–IR0。</p>
 <p>中断屏蔽寄存器IMR(Interrupt Mask Register)用于保存被屏蔽的中断请求线对应的比特位，寄存器的8位也是对应8个中断级。哪个比特位被置1就屏蔽哪一级中断请求。即IMR对IRR进行处理，其每个比特位对应IRR的每个请求比特位。对高优先级输入线的屏蔽并不会影响低优先级中断请求线的输入。</p>
 <p>优先级解析器PR(Priority Resolver)用于确定IRR中所设置比特位的优先级，选通最高优先级的中断请求到正在服务寄存器ISR(In-Service Register)中。ISR中保存着正在接受服务的中断请求。</p>
 <p>控制逻辑方框中的寄存器组用于接收CPU产生的两类命令。在8259A可以正常操作之前，必须首先设置初始化命令字ICW(Initialization Command Words)寄存器组的内容。而在其工作过程中，则可以使用写入操作命令字OCW(Operation Command Words)寄存器组来随时设置和管理8259A的工作方式。A0线用于选择操作的寄存器。在PC/AT微机系统中，当A0线为0时芯片的端口地址是0x20和0xA0(从芯片)，当A0=1时端口就是0x21和0xA1。</p>
-<p>来自各个设备的中断请求线分别连接到8259A的IR0—IR7中断请求引脚上。当这些引脚上有一个或多个终端请求信号时，中断请求寄存器IRR中相应的比特位被置位所存。此时若中断屏蔽寄存器IMR中对应位被置位，则相应的中断请求就不会被送到优先级解析器中。对于未屏蔽的中断请求被送到优先级解析器之后，优先级最高的中断请求会被选中。此时8259A就会向CPU发出一个INT信号，而CPU则会在执行完当前的一条指令之后向8259A发送一个INTA来相应中断信号。8259A在收到这个相应信号之后就会把所选出的最高优先级中断请求保存到正在服务寄存器ISR中，即ISR中对应中断请求级的比特位被置位。与此同时，中断请求寄存器IRR中的对应比特位被复位，表示该中断请求开始正被处理中。</p>
+<p>来自各个设备的中断请求线分别连接到8259A的IR0–IR7中断请求引脚上。当这些引脚上有一个或多个终端请求信号时，中断请求寄存器IRR中相应的比特位被置位所存。此时若中断屏蔽寄存器IMR中对应位被置位，则相应的中断请求就不会被送到优先级解析器中。对于未屏蔽的中断请求被送到优先级解析器之后，优先级最高的中断请求会被选中。此时8259A就会向CPU发出一个INT信号，而CPU则会在执行完当前的一条指令之后向8259A发送一个INTA来相应中断信号。8259A在收到这个相应信号之后就会把所选出的最高优先级中断请求保存到正在服务寄存器ISR中，即ISR中对应中断请求级的比特位被置位。与此同时，中断请求寄存器IRR中的对应比特位被复位，表示该中断请求开始正被处理中。</p>
 <p>此后，CPU会向8259A发送第2个INTA脉冲信号，该信号用于通知8259A送出中断号。因此在该脉冲信号期间8259A就会把一个代表中断号的8位数据发送到数据总线上共CPU读取。</p>
 <p>到此为止，CPU中断周期结束。如果8259A使用的是自动结束中断AEOI(Automatic End of Interrupt)方式，那么在第2个INTA脉冲信号的结尾处正在服务寄存器ISR中的当前服务中断比特位就会被复位。否则的话，若8259A处于非自动结束方式，那么在中断服务程序结束时程序就需要项8259A发送一个结束中断(EOI)命令以复位ISR中的比特位。如果中断请求来自级联的第2个8259A芯片，那么就需要项两个芯片都发送EOI命令。此后8259A就会去判断下一个最高优先级的中断，并重复上述处理过程。</p>
 

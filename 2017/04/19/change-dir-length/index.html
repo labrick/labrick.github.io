@@ -90,25 +90,16 @@
 
 
 
-<meta name="description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
-基础版修改~/.bashrc文件的PS1变量：
-if [ &quot;$color_prompt&quot; = yes ]; then
-    PS1=&apos;${debian_chroot:+($debian_chroot)}\">
+<meta name="description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。 基础版修改~/.bashrc文件的PS1变量： if [ &amp;quot;$color_prompt&amp;quot; = yes ]; then     PS1=&amp;apos;${debian_chroot:+($d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux中自动切换显示目录的长度">
 <meta property="og:url" content="http://labrick.github.io/2017/04/19/change-dir-length/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
-基础版修改~/.bashrc文件的PS1变量：
-if [ &quot;$color_prompt&quot; = yes ]; then
-    PS1=&apos;${debian_chroot:+($debian_chroot)}\">
+<meta property="og:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。 基础版修改~/.bashrc文件的PS1变量： if [ &amp;quot;$color_prompt&amp;quot; = yes ]; then     PS1=&amp;apos;${debian_chroot:+($d">
 <meta property="og:updated_time" content="2017-04-19T13:19:14.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux中自动切换显示目录的长度">
-<meta name="twitter:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。
-基础版修改~/.bashrc文件的PS1变量：
-if [ &quot;$color_prompt&quot; = yes ]; then
-    PS1=&apos;${debian_chroot:+($debian_chroot)}\">
+<meta name="twitter:description" content="前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。 基础版修改~/.bashrc文件的PS1变量： if [ &amp;quot;$color_prompt&amp;quot; = yes ]; then     PS1=&amp;apos;${debian_chroot:+($d">
 
 
 
@@ -248,6 +239,16 @@ if [ &quot;$color_prompt&quot; = yes ]; then
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -434,61 +435,61 @@ if [ &quot;$color_prompt&quot; = yes ]; then
 
       
         <p>前几天还了一台服务器做了些事，毕竟不在自己配置的机子上就需要熟悉他人配置的环境，接触一下新的东西，其中终端上一个特性吸引了我：终端只显示当前目录，上层的所有目录都不显示，这个查了下很容易做到。</p>
-<h2 id="基础版">基础版</h2><p>修改~/.bashrc文件的PS1变量：</p>
-<pre><code>if <span class="special">[</span> "<span class="formula">$color_prompt" = yes <span class="special">]</span>; then
-    PS1='$</span><span class="special">{</span>debian_chroot:+(<span class="formula">$debian_chroot)<span class="special">}</span><span class="command">\[</span>\033<span class="special">[</span>01;32m<span class="command">\]</span><span class="command">\u</span>@<span class="command">\h</span><span class="command">\[</span>\033<span class="special">[</span>00m<span class="command">\]</span>:<span class="command">\[</span>\033<span class="special">[</span>01;34m<span class="command">\]</span><span class="command">\w</span><span class="command">\[</span>\033<span class="special">[</span>00m<span class="command">\]</span><span class="command">\$</span> '
+<h2 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h2><p>修改~/.bashrc文件的PS1变量：</p>
+<pre><code>if [ &quot;$color_prompt&quot; = yes ]; then
+    PS1=&apos;${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ &apos;
 else
-    PS1='$</span><span class="special">{</span>debian_chroot:+(<span class="formula">$debian_chroot)<span class="special">}</span><span class="command">\u</span>@<span class="command">\h</span>:<span class="command">\W</span><span class="command">\$</span> '
-fi</span>
+    PS1=&apos;${debian_chroot:+($debian_chroot)}\u@\h:\W\$ &apos;
+fi
 </code></pre><p>测试一下就可以知道采用的是第二个PS1，只是简单的把<code>\u@\h:\w\</code>中的小写w改成大小的W就好，具体的规定如下：</p>
-<pre><code><span class="string">\u</span> 用户名
-<span class="string">\h</span> 主机名第一部分
-<span class="string">\H</span> 主机名全称
-<span class="string">\w</span>  当前工作目录（如 “/home/username/mywork”）
-<span class="string">\W</span>  当前工作目录的“基名 (basename)”（如 “mywork”)
-<span class="string">\t</span>    <span class="number">24</span> 小时制时间
-<span class="string">\T</span>  <span class="number">12</span> 小时制时间
-<span class="string">\@</span>  带有 am/pm 的 <span class="number">12</span> 小时制时间
-<span class="string">\d</span>   “Sat Dec <span class="number">18</span>″ 格式的日期
-<span class="string">\s</span> shell 的名称（如 “bash”)
-<span class="string">\v</span> bash 的版本（如 <span class="number">2.04</span>）
-<span class="string">\V</span> Bash 版本（包括补丁级别）
-<span class="string">\n</span> 换行符
-<span class="string">\r</span> 回车符
-<span class="string">\\</span> 反斜杠
-<span class="string">\a</span> ASCII 响铃字符（也可以键入 <span class="number">07</span>）
-<span class="string">\e</span> ASCII 转义字符（也可以键入 <span class="number">33</span>)
-<span class="string">\[</span> 这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使bash能够正确计算自动换行。
-<span class="string">\]</span> 这个序列应该出现在非打印字符序列之后。
-</code></pre><h2 id="加强版">加强版</h2><p>上面配置的是终端全部显示最后一级目录，这样咋能行呢，路径深了都不知道是怎么进来的，虽说有pwd，但也太不直观了，如果能够根据路径长度自动决定显示路径的深度该多好啊，比如路径深度小的时候显示全路径，路径深度大时显示最后几级路径，这样应该就完美了吧…..</p>
+<pre><code>\u 用户名
+\h 主机名第一部分
+\H 主机名全称
+\w  当前工作目录（如 “/home/username/mywork”）
+\W  当前工作目录的“基名 (basename)”（如 “mywork”)
+\t    24 小时制时间
+\T  12 小时制时间
+\@  带有 am/pm 的 12 小时制时间
+\d   “Sat Dec 18″ 格式的日期
+\s shell 的名称（如 “bash”)
+\v bash 的版本（如 2.04）
+\V Bash 版本（包括补丁级别）
+\n 换行符
+\r 回车符
+\\ 反斜杠
+\a ASCII 响铃字符（也可以键入 07）
+\e ASCII 转义字符（也可以键入 33)
+\[ 这个序列应该出现在不移动光标的字符序列（如颜色转义序列）之前。它使bash能够正确计算自动换行。
+\] 这个序列应该出现在非打印字符序列之后。
+</code></pre><h2 id="加强版"><a href="#加强版" class="headerlink" title="加强版"></a>加强版</h2><p>上面配置的是终端全部显示最后一级目录，这样咋能行呢，路径深了都不知道是怎么进来的，虽说有pwd，但也太不直观了，如果能够根据路径长度自动决定显示路径的深度该多好啊，比如路径深度小的时候显示全路径，路径深度大时显示最后几级路径，这样应该就完美了吧…..</p>
 <p>嗯嗯，google/baidu/github….</p>
 <p>嗨，竟然没有实现我这种想法的原型…..桑心</p>
 <p>自己来吧………</p>
 <p>这个手脚应该动在哪呢？</p>
 <p>PS1上？这个在.bashrc文件中，可这个文件不能老是被执行啊，不行</p>
 <p>cd上？每次cd执行之后自动获取当前目录的深度，并重新设置PS1，嗯嗯，可行….动手吧</p>
-<pre><code><span class="shebang">#!/bin/bash
-</span>
-<span class="built_in">command</span>=<span class="string">"cd "</span>
-<span class="keyword">for</span> arg <span class="keyword">in</span> <span class="string">"$*"</span>
-<span class="keyword">do</span>
-    <span class="built_in">command</span>=<span class="variable">${command}</span><span class="string">" <span class="variable">$arg</span>"</span>
-<span class="keyword">done</span>
-<span class="variable">$command</span>
+<pre><code>#!/bin/bash
 
-<span class="comment">#echo ${\#PWD}      # 这里因为hexo的原因多加了个\</span>
-<span class="built_in">pwd</span>_len=<span class="variable">${\#PWD}</span>    <span class="comment"># 这里因为hexo的原因多加了个\</span>
-((std_len=<span class="number">14</span>+<span class="number">60</span>))  <span class="comment"># 65 halfscreen</span>
-<span class="comment">#echo std_len:$std_len</span>
-<span class="keyword">if</span> [ <span class="variable">$pwd_len</span> -ge <span class="variable">$std_len</span> ]; <span class="keyword">then</span>
-    keep_str=<span class="variable">${PWD:22-$std_len:$pwd_len}</span>
-    <span class="comment">#echo $keep_str</span>
-    keep_str=<span class="variable">${keep_str#*/}</span>
+command=&quot;cd &quot;
+for arg in &quot;$*&quot;
+do
+    command=${command}&quot; $arg&quot;
+done
+$command
 
-    <span class="built_in">export</span> PS1=<span class="string">'${debian_chroot:+($debian_chroot)}\u@\h:$keep_str\$ '</span>
-<span class="keyword">else</span>
-    <span class="built_in">export</span> PS1=<span class="string">'${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '</span>
-<span class="keyword">fi</span>
+#echo ${\#PWD}      # 这里因为hexo的原因多加了个\
+pwd_len=${\#PWD}    # 这里因为hexo的原因多加了个\
+((std_len=14+60))  # 65 halfscreen
+#echo std_len:$std_len
+if [ $pwd_len -ge $std_len ]; then
+    keep_str=${PWD:22-$std_len:$pwd_len}
+    #echo $keep_str
+    keep_str=${keep_str#*/}
+
+    export PS1=&apos;${debian_chroot:+($debian_chroot)}\u@\h:$keep_str\$ &apos;
+else
+    export PS1=&apos;${debian_chroot:+($debian_chroot)}\u@\h:\w\$ &apos;
+fi
 </code></pre><p>挺好，完美！</p>
 <p>执行试下，嗨，不行啊，这个脚本会在后台开个终端，cd到的目录并不更改当前终端的路径啊</p>
 <p>用source来解决吧…..</p>
@@ -498,7 +499,7 @@ fi</span>
 <li>放在.bashrc中参数竟然还能传递过去，意外的惊喜。</li>
 </ol>
 <p>所以呢，在.bashrc中加入一句话：</p>
-<pre><code><span class="built_in">alias</span> <span class="built_in">cd</span>=<span class="string">"source /mnt/hdd2/yanan/bin/cd.sh"</span>
+<pre><code>alias cd=&quot;source /mnt/hdd2/yanan/bin/cd.sh&quot;
 </code></pre><p>再<code>source ~/.bashrc</code>，ok！搞定手工。</p>
 
       

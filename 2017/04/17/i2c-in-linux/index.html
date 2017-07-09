@@ -90,22 +90,16 @@
 
 
 
-<meta name="description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
-对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
-当前在调试and">
+<meta name="description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。 当前在调试and">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux中的I2C配置">
 <meta property="og:url" content="http://labrick.github.io/2017/04/17/i2c-in-linux/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
-对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
-当前在调试and">
+<meta property="og:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。 当前在调试and">
 <meta property="og:updated_time" content="2017-04-17T15:07:28.745Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux中的I2C配置">
-<meta name="twitter:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。
-对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。
-当前在调试and">
+<meta name="twitter:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。 当前在调试and">
 
 
 
@@ -245,6 +239,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -435,218 +439,218 @@
 <p>当前在调试android的屏幕显示问题，因为采用的是双屏，而soc中屏幕接口(lvds/RGB)又是复用的，所以这里采用MIPI转成了lvds，然后外接lvds屏幕（至于为什么要采用lvds屏，也是因为之前项目中的后遗症），这个转换芯片就是icn6201，这时就需要采用某种方式对icn6201转换芯片进行配置，icn6201支持dsi和i2c两种接口进行配置，我们轻易的就选择了i2c配置(没有任何理由？)。</p>
 <p>因为这里只是在开机时对转换芯片进行下配置，不需要衔接android内部的其他接口，所以我就打算直接写个驱动来进行操作就行了。</p>
 <p>这里时添加驱动的操作：</p>
-<pre><code><span class="header">+++ ./drivers/i2c/Makefile    2017-04-13 13:20:16.000000000 +0800</span>
-<span class="chunk">@@ -6,6 +6,7 @@</span>
+<pre><code>+++ ./drivers/i2c/Makefile    2017-04-13 13:20:16.000000000 +0800
+@@ -6,6 +6,7 @@
  obj-$(CONFIG_I2C)        += i2c-core.o
  obj-$(CONFIG_I2C_SMBUS)        += i2c-smbus.o
  obj-$(CONFIG_I2C_CHARDEV)    += i2c-dev.o
-<span class="addition">+obj-$(CONFIG_I2C_INIT_ICN6201)    += icn6201.o</span>
++obj-$(CONFIG_I2C_INIT_ICN6201)    += icn6201.o
  obj-$(CONFIG_I2C_MUX)        += i2c-mux.o
  obj-y                += algos/ busses/ muxes/
  obj-$(CONFIG_I2C_STUB)        += i2c-stub.o
 
-<span class="header">+++ ./drivers/i2c/Kconfig    2017-04-17 22:24:22.365686411 +0800</span>
-<span class="chunk">@@ -46,6 +46,13 @@</span>
++++ ./drivers/i2c/Kconfig    2017-04-17 22:24:22.365686411 +0800
+@@ -46,6 +46,13 @@
        This support is also available as a module.  If so, the module 
        will be called i2c-dev.
 
-<span class="addition">+config I2C_INIT_ICN6201</span>
-<span class="addition">+    tristate "i2c init icn6201"</span>
-<span class="addition">+    default M</span>
-<span class="addition">+    help</span>
-<span class="addition">+        i2c init icn6201</span>
-<span class="addition">+</span>
-<span class="addition">+</span>
++config I2C_INIT_ICN6201
++    tristate &quot;i2c init icn6201&quot;
++    default M
++    help
++        i2c init icn6201
++
++
  config I2C_MUX
-     tristate "I2C bus multiplexing support"
+     tristate &quot;I2C bus multiplexing support&quot;
      depends on HAS_IOMEM
 </code></pre><p>接下来就是添加驱动文件driver/i2c/icn6201.c了：</p>
-<pre><code><span class="header">+++ ./drivers/i2c/icn6201.c    2017-04-17 22:35:17.658101099 +0800</span>
-<span class="chunk">@@ -0,0 +1,368 @@</span>
-<span class="addition">+/*</span>
-<span class="addition">+    icn6201.c - init icn6201 for screen 10.1</span>
-<span class="addition">+*/</span>
-<span class="addition">+</span>
-<span class="addition">+#include &lt;linux/kernel.h&gt;</span>
-<span class="addition">+#include &lt;linux/module.h&gt;</span>
-<span class="addition">+#include &lt;linux/device.h&gt;</span>
-<span class="addition">+#include &lt;linux/notifier.h&gt;</span>
-<span class="addition">+#include &lt;linux/fs.h&gt;</span>
-<span class="addition">+#include &lt;linux/slab.h&gt;</span>
-<span class="addition">+#include &lt;linux/init.h&gt;</span>
-<span class="addition">+#include &lt;linux/list.h&gt;</span>
-<span class="addition">+#include &lt;linux/i2c.h&gt;</span>
-<span class="addition">+#include &lt;linux/i2c-dev.h&gt;</span>
-<span class="addition">+#include &lt;linux/jiffies.h&gt;</span>
-<span class="addition">+#include &lt;linux/uaccess.h&gt;</span>
-<span class="addition">+</span>
-<span class="addition">+/*</span>
-<span class="addition">+ * An i2c_dev represents an i2c_adapter ... an I2C or SMBus master, not a</span>
-<span class="addition">+ * slave (i2c_client) with which messages will be exchanged.  It's coupled</span>
-<span class="addition">+ * with a character special file which is accessed by user mode drivers.</span>
-<span class="addition">+ *</span>
-<span class="addition">+ * The list of i2c_dev structures is parallel to the i2c_adapter lists</span>
-<span class="addition">+ * maintained by the driver model, and is updated using bus notifications.</span>
-<span class="addition">+ */</span>
-<span class="addition">+struct i2c_dev {</span>
-<span class="addition">+    struct list_head list;</span>
-<span class="addition">+    struct i2c_adapter *adap;</span>
-<span class="addition">+    struct device *dev;</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+struct icn6201_data {</span>
-<span class="addition">+    struct i2c_client *icn6201_client;</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+static int icn6201_smbus_write_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)</span>
-<span class="addition">+{</span>
-<span class="addition">+    s32 dummy;</span>
-<span class="addition">+    dummy = i2c_smbus_write_byte_data(client, reg_addr, *data);</span>
-<span class="addition">+    if (dummy &lt; 0){</span>
-<span class="addition">+        printk("icn6201_smbus_write_byte: write byte data failed\n");</span>
-<span class="addition">+        return -1;</span>
-<span class="addition">+    }</span>
-<span class="addition">+    printk("icn6201_smbus_write_byte: write data successful!\n");</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+// static int icn6201_smbus_read_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)</span>
-<span class="addition">+// {</span>
-<span class="addition">+//     s32 dummy;</span>
-<span class="addition">+//     dummy = i2c_smbus_read_byte_data(client, reg_addr, *data);</span>
-<span class="addition">+//     if (dummy &lt; 0){</span>
-<span class="addition">+//         printk("icn6201_smbus_read_byte: read byte data failed\n");</span>
-<span class="addition">+//         return -1;</span>
-<span class="addition">+//     }</span>
-<span class="addition">+//     printk("icn6201_smbus_read_byte: read data successful!\n");</span>
-<span class="addition">+//     return 0;</span>
-<span class="addition">+// }</span>
-<span class="addition">+</span>
-<span class="addition">+#define BIST_MODE</span>
-<span class="addition">+static int icn6201_probe(struct i2c_client *client, const struct i2c_device_id *id)</span>
-<span class="addition">+{</span>
-<span class="addition">+    int err = 0, i = 0;</span>
-<span class="addition">+    struct icn6201_data *data;</span>
-<span class="addition">+    unsigned char tmp_value = 0;</span>
-<span class="addition">+    </span>
-<span class="addition">+    unsigned char addr_value[][2] = {</span>
-<span class="addition">+#ifdef BIST_MODE</span>
-<span class="addition">+        {0x20, 0x00}, {0x21, 0x20}, {0x22, 0x35},</span>
-<span class="addition">+        {0x23, 0x55}, {0x24, 0x28}, {0x25, 0xA8},</span>
-<span class="addition">+        {0x26, 0x00}, {0x27, 0x0A}, {0x28, 0x06},</span>
-<span class="addition">+        {0x29, 0x10},</span>
-<span class="addition">+</span>
-<span class="addition">+        {0x34, 0x80}, {0x36, 0x55}, {0xB5, 0xA0},</span>
-<span class="addition">+        {0x5C, 0xFF}, {0x56, 0x90}, {0x6B, 0x21},</span>
-<span class="addition">+        {0x69, 0x26}, {0x10, 0x47}, {0x2A, 0x41},</span>
-<span class="addition">+        {0xB6, 0x20}, {0x51, 0x20}, {0x09, 0x10},</span>
-<span class="addition">+#endif</span>
-<span class="addition">+    };</span>
-<span class="addition">+    printk("icn6201:=============Probe==================\n");</span>
-<span class="addition">+</span>
-<span class="addition">+    if (!i2c_check_functionality(client-&gt;adapter, I2C_FUNC_I2C)){</span>
-<span class="addition">+        dev_err(&amp;client-&gt;dev, "System need I2C function.\n");</span>
-<span class="addition">+        return err;</span>
-<span class="addition">+    }</span>
-<span class="addition">+    </span>
-<span class="addition">+    // 这里也申请了i2c_client的空间，相当于实例化</span>
-<span class="addition">+    data = kzalloc(sizeof(struct icn6201_data), GFP_KERNEL);</span>
-<span class="addition">+    if (!data) {</span>
-<span class="addition">+        return -ENOMEM;</span>
-<span class="addition">+    }</span>
-<span class="addition">+</span>
-<span class="addition">+    i2c_set_clientdata(client, data);</span>
-<span class="addition">+    data-&gt;icn6201_client = client;</span>
-<span class="addition">+</span>
-<span class="addition">+    for(i=0; i&lt;sizeof(addr_value)/2; i++){</span>
-<span class="addition">+        printk("icn6201: write data:%X to addr:%X\n", addr_value[i][1], addr_value[i][0]);</span>
-<span class="addition">+        icn6201_smbus_write_byte(client, addr_value[i][0], &amp;addr_value[i][1]);</span>
-<span class="addition">+        // icn6201_smbus_read_byte(client, addr_value[i][0], &amp;addr_value[i][1]);</span>
-<span class="addition">+        printk("icn6201: read data:%X to addr:%X\n", addr_value[i][1], addr_value[i][0]);</span>
-<span class="addition">+    }</span>
-<span class="addition">+</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static int icn6201_remove(struct i2c_client *client)</span>
-<span class="addition">+{</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static const struct i2c_device_id icn6201_id[] = {</span>
-<span class="addition">+    { "icn6201", 0 },</span>
-<span class="addition">+    {}</span>
-<span class="addition">+};</span>
-<span class="addition">+MODULE_DEVICE_TABLE(i2c, icn6201_id);</span>
-<span class="addition">+</span>
-<span class="addition">+int icn6201_detect(struct i2c_client *client, struct i2c_board_info *info)</span>
-<span class="addition">+{</span>
-<span class="addition">+    // 这里是获取总线信息，然后进行判断</span>
-<span class="addition">+    return 0;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static const unsigned short normal_i2c[2] = {0x58&gt;&gt;1, I2C_CLIENT_END, };</span>
-<span class="addition">+</span>
-<span class="addition">+static struct i2c_board_info icn6201_board_info = {</span>
-<span class="addition">+    .type = "icn6201",</span>
-<span class="addition">+    .addr = 0x58&gt;&gt;1,</span>
-<span class="addition">+    // {I2C_BOARD_INFO("icn6201", 0x58&gt;&gt;1),},</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+// 每一个I2C设备驱动，必须首先创造一个i2c_driver结构体对象</span>
-<span class="addition">+static struct i2c_driver icn6201_driver = {</span>
-<span class="addition">+    .class = I2C_CLASS_HWMON,</span>
-<span class="addition">+    .probe        = icn6201_probe,</span>
-<span class="addition">+    .remove        = icn6201_remove,</span>
-<span class="addition">+    .id_table    = icn6201_id,</span>
-<span class="addition">+    .driver = {</span>
-<span class="addition">+        .name    = "icn6201",</span>
-<span class="addition">+        .owner = THIS_MODULE,</span>
-<span class="addition">+    },</span>
-<span class="addition">+    .detect         = icn6201_detect,</span>
-<span class="addition">+    .address_list    = normal_i2c,</span>
-<span class="addition">+};</span>
-<span class="addition">+</span>
-<span class="addition">+// static void print_i2c_list()</span>
-<span class="addition">+// {</span>
-<span class="addition">+//     </span>
-<span class="addition">+// }</span>
-<span class="addition">+</span>
-<span class="addition">+static struct i2c_client *local_client = NULL;</span>
-<span class="addition">+</span>
-<span class="addition">+static int __init icn6201_init(void)</span>
-<span class="addition">+{</span>
-<span class="addition">+    int ret;</span>
-<span class="addition">+    struct i2c_adapter *i2c_adap;</span>
-<span class="addition">+</span>
-<span class="addition">+    i2c_adap = i2c_get_adapter(0);</span>
-<span class="addition">+    local_client = i2c_new_device(i2c_adap, &amp;icn6201_board_info);</span>
-<span class="addition">+    i2c_put_adapter(i2c_adap);</span>
-<span class="addition">+</span>
-<span class="addition">+    printk("icn6201_init: i2c to init icn6201 driver\n");</span>
-<span class="addition">+    ret = i2c_add_driver(&amp;icn6201_driver);</span>
-<span class="addition">+    if(ret)</span>
-<span class="addition">+        printk("icn6201_init: i2c_add_driver err");</span>
-<span class="addition">+</span>
-<span class="addition">+    // i2c_register_board_info(0, icn6201_board_info, ARRAY_SIZE(icn6201_board_info));</span>
-<span class="addition">+</span>
-<span class="addition">+    return ret;</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+static void __exit icn6201_exit(void)</span>
-<span class="addition">+{</span>
-<span class="addition">+    printk("icn6201_exit: i2c to del icn6201 driver\n");</span>
-<span class="addition">+    i2c_unregister_device(local_client);</span>
-<span class="addition">+    i2c_del_driver(&amp;icn6201_driver);</span>
-<span class="addition">+}</span>
-<span class="addition">+</span>
-<span class="addition">+MODULE_AUTHOR("Frodo Looijaard &lt;frodol@dds.nl&gt; and "</span>
-<span class="addition">+        "Simon G. Vogl &lt;simon@tk.uni-linz.ac.at&gt;");</span>
-<span class="addition">+MODULE_DESCRIPTION("I2C /dev entries driver");</span>
-<span class="addition">+MODULE_LICENSE("GPL");</span>
-<span class="addition">+</span>
-<span class="addition">+module_init(icn6201_init);</span>
-<span class="addition">+module_exit(icn6201_exit);</span>
+<pre><code>+++ ./drivers/i2c/icn6201.c    2017-04-17 22:35:17.658101099 +0800
+@@ -0,0 +1,368 @@
++/*
++    icn6201.c - init icn6201 for screen 10.1
++*/
++
++#include &lt;linux/kernel.h&gt;
++#include &lt;linux/module.h&gt;
++#include &lt;linux/device.h&gt;
++#include &lt;linux/notifier.h&gt;
++#include &lt;linux/fs.h&gt;
++#include &lt;linux/slab.h&gt;
++#include &lt;linux/init.h&gt;
++#include &lt;linux/list.h&gt;
++#include &lt;linux/i2c.h&gt;
++#include &lt;linux/i2c-dev.h&gt;
++#include &lt;linux/jiffies.h&gt;
++#include &lt;linux/uaccess.h&gt;
++
++/*
++ * An i2c_dev represents an i2c_adapter ... an I2C or SMBus master, not a
++ * slave (i2c_client) with which messages will be exchanged.  It&apos;s coupled
++ * with a character special file which is accessed by user mode drivers.
++ *
++ * The list of i2c_dev structures is parallel to the i2c_adapter lists
++ * maintained by the driver model, and is updated using bus notifications.
++ */
++struct i2c_dev {
++    struct list_head list;
++    struct i2c_adapter *adap;
++    struct device *dev;
++};
++
++struct icn6201_data {
++    struct i2c_client *icn6201_client;
++};
++
++static int icn6201_smbus_write_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)
++{
++    s32 dummy;
++    dummy = i2c_smbus_write_byte_data(client, reg_addr, *data);
++    if (dummy &lt; 0){
++        printk(&quot;icn6201_smbus_write_byte: write byte data failed\n&quot;);
++        return -1;
++    }
++    printk(&quot;icn6201_smbus_write_byte: write data successful!\n&quot;);
++    return 0;
++}
++
++// static int icn6201_smbus_read_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)
++// {
++//     s32 dummy;
++//     dummy = i2c_smbus_read_byte_data(client, reg_addr, *data);
++//     if (dummy &lt; 0){
++//         printk(&quot;icn6201_smbus_read_byte: read byte data failed\n&quot;);
++//         return -1;
++//     }
++//     printk(&quot;icn6201_smbus_read_byte: read data successful!\n&quot;);
++//     return 0;
++// }
++
++#define BIST_MODE
++static int icn6201_probe(struct i2c_client *client, const struct i2c_device_id *id)
++{
++    int err = 0, i = 0;
++    struct icn6201_data *data;
++    unsigned char tmp_value = 0;
++    
++    unsigned char addr_value[][2] = {
++#ifdef BIST_MODE
++        {0x20, 0x00}, {0x21, 0x20}, {0x22, 0x35},
++        {0x23, 0x55}, {0x24, 0x28}, {0x25, 0xA8},
++        {0x26, 0x00}, {0x27, 0x0A}, {0x28, 0x06},
++        {0x29, 0x10},
++
++        {0x34, 0x80}, {0x36, 0x55}, {0xB5, 0xA0},
++        {0x5C, 0xFF}, {0x56, 0x90}, {0x6B, 0x21},
++        {0x69, 0x26}, {0x10, 0x47}, {0x2A, 0x41},
++        {0xB6, 0x20}, {0x51, 0x20}, {0x09, 0x10},
++#endif
++    };
++    printk(&quot;icn6201:=============Probe==================\n&quot;);
++
++    if (!i2c_check_functionality(client-&gt;adapter, I2C_FUNC_I2C)){
++        dev_err(&amp;client-&gt;dev, &quot;System need I2C function.\n&quot;);
++        return err;
++    }
++    
++    // 这里也申请了i2c_client的空间，相当于实例化
++    data = kzalloc(sizeof(struct icn6201_data), GFP_KERNEL);
++    if (!data) {
++        return -ENOMEM;
++    }
++
++    i2c_set_clientdata(client, data);
++    data-&gt;icn6201_client = client;
++
++    for(i=0; i&lt;sizeof(addr_value)/2; i++){
++        printk(&quot;icn6201: write data:%X to addr:%X\n&quot;, addr_value[i][1], addr_value[i][0]);
++        icn6201_smbus_write_byte(client, addr_value[i][0], &amp;addr_value[i][1]);
++        // icn6201_smbus_read_byte(client, addr_value[i][0], &amp;addr_value[i][1]);
++        printk(&quot;icn6201: read data:%X to addr:%X\n&quot;, addr_value[i][1], addr_value[i][0]);
++    }
++
++    return 0;
++}
++
++static int icn6201_remove(struct i2c_client *client)
++{
++    return 0;
++}
++
++static const struct i2c_device_id icn6201_id[] = {
++    { &quot;icn6201&quot;, 0 },
++    {}
++};
++MODULE_DEVICE_TABLE(i2c, icn6201_id);
++
++int icn6201_detect(struct i2c_client *client, struct i2c_board_info *info)
++{
++    // 这里是获取总线信息，然后进行判断
++    return 0;
++}
++
++static const unsigned short normal_i2c[2] = {0x58&gt;&gt;1, I2C_CLIENT_END, };
++
++static struct i2c_board_info icn6201_board_info = {
++    .type = &quot;icn6201&quot;,
++    .addr = 0x58&gt;&gt;1,
++    // {I2C_BOARD_INFO(&quot;icn6201&quot;, 0x58&gt;&gt;1),},
++};
++
++// 每一个I2C设备驱动，必须首先创造一个i2c_driver结构体对象
++static struct i2c_driver icn6201_driver = {
++    .class = I2C_CLASS_HWMON,
++    .probe        = icn6201_probe,
++    .remove        = icn6201_remove,
++    .id_table    = icn6201_id,
++    .driver = {
++        .name    = &quot;icn6201&quot;,
++        .owner = THIS_MODULE,
++    },
++    .detect         = icn6201_detect,
++    .address_list    = normal_i2c,
++};
++
++// static void print_i2c_list()
++// {
++//     
++// }
++
++static struct i2c_client *local_client = NULL;
++
++static int __init icn6201_init(void)
++{
++    int ret;
++    struct i2c_adapter *i2c_adap;
++
++    i2c_adap = i2c_get_adapter(0);
++    local_client = i2c_new_device(i2c_adap, &amp;icn6201_board_info);
++    i2c_put_adapter(i2c_adap);
++
++    printk(&quot;icn6201_init: i2c to init icn6201 driver\n&quot;);
++    ret = i2c_add_driver(&amp;icn6201_driver);
++    if(ret)
++        printk(&quot;icn6201_init: i2c_add_driver err&quot;);
++
++    // i2c_register_board_info(0, icn6201_board_info, ARRAY_SIZE(icn6201_board_info));
++
++    return ret;
++}
++
++static void __exit icn6201_exit(void)
++{
++    printk(&quot;icn6201_exit: i2c to del icn6201 driver\n&quot;);
++    i2c_unregister_device(local_client);
++    i2c_del_driver(&amp;icn6201_driver);
++}
++
++MODULE_AUTHOR(&quot;Frodo Looijaard &lt;frodol@dds.nl&gt; and &quot;
++        &quot;Simon G. Vogl &lt;simon@tk.uni-linz.ac.at&gt;&quot;);
++MODULE_DESCRIPTION(&quot;I2C /dev entries driver&quot;);
++MODULE_LICENSE(&quot;GPL&quot;);
++
++module_init(icn6201_init);
++module_exit(icn6201_exit);
 </code></pre>
       
     </div>

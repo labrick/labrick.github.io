@@ -90,46 +90,16 @@
 
 
 
-<meta name="description" content="编译Native C的helloworld模块
-在Android源码下的development目录下创建一个名为hello的目录
-在此目录下创建一个名为hello.c的C语言文件，代码如下：
-
-int main()
-{
-    printf(&quot;Hello World!\n&quot;);
-    return 0;
-}
-
-当前目录下创建Android.mk文件（Android Makefile标准命名，不可">
+<meta name="description" content="编译Native C的helloworld模块 在Android源码下的development目录下创建一个名为hello的目录 在此目录下创建一个名为hello.c的C语言文件，代码如下：  int main() {     printf(&amp;quot;Hello World!\n&amp;quot;);     return 0; }  当前目录下创建Android.mk文件（Android Makef">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android运行C程序">
 <meta property="og:url" content="http://labrick.github.io/2016/04/25/use-android-ndk/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="编译Native C的helloworld模块
-在Android源码下的development目录下创建一个名为hello的目录
-在此目录下创建一个名为hello.c的C语言文件，代码如下：
-
-int main()
-{
-    printf(&quot;Hello World!\n&quot;);
-    return 0;
-}
-
-当前目录下创建Android.mk文件（Android Makefile标准命名，不可">
+<meta property="og:description" content="编译Native C的helloworld模块 在Android源码下的development目录下创建一个名为hello的目录 在此目录下创建一个名为hello.c的C语言文件，代码如下：  int main() {     printf(&amp;quot;Hello World!\n&amp;quot;);     return 0; }  当前目录下创建Android.mk文件（Android Makef">
 <meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android运行C程序">
-<meta name="twitter:description" content="编译Native C的helloworld模块
-在Android源码下的development目录下创建一个名为hello的目录
-在此目录下创建一个名为hello.c的C语言文件，代码如下：
-
-int main()
-{
-    printf(&quot;Hello World!\n&quot;);
-    return 0;
-}
-
-当前目录下创建Android.mk文件（Android Makefile标准命名，不可">
+<meta name="twitter:description" content="编译Native C的helloworld模块 在Android源码下的development目录下创建一个名为hello的目录 在此目录下创建一个名为hello.c的C语言文件，代码如下：  int main() {     printf(&amp;quot;Hello World!\n&amp;quot;);     return 0; }  当前目录下创建Android.mk文件（Android Makef">
 
 
 
@@ -269,6 +239,16 @@ int main()
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -454,29 +434,29 @@ int main()
       
 
       
-        <h4 id="编译Native_C的helloworld模块">编译Native C的helloworld模块</h4><ol>
+        <h4 id="编译Native-C的helloworld模块"><a href="#编译Native-C的helloworld模块" class="headerlink" title="编译Native C的helloworld模块"></a>编译Native C的helloworld模块</h4><ol>
 <li>在Android源码下的development目录下创建一个名为hello的目录</li>
 <li>在此目录下创建一个名为hello.c的C语言文件，代码如下：</li>
 </ol>
-<pre><code><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
-</span>{
-    <span class="built_in">printf</span>(<span class="string">"Hello World!\n"</span>);
-    <span class="keyword">return</span> <span class="number">0</span>;
+<pre><code>int main()
+{
+    printf(&quot;Hello World!\n&quot;);
+    return 0;
 }
 </code></pre><ol>
 <li>当前目录下创建Android.mk文件（Android Makefile标准命名，不可更改，内容可以参考其他已有的Android.mk文件的写法），内容如下：</li>
 </ol>
-<pre><code>LO<span class="built_in">CAL_PATH</span>:=$(call my-dir)
+<pre><code>LOCAL_PATH:=$(call my-dir)
 include $(CLEAR_VARS)
-LO<span class="built_in">CAL_SRC_FILES</span>:=\
-hello<span class="variable">.c</span>
-LO<span class="built_in">CAL_MODULE</span> := helloworld
-include $(B<span class="built_in">UILD_EXECUTABLE</span>)
+LOCAL_SRC_FILES:=\
+hello.c
+LOCAL_MODULE := helloworld
+include $(BUILD_EXECUTABLE)
 
 
-<span class="number">1.</span> LO<span class="built_in">CAL_SRC_FILES</span>：用于指定源文件
-<span class="number">2.</span> LO<span class="built_in">CAL_MODULE</span>：用于指定要编译模块的名字，在下一步编译时会用到。
-<span class="number">3.</span> <span class="preprocessor">#include $(BUILD_EXECUTABLE)：表示要编译成一个可执行文件，如果想编译成动态库，则可用BUILD_SHARED_LIBRARY，这些具体用法可以在Android/build/core/config.mk查到。</span>
+1. LOCAL_SRC_FILES：用于指定源文件
+2. LOCAL_MODULE：用于指定要编译模块的名字，在下一步编译时会用到。
+3. #include $(BUILD_EXECUTABLE)：表示要编译成一个可执行文件，如果想编译成动态库，则可用BUILD_SHARED_LIBRARY，这些具体用法可以在Android/build/core/config.mk查到。
 </code></pre><ol>
 <li><p>返回Android源码顶层目录进行编译：</p>
 <p> make helloworld</p>
@@ -487,8 +467,8 @@ include $(B<span class="built_in">UILD_EXECUTABLE</span>)
 </ol>
 <p>这样通过adb push将它传送到Android开发板上，再通过adb shell登录到开发板即可执行</p>
 <p>注意这里可能会存在Android文件系统没有权限问题，解决方法如下：</p>
-<pre><code><span class="title">adb</span> remount
-</code></pre><h4 id="手工编译C模块">手工编译C模块</h4><ol>
+<pre><code>adb remount
+</code></pre><h4 id="手工编译C模块"><a href="#手工编译C模块" class="headerlink" title="手工编译C模块"></a>手工编译C模块</h4><ol>
 <li>在Android编译环境中，提供了showcommands选项来显示编译命令行，可以通过打开这个选项来查看一些编译时的细节。</li>
 <li><p>在具体操作之前，需要使用如下命令把前面中的helloworld模块清除。</p>
 <p> make clean-helloworld</p>
@@ -718,7 +698,7 @@ include $(B<span class="built_in">UILD_EXECUTABLE</span>)
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#编译Native_C的helloworld模块"><span class="nav-number">1.</span> <span class="nav-text">编译Native C的helloworld模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手工编译C模块"><span class="nav-number">2.</span> <span class="nav-text">手工编译C模块</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#编译Native-C的helloworld模块"><span class="nav-number">1.</span> <span class="nav-text">编译Native C的helloworld模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#手工编译C模块"><span class="nav-number">2.</span> <span class="nav-text">手工编译C模块</span></a></li></ol></div>
             
 
           </div>

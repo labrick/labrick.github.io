@@ -90,25 +90,16 @@
 
 
 
-<meta name="description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
-安装sudo apt-get install quota
-配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
-/dev/sdb1   /mnt/">
+<meta name="description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。 安装sudo apt-get install quota 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。 /dev/sdb1   /mnt/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="定额分配硬盘空间">
 <meta property="og:url" content="http://labrick.github.io/2017/02/15/quota-partition/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
-安装sudo apt-get install quota
-配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
-/dev/sdb1   /mnt/">
+<meta property="og:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。 安装sudo apt-get install quota 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。 /dev/sdb1   /mnt/">
 <meta property="og:updated_time" content="2017-02-19T09:00:49.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="定额分配硬盘空间">
-<meta name="twitter:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。
-安装sudo apt-get install quota
-配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。
-/dev/sdb1   /mnt/">
+<meta name="twitter:description" content="由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。 安装sudo apt-get install quota 配置编辑/etc/fstab，在所要配置quota的磁盘分区中添加usrquota, grpquota选项。 /dev/sdb1   /mnt/">
 
 
 
@@ -248,6 +239,16 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -434,93 +435,93 @@
 
       
         <p>由于大家共享实验室的服务器，如果每个人都任意占用硬盘空间，多大的硬盘空间肯定都是不够用的（just like the first harddisk），所以必需在共享的服务器上建立磁盘定额分配策略。</p>
-<h2 id="安装">安装</h2><pre><code>sudo apt-<span class="keyword">get</span> install quota
-</code></pre><h2 id="配置">配置</h2><p>编辑/etc/fstab，在所要配置quota的磁盘分区中添加<code>usrquota, grpquota</code>选项。</p>
-<pre><code><span class="regexp">/dev/</span>sdb1   <span class="regexp">/mnt/</span>hdd2   ext4    defaults,usrquota,grpquota <span class="number">1</span>  <span class="number">2</span>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><pre><code>sudo apt-get install quota
+</code></pre><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>编辑/etc/fstab，在所要配置quota的磁盘分区中添加<code>usrquota, grpquota</code>选项。</p>
+<pre><code>/dev/sdb1   /mnt/hdd2   ext4    defaults,usrquota,grpquota 1  2
 </code></pre><p>重新挂载该磁盘分区：</p>
-<pre><code>mount -o remount <span class="regexp">/dev/</span>sdb1 <span class="regexp">/mnt/</span>hdd2
+<pre><code>mount -o remount /dev/sdb1 /mnt/hdd2
 </code></pre><p>在配置quota的磁盘分区的根目录中建立aquota.group, aquota.user, quota.group, quota.user文件</p>
-<pre><code>touch aquota<span class="class">.group</span> aquota<span class="class">.user</span> quota<span class="class">.group</span> quota.user
+<pre><code>touch aquota.group aquota.user quota.group quota.user
 </code></pre><p>执行quotacheck扫描</p>
 <pre><code>sudo quotacheck -avug
-quotacheck: Cannot find filesystem to<span class="instruction"> check </span>or filesystem<span class="instruction"> not </span>mounted with quota option.
+quotacheck: Cannot find filesystem to check or filesystem not mounted with quota option.
 </code></pre><p>这一步容易出现上面的问题，所以这里可以强制执行quotacheck扫描：</p>
 <pre><code>sudo quotacheck -cfmvF vfsv0 /mnt/hdd2
 quotacheck: Scanning /dev/sdb1 [/mnt/hdd2]
-|<span class="string">/-</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\
+|/-|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\
 .
 .
-</span>|<span class="string">/-</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\</span>|<span class="string">/-\
+|/-|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\|/-\
 done
-quotacheck: Checked 60202 directories and 495168 files</span>
-</code></pre><h2 id="开启quota服务">开启quota服务</h2><pre><code>sudo quotaon -av <span class="regexp">/mnt/</span>hdd2
+quotacheck: Checked 60202 directories and 495168 files
+</code></pre><h2 id="开启quota服务"><a href="#开启quota服务" class="headerlink" title="开启quota服务"></a>开启quota服务</h2><pre><code>sudo quotaon -av /mnt/hdd2
 </code></pre><p>关闭可以用：</p>
-<pre><code>sudo quotaoff -av <span class="regexp">/mnt/</span>hdd2
-</code></pre><h2 id="用户配置策略">用户配置策略</h2><p><a href="https://github.com/labrick/study/blob/master/shell/quota.sh" target="_blank" rel="external">这里</a>我写了个脚本，根据.miduserdb和.supuserdb中的用户名称来对每个用户进行分配硬盘额度。</p>
-<pre><code><span class="shebang">#!/bin/bash
-</span>
-<span class="function"><span class="title">quota_init</span></span>() {
-    awk -F: <span class="string">'{if($3&gt;500) print $1&gt;"./tmpfile"}'</span> /etc/passwd
-    <span class="keyword">for</span> user <span class="keyword">in</span> $(cat <span class="string">"./tmpfile"</span>)
-    <span class="keyword">do</span>
-        miduser_flag=<span class="number">0</span>
-        <span class="keyword">for</span> miduser <span class="keyword">in</span> $(cat <span class="string">"/mnt/hdd2/yanan/.miduserdb"</span>)
-        <span class="keyword">do</span>
-            <span class="keyword">if</span> [ <span class="variable">$user</span> = <span class="variable">$miduser</span> ]; <span class="keyword">then</span>
-                miduser_flag=<span class="number">1</span>
-            <span class="keyword">fi</span>
-        <span class="keyword">done</span>
+<pre><code>sudo quotaoff -av /mnt/hdd2
+</code></pre><h2 id="用户配置策略"><a href="#用户配置策略" class="headerlink" title="用户配置策略"></a>用户配置策略</h2><p><a href="https://github.com/labrick/study/blob/master/shell/quota.sh" target="_blank" rel="external">这里</a>我写了个脚本，根据.miduserdb和.supuserdb中的用户名称来对每个用户进行分配硬盘额度。</p>
+<pre><code>#!/bin/bash
 
-        supuser_flag=<span class="number">0</span>
-        <span class="keyword">for</span> supuser <span class="keyword">in</span> $(cat <span class="string">"/mnt/hdd2/yanan/.supuserdb"</span>)
-        <span class="keyword">do</span>
-            <span class="keyword">if</span> [ <span class="variable">$user</span> = <span class="variable">$supuser</span> ]; <span class="keyword">then</span>
-                supuser_flag=<span class="number">1</span>
-            <span class="keyword">fi</span>
-        <span class="keyword">done</span>
+quota_init() {
+    awk -F: &apos;{if($3&gt;500) print $1&gt;&quot;./tmpfile&quot;}&apos; /etc/passwd
+    for user in $(cat &quot;./tmpfile&quot;)
+    do
+        miduser_flag=0
+        for miduser in $(cat &quot;/mnt/hdd2/yanan/.miduserdb&quot;)
+        do
+            if [ $user = $miduser ]; then
+                miduser_flag=1
+            fi
+        done
 
-        <span class="keyword">if</span> [ <span class="string">"<span class="variable">$supuser_flag</span>"</span> <span class="operator">-eq</span> <span class="number">1</span> ]; <span class="keyword">then</span>
-            <span class="built_in">echo</span> <span class="variable">$user</span> is a super user, deal with it
-            sudo setquota <span class="variable">$user</span> <span class="number">500000000</span> <span class="number">520000000</span> <span class="number">0</span> <span class="number">0</span> /mnt/hdd2
-        <span class="keyword">elif</span> [ <span class="string">"<span class="variable">$miduser_flag</span>"</span> <span class="operator">-eq</span> <span class="number">1</span> ]; <span class="keyword">then</span>
-            <span class="built_in">echo</span> <span class="variable">$user</span> is a miduser, no deal with it
-            sudo setquota <span class="variable">$user</span> <span class="number">300000000</span> <span class="number">320000000</span> <span class="number">0</span> <span class="number">0</span> /mnt/hdd2
-        <span class="keyword">else</span>
-            <span class="built_in">echo</span> <span class="variable">$user</span> is a general user, deal with it
-            sudo setquota <span class="variable">$user</span> <span class="number">100000000</span> <span class="number">120000000</span> <span class="number">0</span> <span class="number">0</span> /mnt/hdd2
-        <span class="keyword">fi</span>
-    <span class="keyword">done</span>
+        supuser_flag=0
+        for supuser in $(cat &quot;/mnt/hdd2/yanan/.supuserdb&quot;)
+        do
+            if [ $user = $supuser ]; then
+                supuser_flag=1
+            fi
+        done
+
+        if [ &quot;$supuser_flag&quot; -eq 1 ]; then
+            echo $user is a super user, deal with it
+            sudo setquota $user 500000000 520000000 0 0 /mnt/hdd2
+        elif [ &quot;$miduser_flag&quot; -eq 1 ]; then
+            echo $user is a miduser, no deal with it
+            sudo setquota $user 300000000 320000000 0 0 /mnt/hdd2
+        else
+            echo $user is a general user, deal with it
+            sudo setquota $user 100000000 120000000 0 0 /mnt/hdd2
+        fi
+    done
 }
 
-<span class="function"><span class="title">quota_help</span></span>() {
+quota_help() {
     cat &lt;&lt;EOF
-Usage: `basename <span class="variable">$0</span>` replace hexo with parameter <span class="string">"-d"</span> and <span class="string">"-g"</span>.
+Usage: `basename $0` replace hexo with parameter &quot;-d&quot; and &quot;-g&quot;.
 options:
-    <span class="operator">-d</span> display the info
+    -d display the info
     -i init the quota
-    -h display this <span class="built_in">help</span> menu
+    -h display this help menu
 EOF
 }
 
-<span class="function"><span class="title">quota_info</span></span>() {
+quota_info() {
     sudo repquota /mnt/hdd2
 }
 
-<span class="keyword">while</span> <span class="built_in">getopts</span> di option; <span class="keyword">do</span>
-    <span class="keyword">case</span> <span class="string">"<span class="variable">$option</span>"</span> <span class="keyword">in</span>
+while getopts di option; do
+    case &quot;$option&quot; in
         d) quota_info;;
         i) quota_init;;
-        \?) quota_<span class="built_in">help</span>
-            <span class="built_in">exit</span> <span class="number">1</span>;;
-    <span class="keyword">esac</span>
-<span class="keyword">done</span>
+        \?) quota_help
+            exit 1;;
+    esac
+done
 
 rm -rf ./tmpfile
 </code></pre><p>其中.supuserdb中记录中级用户的用户名，配额为：500G<br>.miduserdb中记录中级用户的用户名，配额为：300G<br>其他用户为普通用户，配额为：100G</p>
-<h2 id="QA">QA</h2><h3 id="QA1">QA1</h3><p>Q. 为已存在的用户分配配额后删除该用户，在repquota报告中认为以之前用户ID的形式显示之前的配额。</p>
+<h2 id="QA"><a href="#QA" class="headerlink" title="QA"></a>QA</h2><h3 id="QA1"><a href="#QA1" class="headerlink" title="QA1"></a>QA1</h3><p>Q. 为已存在的用户分配配额后删除该用户，在repquota报告中认为以之前用户ID的形式显示之前的配额。</p>
 <p>A. 可以采用如下命令找到已删除用户的所有文件，删除掉即可：</p>
-<pre><code>find ./ -<span class="built_ins">user</span> delusr_id
-</code></pre><h3 id="QA2">QA2</h3><p>Q. 磁盘定额配置中存在soft/hard配置之分，他们的区别，如果soft&lt;用户所用磁盘&lt;hard会如何？</p>
+<pre><code>find ./ -user delusr_id
+</code></pre><h3 id="QA2"><a href="#QA2" class="headerlink" title="QA2"></a>QA2</h3><p>Q. 磁盘定额配置中存在soft/hard配置之分，他们的区别，如果soft&lt;用户所用磁盘&lt;hard会如何？</p>
 <p>A. 磁盘分配hard是绝对无法越过的磁盘占用，而磁盘占用超过soft则会为用户提出警告，在约定时间（默认7days）未能降到soft以下的则soft等同于hard，无法再继续创建文件，占用更多的空间。</p>
 
       

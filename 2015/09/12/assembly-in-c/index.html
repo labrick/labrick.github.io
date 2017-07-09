@@ -90,34 +90,16 @@
 
 
 
-<meta name="description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。
-C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
-    : 输出寄存器
-    : 输入寄存器
-    : 会被修改的寄存器
-    );
-带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定">
+<meta name="description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。 C中嵌入汇编程序格式asm(&amp;quot;汇编语句&amp;quot;     : 输出寄存器     : 输入寄存器     : 会被修改的寄存器     ); 带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C语言中嵌入汇编程序">
 <meta property="og:url" content="http://labrick.github.io/2015/09/12/assembly-in-c/index.html">
 <meta property="og:site_name" content="工作实验室">
-<meta property="og:description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。
-C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
-    : 输出寄存器
-    : 输入寄存器
-    : 会被修改的寄存器
-    );
-带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定">
+<meta property="og:description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。 C中嵌入汇编程序格式asm(&amp;quot;汇编语句&amp;quot;     : 输出寄存器     : 输入寄存器     : 会被修改的寄存器     ); 带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始">
 <meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言中嵌入汇编程序">
-<meta name="twitter:description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。
-C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
-    : 输出寄存器
-    : 输入寄存器
-    : 会被修改的寄存器
-    );
-带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定">
+<meta name="twitter:description" content="背景阅读linux0.11源码的kernel/traps.c文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。 C中嵌入汇编程序格式asm(&amp;quot;汇编语句&amp;quot;     : 输出寄存器     : 输入寄存器     : 会被修改的寄存器     ); 带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始">
 
 
 
@@ -257,6 +239,16 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
           </a>
         </li>
       
@@ -442,50 +434,50 @@ C中嵌入汇编程序格式asm(&quot;汇编语句&quot;
       
 
       
-        <h2 id="背景">背景</h2><p>阅读linux0.11源码的<a href="https://github.com/labrick/linux-0.11/blob/v1.0/kernel/traps.c" target="_blank" rel="external">kernel/traps.c</a>文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。</p>
-<h2 id="C中嵌入汇编程序">C中嵌入汇编程序</h2><h3 id="格式">格式</h3><pre><code><span class="keyword">asm</span>(<span class="string">"汇编语句"</span>
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>阅读linux0.11源码的<a href="https://github.com/labrick/linux-0.11/blob/v1.0/kernel/traps.c" target="_blank" rel="external">kernel/traps.c</a>文件里包含了几个语句是内嵌的汇编程序，虽知道整体的意思，但是细化后就不明所以然，这里记录下。</p>
+<h2 id="C中嵌入汇编程序"><a href="#C中嵌入汇编程序" class="headerlink" title="C中嵌入汇编程序"></a>C中嵌入汇编程序</h2><h3 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h3><pre><code>asm(&quot;汇编语句&quot;
     : 输出寄存器
     : 输入寄存器
     : 会被修改的寄存器
     );
 </code></pre><p>带冒号的行可以省略，“输出寄存器”表示汇编执行完后，存放输出数据的寄存器，“输入寄存器”开始执行代码的时候，指定指定寄存器存放值。</p>
-<h3 id="实例代码">实例代码</h3><h4 id="示例1">示例1</h4><pre><code><span class="keyword">int</span> a=<span class="number">10</span>,b;
-asm(<span class="string">"movl <span class="variable">%1</span>, <span class="variable">%%</span>eax;
-     movl <span class="variable">%%</span>eax, <span class="variable">%0</span>;"</span>
-     :<span class="string">"=r"</span>(b)
-     :<span class="string">"r"</span>(a)
-     :<span class="string">"<span class="variable">%eax</span>"</span>
+<h3 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h3><h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><pre><code>int a=10,b;
+asm(&quot;movl %1, %%eax;
+     movl %%eax, %0;&quot;
+     :&quot;=r&quot;(b)
+     :&quot;r&quot;(a)
+     :&quot;%eax&quot;
     );
 </code></pre><p>表示C语言里的“b=a;”。<br>“r”表示使用任意寄存器，%0、%1表示使用两个寄存器，一般只能%0~%9共十个操作数，按输入输出寄存器出现顺序进行映射。<br>寄存器用两个百分号，是因为使用了%0%1这些数字使百分号有了特殊意义，所以在操作数出现的寄存器必须用双百分表示。<br>会被修改的寄存器里边的%eax表示eax寄存器在汇编代码块执行过程中会被改写，在执行前要保护好，这是提交给编译器决定的。</p>
-<h4 id="示例2">示例2</h4><pre><code>#define get_seg_byte<span class="list">(<span class="keyword">seg</span>,addr)</span> <span class="list">({ \
-    register char __res<span class="comment">; \</span>
-    __asm__<span class="list">(<span class="string">"push %%fs; \                // 将fs寄存器值压栈
+<h4 id="示例2"><a href="#示例2" class="headerlink" title="示例2"></a>示例2</h4><pre><code>#define get_seg_byte(seg,addr) ({ \
+    register char __res; \
+    __asm__(&quot;push %%fs; \                // 将fs寄存器值压栈
         mov %%ax,%%fs; \                // 将eax中的段值赋值给fs寄存器
         movb %%fs:%2,%%al; \            // 将fs:(*(addr)) --&gt; al
-        pop %%fs"</span> \                        // 弹出fs
-    :<span class="string">"=a"</span> <span class="list">(<span class="keyword">__res</span>)</span> \                        // 将eax值 --&gt; __res
-    :<span class="string">"0"</span> <span class="list">(<span class="keyword">seg</span>)</span>,<span class="string">"m"</span> <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">addr</span>)</span>)</span>)</span><span class="comment">; \</span>
-    __res<span class="comment">;})</span></span>
+        pop %%fs&quot; \                        // 弹出fs
+    :&quot;=a&quot; (__res) \                        // 将eax值 --&gt; __res
+    :&quot;0&quot; (seg),&quot;m&quot; (*(addr))); \
+    __res;})
 </code></pre><p>表示取段seg中地址addr处的一个字符。<br>上面是<a href="https://github.com/labrick/linux-0.11/blob/v1.0/kernel/traps.c" target="_blank" rel="external">kernel/traps.c</a>中的一段代码，其中：</p>
 <p>参数：seg - 段选择符；addr - 段内指定地址。<br>输出：%0 - eax(__res)；输入：%1 - eax(seg)；%2 - 内存地址(*(addr))。<br>“=a”中的’a’称为加载代码，’=’表示这是输出寄存器，执行完后，eax的值将赋给_res,’”0” (seg)’表示在这段代码开始运行时将seg放到eax寄存器中，”0”(0可以省略)表示这里使用的寄存器和上面输出寄存器一样。</p>
 <p>编译器规定：标号从输出寄存器的最左边开始，被编号为0，往右和往下将被依次编号。所以这里的”0”表示eax，”1”表示seg，”2”表示*(addr)。</p>
 <p>%%fs:%2是使用编号为2的变量(*(addr))，这里加上%%fs的意思？？</p>
-<h4 id="示例3">示例3</h4><p>// 取段seg中地址addr处的一个字长(4字节)。<br>// 参数：seg - 段选择符；addr - 段内指定地址。<br>// 输出：%0 - eax(__res)；输入：%1 - eax(seg)；%2 - 内存地址(*(addr))。</p>
-<pre><code>#define get_seg_long<span class="list">(<span class="keyword">seg</span>,addr)</span> <span class="list">({ \
-    register unsigned long __res<span class="comment">; \</span>
-    __asm__<span class="list">(<span class="string">"push %%fs; \
+<h4 id="示例3"><a href="#示例3" class="headerlink" title="示例3"></a>示例3</h4><p>// 取段seg中地址addr处的一个字长(4字节)。<br>// 参数：seg - 段选择符；addr - 段内指定地址。<br>// 输出：%0 - eax(__res)；输入：%1 - eax(seg)；%2 - 内存地址(*(addr))。</p>
+<pre><code>#define get_seg_long(seg,addr) ({ \
+    register unsigned long __res; \
+    __asm__(&quot;push %%fs; \
             mov %%ax,%%fs; \
             movl %%fs:%2,%%eax; \
-            pop %%fs"</span> \
-    :<span class="string">"=a"</span> <span class="list">(<span class="keyword">__res</span>)</span> \
-    :<span class="string">"0"</span> <span class="list">(<span class="keyword">seg</span>)</span>,<span class="string">"m"</span> <span class="list">(<span class="keyword">*</span><span class="list">(<span class="keyword">addr</span>)</span>)</span>)</span><span class="comment">; \</span>
-    __res<span class="comment">;})</span></span>
-</code></pre><h4 id="示例4">示例4</h4><p>// 取fs段寄存器的值(选择符)。<br>// 输出：%0 - eax(__res)</p>
-<pre><code><span class="preprocessor">#define _fs() ({ \</span>
-    <span class="keyword">register</span> <span class="keyword">unsigned</span> <span class="keyword">short</span> __res; \
-    __asm__(<span class="string">"mov %%fs,%%ax"</span> \
-    :<span class="string">"=a"</span> (__res) \
-    :                        <span class="comment">// 没有输入寄存器</span>
+            pop %%fs&quot; \
+    :&quot;=a&quot; (__res) \
+    :&quot;0&quot; (seg),&quot;m&quot; (*(addr))); \
+    __res;})
+</code></pre><h4 id="示例4"><a href="#示例4" class="headerlink" title="示例4"></a>示例4</h4><p>// 取fs段寄存器的值(选择符)。<br>// 输出：%0 - eax(__res)</p>
+<pre><code>#define _fs() ({ \
+    register unsigned short __res; \
+    __asm__(&quot;mov %%fs,%%ax&quot; \
+    :&quot;=a&quot; (__res) \
+    :                        // 没有输入寄存器
     ); \
     __res;})
 </code></pre>
