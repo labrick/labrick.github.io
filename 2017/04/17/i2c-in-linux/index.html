@@ -1,0 +1,1049 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, Brick" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。 当前在调试and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux中的I2C配置">
+<meta property="og:url" content="http://labrick.github.io/2017/04/17/i2c-in-linux/index.html">
+<meta property="og:site_name" content="工作实验室">
+<meta property="og:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。 当前在调试and">
+<meta property="og:updated_time" content="2017-04-17T15:07:28.745Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux中的I2C配置">
+<meta name="twitter:description" content="I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。 对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。 当前在调试and">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://labrick.github.io/2017/04/17/i2c-in-linux/"/>
+
+
+
+
+
+  <title>Linux中的I2C配置 | 工作实验室</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-65978647-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?88010fa72f93e593c7b92e8a4eb25e3b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">工作实验室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专注于自我心智成长</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            书籍
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'MDA2Yz6kTCszT2GimT9N','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://labrick.github.io/2017/04/17/i2c-in-linux/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Brick">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="工作实验室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux中的I2C配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-17T21:30:05+08:00">
+                2017-04-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工作记录/" itemprop="url" rel="index">
+                    <span itemprop="name">工作记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/17/i2c-in-linux/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/04/17/i2c-in-linux/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>I2C是一种重要的通信协议，因为他只有两根信号线(时钟线SCL/数据线SDA)，而且采用OC门外接电路，所以它兼具了两个优点：布线简单；可外接多个从设备。</p>
+<p>对于I2C的通信协议网上介绍的已经很多，仔细阅读的话都可以很容易的理解透彻，而且可以在普通的MCU上很容易的通过配置寄存器，甚至是采用IO模拟使用起来，但是如果把I2C放在Linux系统中又是什么样的呢？这里介绍下小白的经历。</p>
+<p>当前在调试android的屏幕显示问题，因为采用的是双屏，而soc中屏幕接口(lvds/RGB)又是复用的，所以这里采用MIPI转成了lvds，然后外接lvds屏幕（至于为什么要采用lvds屏，也是因为之前项目中的后遗症），这个转换芯片就是icn6201，这时就需要采用某种方式对icn6201转换芯片进行配置，icn6201支持dsi和i2c两种接口进行配置，我们轻易的就选择了i2c配置(没有任何理由？)。</p>
+<p>因为这里只是在开机时对转换芯片进行下配置，不需要衔接android内部的其他接口，所以我就打算直接写个驱动来进行操作就行了。</p>
+<p>这里时添加驱动的操作：</p>
+<pre><code>+++ ./drivers/i2c/Makefile    2017-04-13 13:20:16.000000000 +0800
+@@ -6,6 +6,7 @@
+ obj-$(CONFIG_I2C)        += i2c-core.o
+ obj-$(CONFIG_I2C_SMBUS)        += i2c-smbus.o
+ obj-$(CONFIG_I2C_CHARDEV)    += i2c-dev.o
++obj-$(CONFIG_I2C_INIT_ICN6201)    += icn6201.o
+ obj-$(CONFIG_I2C_MUX)        += i2c-mux.o
+ obj-y                += algos/ busses/ muxes/
+ obj-$(CONFIG_I2C_STUB)        += i2c-stub.o
+
++++ ./drivers/i2c/Kconfig    2017-04-17 22:24:22.365686411 +0800
+@@ -46,6 +46,13 @@
+       This support is also available as a module.  If so, the module 
+       will be called i2c-dev.
+
++config I2C_INIT_ICN6201
++    tristate &quot;i2c init icn6201&quot;
++    default M
++    help
++        i2c init icn6201
++
++
+ config I2C_MUX
+     tristate &quot;I2C bus multiplexing support&quot;
+     depends on HAS_IOMEM
+</code></pre><p>接下来就是添加驱动文件driver/i2c/icn6201.c了：</p>
+<pre><code>+++ ./drivers/i2c/icn6201.c    2017-04-17 22:35:17.658101099 +0800
+@@ -0,0 +1,368 @@
++/*
++    icn6201.c - init icn6201 for screen 10.1
++*/
++
++#include &lt;linux/kernel.h&gt;
++#include &lt;linux/module.h&gt;
++#include &lt;linux/device.h&gt;
++#include &lt;linux/notifier.h&gt;
++#include &lt;linux/fs.h&gt;
++#include &lt;linux/slab.h&gt;
++#include &lt;linux/init.h&gt;
++#include &lt;linux/list.h&gt;
++#include &lt;linux/i2c.h&gt;
++#include &lt;linux/i2c-dev.h&gt;
++#include &lt;linux/jiffies.h&gt;
++#include &lt;linux/uaccess.h&gt;
++
++/*
++ * An i2c_dev represents an i2c_adapter ... an I2C or SMBus master, not a
++ * slave (i2c_client) with which messages will be exchanged.  It&apos;s coupled
++ * with a character special file which is accessed by user mode drivers.
++ *
++ * The list of i2c_dev structures is parallel to the i2c_adapter lists
++ * maintained by the driver model, and is updated using bus notifications.
++ */
++struct i2c_dev {
++    struct list_head list;
++    struct i2c_adapter *adap;
++    struct device *dev;
++};
++
++struct icn6201_data {
++    struct i2c_client *icn6201_client;
++};
++
++static int icn6201_smbus_write_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)
++{
++    s32 dummy;
++    dummy = i2c_smbus_write_byte_data(client, reg_addr, *data);
++    if (dummy &lt; 0){
++        printk(&quot;icn6201_smbus_write_byte: write byte data failed\n&quot;);
++        return -1;
++    }
++    printk(&quot;icn6201_smbus_write_byte: write data successful!\n&quot;);
++    return 0;
++}
++
++// static int icn6201_smbus_read_byte(struct i2c_client *client, unsigned char reg_addr, unsigned char *data)
++// {
++//     s32 dummy;
++//     dummy = i2c_smbus_read_byte_data(client, reg_addr, *data);
++//     if (dummy &lt; 0){
++//         printk(&quot;icn6201_smbus_read_byte: read byte data failed\n&quot;);
++//         return -1;
++//     }
++//     printk(&quot;icn6201_smbus_read_byte: read data successful!\n&quot;);
++//     return 0;
++// }
++
++#define BIST_MODE
++static int icn6201_probe(struct i2c_client *client, const struct i2c_device_id *id)
++{
++    int err = 0, i = 0;
++    struct icn6201_data *data;
++    unsigned char tmp_value = 0;
++    
++    unsigned char addr_value[][2] = {
++#ifdef BIST_MODE
++        {0x20, 0x00}, {0x21, 0x20}, {0x22, 0x35},
++        {0x23, 0x55}, {0x24, 0x28}, {0x25, 0xA8},
++        {0x26, 0x00}, {0x27, 0x0A}, {0x28, 0x06},
++        {0x29, 0x10},
++
++        {0x34, 0x80}, {0x36, 0x55}, {0xB5, 0xA0},
++        {0x5C, 0xFF}, {0x56, 0x90}, {0x6B, 0x21},
++        {0x69, 0x26}, {0x10, 0x47}, {0x2A, 0x41},
++        {0xB6, 0x20}, {0x51, 0x20}, {0x09, 0x10},
++#endif
++    };
++    printk(&quot;icn6201:=============Probe==================\n&quot;);
++
++    if (!i2c_check_functionality(client-&gt;adapter, I2C_FUNC_I2C)){
++        dev_err(&amp;client-&gt;dev, &quot;System need I2C function.\n&quot;);
++        return err;
++    }
++    
++    // 这里也申请了i2c_client的空间，相当于实例化
++    data = kzalloc(sizeof(struct icn6201_data), GFP_KERNEL);
++    if (!data) {
++        return -ENOMEM;
++    }
++
++    i2c_set_clientdata(client, data);
++    data-&gt;icn6201_client = client;
++
++    for(i=0; i&lt;sizeof(addr_value)/2; i++){
++        printk(&quot;icn6201: write data:%X to addr:%X\n&quot;, addr_value[i][1], addr_value[i][0]);
++        icn6201_smbus_write_byte(client, addr_value[i][0], &amp;addr_value[i][1]);
++        // icn6201_smbus_read_byte(client, addr_value[i][0], &amp;addr_value[i][1]);
++        printk(&quot;icn6201: read data:%X to addr:%X\n&quot;, addr_value[i][1], addr_value[i][0]);
++    }
++
++    return 0;
++}
++
++static int icn6201_remove(struct i2c_client *client)
++{
++    return 0;
++}
++
++static const struct i2c_device_id icn6201_id[] = {
++    { &quot;icn6201&quot;, 0 },
++    {}
++};
++MODULE_DEVICE_TABLE(i2c, icn6201_id);
++
++int icn6201_detect(struct i2c_client *client, struct i2c_board_info *info)
++{
++    // 这里是获取总线信息，然后进行判断
++    return 0;
++}
++
++static const unsigned short normal_i2c[2] = {0x58&gt;&gt;1, I2C_CLIENT_END, };
++
++static struct i2c_board_info icn6201_board_info = {
++    .type = &quot;icn6201&quot;,
++    .addr = 0x58&gt;&gt;1,
++    // {I2C_BOARD_INFO(&quot;icn6201&quot;, 0x58&gt;&gt;1),},
++};
++
++// 每一个I2C设备驱动，必须首先创造一个i2c_driver结构体对象
++static struct i2c_driver icn6201_driver = {
++    .class = I2C_CLASS_HWMON,
++    .probe        = icn6201_probe,
++    .remove        = icn6201_remove,
++    .id_table    = icn6201_id,
++    .driver = {
++        .name    = &quot;icn6201&quot;,
++        .owner = THIS_MODULE,
++    },
++    .detect         = icn6201_detect,
++    .address_list    = normal_i2c,
++};
++
++// static void print_i2c_list()
++// {
++//     
++// }
++
++static struct i2c_client *local_client = NULL;
++
++static int __init icn6201_init(void)
++{
++    int ret;
++    struct i2c_adapter *i2c_adap;
++
++    i2c_adap = i2c_get_adapter(0);
++    local_client = i2c_new_device(i2c_adap, &amp;icn6201_board_info);
++    i2c_put_adapter(i2c_adap);
++
++    printk(&quot;icn6201_init: i2c to init icn6201 driver\n&quot;);
++    ret = i2c_add_driver(&amp;icn6201_driver);
++    if(ret)
++        printk(&quot;icn6201_init: i2c_add_driver err&quot;);
++
++    // i2c_register_board_info(0, icn6201_board_info, ARRAY_SIZE(icn6201_board_info));
++
++    return ret;
++}
++
++static void __exit icn6201_exit(void)
++{
++    printk(&quot;icn6201_exit: i2c to del icn6201 driver\n&quot;);
++    i2c_unregister_device(local_client);
++    i2c_del_driver(&amp;icn6201_driver);
++}
++
++MODULE_AUTHOR(&quot;Frodo Looijaard &lt;frodol@dds.nl&gt; and &quot;
++        &quot;Simon G. Vogl &lt;simon@tk.uni-linz.ac.at&gt;&quot;);
++MODULE_DESCRIPTION(&quot;I2C /dev entries driver&quot;);
++MODULE_LICENSE(&quot;GPL&quot;);
++
++module_init(icn6201_init);
++module_exit(icn6201_exit);
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/01/git-usage/" rel="next" title="git-usage">
+                <i class="fa fa-chevron-left"></i> git-usage
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/19/change-dir-length/" rel="prev" title="Linux中自动切换显示目录的长度">
+                Linux中自动切换显示目录的长度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Brick" />
+          <p class="site-author-name" itemprop="name">Brick</p>
+           
+              <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/labrick" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/lbrick" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/larrybrick" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://zhihu.com/people/larrybrick" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.wowotech.net/" target="_blank" title="蜂窝">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  蜂窝
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brick</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Brick.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://labrick.github.io/2017/04/17/i2c-in-linux/';
+          this.page.identifier = '2017/04/17/i2c-in-linux/';
+          this.page.title = 'Linux中的I2C配置';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Brick.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
