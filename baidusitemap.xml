@@ -330,17 +330,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/life-quality/overview-of-first-year-of-graduation/</loc>
+    <loc>http://labrick.github.io/categories/about-complaints/first-use-perl/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
         <display>
-        <title>我的研究生之路</title>
-        <pubTime>2016-06-29T15:40:12.000Z</pubTime>
+        <title>第一次使用perl语言</title>
+        <pubTime>2015-06-26T14:06:00.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="让生活更上一层楼" url="http://labrick.github.io/categories/%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%B8%8A%E4%B8%80%E5%B1%82%E6%A5%BC/"/>
+              <breadCrumb title="没事吐糟一下" url="http://labrick.github.io/categories/%E6%B2%A1%E4%BA%8B%E5%90%90%E7%B3%9F%E4%B8%80%E4%B8%8B/"/>
           
         </display>
     </data>
@@ -402,35 +402,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/work-records/ubuntu-android-sdk/</loc>
+    <loc>http://labrick.github.io/categories/life-quality/overview-of-first-year-of-graduation/</loc>
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     <data>
         <display>
-        <title>ubuntu采用eclips搭建安卓环境记录</title>
-        <pubTime>2015-07-26T01:00:35.000Z</pubTime>
+        <title>我的研究生之路</title>
+        <pubTime>2016-06-29T15:40:12.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/categories/about-complaints/first-use-perl/</loc>
-    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
-    <data>
-        <display>
-        <title>第一次使用perl语言</title>
-        <pubTime>2015-06-26T14:06:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="没事吐糟一下" url="http://labrick.github.io/categories/%E6%B2%A1%E4%BA%8B%E5%90%90%E7%B3%9F%E4%B8%80%E4%B8%8B/"/>
+              <breadCrumb title="让生活更上一层楼" url="http://labrick.github.io/categories/%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%B8%8A%E4%B8%80%E5%B1%82%E6%A5%BC/"/>
           
         </display>
     </data>
@@ -444,6 +426,24 @@
         <display>
         <title>多台电脑搭建文件共享系统</title>
         <pubTime>2015-08-03T18:17:04.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/work-records/ubuntu-android-sdk/</loc>
+    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
+    <data>
+        <display>
+        <title>ubuntu采用eclips搭建安卓环境记录</title>
+        <pubTime>2015-07-26T01:00:35.000Z</pubTime>
         
          
            
@@ -474,12 +474,12 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/other-work/translate-abc-xyz/</loc>
+    <loc>http://labrick.github.io/categories/other-work/change-github-pages-domain/</loc>
     <lastmod>2016-12-22T13:12:21.665Z</lastmod>
     <data>
         <display>
-        <title>Google集团Alphabet</title>
-        <pubTime>2015-08-10T22:54:49.000Z</pubTime>
+        <title>改变github-pages的域名</title>
+        <pubTime>2015-08-04T21:01:10.000Z</pubTime>
         
          
            
@@ -528,12 +528,12 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/other-work/change-github-pages-domain/</loc>
+    <loc>http://labrick.github.io/categories/other-work/translate-abc-xyz/</loc>
     <lastmod>2016-12-22T13:12:21.665Z</lastmod>
     <data>
         <display>
-        <title>改变github-pages的域名</title>
-        <pubTime>2015-08-04T21:01:10.000Z</pubTime>
+        <title>Google集团Alphabet</title>
+        <pubTime>2015-08-10T22:54:49.000Z</pubTime>
         
          
            
@@ -546,15 +546,18 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/lab/what-did-i-learn-in-zhihu/</loc>
+    <loc>http://labrick.github.io/categories/other-work/monitor-prototype/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
         <display>
-        <title>这些年我在知乎都学到了什么</title>
-        <pubTime>2015-08-08T03:13:25.000Z</pubTime>
+        <title>后台进程监控软件</title>
+        <pubTime>2015-07-31T01:20:18.000Z</pubTime>
         
          
            
+             
+              <breadCrumb title="突发奇想的小玩意" url="http://labrick.github.io/categories/%E7%AA%81%E5%8F%91%E5%A5%87%E6%83%B3%E7%9A%84%E5%B0%8F%E7%8E%A9%E6%84%8F/"/>
+          
         </display>
     </data>
     </url>
@@ -579,17 +582,17 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/linux-study/shell-vim-collection/</loc>
+    <loc>http://labrick.github.io/categories/life-quality/control-self-better/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
         <display>
-        <title>shell/vim指令收集</title>
-        <pubTime>2015-06-24T13:08:00.000Z</pubTime>
+        <title>更好的掌控自己</title>
+        <pubTime>2015-01-31T11:58:00.000Z</pubTime>
         
          
            
              
-              <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+              <breadCrumb title="让生活更上一层楼" url="http://labrick.github.io/categories/%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%B8%8A%E4%B8%80%E5%B1%82%E6%A5%BC/"/>
           
         </display>
     </data>
@@ -615,12 +618,117 @@
 
     
   <url>
+    <loc>http://labrick.github.io/categories/lab/what-did-i-learn-in-zhihu/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>这些年我在知乎都学到了什么</title>
+        <pubTime>2015-08-08T03:13:25.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://labrick.github.io/categories/linux-study/bash-learning/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
         <display>
         <title>bash学习笔记</title>
         <pubTime>2015-07-29T00:56:26.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/about-android/use-android-ndk/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>Android运行C程序</title>
+        <pubTime>2016-04-25T13:56:34.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="Android" url="http://labrick.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/about-linux0.11/assembly-in-c/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>C语言中嵌入汇编程序</title>
+        <pubTime>2015-09-12T03:39:07.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="linux0.11相关" url="http://labrick.github.io/categories/linux0-11%E7%9B%B8%E5%85%B3/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/work-records/install-matlab2014b-in-ubuntu14.04/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>linux安装matlab记录</title>
+        <pubTime>2015-07-24T00:58:27.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/work-records/latex-quick-learning/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>Latex极快上手</title>
+        <pubTime>2015-07-25T01:00:06.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/linux-study/vim-command/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>vim基本指令</title>
+        <pubTime>2015-08-10T04:05:25.000Z</pubTime>
         
          
            
@@ -651,114 +759,6 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/linux-study/vim-command/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>vim基本指令</title>
-        <pubTime>2015-08-10T04:05:25.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/categories/work-records/install-matlab2014b-in-ubuntu14.04/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>linux安装matlab记录</title>
-        <pubTime>2015-07-24T00:58:27.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/categories/about-linux0.11/assembly-in-c/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>C语言中嵌入汇编程序</title>
-        <pubTime>2015-09-12T03:39:07.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="linux0.11相关" url="http://labrick.github.io/categories/linux0-11%E7%9B%B8%E5%85%B3/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/categories/work-records/latex-quick-learning/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>Latex极快上手</title>
-        <pubTime>2015-07-25T01:00:06.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="工作记录" url="http://labrick.github.io/categories/%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BD%95/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/categories/android/use-android-ndk/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>Android运行C程序</title>
-        <pubTime>2016-04-25T13:56:34.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="Android" url="http://labrick.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://labrick.github.io/categories/life-quality/control-self-better/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>更好的掌控自己</title>
-        <pubTime>2015-01-31T11:58:00.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="让生活更上一层楼" url="http://labrick.github.io/categories/%E8%AE%A9%E7%94%9F%E6%B4%BB%E6%9B%B4%E4%B8%8A%E4%B8%80%E5%B1%82%E6%A5%BC/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://labrick.github.io/categories/about-linux0.11/8259A-interrupt-control/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
@@ -777,24 +777,6 @@
 
     
   <url>
-    <loc>http://labrick.github.io/categories/other-work/monitor-prototype/</loc>
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    <data>
-        <display>
-        <title>后台进程监控软件</title>
-        <pubTime>2015-07-31T01:20:18.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="突发奇想的小玩意" url="http://labrick.github.io/categories/%E7%AA%81%E5%8F%91%E5%A5%87%E6%83%B3%E7%9A%84%E5%B0%8F%E7%8E%A9%E6%84%8F/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://labrick.github.io/categories/about-complaints/what-should-postgraduate-be/</loc>
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     <data>
@@ -806,6 +788,24 @@
            
              
               <breadCrumb title="没事吐糟一下" url="http://labrick.github.io/categories/%E6%B2%A1%E4%BA%8B%E5%90%90%E7%B3%9F%E4%B8%80%E4%B8%8B/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://labrick.github.io/categories/linux-study/shell-vim-collection/</loc>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <data>
+        <display>
+        <title>shell/vim指令收集</title>
+        <pubTime>2015-06-24T13:08:00.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="linux学习" url="http://labrick.github.io/categories/linux%E5%AD%A6%E4%B9%A0/"/>
           
         </display>
     </data>
@@ -866,6 +866,7 @@
     </url>
 
     
+    
   <url>
     <loc>http://labrick.github.io/categories/life-quality/echo-after-think-over/</loc>
     <lastmod>2016-12-22T13:12:21.657Z</lastmod>
@@ -883,7 +884,6 @@
     </data>
     </url>
 
-    
     
     
 </urlset>
