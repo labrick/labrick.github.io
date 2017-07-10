@@ -1,0 +1,918 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, Brick" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="调用现成的模板，比如seuthesis、IEEE conference等。插入章节号\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro} \section{研究背景与意义}\lable{sec.BG} % 节，类似1.1，正文可引用\ref{sec.BG} \subsection{移动智能软硬件系统发展} % 小节，类似1.1.1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Latex极快上手">
+<meta property="og:url" content="http://labrick.github.io/2015/07/25/latex-quick-learning/index.html">
+<meta property="og:site_name" content="工作实验室">
+<meta property="og:description" content="调用现成的模板，比如seuthesis、IEEE conference等。插入章节号\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro} \section{研究背景与意义}\lable{sec.BG} % 节，类似1.1，正文可引用\ref{sec.BG} \subsection{移动智能软硬件系统发展} % 小节，类似1.1.1">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/1.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/2.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/3.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/4.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/5.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/6.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/7.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/8.jpg">
+<meta property="og:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/9.jpg">
+<meta property="og:updated_time" content="2016-12-22T13:12:21.661Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Latex极快上手">
+<meta name="twitter:description" content="调用现成的模板，比如seuthesis、IEEE conference等。插入章节号\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro} \section{研究背景与意义}\lable{sec.BG} % 节，类似1.1，正文可引用\ref{sec.BG} \subsection{移动智能软硬件系统发展} % 小节，类似1.1.1">
+<meta name="twitter:image" content="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://labrick.github.io/2015/07/25/latex-quick-learning/"/>
+
+
+
+
+
+  <title>Latex极快上手 | 工作实验室</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-65978647-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?88010fa72f93e593c7b92e8a4eb25e3b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">工作实验室</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">专注于自我心智成长</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            书籍
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', 'MDA2Yz6kTCszT2GimT9N','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://labrick.github.io/2015/07/25/latex-quick-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Brick">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="工作实验室">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Latex极快上手
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-25T09:00:06+08:00">
+                2015-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工作记录/" itemprop="url" rel="index">
+                    <span itemprop="name">工作记录</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/07/25/latex-quick-learning/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2015/07/25/latex-quick-learning/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="调用现成的模板，比如seuthesis、IEEE-conference等。"><a href="#调用现成的模板，比如seuthesis、IEEE-conference等。" class="headerlink" title="调用现成的模板，比如seuthesis、IEEE conference等。"></a>调用现成的模板，比如seuthesis、IEEE conference等。</h3><h3 id="插入章节号"><a href="#插入章节号" class="headerlink" title="插入章节号"></a>插入章节号</h3><pre><code>\chapter{绪论}\label{sec.intro} % 自动会编号，章，类似1.，章索引{sec.intro}
+\section{研究背景与意义}\lable{sec.BG} % 节，类似1.1，正文可引用\ref{sec.BG}
+\subsection{移动智能软硬件系统发展} % 小节，类似1.1.1
+</code></pre><p>输出PDF如下图所示：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/1.jpg" alt="章节号示例"></p>
+<h3 id="正文插入多行项目符号列表"><a href="#正文插入多行项目符号列表" class="headerlink" title="正文插入多行项目符号列表"></a>正文插入多行项目符号列表</h3><pre><code>\begin{itemize} 
+\item 第一段文字
+\item 第二段文字
+\end{itemize}
+</code></pre><p>输出PDF为：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/2.jpg" alt="多行项目符号列表示例"></p>
+<h3 id="插入引用文献"><a href="#插入引用文献" class="headerlink" title="插入引用文献"></a>插入引用文献</h3><pre><code>\cite{NeilMawston:2013}
+</code></pre><p>注意：最好在google scholar中找到被引用文献，然后点击链接下方的cite，如下图：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/3.jpg" alt="文献引用示例1"></p>
+<p>然后在弹出窗口中选择BibTex，如下图所示：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/4.jpg" alt="文献引用示例2"></p>
+<p>最后保存输出的所有文本到专门的xxx.bib文件中，正文引用时在\cite{}括号中填入红圈中的名字即可，如下：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/5.jpg" alt="文献引用示例3"></p>
+<h3 id="插入图片："><a href="#插入图片：" class="headerlink" title="插入图片："></a>插入图片：</h3><pre><code>\begin{figure}[ht]
+  \centering % 图片居中对齐
+  \centerline{\includegraphics[width = 20.3cm]{figures/fInstMix4.pdf}} %原图路径
+  \caption{图片的中/英文名称和说明，显示在图片下方}
+  \label{fig.fInstMix4} % 图片索引，在正文中用“如图\ref{fig.fInstMix4}”即“如图3.4”
+\end{figure}
+</code></pre><p>图片保存到figures/这个目录下，最好采用.eps或者.pdf，这是矢量图片。如果是matlab生成图片，需要转换一下，详见matlab的使用方法。输出PDF入下图所示：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/6.jpg" alt="插入图片示例1"></p>
+<p>正文中引用显示为：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/7.jpg" alt="插入图片示例2"></p>
+<h3 id="插入表格"><a href="#插入表格" class="headerlink" title="插入表格"></a>插入表格</h3><pre><code>\begin{table}[ht]
+\begin{center}
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+\caption{表格的中/英文名称和说明，显示在表格上方}\label{tab:MICAparams} % 表格索引
+\begin{tabular}{l|l} % 两列表格，均为左对齐；{c|c|r}：3列表格，前两居中最后一列右对齐
+\hline % 横线，会显示出来
+参数名称&amp;参数含义\\ % 第1行内容，用&amp;分割两列，“\\”表示换行；AAA&amp;BBB&amp;CCC表示三列
+\hline % 横线分割，也可以不要
+程序指令级并行度（ILP）&amp;\tabincell{l}{理想处理器中，指令窗口容量\\分别为32、64、96和128时，\\可以并发执行的指令条数}\\ % 第2行内容，其中第二列分为3行显示（tabincell{l}）左对齐
+\hline
+\tabincell{l}{指令依赖关系类特征\\（寄存器依赖距离）}&amp;\tabincell{l}{两次架构寄存器重用\\之间动态指    令条数的分布}\\ % 第3行内容，第1列和第2列均占用2行空间，均为l(左)对其
+\end{tabular}
+\end{center}
+\end{table}
+</code></pre><p>输出pdf如下图所示：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/8.jpg" alt="插入表格示例1"></p>
+<p>正文引用输出效果为：</p>
+<p><img src="http://7xkoxp.com1.z0.glb.clouddn.com/latex-quick-learning-blog/9.jpg" alt="插入表格示例2"></p>
+<h3 id="插入公式"><a href="#插入公式" class="headerlink" title="插入公式"></a>插入公式</h3><pre><code>\begin{eqnarray}\label{eqn.cstall} % 公式索引
+  \nonumber % 多行公式共用一个索引号，就需要在不需要编号的行加这个东西
+  c_{stall} &amp;=&amp; max(0;1-\frac{c_{miss}}{N/D+c^{&apos;}_{stall}})\cdot c^{&apos;}_{stall}, \\% &amp;=&amp;表示多行间按“=”对齐；_{}表示下标；\frac{A}{B}表示A/B；^{}表示上标；\cdot表示乘号；
+  MLP_{avg} &amp;=&amp; \frac{\sum_{e}m(e)}{\sum_{e}1} % \sum表示求和符号
+\end{eqnarray}
+</code></pre>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/07/24/install-matlab2014b-in-ubuntu14.04/" rel="next" title="linux安装matlab记录">
+                <i class="fa fa-chevron-left"></i> linux安装matlab记录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/26/ubuntu-android-sdk/" rel="prev" title="ubuntu采用eclips搭建安卓环境记录">
+                ubuntu采用eclips搭建安卓环境记录 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Brick" />
+          <p class="site-author-name" itemprop="name">Brick</p>
+           
+              <p class="site-description motion-element" itemprop="description">随风的个人博客 </p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">49</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/labrick" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/lbrick" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/larrybrick" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://zhihu.com/people/larrybrick" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.wowotech.net/" target="_blank" title="蜂窝">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  蜂窝
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#调用现成的模板，比如seuthesis、IEEE-conference等。"><span class="nav-number">1.</span> <span class="nav-text">调用现成的模板，比如seuthesis、IEEE conference等。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入章节号"><span class="nav-number">2.</span> <span class="nav-text">插入章节号</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正文插入多行项目符号列表"><span class="nav-number">3.</span> <span class="nav-text">正文插入多行项目符号列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入引用文献"><span class="nav-number">4.</span> <span class="nav-text">插入引用文献</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入图片："><span class="nav-number">5.</span> <span class="nav-text">插入图片：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入表格"><span class="nav-number">6.</span> <span class="nav-text">插入表格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入公式"><span class="nav-number">7.</span> <span class="nav-text">插入公式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Brick</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Brick.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://labrick.github.io/2015/07/25/latex-quick-learning/';
+          this.page.identifier = '2015/07/25/latex-quick-learning/';
+          this.page.title = 'Latex极快上手';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Brick.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
