@@ -4,7 +4,7 @@
   <url>
     <loc>http://labrick.github.io/2017/06/30/apply-dji-embedded-software/</loc>
     
-    <lastmod>2017-07-10T13:31:18.114Z</lastmod>
+    <lastmod>2017-07-19T13:02:53.826Z</lastmod>
     
   </url>
   
@@ -135,27 +135,6 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/07/28/markdown-problem-answer/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/08/09/difference-between-ttl-and-rs232/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2016/06/29/overview-of-first-year-of-graduation/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://labrick.github.io/2015/06/26/first-use-perl/</loc>
     
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
@@ -163,7 +142,7 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/08/04/connect-host/</loc>
+    <loc>http://labrick.github.io/2015/07/28/markdown-problem-answer/</loc>
     
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     
@@ -177,14 +156,21 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/03/05/think-over-code/</loc>
+    <loc>http://labrick.github.io/2015/07/26/ubuntu-android-sdk/</loc>
     
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/07/26/ubuntu-android-sdk/</loc>
+    <loc>http://labrick.github.io/2015/08/04/connect-host/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/08/09/difference-between-ttl-and-rs232/</loc>
     
     <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     
@@ -198,21 +184,28 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/08/11/translate-abc-xyz/</loc>
+    <loc>http://labrick.github.io/2015/03/05/think-over-code/</loc>
     
-    <lastmod>2016-12-22T13:12:21.665Z</lastmod>
+    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/09/04/where-are-we-going-Dad/</loc>
+    <loc>http://labrick.github.io/2016/06/29/overview-of-first-year-of-graduation/</loc>
     
-    <lastmod>2016-12-22T13:12:21.665Z</lastmod>
+    <lastmod>2016-12-22T13:12:21.693Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://labrick.github.io/2015/08/05/change-github-pages-domain/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.665Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/08/11/translate-abc-xyz/</loc>
     
     <lastmod>2016-12-22T13:12:21.665Z</lastmod>
     
@@ -226,63 +219,14 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/01/31/control-self-better/</loc>
+    <loc>http://labrick.github.io/2015/09/04/where-are-we-going-Dad/</loc>
     
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/08/08/lab/what-did-i-learn-in-zhihu/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/06/24/shell-vim-collection/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/07/30/startup-zhihu/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/08/28/linux-0-11-init/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    <lastmod>2016-12-22T13:12:21.665Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://labrick.github.io/2015/10/12/buddy-system-algorithm/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/07/29/bash-learning/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/08/26/8259A-interrupt-control/</loc>
-    
-    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://labrick.github.io/2015/09/12/assembly-in-c/</loc>
     
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     
@@ -296,7 +240,56 @@
   </url>
   
   <url>
+    <loc>http://labrick.github.io/2015/07/24/install-matlab2014b-in-ubuntu14.04/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/07/30/startup-zhihu/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/08/08/lab/what-did-i-learn-in-zhihu/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/01/31/control-self-better/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/08/28/linux-0-11-init/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/09/12/assembly-in-c/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://labrick.github.io/2016/04/25/use-android-ndk/</loc>
+    
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/2015/08/26/8259A-interrupt-control/</loc>
     
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     
@@ -310,7 +303,7 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/07/25/latex-quick-learning/</loc>
+    <loc>http://labrick.github.io/2015/07/29/bash-learning/</loc>
     
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     
@@ -331,16 +324,16 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/07/24/install-matlab2014b-in-ubuntu14.04/</loc>
+    <loc>http://labrick.github.io/2015/07/25/latex-quick-learning/</loc>
     
     <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://labrick.github.io/2015/08/13/linux-0-11-boot/</loc>
+    <loc>http://labrick.github.io/2015/06/24/shell-vim-collection/</loc>
     
-    <lastmod>2016-12-22T13:12:21.657Z</lastmod>
+    <lastmod>2016-12-22T13:12:21.661Z</lastmod>
     
   </url>
   
@@ -359,7 +352,7 @@
   </url>
   
   <url>
-    <loc>http://labrick.github.io/categories/index.html</loc>
+    <loc>http://labrick.github.io/2015/08/13/linux-0-11-boot/</loc>
     
     <lastmod>2016-12-22T13:12:21.657Z</lastmod>
     
@@ -367,6 +360,13 @@
   
   <url>
     <loc>http://labrick.github.io/guestbook/index.html</loc>
+    
+    <lastmod>2016-12-22T13:12:21.657Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://labrick.github.io/categories/index.html</loc>
     
     <lastmod>2016-12-22T13:12:21.657Z</lastmod>
     
